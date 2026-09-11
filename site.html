@@ -1,0 +1,3944 @@
+<title>Biolyz Saliva Biomarker Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400&family=JetBrains+Mono:wght@400&display=swap">
+
+<style>
+/* ==========================================================================
+   ATIRA DESIGN SYSTEM  ·  applied to the Biolyz site
+   Tokens verbatim from atira-ds/tokens/tokens.css (brand-swapped blue + neon).
+   Seven rules held throughout: weight 400 only · headings tracked -0.04em ·
+   display set solid · never pure black/white · alpha ladder over greys ·
+   zero shadows · radii 4/6px. Left aligned. Blue rationed. Neon spent twice.
+
+   THREE DOCUMENTED EXTENSIONS (the source is a one-page site, this is not):
+   1. A light-ground navigation. Atira's nav is glass pills over hero imagery
+      and has nothing to say about an inner page on #fdfdfd. Same pill
+      geometry, ink alpha instead of white alpha.
+   2. A screenshot frame. Product shots need a container and the system has no
+      shadow to lift one with, so it is a hairline on a grey-100 mat at r4.
+   3. Form controls. Atira has no inputs at all. Built from the button recipe:
+      hairline, r4, ink alpha fill, no shadow.
+   ========================================================================== */
+:root{
+  --c-white:#ffffff; --c-off-white:#fdfdfd; --c-off-black:#181818; --c-black-blue:#030712;
+  --c-blue:#0013e9; --c-dark-blue:#000eaf; --c-neon:#c6ff00;
+  --c-grey-100:#f3f4f6; --c-grey-200:#e6e6e6; --c-grey-300:#a0a0a0; --c-grey-400:#646464;
+  --c-success:#16a34a; --c-error:#dc2626;
+
+  --o-black-5:#1818180d; --o-black-10:#1818181a; --o-black-15:#18181826; --o-black-20:#18181833;
+  --o-black-30:#1818184d; --o-black-40:#18181866; --o-black-50:#18181880; --o-black-60:#18181899;
+  --o-black-80:#181818cc;
+  --o-white-5:#fdfdfd0d; --o-white-10:#fdfdfd1a; --o-white-15:#fdfdfd26; --o-white-20:#fdfdfd33;
+  --o-white-30:#fdfdfd4d; --o-white-40:#fdfdfd66; --o-white-50:#fdfdfd80; --o-white-60:#fdfdfd99;
+  --o-white-80:#fdfdfdcc;
+
+  --sans:"Instrument Sans","Untitled Sans",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+
+  --h1:4rem; --h2:3.5rem; --h3:2.75rem; --h4:2.25rem; --h5:1.5rem; --h6:1rem;
+  --t-large:1.25rem; --t-medium:1.125rem; --t-regular:1rem; --t-small:.875rem; --t-tiny:.75rem;
+
+  --sp-2xs:.25rem; --sp-xs:.375rem; --sp-sm:.5rem; --sp-md:1rem; --sp-lg:1.5rem;
+  --sp-xl:2rem; --sp-2xl:3.5rem; --sp-3xl:4rem; --sp-4xl:5rem;
+  --section-sm:2rem; --section-md:5rem; --section-lg:7rem; --section-xl:12rem;
+  --gutter:calc(2rem + 125px); --container:110rem; --reading:88rem;
+
+  --r-sm:4px; --r-md:6px; --r-round:99px;
+  --stroke:1px; --hairline:.5px;
+  --blur:blur(32px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur-micro:.2s; --dur-short:.3s;
+
+  --bg:var(--c-off-white);
+  --text:var(--c-off-black);
+  --text-2:var(--o-black-80);
+  --text-3:var(--o-black-50);
+  --border:var(--c-grey-200);
+  --fill:var(--o-black-5);
+  --fill-hi:var(--o-black-10);
+  --focus:var(--c-blue);
+}
+.inv{
+  background:var(--c-black-blue); --bg:var(--c-black-blue);
+  --text:var(--c-white); --text-2:var(--o-white-80); --text-3:var(--o-white-40);
+  --border:var(--o-white-10); --fill:var(--o-white-5); --fill-hi:var(--o-white-15);
+  --focus:var(--c-neon); color:var(--text);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:clamp(13px,13px + 0.2081vw,16px); scroll-behavior:smooth}
+body{
+  margin:0; background:var(--c-off-white); color:var(--c-off-black);
+  font-family:var(--sans); font-weight:400; font-size:var(--t-medium);
+  line-height:1.4; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+h1,h2,h3,h4,h5,h6,p,figure,blockquote,dl,dd,dt{margin:0; font-weight:400}
+ul,ol{margin:0; padding:0; list-style:none}
+a{color:inherit}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+img{max-width:100%; display:block}
+[hidden]{display:none !important}
+
+/* --- type ---------------------------------------------------------------- */
+.h1{font-size:var(--h1); line-height:1; letter-spacing:-.04em; text-wrap:balance}
+.h2{font-size:var(--h2); line-height:1; letter-spacing:-.04em; text-wrap:balance}
+.h3{font-size:var(--h3); line-height:1; letter-spacing:-.04em; text-wrap:balance}
+.h4{font-size:var(--h4); line-height:1.1; letter-spacing:-.04em; text-wrap:balance}
+.h5{font-size:var(--h5); line-height:1.2; letter-spacing:-.03em}
+.h6{font-size:var(--h6); line-height:1.2; letter-spacing:-.03em}
+.lg{font-size:var(--t-large)} .sm{font-size:var(--t-small)} .xs{font-size:var(--t-tiny)}
+.mono{font-family:var(--mono); font-variant-numeric:tabular-nums}
+.muted{color:var(--text-2)} .faint{color:var(--text-3)}
+.lead{font-size:var(--t-large); color:var(--text-2); max-width:min(62ch,100%)}
+.copy{color:var(--text-2); max-width:min(64ch,100%)}
+.copy + .copy{margin-top:var(--sp-md)}
+
+/* THE LABEL. One treatment for every small uppercase label on the site:
+   the text face rather than the mono one, tracked wide, and at --text-2 so it
+   is a dark grey on the light ground and a light grey on the inverted one.
+   No leading dot. */
+.eyebrow,
+.claim,
+.spec .k,
+.fig .s,
+.fcol .ft,
+.field > label,
+.prose dt,
+.paper .src,
+.coverage .out,
+.out-label,
+.ctx-label{
+  font-family:var(--sans); font-size:.8125rem; font-weight:400;
+  letter-spacing:.09em; text-transform:uppercase; color:var(--text-2);
+}
+.eyebrow{display:inline-flex; align-items:center; gap:var(--sp-sm)}
+
+/* --- layout -------------------------------------------------------------- */
+.wrap{width:100%; max-width:var(--container); margin-inline:auto; padding-inline:var(--gutter)}
+.wrap--read{max-width:var(--reading)}
+.sec{padding-block:var(--section-lg)}
+.sec--md{padding-block:var(--section-md)}
+.sec--sm{padding-block:var(--section-sm)}
+.sec--xl{padding-block:var(--section-xl)}
+.hd{display:flex; flex-direction:column; gap:var(--sp-md); margin-bottom:var(--sp-2xl)}
+.hd .h2, .hd .h3{max-width:min(24ch,100%)}
+.rule{border:0; border-top:var(--hairline) solid var(--border); margin:0}
+.band-grey{background:var(--c-grey-100)}
+
+/* --- buttons ------------------------------------------------------------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-sm);
+  padding:var(--sp-md) var(--sp-lg); border:0; border-radius:var(--r-sm);
+  background:var(--c-blue); color:var(--c-white);
+  font-size:var(--t-small); line-height:1.3; text-decoration:none; cursor:pointer;
+  transition:background-color var(--dur-micro) var(--ease);
+}
+.btn:hover{background:var(--c-dark-blue)}
+.btn--glass{
+  background:var(--o-white-10); color:var(--c-white); border-radius:var(--r-md);
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+}
+.btn--glass:hover{background:var(--o-white-20)}
+.btn--ghost{background:var(--fill); color:var(--text); border-radius:var(--r-md)}
+.btn--ghost:hover{background:var(--fill-hi)}
+.btn-row{display:flex; flex-wrap:wrap; gap:var(--sp-xs)}
+
+/* --- navigation ---------------------------------------------------------- */
+/* EXTENSION 1. Over the dark hero it is Atira's glass pill verbatim. On a
+   light page the same geometry runs on the ink alpha ladder instead, inside a
+   sticky hairline bar — an inner page has no imagery to float on. */
+.sitenav{
+  position:sticky; top:0; z-index:40;
+  background:#fdfdfdf2; backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+  border-bottom:var(--stroke) solid var(--c-grey-200);
+}
+.sitenav .row{display:flex; align-items:center; gap:var(--sp-xs); flex-wrap:wrap; padding-block:var(--sp-md)}
+/* The wordmark inherits currentColor, so the same file reads white over the
+   dark hero and ink on the light bar — no second asset, no theme switch. */
+.brand{
+  display:inline-flex; align-items:center; text-decoration:none;
+  padding-right:var(--sp-md); color:var(--c-off-black);
+}
+.brand .logo-svg{height:1.25rem; width:auto; display:block}
+.brand--foot{padding-right:0}
+.brand--foot .logo-svg{height:1.6rem}
+.brand:focus-visible{outline:2px solid var(--focus); outline-offset:4px; border-radius:var(--r-sm)}
+.np{
+  display:inline-flex; align-items:center; gap:var(--sp-xs);
+  padding:var(--sp-xs) var(--sp-md); border-radius:var(--r-sm);
+  background:transparent; color:var(--o-black-60);
+  font-size:var(--t-small); text-decoration:none; border:0; cursor:pointer;
+  transition:background-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease);
+}
+.np:hover{background:var(--o-black-5); color:var(--c-off-black)}
+.np[aria-current="page"]{background:var(--o-black-5); color:var(--c-off-black)}
+.np--cta{background:var(--o-black-5); color:var(--c-off-black)}
+.np--cta:hover{background:var(--o-black-10)}
+.np--solid{background:var(--c-blue); color:var(--c-white)}
+.np--solid:hover{background:var(--c-dark-blue); color:var(--c-white)}
+.sitenav .spacer{flex:1 1 auto}
+
+/* a nav pill that opens a menu */
+.menu{position:relative}
+.menu > .np i.chev{
+  width:0; height:0; border-left:3.5px solid transparent; border-right:3.5px solid transparent;
+  border-top:4px solid currentColor; display:inline-block;
+  transition:transform var(--dur-micro) var(--ease);
+}
+.menu.is-open > .np i.chev{transform:rotate(180deg)}
+.menu-panel{
+  position:absolute; top:calc(100% + var(--sp-sm)); left:0; z-index:50;
+  min-width:15rem; padding:var(--sp-xs);
+  background:#fdfdfdf7; backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+  border:var(--stroke) solid var(--c-grey-200); border-radius:var(--r-md);
+  display:none; flex-direction:column; gap:1px;
+}
+.menu.is-open .menu-panel{display:flex}
+.menu-panel a{
+  display:flex; align-items:baseline; justify-content:space-between; gap:var(--sp-md);
+  padding:var(--sp-sm) var(--sp-md); border-radius:var(--r-sm);
+  font-size:var(--t-small); color:var(--o-black-60); text-decoration:none;
+  transition:background-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease);
+}
+.menu-panel a:hover{background:var(--o-black-5); color:var(--c-off-black)}
+.menu-panel a[aria-current="page"]{color:var(--c-off-black)}
+.menu-panel a[aria-current="page"]::after{
+  content:""; width:6px; height:6px; border-radius:var(--r-round);
+  background:var(--c-blue); flex:none; align-self:center;
+}
+.menu-panel .k{font-family:var(--mono); font-size:var(--t-tiny); color:var(--o-black-30)}
+
+/* --- page shell ---------------------------------------------------------- */
+.pagehead{padding-block:var(--section-md) var(--sp-2xl); border-bottom:var(--stroke) solid var(--border)}
+/* The head element is both .wrap and .inner. Constrain the CHILDREN, never the
+   element itself — a max-width here meets .wrap's margin-inline:auto and
+   silently centres a system that is left aligned everywhere else. */
+.pagehead .inner{display:flex; flex-direction:column; gap:var(--sp-md)}
+.pagehead .h1{max-width:min(20ch,100%)}
+.pagehead .lead{max-width:min(52ch,100%)}
+
+/* --- screenshot frame (EXTENSION 2) ------------------------------------- */
+.shot{
+  border:var(--stroke) solid var(--border); border-radius:var(--r-sm);
+  background:var(--c-grey-100); overflow:hidden;
+}
+.shot img{width:100%; height:auto}
+.shot figcaption{
+  display:flex; gap:var(--sp-md); justify-content:space-between; flex-wrap:wrap;
+  padding:var(--sp-sm) var(--sp-md);
+  border-top:var(--stroke) solid var(--border); background:var(--c-off-white);
+  font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3);
+}
+.shot--inv{border-color:var(--o-white-15); background:var(--c-black-blue)}
+.shot--inv figcaption{background:transparent; border-top-color:var(--o-white-10); color:var(--o-white-40)}
+
+/* --- grids --------------------------------------------------------------- */
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:var(--sp-xs)}
+.card{
+  background:var(--fill); border-radius:var(--r-sm); padding:var(--sp-lg);
+  display:flex; flex-direction:column; gap:var(--sp-sm);
+  transition:background-color var(--dur-short) var(--ease);
+}
+.card:hover{background:var(--fill-hi)}
+.card .n{font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3); font-variant-numeric:tabular-nums}
+.card .t{font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2}
+.card .d{font-size:var(--t-small); color:var(--text-2)}
+
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:var(--sp-xl)}
+.col{border-top:var(--stroke) solid var(--border); padding-top:var(--sp-lg);
+  display:flex; flex-direction:column; gap:var(--sp-sm)}
+.col h3{font-size:var(--h5); letter-spacing:-.03em; line-height:1.2}
+.col p{font-size:var(--t-regular); color:var(--text-2)}
+
+.split{display:grid; grid-template-columns:1fr 1.2fr; gap:var(--sp-4xl); align-items:start}
+.split--even{grid-template-columns:1fr 1fr}
+
+.figs{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:var(--sp-xl)}
+.fig{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.fig .v{font-size:var(--h2); line-height:1; letter-spacing:-.04em; font-variant-numeric:tabular-nums}
+.fig .k{font-size:var(--t-regular); color:var(--text-2)}
+.fig .s{color:var(--text-3)}
+
+/* label row: hairline-topped mono labels, the DS's claims device */
+.claims{display:flex; flex-wrap:wrap; gap:0; border-top:var(--stroke) solid var(--border)}
+.claim{flex:1 1 190px; padding:var(--sp-md) var(--sp-lg) 0 0}
+
+/* --- data table ---------------------------------------------------------- */
+.tbl{overflow-x:auto; max-width:100%}
+table{border-collapse:collapse; width:100%; font-size:var(--t-small); min-width:44rem}
+th,td{text-align:left; padding:var(--sp-md) var(--sp-lg) var(--sp-md) 0;
+  border-bottom:var(--hairline) solid var(--border); vertical-align:baseline}
+th{font-family:var(--mono); font-size:.6875rem; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--text-3); border-bottom-color:var(--c-grey-300)}
+td.us{color:var(--text)} td.them{color:var(--text-3)}
+caption{caption-side:bottom; padding-top:var(--sp-md); text-align:left;
+  font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3)}
+
+/* --- analyte list -------------------------------------------------------- */
+.analytes{display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); column-gap:var(--sp-xl)}
+.analytes li{display:flex; gap:var(--sp-md); align-items:baseline;
+  padding:.5rem 0; border-bottom:var(--hairline) solid var(--border);
+  font-family:var(--mono); font-size:.8125rem; color:var(--text-2);
+  transition:color var(--dur-micro) var(--ease)}
+.analytes li::before{content:attr(data-i); color:var(--o-black-20); font-variant-numeric:tabular-nums;
+  transition:color var(--dur-micro) var(--ease)}
+.analytes li:hover, .analytes li:hover::before{color:var(--c-blue)}
+
+/* --- research swimlanes -------------------------------------------------- */
+.lanes{display:grid; grid-template-columns:repeat(3,1fr); gap:0}
+.lane{border-right:var(--stroke) solid var(--border); padding-right:var(--sp-xl)}
+.lane:last-child{border-right:0; padding-right:0}
+.lane + .lane{padding-left:var(--sp-xl)}
+.lane-hd{display:flex; align-items:center; gap:var(--sp-sm); padding-bottom:var(--sp-lg);
+  border-top:var(--stroke) solid var(--border); padding-top:var(--sp-xl)}
+.lane-hd .dot{width:9px; height:9px; border-radius:var(--r-round); flex:none; background:var(--c-blue)}
+.lane-hd .dot--live{animation:pulse 2.2s var(--ease) infinite}
+.lane-hd .dot--open{background:transparent; border:1.5px solid var(--c-grey-300)}
+.lane-hd .lbl{font-size:var(--t-regular)}
+.lane-hd .ct{margin-left:auto; font-family:var(--mono); font-size:var(--t-small); color:var(--text-3)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 #0013e959}50%{box-shadow:0 0 0 6px #0013e900}}
+.study{padding-block:var(--sp-lg); display:flex; flex-direction:column; gap:var(--sp-sm)}
+.study + .study{border-top:var(--hairline) solid var(--border)}
+.study .who{font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3); line-height:1.5}
+.study .who.is-next{color:var(--c-blue)}
+.study .t{font-size:var(--t-regular); letter-spacing:-.02em; line-height:1.3}
+.study .d{font-size:var(--t-small); color:var(--text-2)}
+
+/* --- papers -------------------------------------------------------------- */
+.papers{border-top:var(--stroke) solid var(--border)}
+.paper{display:grid; grid-template-columns:14rem 1fr 5rem; gap:var(--sp-xl);
+  padding-block:var(--sp-lg); border-bottom:var(--hairline) solid var(--border); align-items:baseline}
+.paper .src{line-height:1.5}
+.paper .ttl{font-size:var(--t-regular); line-height:1.35; letter-spacing:-.02em}
+.paper .sub{font-size:var(--t-small); color:var(--text-2); margin-top:var(--sp-2xs)}
+.paper .yr{font-family:var(--mono); font-size:var(--t-small); color:var(--text-3);
+  font-variant-numeric:tabular-nums; text-align:right}
+
+/* --- roles accordion ----------------------------------------------------- */
+.roles{border-top:var(--stroke) solid var(--border)}
+.role{border-bottom:var(--stroke) solid var(--border)}
+.role > summary{
+  list-style:none; cursor:pointer; display:flex; align-items:baseline; gap:var(--sp-xl);
+  padding-block:var(--sp-xl);
+}
+.role > summary::-webkit-details-marker{display:none}
+.role > summary:hover .rn{color:var(--c-blue)}
+.role .rn{flex:0 0 14rem; font-size:var(--h5); letter-spacing:-.03em;
+  transition:color var(--dur-micro) var(--ease)}
+.role .rc{flex:1 1 auto; font-size:var(--t-small); color:var(--text-3); max-width:min(60ch,100%)}
+/* Questions, then the view they are answered in underneath at a size you can
+   actually read. Capped rather than full-bleed: the row still has to stay
+   short enough that opening one role does not bury the next. */
+.role-body{padding:0 0 var(--sp-2xl) 0; display:flex; flex-direction:column;
+  gap:var(--sp-xl); align-items:flex-start}
+.role-body .qs{display:flex; flex-direction:column; gap:var(--sp-md)}
+.role-q{font-size:var(--t-regular); color:var(--text-2); padding-left:var(--sp-lg);
+  border-left:2px solid var(--o-black-15); max-width:min(58ch,100%)}
+/* The screenshot sits in the content column of the open row and is bounded by
+   it — it fills that column's width exactly and never sets its own size. */
+.role-shot{margin:0; width:100%; max-width:min(52rem,100%)}
+.role-shot figcaption{padding:var(--sp-sm) var(--sp-md)}
+.role-shot img{width:100%; height:auto; display:block}
+
+
+
+/* --- forms (EXTENSION 3) ------------------------------------------------- */
+form{display:flex; flex-direction:column; gap:var(--sp-lg); max-width:min(34rem,100%)}
+.field{display:flex; flex-direction:column; gap:var(--sp-sm)}
+
+input,select,textarea{
+  font-family:var(--sans); font-size:var(--t-regular); font-weight:400; color:var(--text);
+  background:var(--fill); border:var(--stroke) solid var(--border); border-radius:var(--r-sm);
+  padding:var(--sp-md); width:100%; line-height:1.3;
+  transition:border-color var(--dur-micro) var(--ease), background-color var(--dur-micro) var(--ease);
+}
+input::placeholder,textarea::placeholder{color:var(--o-black-30)}
+input:hover,select:hover,textarea:hover{background:var(--fill-hi)}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--focus); outline-offset:2px; border-color:transparent}
+textarea{min-height:7rem; resize:vertical}
+.field .hint{font-size:var(--t-small); color:var(--text-3)}
+.checks{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.check{display:flex; gap:var(--sp-md); align-items:flex-start; font-size:var(--t-small); color:var(--text-2)}
+.check input{width:16px; height:16px; flex:none; margin-top:2px; padding:0; accent-color:var(--c-blue)}
+.formnote{font-size:var(--t-small); color:var(--text-3); max-width:min(44ch,100%)}
+.sent{
+  border-left:2px solid var(--c-blue); padding:var(--sp-md) 0 var(--sp-md) var(--sp-lg);
+  font-size:var(--t-regular); max-width:min(48ch,100%);
+}
+
+/* --- tabs ---------------------------------------------------------------- */
+.tabs{display:flex; gap:var(--sp-xs); flex-wrap:wrap; margin-bottom:var(--sp-xl)}
+.tab{
+  padding:var(--sp-sm) var(--sp-md); border-radius:var(--r-sm); border:0; cursor:pointer;
+  background:var(--fill); color:var(--text-2); font-size:var(--t-small);
+  transition:background-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease);
+}
+.tab:hover{background:var(--fill-hi); color:var(--text)}
+.tab[aria-selected="true"]{background:var(--c-off-black); color:var(--c-off-white)}
+.inv .tab[aria-selected="true"]{background:var(--c-off-white); color:var(--c-black-blue)}
+
+/* --- misc devices -------------------------------------------------------- */
+/* --- CONTEXT: the data-flow diagram ------------------------------------
+   Feeds in, engine, outputs, wired by dotted paths. The header is centred —
+   the only centred block on the site, and a deliberate exception to the
+   system's left-aligned rule because it heads a symmetrical diagram. */
+.ctx-head{display:flex; flex-direction:column; align-items:flex-start; gap:var(--sp-md);
+  margin-bottom:var(--sp-4xl)}
+.ctx-head .h2{max-width:none}
+.ctx-head .copy{max-width:min(72ch,100%)}
+.eyebrow--blue{color:var(--c-blue)}
+
+.ctx-flow{position:relative; display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,19rem) minmax(0,1fr);
+  gap:var(--sp-4xl); align-items:center}
+/* The wires sit under the boxes and are painted from measured positions. */
+.ctx-wires{position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:0}
+.ctx-flow > *:not(.ctx-wires){position:relative; z-index:1}
+
+.ctx-label{display:flex; align-items:center; gap:var(--sp-md);
+  color:var(--c-blue); margin-bottom:var(--sp-md)}
+.ctx-label::after{content:""; flex:1 1 auto; height:1px; background:var(--c-grey-200)}
+.ctx-label--right{flex-direction:row-reverse}
+.ctx-label--mid{justify-content:center}
+.ctx-label--mid::after{display:none}
+
+/* ---- feeds ---- */
+.feeds{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.feed{display:flex; align-items:center; gap:var(--sp-md);
+  background:var(--c-white); border:var(--stroke) solid var(--c-grey-200);
+  border-radius:10px; padding:var(--sp-sm) var(--sp-md);
+  transition:opacity var(--dur-short) var(--ease)}
+.feed.is-off{opacity:.45}
+.fmark{flex:none; width:2.5rem; height:2.5rem; border-radius:8px;
+  background:var(--c-grey-100); border:var(--stroke) solid var(--c-grey-200);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:.625rem; color:var(--text-3)}
+.fname{flex:1 1 auto; font-size:var(--t-regular); letter-spacing:-.02em}
+.ftype{flex:none; font-family:var(--mono); font-size:.625rem; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--text-3);
+  background:var(--o-black-5); border-radius:var(--r-round); padding:3px 9px}
+
+/* ---- the toggle ---- */
+.tgl{flex:none; display:inline-flex; cursor:pointer}
+.tgl input{position:absolute; opacity:0; width:0; height:0}
+.tgl-track{display:block; width:2.75rem; height:1.5rem; border-radius:var(--r-round);
+  background:var(--c-grey-300); position:relative;
+  transition:background-color var(--dur-short) var(--ease)}
+.tgl-track::after{content:""; position:absolute; top:3px; left:3px;
+  width:1.125rem; height:1.125rem; border-radius:var(--r-round); background:var(--c-white);
+  transition:transform var(--dur-short) var(--ease)}
+.tgl input:checked + .tgl-track{background:var(--c-blue)}
+.tgl input:checked + .tgl-track::after{transform:translateX(1.25rem)}
+.tgl input:focus-visible + .tgl-track{outline:2px solid var(--c-blue); outline-offset:3px}
+
+/* ---- the engine ---- */
+.ctx-mid{display:flex; flex-direction:column; align-items:stretch}
+.engine{background:var(--c-black-blue); border-radius:14px;
+  padding:var(--sp-lg); display:flex; flex-direction:column;
+  align-items:center; gap:var(--sp-md)}
+.engine-brand{display:block; color:var(--c-white); width:5.5rem}
+.engine-brand .logo-svg{width:100%; height:auto; display:block}
+.engine-live{display:inline-flex; align-items:center; gap:var(--sp-sm);
+  background:var(--o-white-10); border-radius:var(--r-round);
+  padding:var(--sp-2xs) var(--sp-md);
+  font-size:var(--t-tiny); color:var(--o-white-80)}
+.engine-live i{width:6px; height:6px; border-radius:var(--r-round); background:#22c55e}
+.engine-live b{font-weight:400; font-variant-numeric:tabular-nums; color:var(--c-white)}
+.engine-card{width:100%; display:flex; align-items:center; gap:var(--sp-md);
+  background:var(--o-white-5); border:var(--stroke) solid var(--o-white-10);
+  border-radius:10px; padding:var(--sp-sm) var(--sp-md)}
+.ec-icon{flex:none; width:2rem; height:2rem; border-radius:8px;
+  display:flex; align-items:center; justify-content:center}
+.ec-icon svg{width:1rem; height:1rem}
+.ec-icon--ext{background:#1e2a5e; color:#8fa6ff}
+.ec-icon--int{background:#12351f; color:#5ee39b}
+.ec-text{display:flex; flex-direction:column; gap:1px; min-width:0}
+.ec-text b{font-weight:400; font-size:var(--t-small); color:var(--c-white)}
+.ec-text span{font-size:var(--t-tiny); color:var(--o-white-40)}
+.engine-plus{width:1.75rem; height:1.75rem; border-radius:var(--r-round);
+  background:var(--c-blue); color:var(--c-white);
+  display:flex; align-items:center; justify-content:center; font-size:var(--t-regular)}
+.engine-foot{margin-top:var(--sp-md); text-align:center;
+  font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3)}
+
+/* ---- outputs ---- */
+.outs{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.out{background:var(--c-white); border:var(--stroke) solid var(--c-grey-200);
+  border-radius:10px; padding:var(--sp-md) var(--sp-lg);
+  display:flex; flex-direction:column; gap:var(--sp-sm)}
+.out-label{color:var(--c-blue)}
+.out ul{display:flex; flex-direction:column; gap:var(--sp-2xs)}
+.out li{display:flex; align-items:baseline; gap:var(--sp-sm);
+  font-size:var(--t-regular); color:var(--text)}
+.out li::before{content:""; flex:none; width:5px; height:5px; border-radius:var(--r-round);
+  background:var(--c-blue); transform:translateY(-2px)}
+
+/* Dashes travel toward the engine on the way in and away from it on the way
+   out, so the diagram reads as flow rather than as decoration. */
+.wire{fill:none; stroke-width:1.25; stroke-dasharray:2 6; stroke-linecap:round}
+.wire--in{stroke:var(--o-black-30); animation:wire-in 2.4s linear infinite}
+.wire--out{stroke:var(--c-blue); opacity:.75; animation:wire-out 2.4s linear infinite}
+.wire.is-off{stroke:var(--o-black-10); animation:none}
+@keyframes wire-in{to{stroke-dashoffset:-16}}
+@keyframes wire-out{to{stroke-dashoffset:-16}}
+@media (prefers-reduced-motion:reduce){ .wire{animation:none !important} }
+
+@media (max-width:1100px){
+  .ctx-flow{grid-template-columns:1fr; gap:var(--sp-2xl)}
+  .ctx-wires{display:none}          /* stacked: there is nothing to wire across */
+  .ctx-mid{max-width:min(24rem,100%); margin-inline:auto}
+  .ctx-label--right{flex-direction:row}
+}
+
+.tags{display:flex; gap:var(--sp-xs); flex-wrap:wrap}
+.tag{border:var(--stroke) solid var(--border); border-radius:var(--r-round);
+  padding:var(--sp-2xs) var(--sp-md); font-family:var(--mono); font-size:var(--t-tiny);
+  letter-spacing:.06em; text-transform:uppercase; color:var(--text-2)}
+.callout{border-left:2px solid var(--c-blue); padding:var(--sp-sm) 0 var(--sp-sm) var(--sp-lg);
+  font-size:var(--t-regular); color:var(--text-2); max-width:min(66ch,100%)}
+.callout--neon{border-left-color:var(--c-neon)}
+/* --- proof: club and press marks ----------------------------------------
+   Both marks are monochrome at rest so the row reads as one texture and
+   nobody's brand shouts over the hero; the clubs take their colour back on
+   hover, which is also the affordance that says the mark is a link.
+
+   The two groups share one --mark-band so a 4.5rem crest and a 1.5rem
+   wordmark sit centred on the same axis instead of on the same baseline. */
+:root{--mark-band:4.5rem}
+.proof{display:flex; gap:var(--sp-4xl); align-items:flex-start;
+  flex-wrap:wrap; justify-content:space-between; margin-top:var(--sp-3xl)}
+.proof-group{display:flex; flex-direction:column; gap:var(--sp-md)}
+.marks{display:flex; align-items:center; gap:var(--sp-2xl);
+  min-height:var(--mark-band); flex-wrap:wrap}
+
+.club{display:inline-flex; border-radius:var(--r-sm); text-decoration:none}
+.club .logo-svg{
+  height:var(--mark-band); width:auto; display:block;
+  filter:grayscale(1); opacity:.82;
+  transition:filter var(--dur-short) var(--ease), opacity var(--dur-short) var(--ease);
+}
+.club:hover .logo-svg,
+.club:focus-visible .logo-svg{filter:none; opacity:1}
+.club:focus-visible{outline:2px solid var(--focus); outline-offset:6px}
+
+/* The press marks are black artwork, so on the blue-black ground they are
+   inverted rather than desaturated — there is no colour in them to reveal.
+   Heights are area-matched off measured ink bounds, not off the exporters'
+   canvases, which is the only way three wordmarks this different in
+   proportion read as the same size. */
+.pmark{display:inline-flex; align-items:center}
+.pmark .logo-svg{width:auto; display:block; filter:invert(1); opacity:.72}
+.pmark--nyt .logo-svg{height:1.15rem}
+.pmark--kicker .logo-svg{height:1.5rem}
+.pmark--sportico .logo-svg{height:1.45rem}
+
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
+
+@media (max-width:900px){
+  :root{--mark-band:3.5rem}
+  .proof{gap:var(--sp-xl); margin-top:var(--sp-2xl)}
+  .marks{gap:var(--sp-xl)}
+  .pmark--nyt .logo-svg{height:.9rem}
+  .pmark--kicker .logo-svg{height:1.25rem}
+  .pmark--sportico .logo-svg{height:1.2rem}
+}
+
+.tiles{display:flex; gap:var(--sp-xs); flex-wrap:wrap}
+.tile{background:var(--c-grey-300); border-radius:var(--r-sm); padding:var(--sp-xs);
+  width:200px; height:118px; display:flex; flex-direction:column; justify-content:flex-end;
+  gap:2px; color:var(--c-off-black)}
+.tile b{font-weight:400; font-size:var(--t-regular); letter-spacing:-.03em}
+.tile span{font-size:var(--t-tiny); color:var(--o-black-60)}
+
+/* prose for the legal pages */
+.prose{max-width:min(68ch,100%); display:flex; flex-direction:column; gap:var(--sp-lg)}
+.prose h2{font-size:var(--h5); letter-spacing:-.03em; margin-top:var(--sp-lg)}
+.prose p,.prose li{font-size:var(--t-regular); color:var(--text-2)}
+.prose ul{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.prose ul li{padding-left:var(--sp-lg); border-left:2px solid var(--o-black-10)}
+.prose a{color:var(--c-blue); text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose dl{display:grid; grid-template-columns:12rem 1fr; gap:var(--sp-sm) var(--sp-xl)}
+
+.prose dd{font-size:var(--t-regular); color:var(--text-2)}
+.stub{border-left:2px solid var(--c-neon); padding:var(--sp-md) 0 var(--sp-md) var(--sp-lg);
+  max-width:min(64ch,100%); font-size:var(--t-small); color:var(--text-2)}
+
+/* --- footer -------------------------------------------------------------- */
+footer.site{border-top:var(--stroke) solid var(--border); padding-block:var(--section-md) var(--sp-2xl)}
+.fgrid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--sp-2xl)}
+.fbrand{display:flex; flex-direction:column; gap:var(--sp-lg)}
+.fbrand .tagline{font-size:var(--h4); line-height:1.1; letter-spacing:-.04em}
+.fbrand address{font-style:normal; font-size:var(--t-small); color:var(--text-3); line-height:1.6}
+.fcol{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.fcol .ft{margin-bottom:var(--sp-2xs)}
+.fcol a{font-size:var(--t-small); color:var(--text-2); text-decoration:none;
+  transition:color var(--dur-micro) var(--ease)}
+.fcol a:hover{color:var(--c-blue)}
+.fbot{display:flex; justify-content:space-between; gap:var(--sp-lg); flex-wrap:wrap;
+  margin-top:var(--section-md); padding-top:var(--sp-lg);
+  border-top:var(--hairline) solid var(--border);
+  font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3)}
+
+/* --- hero ---------------------------------------------------------------- */
+.hero{position:relative; overflow:hidden; padding-block:var(--section-md) var(--section-md);
+  min-height:34rem; display:flex; flex-direction:column; justify-content:flex-end}
+/* The trace sits top right, opposite the headline and clear of the spec strip
+   below it. Both are measurements; neither should sit on top of the other. */
+/* The marker network sits top right, opposite the headline and clear of the
+   spec strip below it. It stays pointer-events:none so the buttons underneath
+   it keep working; the cursor is read from the hero, not from the canvas. */
+.hero-viz{position:absolute; right:0; top:var(--navh); width:58%; height:58%;
+  pointer-events:none; display:flex; flex-direction:column}
+#viz{flex:1 1 0; min-height:0; width:100%; height:auto; display:block}
+/* The marker label is a real element rather than canvas text: it gets the
+   actual mono face at any pixel density, stays crisp, and takes its colour
+   from the tokens like everything else. */
+.viz-tag{
+  position:absolute; left:0; top:0; z-index:2; pointer-events:none;
+  display:flex; flex-direction:column; gap:1px; white-space:nowrap;
+  padding:4px 7px; border-radius:var(--r-sm);
+  /* The label lands on top of the web, so it needs its own ground to stay
+     readable. Translucent ink plus blur is the system's own way of doing
+     that — there is no shadow to reach for. */
+  background:#030712d1; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  font-family:var(--mono); font-size:11px; line-height:1.3;
+  will-change:transform, opacity;
+}
+.viz-tag b{font-weight:400; color:var(--c-neon)}
+.viz-tag i{font-style:normal; color:var(--o-white-60)}
+.viz-tag.is-flip{align-items:flex-end}
+.viz-note{padding:var(--sp-sm) var(--gutter) 0 0; text-align:right;
+  font-family:var(--mono); font-size:var(--t-tiny); color:var(--o-white-30);
+  transition:opacity var(--dur-short) var(--ease)}
+.viz-note b{font-weight:400; color:var(--o-white-40)}
+.hero.is-touched .viz-note b{opacity:0}
+/* No cursor to move on a touch device, so do not ask for one. */
+@media (hover:none){ .viz-note b{display:none} }
+@media (max-width:1000px){
+  .hero-viz{top:auto; bottom:0; width:100%; height:11rem; opacity:.85}
+  .hero{padding-bottom:calc(var(--section-md) + 8rem)}
+}
+.hero .wrap{position:relative; z-index:2}
+.hero-copy{display:flex; flex-direction:column; gap:var(--sp-lg); max-width:min(34ch,100%)}
+.hero-copy .lead{max-width:min(52ch,100%)}
+.hero-copy .btn-row{margin-top:var(--sp-sm)}
+.specs{display:flex; flex-wrap:wrap; gap:0; margin-top:var(--sp-3xl);
+  border-top:var(--stroke) solid var(--border)}
+.spec{flex:1 1 180px; padding:var(--sp-lg) var(--sp-lg) 0 0;
+  display:flex; flex-direction:column; gap:var(--sp-2xs)}
+.spec .v{font-size:var(--h5); letter-spacing:-.03em; font-variant-numeric:tabular-nums; color:var(--text)}
+
+.proof{display:flex; gap:var(--sp-2xl); align-items:flex-start; flex-wrap:wrap; justify-content:space-between}
+.press{display:flex; flex-direction:column; gap:var(--sp-md)}
+.press-list{display:flex; gap:var(--sp-lg); flex-wrap:wrap; font-size:var(--t-regular); color:var(--text-2)}
+/* The story block is narrower than the 110rem container and centred in it,
+   so the quote and the mission read as one column rather than as two things
+   pinned to opposite edges of a very wide page. Text stays left aligned. */
+.quote-row{display:grid; grid-template-columns:minmax(0,1fr) 19rem; gap:var(--sp-3xl);
+  padding-block:var(--section-md); align-items:start;
+  max-width:min(66rem,100%); margin-inline:auto}
+.quote-col blockquote{max-width:min(50ch,100%)}
+.quote-col{display:flex; flex-direction:column; gap:var(--sp-3xl)}
+/* Neon only carries on the dark ground; on off-white a quote takes an ink
+   hairline instead. Same device, correct value for the surface it sits on. */
+blockquote{border-left:2px solid var(--o-black-20); padding-left:var(--sp-lg); max-width:min(44ch,100%)}
+.inv blockquote{border-left-color:var(--c-neon)}
+blockquote p{font-size:var(--h4); line-height:1.1; letter-spacing:-.04em}
+blockquote footer{margin-top:var(--sp-lg); font-size:var(--t-small); color:var(--text-3);
+  display:flex; flex-direction:column; gap:2px}
+blockquote footer b{font-weight:400; color:var(--text-2)}
+.mission{display:flex; flex-direction:column; gap:var(--sp-md); max-width:min(48ch,100%)}
+.quote-col .mission{margin-top:30px}
+.portrait.portrait--inv{border-color:var(--o-white-15); background:var(--c-black-blue)}
+.portrait.portrait--inv figcaption{background:transparent; border-top-color:var(--o-white-10)}
+.portrait.portrait--inv figcaption b{color:var(--c-white)}
+.portrait.portrait--inv figcaption span{color:var(--o-white-40)}
+.mission p{font-size:var(--t-large); color:var(--text-2)}
+.assure{display:flex; justify-content:space-between; align-items:center; gap:var(--sp-xl);
+  flex-wrap:wrap; border-top:var(--stroke) solid var(--border); padding-top:var(--sp-2xl)}
+/* --- founder ------------------------------------------------------------
+   A section, not a profile page: the portrait is column-width, not hero-width,
+   and the column beside it carries facts and coverage rather than a life story. */
+.founder{display:grid; grid-template-columns:16rem 1fr; gap:var(--sp-4xl); align-items:start}
+.portrait{margin:0; border:var(--stroke) solid var(--border); border-radius:var(--r-sm);
+  background:var(--c-grey-100); overflow:hidden}
+.portrait img{width:100%; height:auto; display:block}
+.portrait figcaption{display:flex; flex-direction:column; gap:1px;
+  padding:var(--sp-sm) var(--sp-md); border-top:var(--stroke) solid var(--border);
+  background:var(--c-off-white); font-family:var(--mono); font-size:var(--t-tiny)}
+.portrait figcaption b{font-weight:400; color:var(--text)}
+.portrait figcaption span{color:var(--text-3)}
+.founder-body{display:flex; flex-direction:column; gap:var(--sp-lg)}
+.founder blockquote p{font-size:var(--h5); line-height:1.25; letter-spacing:-.03em}
+.founder blockquote footer{margin-top:var(--sp-md); font-size:var(--t-small); color:var(--text-3)}
+.coverage{border-top:var(--stroke) solid var(--border)}
+.coverage li{border-bottom:var(--hairline) solid var(--border)}
+.coverage a{display:grid; grid-template-columns:11rem 1fr auto; gap:var(--sp-lg);
+  align-items:baseline; padding:var(--sp-md) 0; text-decoration:none;
+  transition:color var(--dur-micro) var(--ease)}
+.coverage a:hover{color:var(--c-blue)}
+
+.coverage a:hover .out{color:var(--c-blue)}
+.coverage .hl{font-size:var(--t-small); line-height:1.35}
+.coverage .yr{font-family:var(--mono); font-size:var(--t-tiny); color:var(--text-3);
+  font-variant-numeric:tabular-nums}
+@media (max-width:900px){
+  .founder{grid-template-columns:1fr; gap:var(--sp-xl)}
+  .portrait{max-width:min(16rem,100%)}
+  .coverage a{grid-template-columns:1fr; gap:var(--sp-2xs)}
+}
+/* A brand-blue panel at 10px. The radius is softer than the system's 4/6px
+   and a full-bleed accent panel spends the action colour far more freely than
+   "one committed action per section" — both are Jan's call, and this is the
+   only place on the site that does either. */
+.cta-box{
+  background:var(--c-blue); border-radius:10px;
+  padding:var(--section-md) var(--sp-4xl);
+  color:var(--c-white);
+  /* On #0013e9 a 60% white eyebrow sits right on the contrast line; 80% clears it. */
+  --text:var(--c-white); --text-2:var(--o-white-80); --text-3:var(--o-white-80);
+  --focus:var(--c-white);
+}
+.btn--ink{background:var(--c-white); color:var(--c-blue)}
+.btn--ink:hover{background:var(--c-off-white); color:var(--c-dark-blue)}
+.close-cta{display:flex; flex-direction:column; gap:var(--sp-xl); align-items:flex-start}
+.close-cta .h2{max-width:min(26ch,100%)}
+
+/* --- responsive ---------------------------------------------------------- */
+@media (max-width:1100px){
+  .split,.split--even,.quote-row{grid-template-columns:1fr; gap:var(--sp-2xl)}
+  .portrait.portrait--inv{max-width:min(19rem,100%)}
+  .cta-box{padding:var(--sp-3xl) var(--sp-xl)}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .lanes{grid-template-columns:1fr}
+  .lane{border-right:0; padding-right:0}
+  .lane + .lane{padding-left:0}
+  .paper{grid-template-columns:1fr; gap:var(--sp-sm)}
+  .paper .yr{text-align:left}
+  .role-body{grid-template-columns:1fr}
+  .role > summary{flex-wrap:wrap; gap:var(--sp-sm)}
+  .role .rn{flex-basis:100%}
+}
+@media (max-width:1024px){ :root{--gutter:calc(2rem + 50px)} }
+@media (max-width:700px){
+  :root{--h1:2.75rem; --h2:2.5rem; --h3:2rem; --h4:1.75rem; --gutter:calc(1.25rem + 25px); --section-xl:7rem}
+  .hero{min-height:0}
+  .hero-copy{max-width:none}
+  .hero-viz{height:10rem}
+  .fgrid{grid-template-columns:1fr}
+  .prose dl{grid-template-columns:1fr; gap:var(--sp-2xs)}
+  .prose dd{margin-bottom:var(--sp-md)}
+  .tile{width:150px; height:96px}
+  .specs .spec{flex-basis:45%}
+  .sitenav .row{padding-block:var(--sp-sm)}
+  .np{padding:var(--sp-2xs) var(--sp-sm)}
+}
+@media (max-width:480px){
+  :root{--h1:2.25rem; --h2:2rem; --h3:1.75rem; --h4:1.5rem}
+  .tile{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important; animation-duration:.01ms !important}
+  html{scroll-behavior:auto}
+}
+</style>
+
+<style>
+/* The nav is fixed, so every page opens its own top space. On home the hero
+   runs underneath it and the bar goes transparent glass over the dark ground
+   — Atira's own recipe — then resolves to the light bar once you scroll off. */
+:root{--navh:4.25rem}
+.sitenav{position:fixed; top:0; left:0; right:0}
+.pagehead{padding-top:calc(var(--navh) + var(--section-md))}
+.hero{padding-top:calc(var(--navh) + var(--section-md))}
+.sitenav.on-dark{background:transparent; border-bottom-color:transparent}
+.sitenav.on-dark .brand{color:var(--c-white)}
+.sitenav.on-dark .np{
+  background:var(--o-white-5); color:var(--o-white-80);
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+}
+.sitenav.on-dark .np:hover,
+.sitenav.on-dark .np[aria-current="page"]{background:var(--o-white-15); color:var(--c-white)}
+.sitenav.on-dark .np--cta{background:var(--o-white-15); color:var(--c-white)}
+.sitenav.on-dark .np--cta:hover{background:var(--o-white-30)}
+.sitenav.on-dark .np--solid{background:var(--c-blue); color:var(--c-white)}
+.sitenav.on-dark .menu-panel{background:#030712f2; border-color:var(--o-white-15)}
+.sitenav.on-dark .menu-panel a{color:var(--o-white-80)}
+.sitenav.on-dark .menu-panel a:hover{background:var(--o-white-10); color:var(--c-white)}
+.sitenav.on-dark .menu-panel a[aria-current="page"]{color:var(--c-white)}
+.sitenav.on-dark .menu-panel .k{color:var(--o-white-30)}
+@media (max-width:700px){:root{--navh:3.25rem}}
+.mark{width:100%; height:auto; display:block}
+</style>
+
+<nav class="sitenav" id="nav" aria-label="Primary">
+  <div class="wrap row">
+    <a class="brand" href="#/" data-link aria-label="Biolyz, home">__SVG_biolyz__</a>
+    <div class="menu" data-menu>
+      <button class="np" type="button" aria-expanded="false" data-menu-btn>Solution <i class="chev"></i></button>
+      <div class="menu-panel">
+        <a href="#/solution/football" data-link>Football <span class="k">Squad</span></a>
+        <a href="#/solution/cycling" data-link>Cycling <span class="k">Roster</span></a>
+        <a href="#/use-cases" data-link>Use cases <span class="k">By role</span></a>
+      </div>
+    </div>
+    <a class="np" href="#/product" data-link>Product</a>
+    <div class="menu" data-menu>
+      <button class="np" type="button" aria-expanded="false" data-menu-btn>Science <i class="chev"></i></button>
+      <div class="menu-panel">
+        <a href="#/science" data-link>The science <span class="k">Method</span></a>
+        <a href="#/biomarkers" data-link>Biomarkers <span class="k">48</span></a>
+        <a href="#/literature" data-link>Literature <span class="k">77</span></a>
+      </div>
+    </div>
+    <a class="np" href="#/about" data-link>About Us</a>
+    <span class="spacer"></span>
+    <a class="np np--cta" href="#/waitlist" data-link>Join athlete waitlist</a>
+    <a class="np np--solid" href="#/demo" data-link>Book a demo &#8599;</a>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ======================================================================
+     HOME
+     ====================================================================== -->
+<div class="page" id="p-home" data-title="Biolyz Saliva Biomarker Platform">
+
+<section class="hero inv">
+  <div class="hero-viz">
+    <canvas id="viz" aria-hidden="true"></canvas>
+    <span class="viz-tag" id="vizTag" aria-hidden="true" hidden><b></b><i></i></span>
+    <p class="viz-note">Panel markers, grouped by indicator <b>&middot; move the cursor</b></p>
+  </div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Saliva biomarker platform</span>
+      <h1 class="h1">Sample. Signal. Decision.</h1>
+      <p class="lead">The first saliva based, non-invasive biomarker platform for elite
+        teams. 60+ markers, 48h turnaround time, zero needles. Built to enhance performance
+        and improve regeneration.</p>
+      <div class="btn-row">
+        <a class="btn" href="#/demo" data-link>Book a demo &#8599;</a>
+        <a class="btn btn--glass" href="#/waitlist" data-link>Join athlete waitlist</a>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="spec"><span class="v">60+</span><span class="k">Biomarkers per swab</span></div>
+      <div class="spec"><span class="v">48 h</span><span class="k">Sample to report</span></div>
+      <div class="spec"><span class="v">60 s</span><span class="k">Collection time</span></div>
+      <div class="spec"><span class="v">0</span><span class="k">Needles</span></div>
+    </div>
+
+    <div class="proof">
+      <div class="proof-group">
+        <span class="eyebrow">Working with</span>
+        <div class="marks">
+          <a class="club" href="https://www.bayer04.de/de-de" target="_blank" rel="noopener"
+             aria-label="Bayer 04 Leverkusen, opens bayer04.de in a new tab">__SVG_b04__</a>
+          <a class="club" href="https://www.bvb.de/" target="_blank" rel="noopener"
+             aria-label="Borussia Dortmund, opens bvb.de in a new tab">__SVG_bvb__</a>
+        </div>
+      </div>
+      <div class="proof-group">
+        <span class="eyebrow">Featured in</span>
+        <div class="marks">
+          <span class="pmark pmark--nyt">__SVG_nyt__<span class="sr-only">The New York Times</span></span>
+          <span class="pmark pmark--kicker">__SVG_kicker__<span class="sr-only">kicker</span></span>
+          <span class="pmark pmark--sportico">__SVG_sportico__<span class="sr-only">Sportico</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Protocol</span>
+      <h2 class="h2">Hustle not Hassle.</h2>
+      <p class="copy">Biolyz offers a full-stack solution, from swab delivery to sample
+        collection and analysis. We have spent millions developing a non-invasive, simple
+        process that is pain free and without the requirement of medical staff.</p>
+    </div>
+    <ol class="cards">
+      <li class="card"><span class="n">01</span><span class="t">60s saliva sample</span>
+        <span class="d">A swab in the mouth for one minute. No needles, no phlebotomist,
+        no medical staff on site.</span></li>
+      <li class="card"><span class="n">02</span><span class="t">Name selection</span>
+        <span class="d">Pick the athlete in the app, so the sample is attributed at the
+        point of collection rather than later.</span></li>
+      <li class="card"><span class="n">03</span><span class="t">Barcode scan</span>
+        <span class="d">Scan the tube to bind it to the session record before it leaves
+        the room.</span></li>
+      <li class="card"><span class="n">04</span><span class="t">Store cooled</span>
+        <span class="d">Into the cooler until pickup. Delivery, logistics and analysis are
+        ours from there.</span></li>
+    </ol>
+    <div style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="#/product" data-link>See the whole process &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The panel</span>
+      <h2 class="h2">60+ biomarkers from a single swab.</h2>
+      <p class="copy">From Actin to Xanthine, we quantify the biomarkers that reveal,
+        stress, recovery, hydration, inflammation, and many more. All with laboratory
+        precision.</p>
+    </div>
+    <div class="claims" style="margin-bottom:var(--sp-2xl); border-top-color:var(--c-grey-200)">
+      <span class="claim">Unparalleled insights</span>
+      <span class="claim">Outstanding accuracy</span>
+      <span class="claim">High-frequency testing</span>
+      <span class="claim">Non-invasive</span>
+    </div>
+    <figure class="shot">
+      <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+        alt="Biolyz dashboard, Biomarker overview: the latest cortisol reading for all 29 players with seven-day change, trend and outlier flags, beside a squad median of 1.90 ng/mL.">
+      <figcaption><span>Biomarker overview &middot; latest panel</span><span>56 markers &middot; 29 players</span></figcaption>
+    </figure>
+    <div style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="#/biomarkers" data-link>Read the full panel &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Why saliva</span>
+      <h2 class="h2">Discover the power of saliva and mass spectrometry.</h2>
+    </div>
+    <div class="cols">
+      <div class="col"><h3>Increased efficiency</h3>
+        <p>Owning the entire testing stack&mdash;hardware, chemistry, and analytics&mdash;lets
+          us slash overhead instead of paying middle-men.</p></div>
+      <div class="col"><h3>Vast data richness</h3>
+        <p>Our methodology unlocks a high-resolution mass spectrometry readout: from 1&nbsp;ml
+          of saliva we manage to extract many insight and plenty of stories.</p></div>
+      <div class="col"><h3>Rooted in science</h3>
+        <p>We work with clear scientific rigour, following scientific studies and the latest
+          biomarker research. We follow a tight knit process from untargeted biomarker
+          discovery based on peer-reviewed literature to operational, targeted analyses.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inv">
+  <div class="wrap">
+    <div class="figs" style="padding-bottom:var(--section-md); border-bottom:var(--stroke) solid var(--border)">
+      <div class="fig"><span class="v">11,000+</span><span class="k">Active sessions</span>
+        <span class="s">From top pros to youth teams</span></div>
+      <div class="fig"><span class="v">25,000+</span><span class="k">Samples</span>
+        <span class="s">In the last 12 months</span></div>
+      <div class="fig"><span class="v">2.5M+</span><span class="k">Analysed biomarkers</span>
+        <span class="s">For impactful decision making</span></div>
+    </div>
+    <div class="quote-row">
+      <div class="quote-col">
+        <blockquote>
+          <p>&ldquo;I was skeptical at first, but when you experience the power of looking
+            inside a player on a daily basis, that can really change how you work and
+            compete.&rdquo;</p>
+          <footer><b>Dr. Markus Braun</b><span>Head Team Physician, Borussia Dortmund (BVB)</span></footer>
+        </blockquote>
+        <div class="mission">
+          <span class="eyebrow">Mission</span>
+          <p>Our mission is to accelerate access to biomarker analytics for all humans,
+            globally.</p>
+          <div><a class="btn btn--glass" href="#/about" data-link>Read the manifesto &#8594;</a></div>
+        </div>
+      </div>
+      <figure class="portrait portrait--inv">
+        <img src="__IMG_braun__" width="720" height="900" loading="lazy"
+          alt="Dr. Markus Braun, Head Team Physician at Borussia Dortmund, in the dugout at Signal Iduna Park.">
+      </figure>
+    </div>
+    <div class="assure">
+      <p class="sm muted" style="max-width:min(52ch,100%)">Athlete data is medical data. It is
+        handled inside a certified information security management system, and it stays
+        the team&rsquo;s.</p>
+      <div class="tags">
+        <a class="tag" href="#/data-security" data-link>ISO 27001</a>
+        <a class="tag" href="#/privacy" data-link>GDPR</a>
+        <a class="tag" href="#/data-security" data-link>Data security</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cta-box close-cta">
+      <span class="eyebrow">Get in touch</span>
+      <h2 class="h2">Turn your team&rsquo;s saliva into a powerful advantage.</h2>
+      <a class="btn btn--ink" href="#/contact" data-link>Contact us &#8599;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     PRODUCT
+     ====================================================================== -->
+<div class="page" id="p-product" data-title="Biolyz Product" hidden>
+
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Product</span>
+    <h1 class="h1">Know more. Guess less.</h1>
+    <p class="lead">Biolyz combines accurate diagnostic analyses with smart data
+      aggregation and recommendations, to support decision making and promote athlete
+      health, recovery and performance capacity.</p>
+    <div class="btn-row" style="margin-top:var(--sp-md)">
+      <a class="btn" href="#/demo" data-link>Book a demo &#8599;</a>
+    </div>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The process</span>
+      <h2 class="h2">Every signal. One saliva sample.</h2>
+      <p class="copy">Two halves, one chain of custody. Your staff own the first four
+        minutes; we own everything after the cooler closes. Nothing in between needs a
+        phlebotomist, a sterile room or a change to your existing setup.</p>
+    </div>
+
+    <div class="proc">
+      <div class="proc-heads">
+        <span class="claim">In the changing room &middot; ~4 min</span>
+        <span class="claim">In our lab &middot; 48 h to report</span>
+      </div>
+      <!-- One grid filled COLUMN-first, with equal rows: the changing-room
+           steps run down the left, the lab steps down the right, and 01 sits
+           level with 05 however long the copy is. Two separate lists could
+           never guarantee that. -->
+      <ol class="proc-grid">
+        <li class="card"><span class="n">01</span><span class="t">60s saliva sample</span>
+          <span class="d">A swab in the mouth for one minute. Zero needles, no
+            phlebotomist, and no medical staff required on site.</span></li>
+        <li class="card"><span class="n">02</span><span class="t">Name selection</span>
+          <span class="d">Pick the athlete in the app, so the sample is attributed at
+            the point of collection rather than reconciled later.</span></li>
+        <li class="card"><span class="n">03</span><span class="t">Barcode scan</span>
+          <span class="d">Scan the tube to bind it to the session record before it
+            leaves the room.</span></li>
+        <li class="card"><span class="n">04</span><span class="t">Store cooled</span>
+          <span class="d">Into the cooler until pickup. That is the last thing anyone
+            at the club has to do.</span></li>
+        <li class="card"><span class="n">05</span><span class="t">Swab delivery &amp; pickup</span>
+          <span class="d">Consumables out, samples back. Logistics are part of the
+            platform, not a separate contract you have to manage.</span></li>
+        <li class="card"><span class="n">06</span><span class="t">LC&ndash;MS/MS readout</span>
+          <span class="d">1&nbsp;ml of saliva is ionised and sorted by mass-to-charge
+            ratio, producing a spectral fingerprint for every biomarker at once.</span></li>
+        <li class="card"><span class="n">07</span><span class="t">Targeted quantification</span>
+          <span class="d">Discovery work is untargeted and literature-led; in
+            production the targeted assay runs, quantified against known standards.</span></li>
+        <li class="card"><span class="n">08</span><span class="t">Report in the dashboard</span>
+          <span class="d">Results land against each athlete&rsquo;s own baseline, with
+            trend and outlier flags already computed.</span></li>
+      </ol>
+    </div>
+
+    <div class="callout" style="margin-top:var(--sp-2xl)">Because collection is effortless,
+      testing can happen daily &mdash; and daily is what turns a single reading into a
+      curve you can act on.</div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The dashboard</span>
+      <h2 class="h2">One dashboard, squad to single athlete.</h2>
+      <p class="copy">Five surfaces, one dataset. Squad level answers who needs you today;
+        the player level answers why. Pick a view.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Dashboard views" data-tabs="dash">
+      <button class="tab" role="tab" aria-selected="true"  data-tab="d1">Team Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="d2">Team Biomarker Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="d3">Player Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="d4">Player Indicator</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="d5">Player Biomarker</button>
+    </div>
+
+    <div data-panel="d1">
+      <figure class="shot">
+        <img src="__IMG_full__" width="1920" height="1080" loading="lazy"
+          alt="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad.">
+        <figcaption><span>Team Overview</span><span>29 in the squad &middot; MD&#8722;1</span></figcaption>
+      </figure>
+      <p class="copy" style="margin-top:var(--sp-lg)">The five-minute read. Who needs you
+        today, what the week&rsquo;s load looked like, and which indicators are off
+        &mdash; before anyone opens a single player.</p>
+    </div>
+    <div data-panel="d2" hidden>
+      <figure class="shot">
+        <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+          alt="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread.">
+        <figcaption><span>Team Biomarker Overview</span><span>56 markers &middot; latest panel</span></figcaption>
+      </figure>
+      <p class="copy" style="margin-top:var(--sp-lg)">One marker, the whole squad. Trend
+        and outlier flags come from each player&rsquo;s own seven-day and rolling windows,
+        not from a population reference range.</p>
+    </div>
+    <div data-panel="d3" hidden>
+      <figure class="shot">
+        <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
+          alt="Player Overview: one athlete's recovery status, open patterns, indicator tiles and marker summary on a single page.">
+        <figcaption><span>Player Overview</span><span>Single athlete</span></figcaption>
+      </figure>
+      <p class="copy" style="margin-top:var(--sp-lg)">Everything known about one athlete on
+        one page: what is open, what changed since you last looked, and what it is likely
+        to mean.</p>
+    </div>
+    <div data-panel="d4" hidden>
+      <figure class="shot">
+        <img src="__IMG_playerind__" width="1920" height="1080" loading="lazy"
+          alt="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting outside the player's own range.">
+        <figcaption><span>Player Indicator</span><span>Stress &middot; Sleep &middot; Hydration &middot; Pain &middot; Virus</span></figcaption>
+      </figure>
+      <p class="copy" style="margin-top:var(--sp-lg)">An indicator is not a black-box
+        score. It is the share of that indicator&rsquo;s biomarkers currently sitting
+        outside this athlete&rsquo;s own range &mdash; so you can always open it and see
+        which markers put it there.</p>
+    </div>
+    <div data-panel="d5" hidden>
+      <figure class="shot">
+        <img src="__IMG_playermk__" width="1920" height="1080" loading="lazy"
+          alt="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median.">
+        <figcaption><span>Player Biomarker</span><span>Per-marker series</span></figcaption>
+      </figure>
+      <p class="copy" style="margin-top:var(--sp-lg)">Marker by marker, day by day, against
+        the athlete&rsquo;s own band rather than a textbook one. The reference line is
+        their personal median.</p>
+    </div>
+    <p class="sm faint" style="margin-top:var(--sp-lg)">Screens captured from the live
+      product on an anonymised squad. Names, portraits and fixtures are not real.</p>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Scores and indicators</span>
+      <h2 class="h2">Two scores, five indicators, and the markers behind each.</h2>
+      <p class="copy">A reading on its own is trivia. The platform turns each one into a
+        position relative to that athlete&rsquo;s own history, then rolls it up into the
+        handful of things staff actually decide on.</p>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h3>Two scores</h3>
+        <p>Recovery and Readiness. Recovery answers how fast each athlete clears
+          yesterday&rsquo;s work, and when they are ready to be pushed &mdash; as a clear,
+          personalised curve rather than a subjective rating.</p>
+        <ul class="tags" style="margin-top:var(--sp-sm)">
+          <li class="tag">Recovery</li><li class="tag">Readiness</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Five indicators</h3>
+        <p>Stress, Sleep, Hydration, Pain and Virus. Each one is backed by named markers,
+          and each one opens to show them. Where the assay does not cover an indicator for
+          a given athlete, it says so in words instead of showing a zero.</p>
+        <ul class="tags" style="margin-top:var(--sp-sm)">
+          <li class="tag">Stress</li><li class="tag">Sleep</li><li class="tag">Hydration</li>
+          <li class="tag">Pain</li><li class="tag">Virus</li>
+        </ul>
+      </div>
+      <div class="col">
+        <h3>Supplementation</h3>
+        <p>Whether what an athlete is taking is showing up in their biology. Tracked
+          against the markers each one moves, so the question stops being a conversation
+          about compliance.</p>
+        <ul class="tags" style="margin-top:var(--sp-sm)">
+          <li class="tag">Melatonin</li><li class="tag">Creatine</li>
+          <li class="tag">Nitrosyn</li><li class="tag">Amino acids</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     CONTEXT — the data-flow diagram. External feeds on the left, the fusion
+     engine in the middle, what comes out of it on the right, wired together
+     by dotted paths that are drawn from live element positions rather than
+     hand-authored, so they stay attached at every width.
+     ====================================================================== -->
+<section class="sec band-grey" id="context">
+  <div class="wrap">
+    <div class="ctx-head">
+      <span class="eyebrow eyebrow--blue">Data integrations</span>
+      <h2 class="h2">Context. Context. Context.</h2>
+      <p class="copy">Biolyz connects to the tools your performance staff already run. We
+        ingest, normalize and validate the data, then route it straight into your dashboard
+        alongside biomarker results: contextualising internal load with external signals
+        for one complete picture.</p>
+    </div>
+
+    <div class="ctx-flow" data-flow>
+      <svg class="ctx-wires" aria-hidden="true" preserveAspectRatio="none"></svg>
+
+      <!-- ---------- external feeds ---------- -->
+      <div class="ctx-col">
+        <span class="ctx-label">External context</span>
+        <ul class="feeds">
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Catapult</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Catapult connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">StatSports</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">StatSports connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Kinexon</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Kinexon connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">VALD</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">VALD connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Kitman Labs</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Kitman Labs connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true">CSV</span>
+            <span class="fname">CSV Upload</span><span class="ftype">File</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">CSV upload connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Google Sheets</span><span class="ftype">Sync</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Google Sheets connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true">{&nbsp;}</span>
+            <span class="fname">Custom API</span><span class="ftype">REST</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Custom API connected</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ---------- the engine ---------- -->
+      <div class="ctx-mid">
+        <span class="ctx-label ctx-label--mid">Ingest &middot; fuse &middot; compare</span>
+        <div class="engine" data-engine>
+          <span class="engine-brand">__SVG_biolyz__</span>
+          <span class="engine-live"><i></i><b data-feed-count>8</b> feeds live &middot; normalized</span>
+          <div class="engine-card">
+            <span class="ec-icon ec-icon--ext" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2.5-6 4 12 2.5-6H21"/></svg>
+            </span>
+            <span class="ec-text"><b>External context</b><span>Load &middot; GPS &middot; wearables</span></span>
+          </div>
+          <span class="engine-plus" aria-hidden="true">+</span>
+          <div class="engine-card">
+            <span class="ec-icon ec-icon--int" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3.2 3.6 5.6 6.7 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 10.2 8.8 7.1 12 3.5z"/></svg>
+            </span>
+            <span class="ec-text"><b>Internal biomarkers</b><span>Saliva panel &middot; 60+ markers</span></span>
+          </div>
+        </div>
+        <span class="engine-foot">ISO 27001 &middot; GDPR</span>
+      </div>
+
+      <!-- ---------- what comes out ---------- -->
+      <div class="ctx-col ctx-col--out">
+        <span class="ctx-label ctx-label--right">Dashboard</span>
+        <div class="outs">
+          <div class="out" data-out>
+            <span class="out-label">Scores</span>
+            <ul><li>Strain &amp; Recovery</li><li>Readiness / Performance Capability</li></ul>
+          </div>
+          <div class="out" data-out>
+            <span class="out-label">Indicators</span>
+            <ul><li>Stress</li><li>Sleep</li><li>Hydration</li><li>Pain</li><li>Virus</li></ul>
+          </div>
+          <div class="out" data-out>
+            <span class="out-label">Nutrition + supplements</span>
+            <ul><li>Melatonin</li><li>Creatine</li><li>Nitrosyn</li><li>Amino Acids</li><li>+ Others</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inv">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Truth hurts? Not anymore</span>
+      <h2 class="h2">Four things a blood panel cannot give you.</h2>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="t">Non-invasive</span>
+        <span class="d">A painless saliva swab replaces blood draws and finger
+          pricks.</span></div>
+      <div class="card"><span class="t">High-frequency</span>
+        <span class="d">Collection is effortless, so testing can happen daily.</span></div>
+      <div class="card"><span class="t">Proprietary process</span>
+        <span class="d">Custom mass spectrometry with clinical grade precision.</span></div>
+      <div class="card"><span class="t">AI recommendations</span>
+        <span class="d">Machine learning turns raw biomarker data into plain language
+          actions.</span></div>
+    </div>
+    <div class="assure" style="margin-top:var(--section-md)">
+      <p class="sm muted" style="max-width:min(52ch,100%)">Your GPS, load and wellness systems stay
+        exactly where they are. Biolyz adds the internal layer underneath them.</p>
+      <div class="tags">
+        <a class="tag" href="#/data-security" data-link>ISO 27001</a>
+        <a class="tag" href="#/privacy" data-link>GDPR</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec--xl">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Know more. Hurt less.</span>
+    <h2 class="h2">See it running on your own squad.</h2>
+    <a class="btn" href="#/demo" data-link>Book a demo &#8599;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     SOLUTION FOR TEAMS  ·  one page, copy swapped by sport
+     Content ported from the solution_2.html prototype. Its own type
+     (Archivo / IBM Plex) and card shadows are dropped: the brief was to build
+     on Atira, so the structure and every word survive and the styling does not.
+     ====================================================================== */ -->
+<div class="page" id="p-solution" data-title="Biolyz Solution" hidden>
+
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow" data-i18n="eyebrow">Solution for football</span>
+    <h1 class="h1" data-i18n="hero-title">Access the internal layer of your squad.</h1>
+    <p class="lead" data-i18n="hero-sub">GPS and load data show what a player did. They
+      don&rsquo;t show what it cost him internally. We do, from a daily saliva swab,
+      non-invasively.</p>
+    <div class="btn-row" style="margin-top:var(--sp-md)">
+      <a class="btn" href="#/demo" data-link>Book a demo &#8599;</a>
+      <div class="tabs" style="margin:0" role="tablist" aria-label="Sport" data-tabs="sport">
+        <button class="tab" role="tab" aria-selected="true"  data-sport="football">Football</button>
+        <button class="tab" role="tab" aria-selected="false" data-sport="cycling">Cycling</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">How it works day to day</span>
+      <h2 class="h2">From flagged data to a decision your staff can stand behind.</h2>
+    </div>
+
+    <div class="steps4" role="tablist" aria-label="Decision sequence" data-tabs="flow">
+      <button type="button" class="step4" role="tab" aria-selected="true"
+        id="tab-f1" aria-controls="panel-f1" data-tab="f1">
+        <span class="step4-bar"><i></i></span>
+        <span class="n">01</span>
+        <span class="t">Flagged</span>
+        <span class="d" data-i18n="step1">Cortisol reads 30% above this player&rsquo;s baseline three days after a midweek away fixture, before soreness or RPE shows anything unusual.</span>
+      </button>
+      <button type="button" class="step4" role="tab" aria-selected="false"
+        id="tab-f2" aria-controls="panel-f2" data-tab="f2">
+        <span class="step4-bar"><i></i></span>
+        <span class="n">02</span>
+        <span class="t">Routed</span>
+        <span class="d" data-i18n="step2">The dashboard shows who on staff needs to see this, and who needs to act before the next session.</span>
+      </button>
+      <button type="button" class="step4" role="tab" aria-selected="false"
+        id="tab-f3" aria-controls="panel-f3" data-tab="f3">
+        <span class="step4-bar"><i></i></span>
+        <span class="n">03</span>
+        <span class="t">Interpreted</span>
+        <span class="d" data-i18n="step3">A cortisol pattern like this after fixture congestion typically points to an under-recovered window ahead of the next session.</span>
+      </button>
+      <button type="button" class="step4" role="tab" aria-selected="false"
+        id="tab-f4" aria-controls="panel-f4" data-tab="f4">
+        <span class="step4-bar"><i></i></span>
+        <span class="n">04</span>
+        <span class="t">Decided</span>
+        <span class="d" data-i18n="step4">Staff and player have a specific, shared reason to talk. A decision gets made: adjust the next session, monitor, or intervene.</span>
+      </button>
+    </div>
+
+    <div data-panel="f1" id="panel-f1" role="tabpanel" aria-labelledby="tab-f1">
+      <figure class="shot">
+        <img src="__IMG_brief__" width="1920" height="1080" loading="lazy"
+          alt="Team Overview in Brief mode: the squad triaged into who needs attention today, with the week's load and the indicators currently out of range.">
+        <figcaption><span>Flagged &middot; Team Overview, Brief</span><span>Triage first</span></figcaption>
+      </figure>
+    </div>
+    <div data-panel="f2" id="panel-f2" role="tabpanel" aria-labelledby="tab-f2" hidden>
+      <figure class="shot">
+        <img src="__IMG_digest__" width="1920" height="1080" loading="lazy"
+          alt="Weekly digest view: the week's findings grouped by who on staff needs to act on them.">
+        <figcaption><span>Routed &middot; Weekly digest</span><span>Who needs to see it</span></figcaption>
+      </figure>
+    </div>
+    <div data-panel="f3" id="panel-f3" role="tabpanel" aria-labelledby="tab-f3" hidden>
+      <figure class="shot">
+        <img src="__IMG_knowledge__" width="1920" height="1080" loading="lazy"
+          alt="Knowledge view: the interpretation library, pairing an observed marker pattern with what it typically means and the evidence behind that reading.">
+        <figcaption><span>Interpreted &middot; Knowledge</span><span>Pattern &rarr; meaning &rarr; evidence</span></figcaption>
+      </figure>
+    </div>
+    <div data-panel="f4" id="panel-f4" role="tabpanel" aria-labelledby="tab-f4" hidden>
+      <figure class="shot">
+        <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
+          alt="Player Overview: one athlete's page, where staff record the decision taken and what it was based on.">
+        <figcaption><span>Decided &middot; Player Overview</span><span>One shared reason to talk</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="callout" style="margin-top:var(--sp-2xl)" data-i18n="callout">On GPS or RPE
+      alone, this pattern typically stays invisible until output drops in the next
+      match.</div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Questions answered</span>
+      <h2 class="h2" data-i18n="roles-title">Every role around a player&rsquo;s body cares
+        about something different.</h2>
+      <p class="copy">And gets a different answer from the same data.</p>
+    </div>
+    <div class="roles">
+      <details class="role" open>
+        <summary>
+          <span class="rn">Team doctor</span>
+          <span class="rc" data-i18n="doc-cares">Cares about squad-wide health patterns and
+            physiological changes worth a closer medical look.</span>
+        </summary>
+        <div class="role-body">
+          <div class="qs">
+            <p class="role-q" data-i18n="doc-q1">&ldquo;Which players&rsquo; physiological
+              markers have shifted meaningfully from their own baseline this week?&rdquo;</p>
+            <p class="role-q" data-i18n="doc-q2">&ldquo;Are there squad-wide patterns, like
+              elevated inflammation, worth a closer medical look?&rdquo;</p>
+          </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, Biomarker overview: the latest reading of one marker for every player in the squad, with seven-day change, trend and outlier flags.">
+              <figcaption><span>Biomarker overview</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary>
+          <span class="rn">Sport scientist</span>
+          <span class="rc" data-i18n="sci-cares">Cares about how training load and fixture
+            congestion translate into physiological stress and recovery.</span>
+        </summary>
+        <div class="role-body">
+          <div class="qs">
+            <p class="role-q" data-i18n="sci-q1">&ldquo;How is each player&rsquo;s body
+              responding internally to this week&rsquo;s training load and fixture
+              schedule?&rdquo;</p>
+            <p class="role-q" data-i18n="sci-q2">&ldquo;Which players are adapting well to
+              the current block, and which show accumulating stress ahead of
+              selection?&rdquo;</p>
+          </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_indicators__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, Indicator overview: a matrix of every player against every indicator, showing the share of each indicator's markers inside that player's own range.">
+              <figcaption><span>Indicator overview</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary>
+          <span class="rn">Nutritionist</span>
+          <span class="rc" data-i18n="nut-cares">Cares about nutrition, hydration, and
+            whether supplementation is actually supporting recovery.</span>
+        </summary>
+        <div class="role-body">
+          <div class="qs">
+            <p class="role-q" data-i18n="nut-q1">&ldquo;Is a player&rsquo;s nutrition or
+              hydration supporting recovery between matches?&rdquo;</p>
+            <p class="role-q" data-i18n="nut-q2">&ldquo;Is a player&rsquo;s current
+              supplementation covering what their biomarkers show they actually
+              need?&rdquo;</p>
+          </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_hydration__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, the Hydration indicator across the squad, with the markers that make it up.">
+              <figcaption><span>Hydration indicator</span></figcaption>
+            </figure>
+        </div>
+      </details>
+    </div>
+    <div style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="#/use-cases" data-link>All use cases by role &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">What this gives your staff</span>
+      <h2 class="h2" data-i18n="gives-title">Three things you don&rsquo;t get from load and
+        GPS data alone.</h2>
+    </div>
+    <div class="cols">
+      <div class="col">
+        <h3>A shared, specific reason to talk</h3>
+        <p>Bring staff and athlete into the same conversation, grounded in data everyone
+          can see.</p>
+      </div>
+      <div class="col">
+        <h3>An internal view</h3>
+        <p>Recovery and physiological status, from inside the athlete&rsquo;s biology.</p>
+      </div>
+      <div class="col">
+        <h3>Interpretation help</h3>
+        <p>We help you read what a flagged marker likely means, drawn from experience and
+          research.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inv">
+  <div class="wrap">
+    <div class="split">
+      <div class="mission">
+        <span class="eyebrow" data-i18n="trusted-label">Trusted by clubs and federations</span>
+        <h2 class="h3" data-i18n="closing-title">See what this looks like with your own
+          squad.</h2>
+        <p class="copy" data-i18n="closing-sub">We run this on your last two weeks of
+          training data, using your own players&rsquo; baselines, not a demo dataset.</p>
+        <div class="btn-row" style="margin-top:var(--sp-md)">
+          <a class="btn btn--glass" href="#/demo" data-link>Talk to us</a>
+        </div>
+        <p class="sm faint" data-i18n="closing-note">No change to your existing GPS or load
+          setup.</p>
+      </div>
+      <div class="tiles">
+        <div class="tile"><b>Bayer 04 Leverkusen</b><span>Bundesliga</span></div>
+        <div class="tile"><b>Borussia Dortmund</b><span>Bundesliga</span></div>
+        <div class="tile" data-i18n-tile><b>Tour de France team</b><span>UCI WorldTeam</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<style>
+/* The four-step flow. A sequence, so it is numbered, and the divider between
+   steps carries the reading order the way the source's did. */
+.steps4{display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-bottom:var(--sp-2xl)}
+/* The whole step is the control, description included — a title-sized hit area
+   on a card-sized target is the classic "why is this not clickable" bug. */
+.step4{
+  display:flex; flex-direction:column; align-items:flex-start; gap:var(--sp-sm);
+  margin:0; padding:0 var(--sp-xl) var(--sp-sm) 0;
+  background:none; border:0; border-right:var(--stroke) solid var(--border);
+  font:inherit; color:inherit; text-align:left; cursor:pointer;
+}
+.step4:last-child{border-right:0; padding-right:0}
+.step4 + .step4{padding-left:var(--sp-xl)}
+.step4:focus-visible{outline:2px solid var(--focus); outline-offset:4px}
+.step4 .n{font-family:var(--mono); font-size:var(--t-small); color:var(--text-3);
+  font-variant-numeric:tabular-nums; transition:color var(--dur-micro) var(--ease)}
+.step4 .t{font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2; color:var(--text-3);
+  transition:color var(--dur-micro) var(--ease)}
+.step4 .d{font-size:var(--t-small); color:var(--text-2); line-height:1.4}
+.step4:hover .t{color:var(--text)}
+.step4[aria-selected="true"] .t{color:var(--text)}
+.step4[aria-selected="true"] .n{color:var(--c-blue)}
+
+/* One loader per step instead of one bar under all four, so the countdown
+   belongs to the step it is counting down. Steps already shown read as done in
+   ink; only the step actually running carries the blue, which keeps the accent
+   to a single element at any moment. */
+.step4-bar{display:block; align-self:stretch; height:2px; border-radius:2px;
+  background:var(--o-black-10); overflow:hidden; margin-bottom:var(--sp-xs)}
+.step4-bar i{display:block; height:100%; width:0%; background:var(--o-black-20)}
+.step4-bar i.is-live{background:var(--c-blue)}
+
+/* The process: two columns, four rows, equal heights, filled column-first. */
+.proc{display:flex; flex-direction:column; gap:var(--sp-lg)}
+.proc-heads{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-xs)}
+.proc-grid{display:grid; grid-template-columns:1fr 1fr;
+  grid-template-rows:repeat(4,1fr); grid-auto-flow:column; gap:var(--sp-xs)}
+@media (max-width:820px){
+  .proc-heads{grid-template-columns:1fr; gap:var(--sp-2xs)}
+  .proc-grid{grid-template-columns:1fr; grid-template-rows:none; grid-auto-flow:row}
+}
+@media (max-width:1100px){
+  .steps4{grid-template-columns:1fr 1fr}
+  .step4{padding:0 var(--sp-lg) var(--sp-lg) 0; border-right:0;
+    border-bottom:var(--stroke) solid var(--border)}
+  .step4 + .step4{padding-left:0}
+}
+@media (max-width:700px){ .steps4{grid-template-columns:1fr} }
+</style>
+
+<!-- ======================================================================
+     SCIENCE
+     ====================================================================== -->
+<div class="page" id="p-science" data-title="Biolyz Science" hidden>
+
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">The science behind the product</span>
+    <h1 class="h1">Turning Spit Into Spectra.</h1>
+    <p class="lead">Mass spectrometry ionises the molecules in a saliva sample and sorts
+      them by their mass-to-charge ratio, producing a unique spectral fingerprint for every
+      biomarker.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="cols">
+      <div class="col">
+        <h3>Breakthrough technology</h3>
+        <p>Leveraging mass spectrometry for highly sensitive analyses to eliminate tedious
+          blood draws for daily testing.</p>
+      </div>
+      <div class="col">
+        <h3>Privacy</h3>
+        <p>ISO 27001 compliant and highly secured processes and servers ensure privacy and
+          data safety.</p>
+      </div>
+      <div class="col">
+        <h3>Scalability</h3>
+        <p>Proprietary processes and AI bring high throughput testing to the masses.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Saliva against blood</span>
+      <h2 class="h2">One medium beats the other on everything except habit.</h2>
+      <p class="copy">Blood is not an ideal diagnostic medium for 99% of cases. It is
+        invasive, which limits how frequently samples can be taken &mdash; and without
+        consistent monitoring, true health and wellbeing remain elusive.</p>
+    </div>
+    <div class="tbl">
+      <table>
+        <caption>Comparison as published on biolyz.com/science.</caption>
+        <thead>
+          <tr><th scope="col">&nbsp;</th><th scope="col">Biolyz</th><th scope="col">Blood testing</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Collection</th>
+            <td class="us">Saliva swab, 60 seconds, non-invasive</td>
+            <td class="them">Invasive blood draw via needle</td></tr>
+          <tr><th scope="row">Biomarkers per sample</th>
+            <td class="us">60+ biomarkers</td>
+            <td class="them">Max. 10 biomarkers</td></tr>
+          <tr><th scope="row">Where it happens</th>
+            <td class="us">Can be done anywhere</td>
+            <td class="them">Requires a sterile environment</td></tr>
+          <tr><th scope="row">Setup</th>
+            <td class="us">Modular, flexible</td>
+            <td class="them">Modular but not scalable</td></tr>
+          <tr><th scope="row">Infection risk</th>
+            <td class="us">Low infection risk</td>
+            <td class="them">Higher iatrogenic infection risk</td></tr>
+          <tr><th scope="row">Cost</th>
+            <td class="us">Cost-efficient, no vendor lock-in</td>
+            <td class="them">Expensive due to proprietary assays</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">How do we know it works?</span>
+      <h2 class="h2">From discovery to the field.</h2>
+      <p class="copy">Our platform is built on research done with academic and elite sport
+        partners. From lab studies that establish reliability, to field studies that test
+        what holds up under real training and competition. Here&rsquo;s where that work
+        currently stands.</p>
+    </div>
+
+    <div class="lanes">
+      <div class="lane">
+        <div class="lane-hd"><span class="dot"></span><span class="lbl">Completed</span><span class="ct">4</span></div>
+        <div class="study">
+          <span class="who">Laboratory &amp; field study &middot; with TU Dortmund, BVB</span>
+          <span class="t">JMU17 + Field Study</span>
+          <span class="d">Established baseline reliability, circadian fluctuations, acute
+            and 24-hour responses, and recovery kinetics.</span>
+        </div>
+        <div class="study">
+          <span class="who">Laboratory study &middot; with TU Dortmund</span>
+          <span class="t">Herzrasen / Heart Racing</span>
+          <span class="d">Compared blood and saliva analytes and how each fluctuates across
+            the day.</span>
+        </div>
+        <div class="study">
+          <span class="who">Field study</span>
+          <span class="t">Tour de France Cycling Team</span>
+          <span class="d">Tracked acute salivary analyte responses to exercise across a
+            three-week Grand Tour.</span>
+        </div>
+        <div class="study">
+          <span class="who">Laboratory study &middot; with TU Dortmund</span>
+          <span class="t">Multiple Sclerosis Study</span>
+          <span class="d">Compared salivary analyte profiles between people with MS and a
+            matched healthy control group.</span>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-hd"><span class="dot dot--live"></span><span class="lbl">Ongoing</span><span class="ct">3</span></div>
+        <div class="study">
+          <span class="who">Laboratory study &middot; with TU Dortmund</span>
+          <span class="t">Peak Power Output Study</span>
+          <span class="d">Examining acute exercise-induced analyte responses and their use
+            in predicting VO&#8322;max.</span>
+        </div>
+        <div class="study">
+          <span class="who">Field study &middot; with BVB, University of Luxembourg, TU Dortmund</span>
+          <span class="t">Optimising Performance and Health in Women&rsquo;s Football</span>
+          <span class="d">Mapping salivary analyte responses across the menstrual cycle and
+            during recovery.</span>
+        </div>
+        <div class="study">
+          <span class="who">Laboratory study &middot; with TU Dortmund, Bergmannsheil</span>
+          <span class="t">Metabolome and Proteome Responses of Various Biological Tissues to
+            Intense Physical Exercise</span>
+          <span class="d">Comparing analyte responses across muscle, blood, urine, and
+            saliva after intense exercise.</span>
+        </div>
+      </div>
+
+      <div class="lane">
+        <div class="lane-hd"><span class="dot dot--open"></span><span class="lbl">In the pipeline</span><span class="ct">1</span></div>
+        <div class="study">
+          <span class="who is-next">Field study</span>
+          <span class="t">Omics-Based Analysis of Load and Recovery in Hyrox</span>
+          <span class="d">Planned study into acute exercise responses, saliva-based
+            assessment of physical function, and training adaptations.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Published</span>
+      <h2 class="h2">The literature we build on.</h2>
+      <p class="copy">Our own work, and the peer-reviewed record that our targeted panel is
+        selected from. Discovery is literature-led before anything reaches production.</p>
+    </div>
+    <div class="papers">
+      <article class="paper">
+        <span class="src">TU Dortmund University</span>
+        <span>
+          <span class="ttl">Targeted saliva multi-omics is a reliable, non-invasive method
+            to capture physiological stress and recovery</span>
+          <span class="sub">A single saliva sample &mdash; analysed for proteins,
+            metabolites and lipids &mdash; reliably tells whether a person exercised
+            recently, even a day later.</span>
+        </span>
+        <span class="yr">2026</span>
+      </article>
+      <article class="paper">
+        <span class="src">German Journal of Sports Medicine</span>
+        <span><span class="ttl">High Frequency Saliva-Based Targeted Multi-Omics as
+          Screening Tool in Professional Soccer</span></span>
+        <span class="yr">2026</span>
+      </article>
+      <article class="paper">
+        <span class="src">Metabolites</span>
+        <span><span class="ttl">Salivary Metabolite Variation After High-Intensity Rowing
+          Training and Potential Biomarker Screening for Exercise-Induced Muscle
+          Damage</span></span>
+        <span class="yr">2025</span>
+      </article>
+      <article class="paper">
+        <span class="src">George Mason University</span>
+        <span><span class="ttl">Preliminary insights into salivary proteomic versus targeted
+          biomarker profiles associated with acute physical fatigue</span></span>
+        <span class="yr">&mdash;</span>
+      </article>
+      <article class="paper">
+        <span class="src">Medicine &amp; Science in Sports &amp; Exercise</span>
+        <span><span class="ttl">Saliva Parameters as Potential Indices of Hydration Status
+          during Acute Dehydration</span></span>
+        <span class="yr">2004</span>
+      </article>
+    </div>
+    <div class="btn-row" style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="#/literature" data-link>See all 77 studies &#8594;</a>
+      <a class="btn btn--ghost" href="#/biomarkers" data-link>The 60+ panel &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec inv">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Sample quality</span>
+      <h2 class="h2">A result is only as good as the swab it came from.</h2>
+      <p class="copy">Collection quality is measured, not assumed. Volume, timing relative
+        to the session, and days since the last usable sample are all tracked per athlete,
+        so a thin week shows up as a data problem rather than a physiological one.</p>
+    </div>
+    <figure class="shot shot--inv">
+      <img src="__IMG_samples__" width="1920" height="1080" loading="lazy"
+        alt="Sample quality view: per-athlete sampling recency and collection quality across the squad, flagging players not sampled for several days.">
+      <figcaption><span>Sample quality &middot; squad</span><span>Captured from the product</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec--xl">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Discover the product</span>
+    <h2 class="h2">See the science as your staff would use it.</h2>
+    <a class="btn" href="#/product" data-link>Discover the product &#8594;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     BIOMARKERS
+     ====================================================================== -->
+<div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">The panel</span>
+    <h1 class="h1">60+ biomarkers from a single swab.</h1>
+    <p class="lead">From Actin to Xanthine, we quantify the biomarkers that reveal, stress,
+      recovery, hydration, inflammation, and many more. All with laboratory precision.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="claims" style="margin-bottom:var(--sp-2xl)">
+      <span class="claim">Unparalleled insights</span>
+      <span class="claim">Outstanding accuracy</span>
+      <span class="claim">High-frequency testing</span>
+      <span class="claim">Non-invasive</span>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:baseline; gap:var(--sp-lg);
+      flex-wrap:wrap; padding-bottom:var(--sp-sm); border-bottom:var(--stroke) solid var(--c-grey-300)">
+      <span class="eyebrow">Quantified analytes</span>
+      <span class="mono xs faint">48 published &middot; alphabetical</span>
+    </div>
+    <ul class="analytes">
+      <li data-i="01">2-trans-octenoylcarnitine</li>
+      <li data-i="02">2&#8242;-deoxyguanosine</li>
+      <li data-i="03">7-ketocholesterol</li>
+      <li data-i="04">8-OHdG</li>
+      <li data-i="05">Alanine</li>
+      <li data-i="06">Androstenedione</li>
+      <li data-i="07">Arachidonic acid</li>
+      <li data-i="08">Arachidonoyl glycine</li>
+      <li data-i="09">cAMP</li>
+      <li data-i="10">Cholic acid</li>
+      <li data-i="11">Citrulline</li>
+      <li data-i="12">Cortisol</li>
+      <li data-i="13">Cortisone</li>
+      <li data-i="14">Cotinine</li>
+      <li data-i="15">Creatine</li>
+      <li data-i="16">Creatinine</li>
+      <li data-i="17">Cytosine</li>
+      <li data-i="18">Decanoylcarnitine</li>
+      <li data-i="19">DHEAS</li>
+      <li data-i="20">Eicosapentaenoic acid</li>
+      <li data-i="21">Estradiol</li>
+      <li data-i="22">Estrone</li>
+      <li data-i="23">Glutamic acid</li>
+      <li data-i="24">Glutamine</li>
+      <li data-i="25">Glycochenodeoxycholic acid</li>
+      <li data-i="26">Glycocholic acid</li>
+      <li data-i="27">Glycoursodeoxycholic acid</li>
+      <li data-i="28">Histamine</li>
+      <li data-i="29">Hypoxanthine</li>
+      <li data-i="30">Kynurenic acid</li>
+      <li data-i="31">Kynurenine</li>
+      <li data-i="32">Leucine</li>
+      <li data-i="33">Linoleic acid</li>
+      <li data-i="34">Linoleoyl ethanolamide</li>
+      <li data-i="35">Melatonin</li>
+      <li data-i="36">N-lactoyl-phenylalanine</li>
+      <li data-i="37">Nicotinic acid</li>
+      <li data-i="38">Nicotinuric acid</li>
+      <li data-i="39">Nitrotyrosine</li>
+      <li data-i="40">Octanoylcarnitine</li>
+      <li data-i="41">Oleoyl ethanolamide</li>
+      <li data-i="42">Palmitoleoyl ethanolamide</li>
+      <li data-i="43">Phenylalanine</li>
+      <li data-i="44">Progesterone</li>
+      <li data-i="45">Proline</li>
+      <li data-i="46">Prostaglandin E2 ethanolamide</li>
+      <li data-i="47">Prostaglandin F2-alpha</li>
+      <li data-i="48">Protein concentration</li>
+    </ul>
+    <div class="callout" style="margin-top:var(--sp-2xl)">Derived ratios sit on top of these
+      &mdash; cortisol to cortisone, arachidonic acid to EPA, creatinine to creatine &mdash;
+      which is how the production assay reaches 56 reportable markers from 48 measured
+      analytes.</div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">In the dashboard</span>
+      <h2 class="h3">Every marker carries what it measures, and what it means in athletes.</h2>
+    </div>
+    <figure class="shot">
+      <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+        alt="Biomarker overview with the cortisol panel selected, showing the squad median, spread, and an explanation of what cortisol measures and what elevation means in athletes.">
+      <figcaption><span>Biomarker overview &middot; Cortisol</span><span>Squad median 1.90 ng/mL</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec--xl">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Get in touch</span>
+    <h2 class="h2">Ask us which markers matter for your sport.</h2>
+    <a class="btn" href="#/contact" data-link>Contact us &#8599;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     ABOUT US / MANIFESTO
+     ====================================================================== -->
+<div class="page" id="p-about" data-title="Biolyz Manifesto" hidden>
+
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">About us</span>
+    <h1 class="h1">Not just a simple lab.</h1>
+    <p class="lead">We believe that the future of health isn&rsquo;t reactive &mdash;
+      it&rsquo;s proactive.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split">
+      <div class="hd" style="margin:0">
+        <span class="eyebrow">Our motivation</span>
+        <h2 class="h3">Shaping diagnostics for the next decade.</h2>
+      </div>
+      <div>
+        <p class="copy">At Biolyz, we stand for uncompromising precision. In a world full of
+          guesswork, we&rsquo;re here to deliver clarity and certainty. Health should never
+          be left to chance.</p>
+        <p class="copy">Blood is simply not an ideal diagnostic medium for 99% of cases.
+          It&rsquo;s invasive, which limits how frequently samples can be taken. Without
+          consistent monitoring, true health and wellbeing remain elusive.</p>
+        <p class="copy">We&rsquo;re unlocking every body&rsquo;s data, effortlessly
+          revealing the inner insights that empower elite athletes, proactive health
+          seekers, and communities around the globe.</p>
+        <p class="copy">Our technology translates complex, hard science into clear,
+          immediate, and humane insights, so you can understand your body better, faster,
+          and more naturally.</p>
+        <p class="copy">We champion access and equality in advanced diagnostics, ensuring
+          everyone &mdash; everywhere &mdash; can take proactive steps toward their optimal
+          performance and well-being. We know data only matters if it improves real lives.</p>
+        <p class="copy" style="color:var(--text)">This is the era of clarity. This is the age
+          of precision. This is Biolyz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec inv">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Manifesto</span>
+      <h2 class="h2">We need to accelerate first principle prognostics.</h2>
+    </div>
+    <div class="split">
+      <div>
+        <p class="copy">The world still runs on 20th century diagnostics: invasive,
+          expensive, episodic, reactive. Between doctor visits, humanity flies blind.</p>
+        <p class="copy" style="color:var(--text)">That ends with saliva.</p>
+        <p class="copy">A single drop carries the same hormones, metabolites, and proteins
+          doctors chase in blood &mdash; without the needle, the clinic, or the cost. The
+          signal was always there. The world just lacked the tools to read it.</p>
+      </div>
+      <div>
+        <p class="copy">Our LC-MS platform measures it at scale: high throughput,
+          multiplexed, noninvasive, and orders of magnitude cheaper than blood.</p>
+        <p class="copy">That changes what diagnostics can be. Not an annual snapshot, but a
+          continuous feed. Not reacting to disease, but reading health as it happens.</p>
+        <p class="copy callout callout--neon" style="margin-top:var(--sp-lg); color:var(--text)">Where
+          others see saliva, we see signal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">From reactive to proactive</span>
+      <h2 class="h2">Our master plan is three-tiered, ruthless in logic, clear in execution.</h2>
+    </div>
+    <ol class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <li class="card"><span class="n">Tier 01</span><span class="t">Elite teams and individuals</span>
+        <span class="d">We start with elite athlete teams and individuals living at the
+          edge of biological performance. Painless daily monitoring of the molecules that
+          drive strength, recovery, inflammation, and hormone balance.</span></li>
+      <li class="card"><span class="n">Tier 02</span><span class="t">Vanguard individuals</span>
+        <span class="d">Next, the rising wave of high performance individuals &mdash;
+          athletes, biohackers, longevity pioneers. People who want radical ownership of
+          their biology, the early adopters of the post sickcare age.</span></li>
+      <li class="card"><span class="n">Tier 03</span><span class="t">Humanity</span>
+        <span class="d">Finally, everyone else. Schools, clinics, families &mdash; entire
+          populations monitored weekly, not once a year. Preventive diagnostics at
+          planetary scale: a new kind of healthcare infrastructure.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="split">
+      <div class="hd" style="margin:0">
+        <span class="eyebrow">Technology and approach</span>
+        <h2 class="h3">We didn&rsquo;t pivot into this space. We engineered our way in.</h2>
+      </div>
+      <div>
+        <p class="copy">Our platform isn&rsquo;t a patchwork of commodity kits &mdash;
+          it&rsquo;s a vertically integrated diagnostic engine with the precision of a lab
+          and the scale of software. We&rsquo;re building the substrate personalized health
+          will run on.</p>
+        <p class="copy" style="color:var(--text); margin-top:var(--sp-xl)">This is not a
+          company. It&rsquo;s a movement.</p>
+        <p class="copy">We&rsquo;re recruiting missionaries, not mercenaries &mdash;
+          scientists, engineers, operators, and rebels who see biology as the next frontier
+          of intelligence and want to build the rails. Especially in the rising wake of
+          artificial intelligence.</p>
+        <p class="copy">This isn&rsquo;t a bet on another wellness app. It&rsquo;s
+          infrastructure for the biological internet, and we intend to be the architects of
+          a new medical epoch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="founder">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Founder</span>
+      <h2 class="h3">Biolyz was founded in 2021 by Marlon Millard.</h2>
+    </div>
+    <div class="founder">
+      <figure class="portrait">
+        <img src="__IMG_marlon__" width="608" height="760" loading="lazy"
+          alt="Marlon Millard, founder and chief executive of Biolyz.">
+        <figcaption><b>Marlon Millard</b><span>Founder &amp; CEO</span></figcaption>
+      </figure>
+      <div class="founder-body">
+        <p class="copy">Marlon Millard founded Biolyz in 2021 and is its chief executive.
+          The company he started is an Austrian deep-tech business built on one contrarian
+          bet: that the medium the whole industry measures in is the wrong one, and that
+          the frequency saliva allows matters more than the familiarity of blood.</p>
+        <p class="copy">Borussia Dortmund has since signed a three-year agreement and is
+          integrating the testing across its performance and medical operations. Expansion
+          beyond the Bundesliga has begun with the Premier League.</p>
+        <blockquote>
+          <p>&ldquo;Blood tests and wearables alone cannot capture the internal chemistry
+            of an athlete with the precision and frequency required. Our method finally
+            answers the question: How is the player &mdash; today?&rdquo;</p>
+          <footer>Marlon Millard, Founder &amp; CEO</footer>
+        </blockquote>
+        <p class="copy">He is one of a team of scientists, engineers and operators in
+          Tulln an der Donau. If you want to know what the rest of them are working on,
+          the <a href="#/careers" data-link style="color:var(--c-blue); text-decoration:none">open
+          problems</a> say more than a biography would.</p>
+
+        <div style="margin-top:var(--sp-md)">
+          <span class="eyebrow">Recent coverage</span>
+          <ul class="coverage" style="margin-top:var(--sp-md)">
+            <li><a href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/" target="_blank" rel="noopener">
+              <span class="out">Sportico</span>
+              <span class="hl">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</span>
+              <span class="yr">2026 &#8599;</span></a></li>
+            <li><a href="https://athletechnews.com/borussia-dortmund-saliva-biomarker-testing-biolyz/" target="_blank" rel="noopener">
+              <span class="out">Athletech News</span>
+              <span class="hl">Top Soccer Team Using Biomarker Testing To Optimize Performance</span>
+              <span class="yr">2026 &#8599;</span></a></li>
+            <li><a href="https://insider.fitt.co/press-release/biolyz-partners-with-borussia-dortmund-to-bring-high-frequency-saliva-biomarker-testing-to-elite-football/" target="_blank" rel="noopener">
+              <span class="out">Fitt Insider</span>
+              <span class="hl">Biolyz Partners with Borussia Dortmund to Bring High-Frequency Saliva Biomarker Testing to Elite Football</span>
+              <span class="yr">2026 &#8599;</span></a></li>
+          </ul>
+        </div>
+
+        <div class="btn-row" style="margin-top:var(--sp-md)">
+          <a class="btn" href="#/contact" data-link>Interview requests &#8599;</a>
+          <a class="btn btn--ghost" href="#/press" data-link>Press kit</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Our values</span>
+      <h2 class="h2">Four, and we mean them literally.</h2>
+    </div>
+    <div class="cols">
+      <div class="col"><h3>Truth</h3>
+        <p>We always seek and speak the truth, no matter how uncomfortable the path may
+          be.</p></div>
+      <div class="col"><h3>Tenacity</h3>
+        <p>We are working to solve some of the world&rsquo;s hardest problems, and we refuse
+          to fail for a lack of effort or focus.</p></div>
+      <div class="col"><h3>Craftsmanship</h3>
+        <p>We take pride in the aesthetics of what we build, from our labs, our UIs to our
+          backend infra.</p></div>
+      <div class="col"><h3>Humanity</h3>
+        <p>We believe that in an age of AI, humans must be served with deserving science,
+          insights and love.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec--xl">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Join us</span>
+    <h2 class="h2">Missionaries, not mercenaries.</h2>
+    <a class="btn" href="#/careers" data-link>See open roles &#8594;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     USE CASES
+     ====================================================================== -->
+<div class="page" id="p-use-cases" data-title="Biolyz Use Cases" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Use cases</span>
+    <h1 class="h1">One dataset, five jobs.</h1>
+    <p class="lead">Every role around an athlete&rsquo;s body asks a different question of
+      the same swab. These are the questions staff actually bring, and where the platform
+      answers them.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="roles">
+      <details class="role" open>
+        <summary><span class="rn">Team doctor</span>
+          <span class="rc">Squad-wide health patterns and physiological changes worth a
+            closer medical look.</span></summary>
+        <div class="role-body"><div class="qs">
+          <p class="role-q">&ldquo;Which players&rsquo; physiological markers have shifted
+            meaningfully from their own baseline this week?&rdquo;</p>
+          <p class="role-q">&ldquo;Are there squad-wide patterns, like elevated
+            inflammation, worth a closer medical look?&rdquo;</p>
+          <p class="role-q">&ldquo;Is anyone showing a viral signature before they report
+            feeling ill?&rdquo;</p>
+        </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, Biomarker overview: the latest reading of one marker for every player in the squad, with seven-day change, trend and outlier flags.">
+              <figcaption><span>Biomarker overview</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary><span class="rn">Sport scientist</span>
+          <span class="rc">How training load and fixture congestion translate into
+            physiological stress and recovery.</span></summary>
+        <div class="role-body"><div class="qs">
+          <p class="role-q">&ldquo;How is each player&rsquo;s body responding internally to
+            this week&rsquo;s training load and fixture schedule?&rdquo;</p>
+          <p class="role-q">&ldquo;Which players are adapting well to the current block, and
+            which show accumulating stress ahead of selection?&rdquo;</p>
+          <p class="role-q">&ldquo;Did the deload actually land, or only on paper?&rdquo;</p>
+        </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_indicators__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, Indicator overview: a matrix of every player against every indicator, showing the share of each indicator's markers inside that player's own range.">
+              <figcaption><span>Indicator overview</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary><span class="rn">Nutritionist</span>
+          <span class="rc">Nutrition, hydration, and whether supplementation is actually
+            supporting recovery.</span></summary>
+        <div class="role-body"><div class="qs">
+          <p class="role-q">&ldquo;Is a player&rsquo;s nutrition or hydration supporting
+            recovery between matches?&rdquo;</p>
+          <p class="role-q">&ldquo;Is a player&rsquo;s current supplementation covering what
+            their biomarkers show they actually need?&rdquo;</p>
+        </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_hydration__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, the Hydration indicator across the squad, with the markers that make it up.">
+              <figcaption><span>Hydration indicator</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary><span class="rn">Head of performance</span>
+          <span class="rc">Where the squad stands in five minutes, and what changed since
+            the last look.</span></summary>
+        <div class="role-body"><div class="qs">
+          <p class="role-q">&ldquo;Who needs me today, and who can wait?&rdquo;</p>
+          <p class="role-q">&ldquo;What moved since I last looked at this?&rdquo;</p>
+        </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_brief__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz dashboard, Team Overview in Brief mode: the squad triaged into who needs attention today.">
+              <figcaption><span>Team Overview</span></figcaption>
+            </figure>
+        </div>
+      </details>
+      <details class="role">
+        <summary><span class="rn">The athlete</span>
+          <span class="rc">Their own body, in their own words, without the squad
+            around it.</span></summary>
+        <div class="role-body"><div class="qs">
+          <p class="role-q">&ldquo;Am I where I should be?&rdquo;</p>
+          <p class="role-q">&ldquo;Is what I&rsquo;m taking doing anything?&rdquo;</p>
+          <p class="sm faint">The athlete view is deliberately narrower than the staff
+            view. <a href="#/waitlist" data-link style="color:var(--c-blue); text-decoration:none">See
+            what a player sees &#8594;</a></p>
+        </div>
+            <figure class="shot role-shot">
+              <img src="__IMG_athlete__" width="1920" height="1080" loading="lazy"
+                alt="Biolyz athlete view: one player's own page, showing their markers against their own usual range.">
+              <figcaption><span>Athlete view</span></figcaption>
+            </figure>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Interpretation</span>
+      <h2 class="h3">Every reading arrives with the reasoning attached.</h2>
+      <p class="copy">A flagged marker is only useful if someone can say what it likely
+        means. The knowledge library pairs each pattern with what it typically indicates and
+        the evidence that reading rests on.</p>
+    </div>
+    <figure class="shot">
+      <img src="__IMG_knowledge__" width="1920" height="1080" loading="lazy"
+        alt="Knowledge view: a library of marker patterns, each with what it typically indicates, which players currently match it, and the supporting evidence.">
+      <figcaption><span>Knowledge &middot; interpretation library</span><span>Pattern &rarr; meaning &rarr; evidence</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec--xl">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Get in touch</span>
+    <h2 class="h2">Tell us the question your staff keeps asking.</h2>
+    <a class="btn" href="#/demo" data-link>Book a demo &#8599;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     INTEGRATIONS
+     ====================================================================== -->
+<!-- ======================================================================
+     LITERATURE
+     ====================================================================== -->
+<div class="page" id="p-literature" data-title="Biolyz Literature" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Literature</span>
+    <h1 class="h1">The record the panel is selected from.</h1>
+    <p class="lead">Untargeted discovery is literature-led. Before a marker reaches the
+      production assay it has to be defensible on paper, which means this library is part of
+      the product rather than a marketing appendix.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="figs" style="padding-bottom:var(--section-sm)">
+      <div class="fig"><span class="v">77</span><span class="k">Studies in the library</span>
+        <span class="s">Peer-reviewed and internal</span></div>
+      <div class="fig"><span class="v">8</span><span class="k">Biolyz studies</span>
+        <span class="s">4 complete &middot; 3 running &middot; 1 planned</span></div>
+      <div class="fig"><span class="v">5</span><span class="k">Partner institutions</span>
+        <span class="s">Named on the science page</span></div>
+    </div>
+    <hr class="rule" style="margin-block:var(--sp-2xl)">
+    <div class="hd">
+      <span class="eyebrow">Featured</span>
+      <h2 class="h3">Five that carry the most weight.</h2>
+    </div>
+    <div class="papers">
+      <article class="paper">
+        <span class="src">TU Dortmund University</span>
+        <span><span class="ttl">Targeted saliva multi-omics is a reliable, non-invasive
+          method to capture physiological stress and recovery</span>
+          <span class="sub">A single saliva sample &mdash; analysed for proteins,
+            metabolites and lipids &mdash; reliably tells whether a person exercised
+            recently, even a day later.</span></span>
+        <span class="yr">2026</span>
+      </article>
+      <article class="paper">
+        <span class="src">German Journal of Sports Medicine</span>
+        <span><span class="ttl">High Frequency Saliva-Based Targeted Multi-Omics as
+          Screening Tool in Professional Soccer</span></span>
+        <span class="yr">2026</span>
+      </article>
+      <article class="paper">
+        <span class="src">Metabolites</span>
+        <span><span class="ttl">Salivary Metabolite Variation After High-Intensity Rowing
+          Training and Potential Biomarker Screening for Exercise-Induced Muscle
+          Damage</span></span>
+        <span class="yr">2025</span>
+      </article>
+      <article class="paper">
+        <span class="src">George Mason University</span>
+        <span><span class="ttl">Preliminary insights into salivary proteomic versus targeted
+          biomarker profiles associated with acute physical fatigue</span></span>
+        <span class="yr">&mdash;</span>
+      </article>
+      <article class="paper">
+        <span class="src">Medicine &amp; Science in Sports &amp; Exercise</span>
+        <span><span class="ttl">Saliva Parameters as Potential Indices of Hydration Status
+          during Acute Dehydration</span></span>
+        <span class="yr">2004</span>
+      </article>
+    </div>
+    <p class="stub" style="margin-top:var(--sp-2xl)"><b>Build note.</b> The five above are
+      the ones published on biolyz.com/science. The remaining 72 exist in the internal
+      library and were not on the public site, so this page carries the layout for them
+      rather than invented citations. Drop the real list in and the markup takes it.</p>
+    <div class="btn-row" style="margin-top:var(--sp-xl)">
+      <a class="btn btn--ghost" href="#/science" data-link>The research pipeline &#8594;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     CHANGELOG
+     ====================================================================== -->
+<div class="page" id="p-changelog" data-title="Biolyz Changelog" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Changelog</span>
+    <h1 class="h1">What shipped, and when.</h1>
+    <p class="lead">Product changes to the staff dashboard and the athlete view. Assay and
+      panel changes are versioned separately, on the science page.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="papers">
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">The five-minute read</span>
+          <span class="sub">Team Overview now opens in Brief: the squad triaged into who
+            needs attention today, with Full one click away. Added &ldquo;since you last
+            looked&rdquo;.</span></span>
+        <span class="yr">Dashboard</span>
+      </article>
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">Indicators show their working</span>
+          <span class="sub">An indicator is now the share of its biomarkers sitting outside
+            that athlete&rsquo;s own range, not an opaque 0&ndash;100 score. Where the assay
+            has no coverage, the surface says so in words instead of showing a
+            zero.</span></span>
+        <span class="yr">Dashboard</span>
+      </article>
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">Knowledge library</span>
+          <span class="sub">Alerts, active patterns and the use case library became one
+            object with one vocabulary: a pattern, what it typically means, and the evidence
+            behind that reading.</span></span>
+        <span class="yr">Dashboard</span>
+      </article>
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">Dark theme, and a rail that follows it</span>
+          <span class="sub">Full light and dark themes across every view, including the
+            navigation rail. Toggle with T.</span></span>
+        <span class="yr">Dashboard</span>
+      </article>
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">Compare, sample quality and the weekly digest</span>
+          <span class="sub">Three new surfaces: two athletes or two windows side by side,
+            collection quality per athlete, and a weekly digest grouped by who needs to
+            act.</span></span>
+        <span class="yr">Dashboard</span>
+      </article>
+      <article class="paper">
+        <span class="src">September 2026</span>
+        <span><span class="ttl">Athlete view</span>
+          <span class="sub">A player&rsquo;s own page, deliberately narrower than the staff
+            view: their status, their open patterns, their markers, and nothing about the
+            rest of the squad.</span></span>
+        <span class="yr">Athlete</span>
+      </article>
+    </div>
+    <p class="stub" style="margin-top:var(--sp-2xl)"><b>Build note.</b> These entries are
+      real changes from the September 2026 dashboard work, written as public release notes.
+      Confirm the wording and the dates against your own release log before this page
+      goes live.</p>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     BOOK A DEMO
+     ====================================================================== -->
+<div class="page" id="p-demo" data-title="Book a Biolyz Demo" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Book a demo</span>
+    <h1 class="h1">See it on your own squad, not a demo dataset.</h1>
+    <p class="lead">We run the platform against your last two weeks of training data, using
+      your own athletes&rsquo; baselines. Forty-five minutes, your staff, your questions.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split">
+      <form data-form="demo" novalidate>
+        <div class="field">
+          <label for="d-name">Your name</label>
+          <input id="d-name" name="name" type="text" required autocomplete="name" placeholder="Alex Berger">
+        </div>
+        <div class="field">
+          <label for="d-role">Role</label>
+          <select id="d-role" name="role" required>
+            <option value="">Select&hellip;</option>
+            <option>Head of performance</option>
+            <option>Team doctor</option>
+            <option>Sport scientist</option>
+            <option>Nutritionist</option>
+            <option>Sporting director</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d-org">Club, team or federation</label>
+          <input id="d-org" name="org" type="text" required placeholder="e.g. a Bundesliga first team">
+        </div>
+        <div class="field">
+          <label for="d-email">Work email</label>
+          <input id="d-email" name="email" type="email" required autocomplete="email" placeholder="you@club.com">
+        </div>
+        <div class="field">
+          <label for="d-squad">Squad size</label>
+          <select id="d-squad" name="squad">
+            <option value="">Select&hellip;</option>
+            <option>Under 20</option><option>20&ndash;35</option>
+            <option>35&ndash;60</option><option>60+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="d-stack">What you already run</label>
+          <input id="d-stack" name="stack" type="text" placeholder="Catapult, Kitman Labs, &hellip;">
+          <span class="hint">So we can show your load data next to the panel, not beside it.</span>
+        </div>
+        <div class="field">
+          <label for="d-msg">The question your staff keeps asking</label>
+          <textarea id="d-msg" name="message" placeholder="Optional, but it makes the call sharper."></textarea>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="consent" required>
+            <span>I agree that Biolyz may contact me about this request, on the terms in the
+              privacy policy.</span></label>
+        </div>
+        <div class="btn-row">
+          <button class="btn" type="submit">Request the demo &#8599;</button>
+        </div>
+        <p class="formnote">No change to your existing GPS or load setup is needed to run
+          the session.</p>
+      </form>
+
+      <div>
+        <div class="hd">
+          <span class="eyebrow">What happens on the call</span>
+          <h2 class="h4">Three things, in this order.</h2>
+        </div>
+        <ol class="cards" style="grid-template-columns:1fr">
+          <li class="card"><span class="n">01</span><span class="t">Your data, loaded</span>
+            <span class="d">We import two weeks of your load and wellness exports before we
+              speak, so the first thing you see is your own squad.</span></li>
+          <li class="card"><span class="n">02</span><span class="t">The five-minute read</span>
+            <span class="d">We walk the Brief view the way your staff would on an MD&#8722;1,
+              and open whichever athlete you point at.</span></li>
+          <li class="card"><span class="n">03</span><span class="t">The awkward questions</span>
+            <span class="d">Coverage, turnaround, what the assay does not measure, what the
+              data protection arrangement looks like. We would rather have that
+              conversation early.</span></li>
+        </ol>
+        <div class="assure" style="margin-top:var(--sp-2xl)">
+          <p class="sm muted" style="max-width:min(40ch,100%)">Athlete data is medical data. Nothing
+            is loaded without a signed arrangement.</p>
+          <div class="tags">
+            <a class="tag" href="#/data-security" data-link>ISO 27001</a>
+            <a class="tag" href="#/privacy" data-link>GDPR</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     ATHLETE WAITLIST
+     ====================================================================== -->
+<div class="page" id="p-waitlist" data-title="Biolyz Athlete Waitlist" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Join athlete waitlist</span>
+    <h1 class="h1">Your body, your data, your page.</h1>
+    <p class="lead">Biolyz runs through teams today. The athlete view is how an individual
+      will use it &mdash; and it is deliberately narrower than what staff see. Join the
+      waitlist and we will come to you in order.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">What a player sees</span>
+      <h2 class="h3">Their own markers. Not the squad&rsquo;s.</h2>
+      <p class="copy">One page: where their markers sit against their own usual range, what
+        patterns are open, and whether what they are taking is showing up. No squad ranking,
+        no teammates, no comparison they did not ask for.</p>
+    </div>
+    <figure class="shot">
+      <img src="__IMG_athlete__" width="1920" height="1382" loading="lazy"
+        alt="Athlete view: one player's own page showing 89% of markers in their usual range, an open kynurenine pattern, an at-a-glance grid of thirteen indicators, and performance and medical sections.">
+      <figcaption><span>Athlete view</span><span>Captured from the product &middot; anonymised</span></figcaption>
+    </figure>
+    <div class="cols" style="margin-top:var(--section-md)">
+      <div class="col"><h3>60 seconds, no needles</h3>
+        <p>A swab in the mouth for a minute. That is the whole collection burden, which is
+          what makes daily testing realistic in the first place.</p></div>
+      <div class="col"><h3>Your own baseline</h3>
+        <p>Every reading is judged against your history, not a population reference range.
+          The line on your chart is your own median.</p></div>
+      <div class="col"><h3>You decide who sees it</h3>
+        <p>Athlete data is medical data. Sharing with a coach, a doctor or nobody is your
+          call, and it is reversible.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="split">
+      <form data-form="waitlist" novalidate>
+        <div class="field">
+          <label for="w-name">Your name</label>
+          <input id="w-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="w-email">Email</label>
+          <input id="w-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+        </div>
+        <div class="field">
+          <label for="w-sport">Sport</label>
+          <input id="w-sport" name="sport" type="text" placeholder="Football, cycling, triathlon, &hellip;">
+        </div>
+        <div class="field">
+          <label for="w-level">Level</label>
+          <select id="w-level" name="level">
+            <option value="">Select&hellip;</option>
+            <option>Professional</option>
+            <option>Semi-professional</option>
+            <option>Competitive amateur</option>
+            <option>Recreational</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="w-country">Country</label>
+          <input id="w-country" name="country" type="text" placeholder="Austria">
+          <span class="hint">Rollout is country by country, so this decides your place in
+            the queue more than the date does.</span>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="consent" required>
+            <span>I agree that Biolyz may email me about the waitlist, on the terms in the
+              privacy policy.</span></label>
+          <label class="check"><input type="checkbox" name="research">
+            <span>I would consider taking part in a research study. Optional, and separate
+              from the waitlist.</span></label>
+        </div>
+        <div class="btn-row"><button class="btn" type="submit">Join the waitlist &#8599;</button></div>
+        <p class="formnote">We will not pass your address to a club, a federation or anyone
+          else.</p>
+      </form>
+      <div>
+        <div class="hd">
+          <span class="eyebrow">Honest expectations</span>
+          <h2 class="h4">What the waitlist is, and is not.</h2>
+        </div>
+        <div class="cols" style="grid-template-columns:1fr; gap:var(--sp-lg)">
+          <div class="col"><h3>It is not a queue for a product you can buy today</h3>
+            <p>Individual access comes after teams, by design &mdash; that is tier two of a
+              three-tier plan, and we would rather say so than take a pre-order.</p></div>
+          <div class="col"><h3>It is not medical advice</h3>
+            <p>Biolyz measures and contextualises biomarkers. It does not diagnose, and it
+              does not replace your doctor.</p></div>
+          <div class="col"><h3>It is a real signal to us</h3>
+            <p>Sport and country decide which market opens next. That is the main thing the
+              list is for.</p></div>
+        </div>
+        <div class="btn-row" style="margin-top:var(--sp-xl)">
+          <a class="btn btn--ghost" href="#/about" data-link>Read the three-tier plan &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     CAREERS
+     ====================================================================== -->
+<div class="page" id="p-careers" data-title="Biolyz Careers" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Careers</span>
+    <h1 class="h1">Missionaries, not mercenaries.</h1>
+    <p class="lead">Scientists, engineers, operators, and rebels who see biology as the next
+      frontier of intelligence and want to build the rails. Especially in the rising wake of
+      artificial intelligence.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Join us if you are passionate about</span>
+      <h2 class="h2">Four problems, all of them open.</h2>
+    </div>
+    <ol class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+      <li class="card"><span class="n">01</span><span class="t">Laboratory &amp; chemistry</span>
+        <span class="d">Solving laboratory and chemical problems that push the boundaries of
+          what is currently possible.</span></li>
+      <li class="card"><span class="n">02</span><span class="t">AI development</span>
+        <span class="d">Building AI that is truthful, with verifiably correct outputs that
+          infer health benefits.</span></li>
+      <li class="card"><span class="n">03</span><span class="t">High-throughput analysis</span>
+        <span class="d">Accelerating the advent of high-throughput analyses and laboratory
+          savoir.</span></li>
+      <li class="card"><span class="n">04</span><span class="t">Cross-disciplinary problems</span>
+        <span class="d">Solving open problems in engineering, design, and beyond.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">How we work</span>
+      <h2 class="h3">Four values, and we mean them literally.</h2>
+    </div>
+    <div class="cols">
+      <div class="col"><h3>Truth</h3><p>We always seek and speak the truth, no matter how
+        uncomfortable the path may be.</p></div>
+      <div class="col"><h3>Tenacity</h3><p>We are working to solve some of the world&rsquo;s
+        hardest problems, and we refuse to fail for a lack of effort or focus.</p></div>
+      <div class="col"><h3>Craftsmanship</h3><p>We take pride in the aesthetics of what we
+        build, from our labs, our UIs to our backend infra.</p></div>
+      <div class="col"><h3>Humanity</h3><p>We believe that in an age of AI, humans must be
+        served with deserving science, insights and love.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Open roles</span>
+      <h2 class="h3">Where we are, and how to reach us.</h2>
+    </div>
+    <div class="prose">
+      <dl>
+        <dt>Based in</dt><dd>Technopark 1, 3430 Tulln an der Donau, Austria &mdash; lab and
+          engineering in the same building.</dd>
+        <dt>Entity</dt><dd>BIOLYZ FlexCo</dd>
+        <dt>Speculative</dt><dd>If none of the roles fit but one of the four problems above
+          is yours, write anyway and say which one.</dd>
+      </dl>
+      <p class="stub"><b>Build note.</b> The live vacancy list was not on the public pages
+        this rebuild was drawn from, so no positions are invented here. The layout above
+        takes a real list of roles as soon as you have one.</p>
+    </div>
+    <div class="btn-row" style="margin-top:var(--sp-xl)">
+      <a class="btn" href="#/contact" data-link>Write to us &#8599;</a>
+      <a class="btn btn--ghost" href="#/about" data-link>Read the manifesto first &#8594;</a>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     CONTACT
+     ====================================================================== -->
+<div class="page" id="p-contact" data-title="Contact Biolyz" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Get in touch</span>
+    <h1 class="h1">Get in touch.</h1>
+    <p class="lead">Schedule a quick call to learn how Biolyz can turn your team&rsquo;s
+      saliva into a powerful advantage.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split">
+      <form data-form="contact" novalidate>
+        <div class="field">
+          <label for="c-name">Your name</label>
+          <input id="c-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" name="email" type="email" required autocomplete="email" placeholder="you@organisation.com">
+        </div>
+        <div class="field">
+          <label for="c-about">What this is about</label>
+          <select id="c-about" name="about" required>
+            <option value="">Select&hellip;</option>
+            <option>A team or federation</option>
+            <option>Individual athlete access</option>
+            <option>Research collaboration</option>
+            <option>Press</option>
+            <option>Careers</option>
+            <option>Data protection</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="c-msg">Message</label>
+          <textarea id="c-msg" name="message" required placeholder="As specific as you like."></textarea>
+        </div>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="consent" required>
+            <span>I agree that Biolyz may reply to me about this, on the terms in the
+              privacy policy.</span></label>
+        </div>
+        <div class="btn-row"><button class="btn" type="submit">Send &#8599;</button></div>
+      </form>
+      <div class="prose">
+        <span class="eyebrow">Where we are</span>
+        <dl>
+          <dt>Company</dt><dd>BIOLYZ FlexCo</dd>
+          <dt>Address</dt><dd>Technopark 1<br>3430 Tulln an der Donau<br>Austria</dd>
+          <dt>Teams</dt><dd><a href="#/demo" data-link>Book a demo</a> &mdash; faster than
+            this form if you have a squad.</dd>
+          <dt>Athletes</dt><dd><a href="#/waitlist" data-link>Join the athlete waitlist</a></dd>
+          <dt>Security</dt><dd><a href="#/data-security" data-link>Data security and ISO
+            27001</a></dd>
+          <dt>Press</dt><dd><a href="#/press" data-link>Press kit and brand assets</a></dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     PRESS KIT
+     ====================================================================== -->
+<div class="page" id="p-press" data-title="Biolyz Press Kit" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Press</span>
+    <h1 class="h1">Press kit.</h1>
+    <p class="lead">The marks, the facts, and the sentence we would like quoted. Biolyz has
+      been covered by The New York Times, kicker and Sportico.</p>
+  </div>
+</header>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The marks</span>
+      <h2 class="h3">Two lockups, one colour each.</h2>
+      <p class="copy">Both marks are single-colour and inherit whatever they sit on. On the
+        off-white ground use ink; on the blue-black ground use off-white. Do not recolour
+        them to the brand blue, and do not add a shadow.</p>
+    </div>
+    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+      <div class="card" style="gap:var(--sp-lg)">
+        <span class="n">Signet</span>
+        <div style="color:var(--c-off-black); width:76px">__SVG_signet__</div>
+        <span class="d">Favicons, app icons, anywhere under 40&nbsp;px.</span>
+      </div>
+      <div class="card" style="gap:var(--sp-lg)">
+        <span class="n">Horizontal lockup</span>
+        <div style="color:var(--c-off-black); max-width:230px">__SVG_horizontal__</div>
+        <span class="d">The default. Headers, documents, partner walls.</span>
+      </div>
+      <div class="card inv" style="gap:var(--sp-lg); background:var(--c-black-blue)">
+        <span class="n" style="color:var(--o-white-40)">On the inverted ground</span>
+        <div style="color:var(--c-off-white); max-width:230px">__SVG_horizontal2__</div>
+        <span class="d" style="color:var(--o-white-60)">Same file. It inherits the colour of
+          whatever it sits in.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Boilerplate</span>
+      <h2 class="h3">The facts, checkable.</h2>
+    </div>
+    <div class="tbl">
+      <table>
+        <tbody>
+          <tr><th scope="row">What it is</th><td class="us">The first saliva based,
+            non-invasive biomarker platform for elite teams.</td></tr>
+          <tr><th scope="row">Panel</th><td class="us">60+ biomarkers from a single swab,
+            48&nbsp;h turnaround, zero needles.</td></tr>
+          <tr><th scope="row">Method</th><td class="us">LC&ndash;MS/MS on 1&nbsp;ml of
+            saliva, targeted quantification.</td></tr>
+          <tr><th scope="row">Scale</th><td class="us">11,000+ active sessions &middot;
+            25,000+ samples in the last 12 months &middot; 2.5M+ analysed biomarkers.</td></tr>
+          <tr><th scope="row">Named clubs</th><td class="us">Bayer 04 Leverkusen, Borussia
+            Dortmund.</td></tr>
+          <tr><th scope="row">Founded</th><td class="us">2021, by Marlon Millard, who is
+            chief executive. <a href="#/about/founder" data-link style="color:var(--c-blue); text-decoration:none">Founder
+            section, portrait and recent coverage &#8594;</a></td></tr>
+          <tr><th scope="row">Entity</th><td class="us">BIOLYZ FlexCo, Technopark 1, 3430
+            Tulln an der Donau, Austria.</td></tr>
+          <tr><th scope="row">Certification</th><td class="us">ISO 27001.</td></tr>
+          <tr><th scope="row">Taglines</th><td class="us">&ldquo;Know more. Hurt
+            less.&rdquo; &middot; &ldquo;Sample. Signal. Decision.&rdquo;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="stub" style="margin-top:var(--sp-2xl)"><b>Build note.</b> In a published
+      artifact the browser sandbox blocks downloads, so the marks above are shown rather
+      than offered as files. On the real host, wire each one to the actual asset.</p>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     LEGAL AND FUNDING
+     ====================================================================== -->
+<div class="page" id="p-privacy" data-title="Biolyz Privacy Policy" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Legal</span>
+    <h1 class="h1">Privacy policy.</h1>
+    <p class="lead">Athlete data is medical data, and it is processed under the GDPR as
+      such. This page is where the full policy lives.</p>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="prose">
+      <p class="stub"><b>Build note.</b> A privacy policy is a legal instrument and the real
+        text is not something to reconstruct from a marketing page. Nothing here is invented:
+        the section headings below are the GDPR articles a policy has to answer, ready for
+        your counsel&rsquo;s wording. The live text is at
+        <a href="https://www.biolyz.com/privacy">biolyz.com/privacy</a>.</p>
+      <h2>Controller and contact</h2>
+      <dl>
+        <dt>Controller</dt><dd>BIOLYZ FlexCo, Technopark 1, 3430 Tulln an der Donau,
+          Austria</dd>
+        <dt>Data protection</dt><dd><a href="#/contact" data-link>Contact us</a>, selecting
+          &ldquo;Data protection&rdquo;</dd>
+        <dt>Supervisory authority</dt><dd>Austrian Data Protection Authority
+          (Datenschutzbehörde)</dd>
+      </dl>
+      <h2>What the policy has to cover</h2>
+      <ul>
+        <li>Categories of personal data, including health data under Art. 9 GDPR, and the
+          separate legal basis that special category processing requires.</li>
+        <li>Purposes and legal basis per purpose &mdash; contract, consent, legitimate
+          interest &mdash; kept apart rather than bundled.</li>
+        <li>Who the data is shared with: the club, the laboratory, sub-processors, and what
+          each one may see.</li>
+        <li>Retention periods, and what happens to an athlete&rsquo;s data when they leave
+          the club.</li>
+        <li>Data subject rights: access, rectification, erasure, restriction, portability,
+          objection, and how to exercise each.</li>
+        <li>International transfers, and the mechanism relied on for each.</li>
+        <li>Automated processing and profiling, given the platform produces scores and
+          recommendations.</li>
+      </ul>
+      <h2>Related</h2>
+      <ul>
+        <li><a href="#/data-security" data-link>Data security and ISO 27001</a></li>
+        <li><a href="#/cookies" data-link>Cookie settings</a></li>
+        <li><a href="#/impressum" data-link>Impressum</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-data-security" data-title="Biolyz Data Security" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Trust</span>
+    <h1 class="h1">Data security.</h1>
+    <p class="lead">ISO 27001 compliant and highly secured processes and servers ensure
+      privacy and data safety.</p>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="cols">
+      <div class="col"><h3>Certified, not asserted</h3>
+        <p>Information security runs inside an ISO 27001 management system, which means the
+          controls are audited rather than described.</p></div>
+      <div class="col"><h3>The team&rsquo;s data stays the team&rsquo;s</h3>
+        <p>Athlete data is medical data. Access is scoped by role, and the club decides who
+          inside it can see what.</p></div>
+      <div class="col"><h3>No vendor lock-in</h3>
+        <p>The panel is readable over a REST API and exportable as CSV. Leaving should not
+          cost you your history.</p></div>
+    </div>
+    <div class="tags" style="margin-top:var(--section-sm)">
+      <span class="tag">ISO 27001</span><span class="tag">GDPR</span>
+      <span class="tag">Role-scoped access</span><span class="tag">Audited controls</span>
+    </div>
+    <div class="prose" style="margin-top:var(--section-md)">
+      <h2>Live status and documentation</h2>
+      <p>Certificates, sub-processor lists and the current control status are published on
+        the Biolyz trust center at
+        <a href="https://trust.biolyz.com/">trust.biolyz.com</a>.</p>
+      <p class="stub"><b>Build note.</b> Certificate numbers, audit dates and the
+        sub-processor list are live compliance facts. They belong on the trust center as the
+        single source, and this page should link to it rather than restate them.</p>
+      <h2>Reporting a vulnerability</h2>
+      <p>Use the <a href="#/contact" data-link>contact form</a> with
+        &ldquo;Data protection&rdquo; selected. Please do not include athlete data in the
+        report itself.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-impressum" data-title="Biolyz Impressum" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Legal</span>
+    <h1 class="h1">Impressum.</h1>
+    <p class="lead">Disclosure under &sect;&nbsp;5 ECG, &sect;&nbsp;14 UGB and
+      &sect;&nbsp;25 MedienG.</p>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="prose">
+      <dl>
+        <dt>Company</dt><dd>BIOLYZ FlexCo</dd>
+        <dt>Address</dt><dd>Technopark 1<br>3430 Tulln an der Donau<br>Austria</dd>
+        <dt>Legal form</dt><dd>Flexible Kapitalgesellschaft (FlexCo)</dd>
+        <dt>Business purpose</dt><dd>Development and operation of a saliva-based biomarker
+          analysis platform.</dd>
+        <dt>Contact</dt><dd><a href="#/contact" data-link>Contact form</a></dd>
+      </dl>
+      <p class="stub"><b>Build note.</b> An Austrian Impressum has mandatory fields that
+        must be exact: company register number (FN), the register court, UID/VAT number,
+        the managing directors, chamber membership (WKO) and the applicable trade
+        regulation. Those are not on the public marketing pages, so they are listed here as
+        gaps rather than guessed. The live text is at
+        <a href="https://www.biolyz.com/impressum">biolyz.com/impressum</a>.</p>
+      <h2>Still required</h2>
+      <ul>
+        <li>Firmenbuchnummer (FN) and Firmenbuchgericht</li>
+        <li>UID-Nummer</li>
+        <li>Geschäftsführung</li>
+        <li>Kammerzugehörigkeit and applicable Gewerbeordnung</li>
+        <li>Supervisory authority, where a licensed activity applies</li>
+      </ul>
+      <h2>Related</h2>
+      <ul>
+        <li><a href="#/privacy" data-link>Privacy policy</a></li>
+        <li><a href="#/data-security" data-link>Data security</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-erdf" data-title="Biolyz ERDF Funding" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Funding</span>
+    <h1 class="h1">ERDF.</h1>
+    <p class="lead">Biolyz research and development has been co-financed with public funds.
+      This page carries the disclosure that comes with them.</p>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="prose">
+      <p class="stub"><b>Build note.</b> European Regional Development Fund publicity has
+        prescribed wording, a prescribed emblem and a prescribed statement of co-financing,
+        and getting any of it wrong is a compliance problem rather than a copy problem. So
+        nothing is drafted here. The live page is at
+        <a href="https://www.biolyz.com/fund">biolyz.com/fund</a>, and its exact text and
+        emblem should be transferred verbatim.</p>
+      <h2>What this page must carry</h2>
+      <ul>
+        <li>The EU emblem with the prescribed &ldquo;Co-funded by the European Union&rdquo;
+          statement, at the prescribed minimum size.</li>
+        <li>The programme name and the funding body.</li>
+        <li>The project title, its objective, and the total and EU-funded amounts.</li>
+        <li>The project period.</li>
+      </ul>
+      <h2>Entity</h2>
+      <dl>
+        <dt>Beneficiary</dt><dd>BIOLYZ FlexCo, Technopark 1, 3430 Tulln an der Donau,
+          Austria</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-cookies" data-title="Biolyz Cookie Settings" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Cookie settings</span>
+    <h1 class="h1">Cookie settings.</h1>
+    <p class="lead">Three categories. Only the first is on by default, and only the first
+      cannot be turned off.</p>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <form data-form="cookies" style="max-width:min(44rem,100%)" novalidate>
+      <div class="checks" style="gap:var(--sp-lg)">
+        <label class="check">
+          <input type="checkbox" checked disabled>
+          <span><b style="font-weight:400; color:var(--text)">Strictly necessary</b><br>
+            Session handling, security and your choice on this page. Always on, because the
+            site does not work without it.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="analytics" data-ck="analytics">
+          <span><b style="font-weight:400; color:var(--text)">Analytics</b><br>
+            Aggregate page and referrer counts, so we know which pages earn their place.
+            Off unless you turn it on.</span>
+        </label>
+        <label class="check">
+          <input type="checkbox" name="marketing" data-ck="marketing">
+          <span><b style="font-weight:400; color:var(--text)">Marketing</b><br>
+            Attribution for campaigns and embedded third-party content. Off unless you turn
+            it on.</span>
+        </label>
+      </div>
+      <div class="btn-row">
+        <button class="btn" type="submit">Save my choice</button>
+        <button class="btn btn--ghost" type="button" data-ck-reject>Reject all optional</button>
+      </div>
+      <p class="formnote">Your choice is stored in this browser only, and you can change it
+        here at any time.</p>
+    </form>
+    <div class="prose" style="margin-top:var(--section-md)">
+      <h2>Related</h2>
+      <ul>
+        <li><a href="#/privacy" data-link>Privacy policy</a></li>
+        <li><a href="#/data-security" data-link>Data security</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-404" data-title="Biolyz Page Not Found" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">404</span>
+    <h1 class="h1">Nothing at that address.</h1>
+    <p class="lead">The signal was always there. This particular URL was not.</p>
+    <div class="btn-row" style="margin-top:var(--sp-md)">
+      <a class="btn" href="#/" data-link>Back to the home page</a>
+      <a class="btn btn--ghost" href="#/product" data-link>See the product</a>
+    </div>
+  </div>
+</header>
+</div>
+
+</main>
+
+<!-- ======================================================================
+     FOOTER
+     ====================================================================== -->
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fbrand">
+        <a class="brand brand--foot" href="#/" data-link style="padding:0"
+           aria-label="Biolyz, home">__SVG_biolyz__</a>
+        <p class="tagline">Know more. Hurt less.</p>
+        <address>
+          BIOLYZ FlexCo<br>Technopark 1<br>3430 Tulln an der Donau<br>Austria
+        </address>
+      </div>
+      <nav class="fcol" aria-label="Product">
+        <span class="ft">Product</span>
+        <a href="#/product" data-link>Product</a>
+        <a href="#/solution/football" data-link>Solution</a>
+        <a href="#/science" data-link>Science</a>
+        <a href="#/use-cases" data-link>Use Cases</a>
+        <a href="#/biomarkers" data-link>Biomarkers</a>
+        <a href="#/literature" data-link>Literature</a>
+        <a href="#/changelog" data-link>Changelog</a>
+      </nav>
+      <nav class="fcol" aria-label="Company">
+        <span class="ft">Company</span>
+        <a href="#/about" data-link>About Us</a>
+        <a href="#/about/founder" data-link>Founder</a>
+        <a href="#/contact" data-link>Contact</a>
+        <a href="#/demo" data-link>Book a demo</a>
+        <a href="#/waitlist" data-link>Waitlist</a>
+        <a href="#/careers" data-link>Careers</a>
+        <a href="#/erdf" data-link>ERDF</a>
+        <a href="#/press" data-link>Download Press Kit</a>
+      </nav>
+      <nav class="fcol" aria-label="Legal">
+        <span class="ft">Legal</span>
+        <a href="#/privacy" data-link>Privacy Policy</a>
+        <a href="#/data-security" data-link>Data Security</a>
+        <a href="#/impressum" data-link>Impressum</a>
+        <a href="#/cookies" data-link>Cookie Settings</a>
+      </nav>
+    </div>
+    <div class="fbot">
+      <span>&copy; biolyz 2026 All Rights Reserved</span>
+      <span>ISO 27001 certified</span>
+      <span>Tulln an der Donau, Austria</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* =====================================================================
+     ROUTER
+     Hash routing, so every page has a real address that survives a reload
+     and a copied link. One .page is visible at a time.
+     ===================================================================== */
+  var ROUTES = {
+    '/': 'p-home',
+    '/product': 'p-product',
+    '/solution': 'p-solution',
+    '/solution/football': 'p-solution',
+    '/solution/cycling': 'p-solution',
+    '/science': 'p-science',
+    '/biomarkers': 'p-biomarkers',
+    '/about': 'p-about',
+    '/about/founder': 'p-about',
+    '/use-cases': 'p-use-cases',
+    '/literature': 'p-literature',
+    '/changelog': 'p-changelog',
+    '/demo': 'p-demo',
+    '/waitlist': 'p-waitlist',
+    '/careers': 'p-careers',
+    '/contact': 'p-contact',
+    '/press': 'p-press',
+    '/privacy': 'p-privacy',
+    '/data-security': 'p-data-security',
+    '/impressum': 'p-impressum',
+    '/erdf': 'p-erdf',
+    '/cookies': 'p-cookies'
+  };
+  /* Which nav pill or menu entry lights up for a given route. */
+  var NAV_OF = {
+    '/solution': 'solution', '/solution/football': 'solution',
+    '/solution/cycling': 'solution', '/use-cases': 'solution',
+    '/science': 'science', '/biomarkers': 'science', '/literature': 'science',
+    '/about/founder': '/about'
+  };
+  /* Routes that open a page at a particular section. Founder PR sends people
+     to a person, so that section needs an address of its own even though it
+     is not a page of its own. */
+  var ANCHOR_OF = { '/about/founder': 'founder' };
+
+  var nav = document.getElementById('nav');
+  var pages = [].slice.call(document.querySelectorAll('.page'));
+  var current = null;
+
+  function path() {
+    var h = location.hash.replace(/^#/, '');
+    return h && h.charAt(0) === '/' ? h.replace(/\/+$/, '') || '/' : '/';
+  }
+
+  function show(p) {
+    var id = ROUTES[p] || 'p-404';
+    pages.forEach(function (el) { el.hidden = el.id !== id; });
+    var page = document.getElementById(id);
+    if (page && page.dataset.title) document.title = page.dataset.title;
+
+    /* The nav resolves against the route group, not the literal href, so
+       Biomarkers lights up "Science" rather than nothing. */
+    var group = NAV_OF[p] || p;
+    [].forEach.call(nav.querySelectorAll('[data-link]'), function (a) {
+      var t = a.getAttribute('href').replace(/^#/, '');
+      if (t === p || t === group) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+    [].forEach.call(nav.querySelectorAll('[data-menu]'), function (m) {
+      var btn = m.querySelector('[data-menu-btn]');
+      var mine = [].some.call(m.querySelectorAll('a'), function (a) {
+        return NAV_OF[a.getAttribute('href').replace(/^#/, '')] === group;
+      });
+      if (btn) { if (mine) btn.setAttribute('aria-current', 'page'); else btn.removeAttribute('aria-current'); }
+    });
+
+    if (p === '/solution/cycling') setSport('cycling');
+    else if (p === '/solution' || p === '/solution/football') setSport('football');
+
+    /* The canvas cannot be measured while its page is hidden, so the hero
+       trace is built the moment home becomes the visible page. */
+    if (id === 'p-home') startViz();
+    onScroll();
+    var anchor = ANCHOR_OF[p] && document.getElementById(ANCHOR_OF[p]);
+    if (anchor) {
+      /* The page has just been unhidden, so its geometry is one frame away. */
+      requestAnimationFrame(function () {
+        var y = anchor.getBoundingClientRect().top + window.scrollY -
+          (nav.offsetHeight + 24);   // the bar is fixed, so clear it
+        window.scrollTo({ top: Math.max(0, y), behavior: current === null || reduce ? 'auto' : 'smooth' });
+      });
+    } else if (current !== null) window.scrollTo(0, 0);
+    current = id;
+  }
+
+  function route() { show(path()); }
+  window.addEventListener('hashchange', route);
+
+  /* An in-page link to the route you are already on should still scroll to
+     the top rather than do nothing at all. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-link]') : null;
+    if (!a) return;
+    if (a.getAttribute('href').replace(/^#/, '') === path()) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    }
+  });
+
+  /* =====================================================================
+     NAV: glass over the hero, light bar once you leave it
+     ===================================================================== */
+  function onScroll() {
+    var hero = document.querySelector('#p-home .hero');
+    var onHome = !document.getElementById('p-home').hidden;
+    var past = hero ? window.scrollY > hero.offsetHeight - 120 : true;
+    nav.classList.toggle('on-dark', onHome && !past);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+
+  /* =====================================================================
+     NAV MENUS
+     ===================================================================== */
+  [].forEach.call(document.querySelectorAll('[data-menu]'), function (menu) {
+    var btn = menu.querySelector('[data-menu-btn]');
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = !menu.classList.contains('is-open');
+      closeMenus();
+      menu.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+  function closeMenus() {
+    [].forEach.call(document.querySelectorAll('[data-menu]'), function (m) {
+      m.classList.remove('is-open');
+      var b = m.querySelector('[data-menu-btn]');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+  document.addEventListener('click', closeMenus);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(); });
+
+  /* =====================================================================
+     TABS  ·  one handler for the dashboard views and the four-step flow
+     ===================================================================== */
+  function selectTab(scope, id) {
+    [].forEach.call(scope.querySelectorAll('[data-tab]'), function (b) {
+      b.setAttribute('aria-selected', b.dataset.tab === id ? 'true' : 'false');
+    });
+    [].forEach.call(scope.querySelectorAll('[data-panel]'), function (p) {
+      p.hidden = p.dataset.panel !== id;
+    });
+  }
+  [].forEach.call(document.querySelectorAll('[data-tabs]'), function (list) {
+    var scope = list.closest('section') || document;
+    list.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-tab]');
+      if (!b) return;
+      selectTab(scope, b.dataset.tab);
+      if (list.dataset.tabs === 'flow') {
+        flowStep = +b.dataset.tab.slice(1); flowMs = 0; paintFlow(0);
+      }
+    });
+  });
+
+  /* =====================================================================
+     THE FOUR-STEP FLOW
+     Auto-advancing, as in the prototype this page was ported from, with the
+     progress bar it had. Pauses on hover and on keyboard focus, and does not
+     run at all under reduced motion.
+     ===================================================================== */
+  var SEG = 7000, flowStep = 1, flowMs = 0, flowPaused = false, flowLast = null;
+  var flowBars = [].slice.call(document.querySelectorAll('#p-solution .step4-bar i'));
+  var flowTabs = [].slice.call(document.querySelectorAll('#p-solution .step4'));
+  var flowSec = document.querySelector('#p-solution .sec');
+
+  /* Each step owns its own loader: filled for the ones already shown, running
+     for the current one, empty for the ones still to come. */
+  function paintFlow(frac) {
+    for (var i = 0; i < flowBars.length; i++) {
+      var n = i + 1, w = n < flowStep ? 1 : n === flowStep ? frac : 0;
+      flowBars[i].style.width = (w * 100).toFixed(2) + '%';
+      flowBars[i].classList.toggle('is-live', n === flowStep);
+    }
+  }
+  if (flowSec) {
+    flowSec.addEventListener('mouseenter', function () { flowPaused = true; });
+    flowSec.addEventListener('mouseleave', function () { flowPaused = false; flowLast = null; });
+    flowSec.addEventListener('focusin', function () { flowPaused = true; });
+  }
+  function flowFrame(ts) {
+    if (flowLast === null) flowLast = ts;
+    var dt = ts - flowLast; flowLast = ts;
+    var live = !flowPaused && !document.getElementById('p-solution').hidden;
+    if (live) {
+      flowMs += dt;
+      if (flowMs >= SEG) {
+        flowMs = 0;
+        flowStep = flowStep % 4 + 1;
+        selectTab(flowSec, 'f' + flowStep);
+      }
+      paintFlow(flowMs / SEG);
+    }
+    requestAnimationFrame(flowFrame);
+  }
+  if (!reduce) requestAnimationFrame(flowFrame);
+  else paintFlow(1);   // no countdown to show, but the state still reads
+
+  var flowList = document.querySelector('[data-tabs="flow"]');
+  if (flowList) {
+    flowList.addEventListener('keydown', function (e) {
+      var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      e.preventDefault();
+      flowStep = ((flowStep - 1 + d + flowTabs.length) % flowTabs.length) + 1;
+      flowMs = 0;
+      selectTab(flowSec, 'f' + flowStep);
+      paintFlow(0);
+      flowTabs[flowStep - 1].focus();
+    });
+  }
+
+  /* =====================================================================
+     SPORT SWITCH
+     The copy dictionary from the solution_2 prototype, unchanged.
+     ===================================================================== */
+  var DICT = {
+    'eyebrow': { football: 'Solution for football', cycling: 'Solution for cycling' },
+    'hero-title': {
+      football: 'Access the internal layer of your squad.',
+      cycling: 'Access the internal layer of your riders.' },
+    'hero-sub': {
+      football: "GPS and load data show what a player did. They don't show what it cost him internally. We do, from a daily saliva swab, non-invasively.",
+      cycling: "Power and TSS show what a rider produced. They don't show what it cost him internally. We do, from a daily saliva swab, non-invasively." },
+    'step1': {
+      football: "Cortisol reads 30% above this player's baseline three days after a midweek away fixture, before soreness or RPE shows anything unusual.",
+      cycling: "Testosterone:cortisol ratio drops sharply by day 4 of a stage block, past where this rider's own history says it should stabilize." },
+    'step2': {
+      football: 'The dashboard shows who on staff needs to see this, and who needs to act before the next session.',
+      cycling: 'The dashboard shows who on staff needs to see this, and who needs to act before the next stage.' },
+    'step3': {
+      football: 'A cortisol pattern like this after fixture congestion typically points to an under-recovered window ahead of the next session.',
+      cycling: 'A falling T:C ratio mid-stage-race typically signals a catabolic shift building faster than overnight recovery can offset.' },
+    'step4': {
+      football: 'Staff and player have a specific, shared reason to talk. A decision gets made: adjust the next session, monitor, or intervene.',
+      cycling: "Staff and rider have a specific, shared reason to talk. A decision gets made: adjust the next stage's effort, monitor, or intervene." },
+    'callout': {
+      football: 'On GPS or RPE alone, this pattern typically stays invisible until output drops in the next match.',
+      cycling: "On power data alone, this pattern typically stays invisible until the rider can't hold his numbers on a climb that used to be routine." },
+    'roles-title': {
+      football: "Every role around a player's body cares about something different.",
+      cycling: "Every role around a rider's body cares about something different." },
+    'doc-cares': {
+      football: 'Cares about squad-wide health patterns and physiological changes worth a closer medical look.',
+      cycling: 'Cares about team-wide health patterns and physiological changes worth a closer medical look, including illness risk across a stage race.' },
+    'doc-q1': {
+      football: '“Which players’ physiological markers have shifted meaningfully from their own baseline this week?”',
+      cycling: '“Which riders’ physiological markers have shifted meaningfully from their own baseline this week?”' },
+    'doc-q2': {
+      football: '“Are there squad-wide patterns, like elevated inflammation, worth a closer medical look?”',
+      cycling: '“Is secretory IgA dropping anywhere in the team, ahead of the illness risk that comes with it mid-race?”' },
+    'sci-cares': {
+      football: 'Cares about how training load and fixture congestion translate into physiological stress and recovery.',
+      cycling: 'Cares about how training and race load translate into physiological stress and who can be pushed further.' },
+    'sci-q1': {
+      football: "“How is each player’s body responding internally to this week’s training load and fixture schedule?”",
+      cycling: "“How is each rider’s body responding internally to this training block or stage race?”" },
+    'sci-q2': {
+      football: '“Which players are adapting well to the current block, and which show accumulating stress ahead of selection?”',
+      cycling: '“Which riders can go deep tomorrow, and which need protecting before a key stage?”' },
+    'nut-cares': {
+      football: 'Cares about nutrition, hydration, and whether supplementation is actually supporting recovery.',
+      cycling: 'Cares about fueling, hydration, and whether supplementation is supporting recovery across consecutive stage days.' },
+    'nut-q1': {
+      football: '“Is a player’s nutrition or hydration supporting recovery between matches?”',
+      cycling: '“Is a rider’s fueling and hydration keeping pace across consecutive stage days?”' },
+    'nut-q2': {
+      football: '“Is a player’s current supplementation covering what their biomarkers show they actually need?”',
+      cycling: '“Is a rider’s current supplementation covering what their biomarkers show they actually need?”' },
+    'gives-title': {
+      football: "Three things you don’t get from load and GPS data alone.",
+      cycling: "Three things you don’t get from power and TSS data alone." },
+    'closing-title': {
+      football: 'See what this looks like with your own squad.',
+      cycling: 'See what this looks like with your own riders.' },
+    'closing-sub': {
+      football: "We run this on your last two weeks of training data, using your own players’ baselines, not a demo dataset.",
+      cycling: "We run this on your last two weeks of training data, using your own riders’ baselines, not a demo dataset." },
+    'closing-note': {
+      football: 'No change to your existing GPS or load setup.',
+      cycling: 'No change to your existing power or TSS setup.' },
+    'trusted-label': {
+      football: 'Trusted by clubs and federations',
+      cycling: 'Trusted by teams and federations' }
+  };
+  function setSport(sport) {
+    [].forEach.call(document.querySelectorAll('[data-i18n]'), function (el) {
+      var d = DICT[el.getAttribute('data-i18n')];
+      if (d && d[sport]) el.textContent = d[sport];
+    });
+    [].forEach.call(document.querySelectorAll('[data-sport]'), function (b) {
+      b.setAttribute('aria-selected', b.dataset.sport === sport ? 'true' : 'false');
+    });
+  }
+  [].forEach.call(document.querySelectorAll('[data-sport]'), function (b) {
+    b.addEventListener('click', function () { location.hash = '#/solution/' + b.dataset.sport; });
+  });
+
+  /* =====================================================================
+     FORMS
+     Nothing here posts anywhere: this is a design build, and a form that
+     silently swallows a health enquiry would be worse than one that says so.
+     ===================================================================== */
+  var SENT = {
+    demo: 'Thanks — a demo request from %s at %s would land with the team here.',
+    waitlist: 'Thanks — %s would be on the athlete waitlist, and we would come to you in country order.',
+    contact: 'Thanks — your message from %s would be on its way.'
+  };
+  [].forEach.call(document.querySelectorAll('form[data-form]'), function (form) {
+    var kind = form.dataset.form;
+    if (kind === 'cookies') return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        var bad = form.querySelector(':invalid');
+        if (bad) { bad.focus(); bad.reportValidity && bad.reportValidity(); }
+        return;
+      }
+      var d = new FormData(form);
+      var msg = (SENT[kind] || 'Thanks — received.')
+        .replace('%s', d.get('name') || 'you')
+        .replace('%s', d.get('org') || d.get('country') || 'your organisation');
+      var box = document.createElement('div');
+      box.className = 'sent';
+      box.setAttribute('role', 'status');
+      box.innerHTML = '<p>' + msg + '</p>' +
+        '<p class="sm faint" style="margin-top:.75rem">Build note: this prototype has no ' +
+        'backend, so nothing was actually sent. Wire the form to your own handler before ' +
+        'it goes live.</p>';
+      form.replaceWith(box);
+      box.focus && box.focus();
+    });
+  });
+
+  /* Cookie preferences. Stored in this browser only, and read back on load
+     so the page reflects the visitor's actual choice. */
+  var ckForm = document.querySelector('form[data-form="cookies"]');
+  if (ckForm) {
+    var KEY = 'biolyz.cookie.prefs';
+    function readPrefs() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }
+      catch (err) { return {}; }
+    }
+    function writePrefs(p) {
+      try { localStorage.setItem(KEY, JSON.stringify(p)); } catch (err) { /* private mode */ }
+    }
+    function paint() {
+      var p = readPrefs();
+      [].forEach.call(ckForm.querySelectorAll('[data-ck]'), function (b) {
+        b.checked = !!p[b.dataset.ck];
+      });
+    }
+    function confirmSaved(text) {
+      var old = ckForm.querySelector('[data-ck-msg]');
+      if (old) old.remove();
+      var n = document.createElement('p');
+      n.className = 'sent'; n.setAttribute('data-ck-msg', ''); n.setAttribute('role', 'status');
+      n.textContent = text;
+      ckForm.appendChild(n);
+    }
+    ckForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var p = {};
+      [].forEach.call(ckForm.querySelectorAll('[data-ck]'), function (b) { p[b.dataset.ck] = b.checked; });
+      writePrefs(p);
+      var on = Object.keys(p).filter(function (k) { return p[k]; });
+      confirmSaved(on.length ? 'Saved. Optional cookies on: ' + on.join(', ') + '.'
+                             : 'Saved. Strictly necessary cookies only.');
+    });
+    ckForm.querySelector('[data-ck-reject]').addEventListener('click', function () {
+      writePrefs({ analytics: false, marketing: false });
+      paint();
+      confirmSaved('Saved. Strictly necessary cookies only.');
+    });
+    paint();
+  }
+
+  /* =====================================================================
+     CONTEXT DIAGRAM
+     The wires are drawn from measured element positions rather than authored
+     as fixed path data: the three columns reflow at every width, and a hand
+     drawn curve would detach from the boxes the moment anything moved.
+
+     Each feed's toggle really does disconnect it — the wire fades and the
+     live counter drops — which is what makes the row read as a switch rather
+     than as a picture of one.
+     ===================================================================== */
+  var flow = document.querySelector('[data-flow]');
+  if (flow) {
+    var wires = flow.querySelector('.ctx-wires');
+    var engine = flow.querySelector('[data-engine]');
+    var feeds = [].slice.call(flow.querySelectorAll('[data-feed]'));
+    var outs = [].slice.call(flow.querySelectorAll('[data-out]'));
+    var counter = flow.querySelector('[data-feed-count]');
+    var NS = 'http://www.w3.org/2000/svg';
+
+    function curve(x1, y1, x2, y2) {
+      /* A flat S: the horizontal control offset is most of the gap, so the
+         path leaves and arrives horizontally and never loops. */
+      var dx = Math.max(28, (x2 - x1) * 0.55);
+      return 'M' + x1 + ',' + y1 + ' C' + (x1 + dx) + ',' + y1 +
+             ' ' + (x2 - dx) + ',' + y2 + ' ' + x2 + ',' + y2;
+    }
+
+    function drawWires() {
+      if (!flow.offsetWidth) return;
+      var box = flow.getBoundingClientRect();
+      if (getComputedStyle(wires).display === 'none') return;
+      wires.setAttribute('viewBox', '0 0 ' + Math.round(box.width) + ' ' + Math.round(box.height));
+      while (wires.firstChild) wires.removeChild(wires.firstChild);
+      var e = engine.getBoundingClientRect();
+      var eL = { x: e.left - box.left, y: e.top - box.top + e.height / 2 };
+      var eR = { x: e.right - box.left, y: eL.y };
+
+      feeds.forEach(function (f) {
+        var r = f.getBoundingClientRect();
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', curve(r.right - box.left, r.top - box.top + r.height / 2, eL.x, eL.y));
+        path.setAttribute('class', 'wire wire--in' + (f.classList.contains('is-off') ? ' is-off' : ''));
+        wires.appendChild(path);
+      });
+      outs.forEach(function (o) {
+        var r = o.getBoundingClientRect();
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', curve(eR.x, eR.y, r.left - box.left, r.top - box.top + r.height / 2));
+        path.setAttribute('class', 'wire wire--out');
+        wires.appendChild(path);
+      });
+    }
+
+    function syncFeeds() {
+      var on = 0;
+      feeds.forEach(function (f) {
+        var live = f.querySelector('input').checked;
+        f.classList.toggle('is-off', !live);
+        if (live) on++;
+      });
+      if (counter) counter.textContent = on;
+      drawWires();
+    }
+
+    feeds.forEach(function (f) {
+      f.querySelector('input').addEventListener('change', syncFeeds);
+    });
+    if ('ResizeObserver' in window) new ResizeObserver(drawWires).observe(flow);
+    window.addEventListener('resize', drawWires);
+    syncFeeds();
+  }
+
+  /* =====================================================================
+     HERO: THE MARKER NETWORK
+     The panel is not a list, it is a set of markers that group into
+     indicators — so the hero draws that, with the real analyte names on the
+     nodes and the real indicator names on the groups. Six clusters, springs
+     that hold each node near its own place so the composition never
+     degenerates, and one attractor that follows the cursor.
+
+     Neon is the cursor's own colour here: it appears only within the radius
+     of attention and fades out behind it, which keeps the accent rationed to
+     one earned moment per page rather than painted across the hero.
+
+     Where a pointer never arrives — a phone, a laptop with the cursor
+     parked — the attractor walks a slow Lissajous path instead, so the
+     interplay is visible without one. The handover is a lerp, so it glides
+     rather than jumps.
+     ===================================================================== */
+  var GROUPS = [
+    { g: 'Psychological stress', m: ['Cortisol', 'Cortisol morning', 'Cortisone', 'DHEAS',
+        'Cortisol/Cortisone', 'Kynurenine', 'Kynurenic acid'] },
+    { g: 'Metabolic stress',     m: ['Hypoxanthine', 'Xanthine/Hypoxanthine', 'Alanine',
+        'Glutamine', 'Glutamic acid', 'Leucine', 'Proline', 'Phenylalanine', 'cAMP',
+        'N-lactoyl-phenylalanine'] },
+    { g: 'Hydration',            m: ['Creatinine', 'Protein concentration', 'Creatine',
+        'Creatinine/Creatine', 'Citrulline'] },
+    { g: 'Hormonal status',      m: ['Estradiol', 'Progesterone', 'Androstenedione', 'Estrone'] },
+    { g: 'Inflammation',         m: ['Arachidonic acid', 'Eicosapentaenoic acid', 'AA/EPA ratio',
+        'Histamine', 'Nitrotyrosine', '8-OHdG', 'Prostaglandin F2-alpha',
+        'Prostaglandin E2 ethanolamide', 'Linoleic acid'] },
+    { g: 'Sleep',                m: ['Melatonin', 'Nicotinic acid', 'Nicotinuric acid',
+        'Oleoyl ethanolamide'] },
+    { g: 'Muscle damage',        m: ['Octanoylcarnitine', 'Decanoylcarnitine',
+        '2-trans-octenoylcarnitine'] }
+  ];
+
+  var vz = document.getElementById('viz');
+  var vctx = vz && vz.getContext ? vz.getContext('2d') : null;
+  var hero = document.querySelector('#p-home .hero');
+  var vzW = 0, vzH = 0, nodes = null, link = 120, running = false, raf = 0;
+  var tag = document.getElementById('vizTag');
+  var tagName = tag ? tag.querySelector('b') : null;
+  var tagGroup = tag ? tag.querySelector('i') : null;
+  var tagFor = null;
+  var ptrX = null, ptrY = null, ptrAt = -1e9;      // last real pointer position
+  var atX = 0, atY = 0, atInit = false;            // the attractor, lerped
+  var ptrLive = false;                             // a real pointer, recently moved
+  var t0 = 0, intro = 0;
+
+  /* Deterministic layout: the same web every load, which matters because a
+     hero that reshuffles on refresh reads as noise rather than as data. */
+  function lcg(seed) {
+    var s = seed;
+    return function () { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+
+  function layout() {
+    if (!vctx) return false;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var bb = vz.getBoundingClientRect();
+    vzW = Math.round(bb.width); vzH = Math.round(bb.height);
+    if (!vzW || !vzH) return false;
+    vz.width = Math.round(vzW * dpr); vz.height = Math.round(vzH * dpr);
+    vctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    link = Math.max(92, Math.min(196, Math.min(vzW, vzH) * 0.44));
+
+    var rnd = lcg(20260907);
+    /* Centroids on a jittered grid rather than a ring. A ring looks tidier in
+       the abstract but leaves the middle of the panel hollow, so the cursor
+       spends most of its time over a void with nothing to interact with. The
+       grid fills the box; the jitter keeps it from reading as a diagram. */
+    var gn = GROUPS.length;
+    var cols = Math.max(1, Math.round(Math.sqrt(gn * (vzW / Math.max(1, vzH)))));
+    var rows = Math.ceil(gn / cols);
+    var cw = (vzW * 0.85) / cols, ch = vzH / rows;
+    var keep = nodes;                       // reuse velocities across a resize
+    nodes = [];
+    GROUPS.forEach(function (grp, gi) {
+      var col = gi % cols, row = Math.floor(gi / cols);
+      var inRow = Math.min(cols, gn - row * cols);   // centre a short last row
+      /* Inset from the left so no cluster centre lands inside the fade. */
+      var x0 = vzW * 0.15, xw = (vzW - x0) / cols;
+      var gx = x0 + (col + 0.5 + (cols - inRow) / 2) * xw + (rnd() - 0.5) * xw * 0.30;
+      var gy = (row + 0.5) * ch + (rnd() - 0.5) * ch * 0.26;
+      var spread = Math.min(cw, ch) * 0.46;
+      grp.m.forEach(function (name, mi) {
+        var b = rnd() * Math.PI * 2, r = Math.pow(rnd(), 0.6) * spread;
+        var hx = Math.max(10, Math.min(vzW - 10, gx + Math.cos(b) * r));
+        var hy = Math.max(10, Math.min(vzH - 10, gy + Math.sin(b) * r * 0.95));
+        var old = keep && keep[nodes.length];
+        nodes.push({
+          hx: hx, hy: hy,
+          x: old ? old.x : hx, y: old ? old.y : hy,
+          vx: old ? old.vx : (rnd() - 0.5) * 0.12,
+          vy: old ? old.vy : (rnd() - 0.5) * 0.12,
+          g: gi, name: name, phase: rnd() * Math.PI * 2,
+          i: mi
+        });
+      });
+    });
+    return true;
+  }
+
+  /* A soft mask at the left and bottom edges. Without it the network reads as
+     a rectangle pasted onto the hero; with it, it dissolves into the ground. */
+  function mask(x, y) {
+    var u = x / vzW, v = y / vzH;
+    var mx = u < 0.14 ? Math.max(0, u / 0.14) : 1;
+    var my = v > 0.86 ? Math.max(0, (1 - v) / 0.14) : 1;
+    return Math.pow(mx, 1.25) * Math.pow(my, 1.1);
+  }
+
+  function step(dt, now) {
+    /* The attractor: the cursor when there is one, otherwise a slow walk. */
+    var live = now - ptrAt < 2400 && ptrX !== null;
+    ptrLive = live;
+    var tx, ty;
+    if (live) { tx = ptrX; ty = ptrY; }
+    else {
+      var k = now / 1000;
+      tx = vzW * (0.58 + 0.28 * Math.sin(k * 0.21));
+      ty = vzH * (0.50 + 0.27 * Math.sin(k * 0.147 + 1.1));
+    }
+    if (!atInit) { atX = tx; atY = ty; atInit = true; }
+    atX += (tx - atX) * Math.min(1, dt * 0.005);
+    atY += (ty - atY) * Math.min(1, dt * 0.005);
+
+    /* A spotlight, not a wash. At 0.40 of the panel the accent covered half
+         the hero, which is exactly what "blue is rationed, neon more so" rules
+         out. Small radius, steep falloff: one neighbourhood at a time. */
+      var R = Math.min(vzW, vzH) * 0.23;
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      /* Spring home, gentle lean toward attention, light damping. Three
+         forces, no collision handling — the clusters do that themselves. */
+      n.vx += (n.hx - n.x) * 0.0011 * dt * 0.06;
+      n.vy += (n.hy - n.y) * 0.0011 * dt * 0.06;
+      var dx = atX - n.x, dy = atY - n.y;
+      var d = Math.sqrt(dx * dx + dy * dy) || 1;
+      if (d < R) {
+        var f = (1 - d / R) * 0.05;
+        n.vx += (dx / d) * f * dt * 0.06;
+        n.vy += (dy / d) * f * dt * 0.06;
+        n.infl = Math.pow(1 - d / R, 1.35);
+      } else n.infl = 0;
+      n.vx *= 0.972; n.vy *= 0.972;
+      /* A breath of independent drift so a resting network is never frozen. */
+      n.x += n.vx * dt * 0.06 + Math.sin(now / 2600 + n.phase) * 0.045;
+      n.y += n.vy * dt * 0.06 + Math.cos(now / 3100 + n.phase) * 0.045;
+      if (n.x < 6) { n.x = 6; n.vx = Math.abs(n.vx); }
+      if (n.x > vzW - 6) { n.x = vzW - 6; n.vx = -Math.abs(n.vx); }
+      if (n.y < 6) { n.y = 6; n.vy = Math.abs(n.vy); }
+      if (n.y > vzH - 6) { n.y = vzH - 6; n.vy = -Math.abs(n.vy); }
+    }
+  }
+
+  function render(now) {
+    vctx.clearRect(0, 0, vzW, vzH);
+    var i, j, n, m, a;
+
+    /* Edges first, so nodes always sit on top of their own connections. */
+    vctx.lineWidth = 1;
+    for (i = 0; i < nodes.length; i++) {
+      n = nodes[i];
+      for (j = i + 1; j < nodes.length; j++) {
+        m = nodes[j];
+        var dx = m.x - n.x, dy = m.y - n.y;
+        var d2 = dx * dx + dy * dy;
+        if (d2 > link * link) continue;
+        var d = Math.sqrt(d2);
+        var same = n.g === m.g;
+        /* Within an indicator the markers are wired more tightly than across
+           one. That is the only thing the edge weight encodes. */
+        var base = (same ? 0.44 : 0.175) * (1 - d / link);
+        var hot = Math.pow(Math.max(n.infl, m.infl), 0.9) * (1 - d / link);
+        var mk = Math.min(mask(n.x, n.y), mask(m.x, m.y));
+        a = base * mk * intro;
+        // hot edges gain weight as well as colour, or the ramp reads as noise
+        if (hot > 0.02) vctx.lineWidth = 1 + hot * 0.5; else vctx.lineWidth = 1;
+        if (a < 0.004) continue;
+        vctx.beginPath();
+        vctx.moveTo(n.x, n.y); vctx.lineTo(m.x, m.y);
+        vctx.strokeStyle = hot > 0.02
+          ? 'rgba(' + Math.round(253 - 55 * hot) + ',' + Math.round(253 + 2 * hot) + ',' +
+            Math.round(253 - 253 * hot) + ',' + Math.min(0.72, a * (1 + hot * 3.0)).toFixed(3) + ')'
+          : 'rgba(253,253,253,' + a.toFixed(3) + ')';
+        vctx.stroke();
+      }
+    }
+
+    /* Nodes. */
+    var near = null, nearD = 1e9;
+    for (i = 0; i < nodes.length; i++) {
+      n = nodes[i];
+      var mk = mask(n.x, n.y);
+      if (mk < 0.02) continue;
+      var ni = Math.pow(n.infl, 0.8);
+      var r = (1.9 + ni * 1.9) * (0.6 + 0.4 * intro);
+      a = (0.52 + ni * 0.46) * mk * intro;
+      vctx.beginPath();
+      vctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      vctx.fillStyle = ni > 0.02
+        ? 'rgba(' + Math.round(253 - 55 * ni) + ',' + Math.round(253 + 2 * ni) + ',' +
+          Math.round(253 - 253 * ni) + ',' + Math.min(1, a * 1.5).toFixed(3) + ')'
+        : 'rgba(253,253,253,' + a.toFixed(3) + ')';
+      vctx.fill();
+      if (mk > 0.35) {
+        var dd = Math.hypot(atX - n.x, atY - n.y);
+        if (dd < nearD) { nearD = dd; near = n; }
+      }
+    }
+
+    /* One label at a time: the marker nearest the cursor, and the indicator
+       it belongs to. Any more than one and the hero becomes a chart. */
+    var reach = Math.min(vzW, vzH) * 0.30;
+    if (tag) {
+      if (near && nearD < reach && ptrLive) {
+        var fade = Math.min(1, (1 - nearD / reach) * 2.6);
+        var flip = near.x > vzW * 0.70;
+        if (near !== tagFor) {
+          tagFor = near;
+          tagName.textContent = near.name;
+          tagGroup.textContent = GROUPS[near.g].g;
+          tag.classList.toggle('is-flip', flip);
+        }
+        tag.hidden = false;
+        tag.style.opacity = fade.toFixed(3);
+        tag.style.transform = 'translate3d(' + Math.round(near.x + (flip ? -10 : 10)) +
+          'px,' + Math.round(near.y - 30) + 'px,0)' + (flip ? ' translateX(-100%)' : '');
+      } else if (!tag.hidden) {
+        tag.hidden = true; tagFor = null;
+      }
+    }
+  }
+
+  var last = 0;
+  function loop(now) {
+    if (!running) return;
+    var dt = last ? Math.min(48, now - last) : 16;
+    last = now;
+    if (!t0) t0 = now;
+    /* The entrance fade happens once. It used to restart every time the loop
+       did — and the loop stops and starts whenever the tab is backgrounded or
+       the hero scrolls out of view — which left `intro` pinned near zero and
+       silently suppressed everything gated on it, the marker label included. */
+    intro = Math.max(intro, Math.min(1, (now - t0) / 900));
+    step(dt, now);
+    render(now);
+    raf = requestAnimationFrame(loop);
+  }
+
+  function startViz() {
+    if (!vctx) return;
+    if (!layout()) return;
+    if (reduce) {
+      /* Static, but still the real composition rather than an empty box. */
+      intro = 1; atX = vzW * 0.55; atY = vzH * 0.45; atInit = true;
+      for (var i = 0; i < nodes.length; i++) nodes[i].infl = 0;
+      render(0);
+      return;
+    }
+    if (running) return;
+    running = true; last = 0;
+    if (intro < 1) t0 = 0;      // only a fade that never finished may restart
+    raf = requestAnimationFrame(loop);
+  }
+  function stopViz() {
+    running = false;
+    if (tag) { tag.hidden = true; tagFor = null; }
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+  }
+
+  if (vz && !reduce) {
+    /* Read the pointer from the hero, not the canvas: the canvas is
+       pointer-events:none so the buttons under it stay clickable. */
+    hero.addEventListener('pointermove', function (e) {
+      var r = vz.getBoundingClientRect();
+      ptrX = e.clientX - r.left; ptrY = e.clientY - r.top;
+      ptrAt = performance.now();
+      hero.classList.add('is-touched');
+    }, { passive: true });
+    hero.addEventListener('pointerleave', function () { ptrAt = -1e9; });
+    /* Off-screen or on another route, stop burning frames. */
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopViz();
+      else if (!document.getElementById('p-home').hidden) startViz();
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) startViz(); else stopViz();
+      }, { threshold: 0 }).observe(vz);
+    }
+  }
+
+  /* Setting canvas.width clears the bitmap, so a relayout while the loop is
+     paused — a background tab, a scrolled-away hero — would otherwise leave an
+     empty box on screen. Whoever relayouts is responsible for repainting. */
+  function relayout() {
+    if (!layout()) return;
+    atInit = false;
+    if (!running) { intro = 1; render(performance.now()); }
+  }
+  /* The canvas is a flex child whose height resolves after first paint, so a
+     layout taken at route() time can land on the default 300x150 backing
+     store. A ResizeObserver catches the real box whenever it appears, which a
+     resize listener alone does not. */
+  if (vz && 'ResizeObserver' in window) new ResizeObserver(relayout).observe(vz);
+  var vzT;
+  window.addEventListener('resize', function () {
+    clearTimeout(vzT);
+    vzT = setTimeout(relayout, 150);
+  });
+
+  route();
+})();
+</script>

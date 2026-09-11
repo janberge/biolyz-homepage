@@ -1,0 +1,105 @@
+<!-- ======================================================================
+     CONTEXT — the data-flow diagram. External feeds on the left, the fusion
+     engine in the middle, what comes out of it on the right, wired together
+     by dotted paths that are drawn from live element positions rather than
+     hand-authored, so they stay attached at every width.
+     ====================================================================== -->
+<section class="sec band-grey" id="context">
+  <div class="wrap">
+    <div class="ctx-head">
+      <span class="eyebrow eyebrow--blue">Data integrations</span>
+      <h2 class="h2">Context. Context. Context.</h2>
+      <p class="copy">Biolyz connects to the tools your performance staff already run. We
+        ingest, normalize and validate the data, then route it straight into your dashboard
+        alongside biomarker results: contextualising internal load with external signals
+        for one complete picture.</p>
+    </div>
+
+    <div class="ctx-flow" data-flow>
+      <svg class="ctx-wires" aria-hidden="true" preserveAspectRatio="none"></svg>
+
+      <!-- ---------- external feeds ---------- -->
+      <div class="ctx-col">
+        <span class="ctx-label">External context</span>
+        <ul class="feeds">
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Catapult</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Catapult connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">StatSports</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">StatSports connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Kinexon</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Kinexon connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">VALD</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">VALD connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Kitman Labs</span><span class="ftype">API</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Kitman Labs connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true">CSV</span>
+            <span class="fname">CSV Upload</span><span class="ftype">File</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">CSV upload connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true"></span>
+            <span class="fname">Google Sheets</span><span class="ftype">Sync</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Google Sheets connected</span></label></li>
+          <li class="feed" data-feed><span class="fmark" aria-hidden="true">{&nbsp;}</span>
+            <span class="fname">Custom API</span><span class="ftype">REST</span>
+            <label class="tgl"><input type="checkbox" checked><span class="tgl-track"></span>
+              <span class="sr-only">Custom API connected</span></label></li>
+        </ul>
+      </div>
+
+      <!-- ---------- the engine ---------- -->
+      <div class="ctx-mid">
+        <span class="ctx-label ctx-label--mid">Ingest &middot; fuse &middot; compare</span>
+        <div class="engine" data-engine>
+          <span class="engine-brand">__SVG_biolyz__</span>
+          <span class="engine-live"><i></i><b data-feed-count>8</b> feeds live &middot; normalized</span>
+          <div class="engine-card">
+            <span class="ec-icon ec-icon--ext" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h3l2.5-6 4 12 2.5-6H21"/></svg>
+            </span>
+            <span class="ec-text"><b>External context</b><span>Load &middot; GPS &middot; wearables</span></span>
+          </div>
+          <span class="engine-plus" aria-hidden="true">+</span>
+          <div class="engine-card">
+            <span class="ec-icon ec-icon--int" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5c3.2 3.6 5.6 6.7 5.6 9.4a5.6 5.6 0 1 1-11.2 0C6.4 10.2 8.8 7.1 12 3.5z"/></svg>
+            </span>
+            <span class="ec-text"><b>Internal biomarkers</b><span>Saliva panel &middot; 60+ markers</span></span>
+          </div>
+        </div>
+        <span class="engine-foot">ISO 27001 &middot; GDPR</span>
+      </div>
+
+      <!-- ---------- what comes out ---------- -->
+      <div class="ctx-col ctx-col--out">
+        <span class="ctx-label ctx-label--right">Dashboard</span>
+        <div class="outs">
+          <div class="out" data-out>
+            <span class="out-label">Scores</span>
+            <ul><li>Strain &amp; Recovery</li><li>Readiness / Performance Capability</li></ul>
+          </div>
+          <div class="out" data-out>
+            <span class="out-label">Indicators</span>
+            <ul><li>Stress</li><li>Sleep</li><li>Hydration</li><li>Pain</li><li>Virus</li></ul>
+          </div>
+          <div class="out" data-out>
+            <span class="out-label">Nutrition + supplements</span>
+            <ul><li>Melatonin</li><li>Creatine</li><li>Nitrosyn</li><li>Amino Acids</li><li>+ Others</li></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
