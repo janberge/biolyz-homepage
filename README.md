@@ -49,8 +49,22 @@ opens it.
 
 ## The screenshots
 
-Captured from the dashboard with headless Chrome at `deviceScaleFactor: 2`,
-not the Browser pane, which caps at about 800×450.
+```bash
+python3 tools/recapture.py                       # all of them
+python3 tools/recapture.py --only full,athlete   # just these
+python3 tools/recapture.py ~/src/biolyz-atira    # dashboard somewhere else
+```
+
+`tools/recapture.py` copies the dashboard, patches the **copy** so each view
+is addressable as a URL, serves it, drives headless Chrome over CDP at
+`deviceScaleFactor: 2`, and writes the JPEGs into `web/`. The dashboard itself
+is never modified — it keeps `route` / `playerId` / `playerTab` in React state,
+which is right for the product and useless for a capture tool, so the patch
+lives here instead. `tools/dashshot.js` takes one frame.
+
+The manifest at the top of `recapture.py` maps each name to a view and a size.
+Sizes match what `site.html` declares; a capture at the wrong aspect gets
+letterboxed and looks soft.
 
 Two rules held when these were taken, and must hold again:
 
@@ -63,10 +77,22 @@ Two rules held when these were taken, and must hold again:
   only** to seed those from `URLSearchParams`. Do not commit that patch to the
   dashboard.
 
-**These screenshots are a snapshot and will drift.** The ones here predate the
-2026-09-11 dashboard changes and still show the topbar role chip, the Beta
-button and the Brief/Full toggle — all three since removed. Re-capture before
-the page goes live.
+**These screenshots are a snapshot and will drift.** Re-run the script after
+any change to the dashboard's chrome. Last captured **2026-09-11**, against a
+dashboard with no topbar role chip, no Beta button and no Brief/Full toggle.
+
+That last one cost an image: `brief.jpg` showed "Team Overview in Brief mode",
+and the Brief view no longer exists. Both of its slots now use `full`, and the
+alt text no longer claims a mode that is gone. `compare.jpg` and
+`playerdata.jpg` went too — nothing had referenced them since 7 September.
+
+Four alt texts were also wrong, which is the same staleness in words rather
+than pixels: one counted 29 players against a squad of 36, one quoted 89% for
+a player now reading 51% and named a "kynurenine pattern" from a surface the
+product no longer has, one described a removed recovery score and those same
+patterns, and one had the key measure **inverted** — it said the share of
+markers *outside* the player's range when every percentage in the app is the
+share *inside*, so it read the chart backwards.
 
 ## Before this goes live
 
