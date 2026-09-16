@@ -64,7 +64,10 @@ def clean(path, prefix, viewbox=None, drop=None, recolor=False):
     s = re.sub(r'<svg([^>]*?)\s(?:width|height)="[^"]*"', r'<svg\1', s)
 
     # 5. The element sizes from CSS; it is decoration with a text label beside it.
-    s = s.replace('<svg ', '<svg class="logo-svg" aria-hidden="true" focusable="false" ', 1)
+    # A literal '<svg ' only matches a single-space export (Illustrator); an
+    # Inkscape file opens with '<svg\n  ' instead, so this needs to match on
+    # *any* whitespace after the tag name, not one exact character.
+    s = re.sub(r'<svg(?=\s)', '<svg class="logo-svg" aria-hidden="true" focusable="false"', s, count=1)
     s = re.sub(r'\s+', ' ', s).strip()
     return s
 

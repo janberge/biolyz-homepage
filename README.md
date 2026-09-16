@@ -16,7 +16,7 @@ generated, gitignored, and overwritten on the next build.
 
 ## How the build works
 
-`site.html` carries two kinds of placeholder, and `build.py` substitutes both:
+`site.html` carries three kinds of placeholder, and `build.py` substitutes all of them:
 
 - **`__IMG_<name>__`** → a dashboard screenshot from `web/<name>.jpg`. These
   do *not* become inline `src` data URIs. The biomarker overview alone appears
@@ -24,6 +24,12 @@ generated, gitignored, and overwritten on the next build.
   instead each image ships **once** in a `window.__IMG` map and a small loader
   assigns them at runtime. `width`/`height` are already on the markup, so
   nothing shifts while they resolve.
+- **`__VIDEO_<name>__`** → a video from `web/<name>.mp4`, inlined the same
+  way through a `window.__VIDEO` map (one entry today: the home hero's
+  background). A video is a much bigger asset than a screenshot — the hero
+  clip alone is most of the assembled file's size — but the project stays a
+  single self-contained file, so it ships the same way rather than as an
+  external reference.
 - **`__SVG_<name>__`** → cleaned inline SVG from `brand/`. `svgclean.py` folds
   each exporter's `<style>` classes inline, because two Illustrator exports in
   one document otherwise fight over `.st0`/`.st1`.
@@ -42,6 +48,7 @@ opens it.
 | `svgclean.py` | SVG normaliser — inlines `<style>` classes, retargets fills, retightens viewBoxes. |
 | `ctx.html` | Source for the data-flow diagram (dotted paths drawn from live element positions, so they stay attached at every width). |
 | `web/*.jpg` | 16 dashboard screenshots, 3.2MB. See below. |
+| `web/hero.mp4` | Home hero background video, ~8MB. |
 | `brand/biolyz/` | Our own marks — signet, horizontal lockup, white wordmark. |
 | `brand/third-party/` | Club and press marks. **Read that folder's README before making this repo public.** |
 | `tools/*.js` | Chrome DevTools Protocol scripts for capture and verification. |

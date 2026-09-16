@@ -27,11 +27,22 @@ for name in used:
     imgmap[name] = "data:image/jpeg;base64," + b
 src = re.sub(r'src="__IMG_([a-z0-9]+)__"', r'data-img="\1"', src)
 assert "__IMG_" not in src, "an __IMG_ token was used outside a src attribute"
-loader = ("<script>window.__IMG=" + json.dumps(imgmap) + ";\n"
-          "/* Set every screenshot from the shared map. width/height are on the\n"
-          "   markup already, so nothing shifts while these resolve. */\n"
+# Same trick for video (the hero background), one map even though there is
+# only one entry today — src="__VIDEO_x__" becomes data-video="x".
+usedv = sorted(set(re.findall(r'__VIDEO_([a-z0-9]+)__', src)))
+vidmap = {}
+for name in usedv:
+    b = base64.b64encode(open(os.path.join(sp, "web", name + ".mp4"), "rb").read()).decode()
+    vidmap[name] = "data:video/mp4;base64," + b
+src = re.sub(r'src="__VIDEO_([a-z0-9]+)__"', r'data-video="\1"', src)
+assert "__VIDEO_" not in src, "a __VIDEO_ token was used outside a src attribute"
+loader = ("<script>window.__IMG=" + json.dumps(imgmap) + ";window.__VIDEO=" + json.dumps(vidmap) + ";\n"
+          "/* Set every screenshot and video from the shared maps. width/height\n"
+          "   are on the img markup already, so nothing shifts while those resolve. */\n"
           "document.querySelectorAll('img[data-img]').forEach(function(i){\n"
-          "  var d=window.__IMG[i.dataset.img]; if(d) i.src=d; });\n</script>")
+          "  var d=window.__IMG[i.dataset.img]; if(d) i.src=d; });\n"
+          "document.querySelectorAll('video[data-video]').forEach(function(v){\n"
+          "  var d=window.__VIDEO[v.dataset.video]; if(d){ v.src=d; v.load(); } });\n</script>")
 # Append, do not anchor on "</footer>" — the first one in the document is a
 # blockquote's attribution footer, which put the loader before every image.
 src = src.rstrip() + "\n" + loader + "\n"
@@ -60,6 +71,12 @@ src = src.replace("__SVG_kicker__", _clean(
     drop='<path fill="#fff" d="M0 0h192.756v192.756H0V0z"/>'))
 src = src.replace("__SVG_sportico__", _clean(
     os.path.join(TP, "sportico.svg"), "sportico", viewbox="0 0 491.1 126.76"))
+# Integration marks for the marquee. Own colours kept (no recolor) — these
+# are read on a plain white card, not over a variable background.
+src = src.replace("__SVG_whoop__", _clean(os.path.join(TP, "whoop.svg"), "whoop"))
+src = src.replace("__SVG_garmin__", _clean(os.path.join(TP, "garmin.svg"), "garmin"))
+src = src.replace("__SVG_trainingpeaks__", _clean(os.path.join(TP, "trainingpeaks.svg"), "trainingpeaks"))
+src = src.replace("__SVG_catapult__", _clean(os.path.join(TP, "catapult.svg"), "catapult"))
 
 logo=os.path.join(BRAND,"biolyz")
 src=src.replace("__SVG_signet__",svg(logo+"/biolyz-signet.svg","mark"))
