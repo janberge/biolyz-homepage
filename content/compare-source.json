@@ -1,0 +1,1202 @@
+[
+{
+"style": "",
+"sz": "26",
+"t": "Biolyz"
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz measures more than 60 biomarkers in saliva from active athletes to assess their performance capacity and regeneration. The basic idea is that athletes regularly provide saliva samples, which are then analyzed using mass spectrometry. By measuring different biomarkers, Biolyz gives insights into inflammation, metabolic stress, muscle damage, hormonal status, psychological stress, sleep and hydration. Essentially, it works like a blood laboratory without the need for blood draws. Instead of regularly taking blood samples, Biolyz analyses saliva, making it possible to measure biomarkers less invasive and more frequently."
+},
+{
+"style": "",
+"sz": "",
+"t": "What are the benefits?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Blood draws are more invasive and make frequent testing more complicated. Saliva samples, on the other hand, require almost no time or effort for the athletes. This makes it easier to collect a wide range of data and track changes in an athlete’s biomarkers over time, with a wide range of biomarkers than can be measured, from cortisol and melatonin to testosterone and many more."
+},
+{
+"style": "",
+"sz": "",
+"t": "How does it work?"
+},
+{
+"style": "",
+"sz": "",
+"t": "The athlete provides a saliva sample, through one swab in under a minute, without the need for needles or clinical staff. This process allows the sampling to be quicker and less interruptive of training. The saliva sample is sent to Biolyz own laboratory, where the biomarkers are assessed using mass spectrometry. The regularly incoming results are processed and compared with the athlete’s previous measurements and individualized reference values. This ultimately gives the teams internal performance and medical staff or the athlete himself a clear picture to make more educated decisions about training load and recovery times."
+},
+{
+"style": "",
+"sz": "28",
+"t": "Biolyz vs. Point of Care - Which is better for athlete monitoring?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of care tells you one number right now, biolyz tells you how an athlete is adapting, every day, across the whole team. Both want to answer the same question: Is this athlete ready to train and are they recovering? They just take very different routes to get there."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Point of Care reads one marker, on the spot."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Biolyz reads 60+ from a saliva swab and shows the whole picture, no needle involved."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Collection: A swab in under a minute, done by the athlete. Most point-of-care devices need a trained staff member and a finger prick for very test."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Speed: Spoint of care wins on speed: lactate in 10 seconds, cortisol in about 20 minutes. Biolyz reutrns the full 60+ biomarker panel in 24-48 hours, every time."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Frequency: Daily if the club wants it. With point of care, staff time per athlete and per device limits how often a whole squad can be tested."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Infrastructure: No devices to set up or calibrate on site. Point of care needs an analyzer, consumables and someone to run it for every marker."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Whats the Difference?"
+},
+{
+"style": "",
+"sz": "",
+"t": "A point-of-care device answers one question at a time. A lactate meter tells you lactate, a cortisol stick tells you cortisol, a CK test tells you about muscle damage. Each answer is useful, but it is a single number from a single moment."
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz looks at many body systems from the same sample: stress, recovery, inflammation, sleep, hydration and nutrition. That is the difference between \"his CK is high\" and \"he is under-recovered, his inflammation markers are rising and he slept badly for three nights\". The first is a data point. The second is a decision."
+},
+{
+"style": "",
+"sz": "26",
+"t": "What is point of care?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of care (POC) means testing right where the athlete is: on the training ground, in the treatment room or on the team bus, instead of sending a sample to a central lab. A small device analyses a drop of blood, saliva or sweat on the spot and shows a result within seconds to minutes. It has earned its place in sports science, and here is what it does well."
+},
+{
+"style": "",
+"sz": "",
+"t": "Results in seconds to minutes"
+},
+{
+"style": "",
+"sz": "",
+"t": "A handheld lactate meter gives a reading in 10 seconds. That makes point of care the right tool when a coach needs to adjust intensity mid-session, for example in a step test."
+},
+{
+"style": "",
+"sz": "",
+"t": "Works anywhere, no lab needed"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point-of-care devices run on the training ground, in a hotel room or on the team bus. Nothing must be shipped, and nothing depends on a lab’s opening hours."
+},
+{
+"style": "",
+"sz": "",
+"t": "Proven tools for specific questions"
+},
+{
+"style": "",
+"sz": "",
+"t": "For a single, well-defined question, a single, well-known marker is often enough. Lactate for thresholds, CK for muscle damage and cortisol for acute stress all have decades of research behind them."
+},
+{
+"style": "",
+"sz": "",
+"t": "Examples of Point-of-Care systems are:"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "EKF Lactate Scout: lactate from a drop of capillary blood, in 10 seconds"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Roche Reflotron: 17 clinical chemistry values, including CK, one test at a time, in 2 to 3 minutes"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Eli Health Hormometer: cortisol from saliva, read by smartphone in about 20 minutes"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Orreco point of care: finger prick testing every few days alongside full blood draws"
+},
+{
+"style": "",
+"sz": "26",
+"t": ""
+},
+{
+"style": "",
+"sz": "26",
+"t": "Side by Side Comparison"
+},
+{
+"style": "",
+"sz": "",
+"t": "Feature"
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of Care"
+},
+{
+"style": "",
+"sz": "",
+"t": "Sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "Saliva"
+},
+{
+"style": "",
+"sz": "",
+"t": "Most capillary blood (finger prick), some saliva or sweat"
+},
+{
+"style": "",
+"sz": "",
+"t": "Needle"
+},
+{
+"style": "",
+"sz": "",
+"t": "No"
+},
+{
+"style": "",
+"sz": "",
+"t": "Usually yes, for blood-based devices"
+},
+{
+"style": "",
+"sz": "",
+"t": "Panel Size"
+},
+{
+"style": "",
+"sz": "",
+"t": "60+ Biomarkers per sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "1 to 17 values, usually one per test"
+},
+{
+"style": "",
+"sz": "",
+"t": "Time to result"
+},
+{
+"style": "",
+"sz": "",
+"t": "24 to 48 hours"
+},
+{
+"style": "",
+"sz": "",
+"t": "Seconds to minutes"
+},
+{
+"style": "",
+"sz": "",
+"t": "Who takes the sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "The athlete"
+},
+{
+"style": "",
+"sz": "",
+"t": "Coach, doctor or sport scientist"
+},
+{
+"style": "",
+"sz": "",
+"t": "Equipment"
+},
+{
+"style": "",
+"sz": "",
+"t": "Saliva swab"
+},
+{
+"style": "",
+"sz": "",
+"t": "Analyzer, lancets, test strips of cartridges per device"
+},
+{
+"style": "",
+"sz": "",
+"t": "Precision"
+},
+{
+"style": "",
+"sz": "",
+"t": "Mass spectrometry"
+},
+{
+"style": "",
+"sz": "",
+"t": "Test strips, color reactions or rapid immunoassays (varies by device)"
+},
+{
+"style": "",
+"sz": "",
+"t": "Frequency for a squad"
+},
+{
+"style": "",
+"sz": "",
+"t": "Daily or 2 to 5 times a week"
+},
+{
+"style": "",
+"sz": "",
+"t": "Limited by staff time per test"
+},
+{
+"style": "",
+"sz": "",
+"t": "Body systems covered"
+},
+{
+"style": "",
+"sz": "",
+"t": "Stress, recovery, inflammation, sleep, hydration, nutrition"
+},
+{
+"style": "",
+"sz": "",
+"t": "One system per device"
+},
+{
+"style": "",
+"sz": "",
+"t": "Data"
+},
+{
+"style": "",
+"sz": "",
+"t": "One platform, individual baselines, AI pattern detection"
+},
+{
+"style": "",
+"sz": "",
+"t": "Separate readings per device"
+},
+{
+"style": "",
+"sz": "",
+"t": "Who’s involved"
+},
+{
+"style": "",
+"sz": "",
+"t": "One company, one pipeline"
+},
+{
+"style": "",
+"sz": "",
+"t": "Device maker plus staff on site"
+},
+{
+"style": "",
+"sz": "",
+"t": "Works without a lab"
+},
+{
+"style": "",
+"sz": "",
+"t": "No"
+},
+{
+"style": "",
+"sz": "",
+"t": "Yes"
+},
+{
+"style": "",
+"sz": "26",
+"t": "Where Each One Has Its Limits"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of Care"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of care is built for one fast answer. Monitoring a whole squad every day asks for something else, and that is where its limits show."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Few markers per test, so one device rarely shows the full picture"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Most blood-based devices need a finger prick, which athletes tolerate less well the more often it happens"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "A trained staff member has to run each test, which caps how often a whole squad can be tested"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Precision varies by device, so small day-to-day changes can be hard to separate from noise"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Each device has its own consumables, calibration and data, which adds up across several tools"
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "No result during the session itself: results arrive within 24 to 48 hours"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "The analysis runs in a lab, not on the training ground"
+},
+{
+"style": "",
+"sz": "26",
+"t": "What a Testing Day Looks Like"
+},
+{
+"style": "",
+"sz": "",
+"t": "Take a squad of 25 players. With point of care, a staff member sets up each device, pricks every finger, runs each test and logs the result, then does it again for the next marker. With Biolyz, each player takes a saliva swab in under a minute, the samples go to the Biolyz lab, and the whole squad's results land on one dashboard within 24 to 48 hours."
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+},
+{
+"style": "",
+"sz": "26",
+"t": "Cost per Insight"
+},
+{
+"style": "",
+"sz": "",
+"t": "The fair comparison is not price per test but price per useful insight. A point-of-care device looks cheap per reading, but each reading answers one question. Covering stress, recovery, inflammation, sleep and hydration means several devices, each with its own consumables, calibration and staff time."
+},
+{
+"style": "",
+"sz": "",
+"t": "Three costs are easy to overlook:"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Staff time: a trained person runs every point-of-care test. With Biolyz, athletes sample themselves in under a minute."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Several systems: each extra device adds strips, cartridges, maintenance and a separate data stream."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Missed signals: an overload or illness spotted a few days earlier can save weeks of lost training. That is where most of the value sits."
+},
+{
+"style": "",
+"sz": "",
+"t": "Which Approach Fits Athletes Best?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Point of care answers \"what is happening right now in this session?\" Biolyz answers \"how is this athlete adapting and recovering over days and weeks?\" They are not rivals so much as tools for two different jobs."
+},
+{
+"style": "",
+"sz": "",
+"t": "What you get with point of care"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "An answer in seconds to minutes, during the session"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Testing anywhere, with no lab"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Well-established single markers such as lactate and CK"
+},
+{
+"style": "",
+"sz": "",
+"t": "What you get with Biolyz"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "60+ biomarkers across six body systems from one swab"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Needle-free self-sampling for the whole squad, as often as daily"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Lab-grade precision and individual baselines, so small changes can be trusted"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "One company and one dashboard, from sample to insight"
+},
+{
+"style": "",
+"sz": "",
+"t": "Choosing the right tool"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Choose point of care if you need an answer during the session, are testing one marker on a few athletes, or have no lab access."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Choose Biolyz if you want to track recovery, stress and readiness for a whole squad, every day, without needles."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Use both if you want in-session decisions and long-term monitoring. Point of care steers the session; Biolyz steers the week."
+},
+{
+"style": "",
+"sz": "",
+"t": "What Are Teams Saying?"
+},
+{
+"style": "",
+"sz": "",
+"t": "FAQs on Biolyz vs. Point of Care"
+},
+{
+"style": "",
+"sz": "",
+"t": "Is saliva as accurate as blood?"
+},
+{
+"style": "",
+"sz": "",
+"t": "For the markers Biolyz measures, the method itself is lab grade: mass spectrometry with a typical variation of 4.8%, assessed against the ICH M10 guideline. Saliva and blood carry different information, though."
+},
+{
+"style": "",
+"sz": "",
+"t": "How fast do I get Biolyz results?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Within 24 to 48 hours of sampling, delivered to the Biolyz dashboard."
+},
+{
+"style": "",
+"sz": "",
+"t": "Can Biolyz replace lactate testing?"
+},
+{
+"style": "",
+"sz": "",
+"t": "No. Lactate tells you about intensity during a session, so it needs an answer within seconds. Biolyz tells you about recovery and readiness across days and weeks. The two work best side by side."
+},
+{
+"style": "",
+"sz": "",
+"t": "Who takes the sample, and how long does it take?"
+},
+{
+"style": "",
+"sz": "",
+"t": "The athlete, in under a minute, with a painless saliva swab. No needle and no staff member are needed."
+},
+{
+"style": "",
+"sz": "",
+"t": "How often should athletes be tested?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Borussia Dortmund tested players two to five times a week. Daily testing is possible when you want the closest view of recovery."
+},
+{
+"style": "",
+"sz": "",
+"t": "Can I use Biolyz and point of care together?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Yes, and many teams should. Point of care steers the session, Biolyz shows how the athlete is responding over time."
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz vs. Bloodlab Companies – Which is better for athlete monitoring"
+},
+{
+"style": "",
+"sz": "",
+"t": "A blood lab company checks the foundation; Biolyz tracks the day-to-day. Both look at health and recovery, but one does it a few times a season and the other every day, without a needle."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Bloodlabs read your athletes blood."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Biolyz reads their saliva and gets the same biochemical depth, no needle involved."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Collection: A swab under a minute, done by the athlete. Bloodlabs needs a trained professional to draw blood."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Speed: The full 60+ biomarker panel comes back in 24 to 48 hours, every time. Bloodlabs full panel takes about a week."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Frequency: Daily, if a club wants it. Bloodlabs run the full panel a handful of times a season because a blood draw just doesn’t scale to daily use."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Infrastructure: Nothing to install, no dedicated space. Bloodlabs need an analyzer on-site and a controlled draw process."
+},
+{
+"style": "",
+"sz": "",
+"t": "What’s the Difference?"
+},
+{
+"style": "",
+"sz": "",
+"t": "A blood lab company takes a venous sample, sends it to a clinical lab and returns a broad panel of 50+ markers. It is the gold standard for health screening: iron status, blood count, vitamins, hormones, liver and kidney function. But it is a snapshot, taken a few times a season."
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz looks at stress, recovery, inflammation, sleep, hydration and nutrition from a saliva swab, as often as daily. That is the difference between a quarterly health check and a running picture of how each athlete responds to training. The first tells you where an athlete stands. The second tells you where they are heading."
+},
+{
+"style": "",
+"sz": "",
+"t": "Non-invasive by design."
+},
+{
+"style": "",
+"sz": "",
+"t": "There’s no version of a needle that becomes non-invasive with better software. A swab either replaces the blood draw or it doesn’t, and with Biolyz, it does. The athlete does it themselves, under a minute, with no clinical staff involved and no break in the training schedule. That matters beyond athlete comfort. It’s also why daily testing is realistic in the first place. A method that requires a trained professional and a controlled setting caps how often you can reasonably ask for it. Remove that requirement and frequency stops being a constraint."
+},
+{
+"style": "",
+"sz": "26",
+"t": "What do Bloodlab Companies do?"
+},
+{
+"style": "",
+"sz": "",
+"t": "A sports blood lab analyses venous blood for athletes and teams. A doctor or phlebotomist draws the sample, it is cooled and shipped to an accredited lab, and the results arrive in a platform with sports-specific interpretation. Orreco, for example, works with Premier League clubs such as Liverpool and Newcastle United, as well as NBA and NFL teams. It has earned its place in elite sport, and here is what it does well."
+},
+{
+"style": "",
+"sz": "",
+"t": "Clinical depth from one draw"
+},
+{
+"style": "",
+"sz": "",
+"t": "A full venous panel covers 50+ markers, including the ones only blood can give reliably: full blood count, ferritin and iron status, vitamin D, B12, liver and kidney function."
+},
+{
+"style": "",
+"sz": "",
+"t": "Established reference ranges"
+},
+{
+"style": "",
+"sz": "",
+"t": "Blood markers have decades of clinical research and agreed reference ranges behind them. Team doctors know how to read them and act on them."
+},
+{
+"style": "",
+"sz": "",
+"t": "Medical screening and diagnosis"
+},
+{
+"style": "",
+"sz": "",
+"t": "For pre-season screening, return-to-play decisions or a suspected deficiency, blood is the established standard and often the only accepted one."
+},
+{
+"style": "",
+"sz": "",
+"t": "Examples of sports blood labs are:"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Forth (Forth Edge): finger-prick home kits with 15 to 40+ markers, results in about 2 working days"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Medichecks Ultimate Performance: 56 markers from a venous or finger-prick sample, results in about 3 working days"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "InsideTracker: up to 54 markers from a venous draw, results within about 7 business days"
+},
+{
+"style": "",
+"sz": "",
+"t": "Side by Side Comparison"
+},
+{
+"style": "",
+"sz": "",
+"t": "Feature"
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz"
+},
+{
+"style": "",
+"sz": "",
+"t": "Sports Blood Lab"
+},
+{
+"style": "",
+"sz": "",
+"t": "Sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "Saliva"
+},
+{
+"style": "",
+"sz": "",
+"t": "Venous blood (some finger-prick options)"
+},
+{
+"style": "",
+"sz": "",
+"t": "Needle"
+},
+{
+"style": "",
+"sz": "",
+"t": "No"
+},
+{
+"style": "",
+"sz": "",
+"t": "Yes"
+},
+{
+"style": "",
+"sz": "",
+"t": "Panel Size"
+},
+{
+"style": "",
+"sz": "",
+"t": "60+ biomarkers per sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "50+ markers per venous panel"
+},
+{
+"style": "",
+"sz": "",
+"t": "Time to result"
+},
+{
+"style": "",
+"sz": "",
+"t": "24 to 48 hours"
+},
+{
+"style": "",
+"sz": "",
+"t": "About a week for the full panel"
+},
+{
+"style": "",
+"sz": "",
+"t": "Who takes the sample"
+},
+{
+"style": "",
+"sz": "",
+"t": "The athlete"
+},
+{
+"style": "",
+"sz": "",
+"t": "Doctor or phlebotomist"
+},
+{
+"style": "",
+"sz": "",
+"t": "Equipment"
+},
+{
+"style": "",
+"sz": "",
+"t": "Saliva swab"
+},
+{
+"style": "",
+"sz": "",
+"t": "Needles, blood tubes, cooling, courier"
+},
+{
+"style": "",
+"sz": "",
+"t": "Precision"
+},
+{
+"style": "",
+"sz": "",
+"t": "Mass spectrometry (ICH M10)"
+},
+{
+"style": "",
+"sz": "",
+"t": "Accredited clinical lab methods"
+},
+{
+"style": "",
+"sz": "",
+"t": "Frequency for a squad"
+},
+{
+"style": "",
+"sz": "",
+"t": "Daily or 2 to 5 times a week"
+},
+{
+"style": "",
+"sz": "",
+"t": "A handful of times a season"
+},
+{
+"style": "",
+"sz": "",
+"t": "Body systems covered"
+},
+{
+"style": "",
+"sz": "",
+"t": "Stress, recovery, inflammation, sleep, hydration, nutrition"
+},
+{
+"style": "",
+"sz": "",
+"t": "Blood count, iron, vitamins, hormones, organ function, muscle damage"
+},
+{
+"style": "",
+"sz": "",
+"t": "Data"
+},
+{
+"style": "",
+"sz": "",
+"t": "One platform, individual baselines, AI pattern detection"
+},
+{
+"style": "",
+"sz": "",
+"t": "Platform with sports interpretation, periodic snapshots"
+},
+{
+"style": "",
+"sz": "",
+"t": "Who’s involved"
+},
+{
+"style": "",
+"sz": "",
+"t": "One company, one pipeline"
+},
+{
+"style": "",
+"sz": "",
+"t": "Blood lab company, partner labs, courier, medical staff"
+},
+{
+"style": "",
+"sz": "",
+"t": "Works without a needle"
+},
+{
+"style": "",
+"sz": "",
+"t": "Yes"
+},
+{
+"style": "",
+"sz": "",
+"t": "No"
+},
+{
+"style": "",
+"sz": "26",
+"t": "Where Each One Has Its Limits"
+},
+{
+"style": "",
+"sz": "",
+"t": "Sports Blood Labs"
+},
+{
+"style": "",
+"sz": "",
+"t": "A blood lab is built for a deep, clinical snapshot. Monitoring a whole squad every week asks for something else, and that is where its limits show."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "A needle for every test, which athletes accept a few times a season but not every week"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "A doctor or phlebotomist has to draw each sample, which ties up medical staff"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Samples need cooling, a courier and a partner lab, so several parties are involved"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Results take about a week, so they describe how the athlete was, not how they are"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "A handful of draws per season leaves long gaps where overload or illness can build unnoticed"
+},
+{
+"style": "",
+"sz": "",
+"t": "Biolyz"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "No full blood count, iron status or other blood-only markers"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Results arrive in 24 to 48 hours, not on the spot"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Saliva reference ranges are younger than blood’s, so Biolyz compares each athlete with their own baseline"
+},
+{
+"style": "",
+"sz": "26",
+"t": "What a Testing Day Looks Like"
+},
+{
+"style": "",
+"sz": "",
+"t": "Take a squad of 25 players. With a sports blood lab, a doctor or phlebotomist draws blood from every player, the tubes are cooled and couriered to a partner lab, and results come back about a week later. With Biolyz, each player takes a saliva swab in under a minute, the samples go to the Biolyz lab, and the whole squad’s results land on one dashboard within 24 to 48 hours."
+},
+{
+"style": "",
+"sz": "26",
+"t": ""
+},
+{
+"style": "",
+"sz": "26",
+"t": "Cost per Insight"
+},
+{
+"style": "",
+"sz": "",
+"t": "The fair comparison is not price per test but price per useful insight. A blood panel delivers a lot of information per draw, but only a few draws fit into a season. Between them, there is no data at all."
+},
+{
+"style": "",
+"sz": "",
+"t": "Three costs are easy to overlook:"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Staff time: a doctor or phlebotomist draws every sample. With Biolyz, athletes sample themselves in under a minute."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Logistics: tubes, cooling, couriers and partner labs add cost and coordination to every round of testing."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Missed signals: an overload or illness spotted a few days earlier can save weeks of lost training. Long gaps between blood draws are where those signals get missed."
+},
+{
+"style": "",
+"sz": "26",
+"t": "Which Approach Fits Athletes Best?"
+},
+{
+"style": "",
+"sz": "",
+"t": "A sports blood lab answers “is this athlete healthy, and are any values out of range?” Biolyz answers “how is this athlete adapting and recovering, day by day?” They are not rivals so much as tools for two different jobs."
+},
+{
+"style": "",
+"sz": "",
+"t": "What you get with a sports blood lab"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "A broad clinical panel with established reference ranges"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Blood-only markers such as blood count, iron status and vitamins"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "The accepted standard for medical screening and diagnosis"
+},
+{
+"style": "",
+"sz": "",
+"t": "What you get with Biolyz"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "60+ biomarkers across six body systems from one swab"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Needle-free self-sampling for the whole squad, as often as daily"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Results in 24 to 48 hours instead of about a week"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "One company and one dashboard, from sample to insight"
+},
+{
+"style": "",
+"sz": "",
+"t": "Choosing the right tool"
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Choose a sports blood lab if you need a clinical health screening, blood-only markers or a medical diagnosis."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Choose Biolyz if you want to track recovery, stress and readiness for a whole squad, every day, without needles."
+},
+{
+"style": "ListParagraph",
+"sz": "",
+"t": "Use both if you want periodic health checks and continuous monitoring. Blood checks the foundation; Biolyz steers the week."
+},
+{
+"style": "",
+"sz": "",
+"t": "What Are Teams Saying?"
+},
+{
+"style": "",
+"sz": "",
+"t": "FAQs on Biolyz vs. Bloodlab Companies"
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+},
+{
+"style": "",
+"sz": "",
+"t": "Is saliva as accurate as blood?"
+},
+{
+"style": "",
+"sz": "",
+"t": "For the markers Biolyz measures, the method itself is lab grade: mass spectrometry with a typical variation of 4.8%, assessed against the ICH M10 guideline. Saliva and blood carry different information, though, and some values such as iron status still need blood."
+},
+{
+"style": "",
+"sz": "",
+"t": "Can Biolyz replace blood tests?"
+},
+{
+"style": "",
+"sz": "",
+"t": "No. Blood remains the standard for clinical screening and blood-only markers. Biolyz fills the gaps between blood draws with daily, needle-free monitoring."
+},
+{
+"style": "",
+"sz": "",
+"t": "How fast do I get Biolyz results?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Within 24 to 48 hours of sampling, delivered to the Biolyz dashboard. A full venous blood panel usually takes about a week."
+},
+{
+"style": "",
+"sz": "",
+"t": "Who takes the sample, and how long does it take?"
+},
+{
+"style": "",
+"sz": "",
+"t": "The athlete, in under a minute, with a painless saliva swab. No needle, no doctor and no phlebotomist are needed."
+},
+{
+"style": "",
+"sz": "",
+"t": "How often should athletes be tested?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Borussia Dortmund tested players two to five times a week with Biolyz. Blood panels typically run a few times a season, for example pre-season, mid-season and after injury."
+},
+{
+"style": "",
+"sz": "",
+"t": "Can I use Biolyz and a sports blood lab together?"
+},
+{
+"style": "",
+"sz": "",
+"t": "Yes, and many teams should. Blood checks the foundation a few times a season; Biolyz shows how each athlete is responding in between."
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+},
+{
+"style": "",
+"sz": "",
+"t": ""
+}
+]

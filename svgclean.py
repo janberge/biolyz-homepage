@@ -53,6 +53,12 @@ def clean(path, prefix, viewbox=None, drop=None, recolor=False):
     # 4a. One-colour marks follow their surroundings.
     if recolor:
         s = re.sub(r'fill="(?!none)[^"]*"', 'fill="currentColor"', s)
+        # Step 2 above folds Illustrator's <style> classes into inline style=,
+        # so a one-colour mark's colour usually ends up THERE and never in a
+        # fill attribute — which is how a navy wordmark shipped through a
+        # recolor that only ever looked at attributes. "fill:" does not match
+        # "fill-rule:", so the rule survives.
+        s = re.sub(r'fill:\s*(?!none)[^;"]+', 'fill: currentColor', s)
 
     # 4b. A tight viewBox, and never width/height attributes — CSS sizes these.
     if viewbox:

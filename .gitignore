@@ -8,3 +8,9 @@ check.js
 .DS_Store
 __pycache__/
 *.pyc
+
+# The gated US readiness draft. The repo is public; this is not.
+us/
+
+# Machine-specific dev server paths.
+.claude/
