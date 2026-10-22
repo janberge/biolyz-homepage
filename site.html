@@ -86,6 +86,9 @@ img{max-width:100%; display:block}
 .h2{font-size:var(--h2); line-height:1; letter-spacing:-.04em; text-wrap:balance}
 .h3{font-size:var(--h3); line-height:1; letter-spacing:-.04em; text-wrap:balance}
 .h4{font-size:var(--h4); line-height:1.1; letter-spacing:-.04em; text-wrap:balance}
+/* Every section heading on every page is one size: an <h2> keeps the h2
+   scale even where it was given the smaller h3/h4 look. */
+.page h2.h2, .page h2.h3, .page h2.h4{font-size:var(--h3); line-height:1.05; letter-spacing:-.04em}
 .h5{font-size:var(--h5); line-height:1.2; letter-spacing:-.03em}
 .h6{font-size:var(--h6); line-height:1.2; letter-spacing:-.03em}
 .lg{font-size:var(--t-large)} .sm{font-size:var(--t-small)} .xs{font-size:var(--t-tiny)}
@@ -294,8 +297,8 @@ img{max-width:100%; display:block}
 .saliva-proof-l{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
 .saliva-proof-figs{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-xl)}
 .saliva-proof .fig{gap:var(--sp-xs); padding-top:var(--sp-md); border-top:var(--stroke) solid var(--c-grey-300)}
-.saliva-proof .fig .v{font-size:clamp(3rem,6.4vw,5.5rem); letter-spacing:-.05em; line-height:.95;
-  color:var(--text); margin-bottom:var(--sp-sm)}
+.saliva-proof .fig .v{font-size:clamp(2.25rem,4.2vw,3.5rem); letter-spacing:-.05em; line-height:.95;
+  color:var(--c-blue); margin-bottom:var(--sp-sm)}
 .saliva-proof .fig .k{font-size:var(--t-large); letter-spacing:-.02em; color:var(--text)}
 .saliva-proof .fig .s{color:var(--text-3); text-transform:none; letter-spacing:0; font-size:var(--t-regular)}
 .saliva-staff-hd{margin-top:var(--section-md)}
@@ -350,6 +353,121 @@ img{max-width:100%; display:block}
 #p-literature > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-literature > .pagehead + .sec{padding-top:var(--sp-md)}
 #p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
+/* Science page: the tight rhythm used across the site, no rule under the
+   research heading, and the sample-quality view as a light split
+   (text left, screenshot right) instead of a black band. */
+#p-science > .sec{padding-block:var(--sp-2xl)}
+#p-science > .sec .hd{margin-bottom:var(--sp-xl)}
+#research-pipeline .lane-hd{border-top:0; padding-top:0}
+#p-science .papers{border-top:0}
+/* Biomarkers page: tight rhythm, blue accents, and the extra blocks redone. */
+#p-biomarkers > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
+#p-biomarkers > .sec{padding-block:var(--sp-2xl)}
+#p-biomarkers > .pagehead + style + #precision{padding-top:var(--sp-md)}
+#p-biomarkers #precision .hd{margin-bottom:var(--sp-xl)}
+#p-biomarkers .ap-figs{margin-bottom:var(--sp-xl)}
+#p-biomarkers .ap-figs .fig .v{color:var(--c-blue)}
+#p-biomarkers .ap-cap{margin-bottom:var(--sp-md)}
+#p-biomarkers .ap .tabs .tab[aria-selected="true"]{background:var(--c-blue); color:var(--c-white)}
+#p-biomarkers .ap .tabs .tab:hover{color:var(--c-blue)}
+#p-biomarkers .ap .tabs .tab[aria-selected="true"]:hover{color:var(--c-white)}
+#p-biomarkers .ap-note{background:var(--c-blue); color:var(--o-white-80)}
+#p-biomarkers .ap-method{border-top:0; padding-top:0; margin-top:var(--sp-2xl); gap:var(--sp-xs)}
+#p-biomarkers .ap-method > div{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-lg)}
+#p-biomarkers .ap-method h3{color:var(--c-blue)}
+#p-biomarkers .list-toolbar .eyebrow{color:var(--c-blue)}
+#p-biomarkers .uc-filter button[aria-pressed="true"]{background:var(--c-blue); color:var(--c-white)}
+#p-biomarkers .uc-filter button:hover{color:var(--c-blue)}
+#p-biomarkers .uc-filter button[aria-pressed="true"]:hover{color:var(--c-white)}
+#p-biomarkers .agroups{gap:var(--sp-lg)}
+#p-biomarkers .agroup-h .t{color:var(--c-blue)}
+#p-biomarkers #precision{padding-bottom:var(--sp-md)}
+#p-biomarkers #bm-analytes{padding-block:var(--sp-md)}
+#p-biomarkers #bm-dashboard{padding-top:var(--sp-md)}
+/* About, redesigned for clarity: a big statement hero, each idea as a short
+   titled card instead of a wall of paragraphs, the manifesto as three steps
+   and a pull quote on blue, the plan as a numbered timeline, values as cards.
+   Cards turn blue under the cursor. */
+.ab-hero{padding:calc(var(--navh) + var(--section-md)) 0 var(--sp-xl)}
+.ab-hero .wrap{display:flex; flex-direction:column; gap:var(--sp-md)}
+.ab-title{font-size:clamp(2rem,4.5vw,3.5rem); letter-spacing:-.045em; line-height:1; max-width:16ch; margin:0}
+.ab-lead{font-size:var(--h5); letter-spacing:-.02em; color:var(--text-2); max-width:36ch; margin:0}
+.ab-sec{padding-block:var(--sp-2xl)}
+.ab-head{display:flex; flex-direction:column; gap:var(--sp-md); margin-bottom:var(--sp-xl)}
+.ab-head .h2{margin:0; max-width:22ch}
+.ab-statement{font-size:var(--t-large); letter-spacing:-.02em; color:var(--text-2); max-width:60ch; margin:0}
+.ab-grid{display:grid; gap:var(--sp-xs)}
+.ab-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ab-grid--4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ab-card{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-xl);
+  display:flex; flex-direction:column; gap:var(--sp-sm);
+  transition:background-color var(--dur-short) var(--ease), color var(--dur-short) var(--ease)}
+.ab-card h3{font-size:var(--h5); letter-spacing:-.03em; line-height:1.2; margin:0}
+.ab-card p{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.ab-n{font-family:var(--mono); font-size:var(--t-small); color:var(--c-blue)}
+.ab-card:hover, .ab-tier:hover{background:var(--c-blue); color:var(--c-white)}
+.ab-card:hover p, .ab-tier:hover p{color:var(--o-white-80)}
+.ab-card:hover .ab-n, .ab-card:hover .ab-initial, .ab-tier:hover .ab-tier-n{color:var(--c-white)}
+.ab-claim{margin:var(--sp-xl) 0 0; font-size:var(--h5); letter-spacing:-.02em; color:var(--text-2)}
+.ab-claim b{font-weight:400; color:var(--c-blue)}
+/* manifesto */
+.ab-mani{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-xl)}
+.ab-mani-step{display:flex; flex-direction:column; gap:var(--sp-sm); padding-top:var(--sp-md);
+  border-top:var(--stroke) solid rgba(255,255,255,.3)}
+.ab-mani-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--o-white-80)}
+.ab-mani-step p{margin:0; color:var(--o-white-80)}
+.ab-mani-step b{font-weight:400; color:var(--c-white)}
+.ab-quote{margin:var(--sp-2xl) 0 0; padding-left:var(--sp-lg); border-left:2px solid var(--c-white);
+  font-size:clamp(1.75rem,3.4vw,2.75rem); letter-spacing:-.03em; line-height:1.15; color:var(--c-white)}
+/* plan */
+.ab-plan{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-xs)}
+.ab-tier{position:relative; background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-xl);
+  display:flex; flex-direction:column; gap:var(--sp-sm);
+  transition:background-color var(--dur-short) var(--ease), color var(--dur-short) var(--ease)}
+.ab-tier-n{font-size:clamp(2.5rem,4.5vw,3.75rem); letter-spacing:-.05em; line-height:1; color:var(--c-blue);
+  margin-bottom:var(--sp-sm)}
+.ab-tier h3{font-size:var(--h5); letter-spacing:-.03em; line-height:1.2; margin:0}
+.ab-tier p{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.ab-tier + .ab-tier::before{content:"\2192"; position:absolute; left:calc(-1 * var(--sp-xs) - .55rem); top:var(--sp-xl);
+  width:1.1rem; height:1.1rem; border-radius:50%; background:var(--c-white); color:var(--c-blue);
+  font-size:.75rem; display:flex; align-items:center; justify-content:center; z-index:1}
+/* technology */
+.ab-tech{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.2fr); gap:var(--sp-3xl); align-items:start}
+.ab-tech-body{display:flex; flex-direction:column; gap:var(--sp-md)}
+.ab-tech-body p{margin:0; color:var(--text-2)}
+.ab-tech-body .ab-tech-hl{font-size:var(--h5); letter-spacing:-.02em; color:var(--c-blue); padding-block:var(--sp-xs)}
+/* values */
+.ab-initial{font-size:clamp(2.5rem,4.5vw,3.75rem); letter-spacing:-.05em; line-height:1; color:var(--c-blue);
+  margin-bottom:var(--sp-sm)}
+.ab-join{padding-block:var(--sp-2xl) var(--section-md)}
+@media (max-width:1000px){ .ab-grid--4{grid-template-columns:repeat(2,minmax(0,1fr))} }
+@media (max-width:820px){
+  .ab-grid--2, .ab-grid--4, .ab-mani, .ab-plan, .ab-tech{grid-template-columns:1fr}
+  .ab-tech{gap:var(--sp-xl)}
+  .ab-card, .ab-tier{padding:var(--sp-lg)}
+  .ab-tier + .ab-tier::before{display:none}
+}
+.bm-more{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-xs); margin-top:var(--sp-2xl)}
+.bm-card{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-xl);
+  display:flex; flex-direction:column; gap:var(--sp-sm)}
+.bm-card p{margin:0; font-size:var(--t-small); color:var(--text-2); max-width:46ch}
+.bm-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.bm-big{font-size:clamp(3rem,6vw,5rem); letter-spacing:-.05em; line-height:.95; color:var(--c-blue)}
+.bm-card p.bm-lead{font-size:var(--t-large); letter-spacing:-.02em; color:var(--text); margin-bottom:var(--sp-xs)}
+.bm-chips{list-style:none; margin:var(--sp-sm) 0 0; padding:0; display:flex; flex-wrap:wrap; gap:var(--sp-xs)}
+.bm-chips li{background:var(--c-white); border-radius:var(--r-round); padding:.3rem .75rem; font-size:var(--t-small)}
+.bm-card--us{background:var(--c-blue)}
+.bm-card--us .bm-k{color:var(--o-white-60)}
+.bm-card--us .bm-big, .bm-card--us p.bm-lead{color:var(--c-white)}
+.bm-card--us p{color:var(--o-white-80)}
+.bm-card--us .bm-chips li{background:rgba(255,255,255,.14); color:var(--c-white)}
+@media (max-width:820px){ .bm-more{grid-template-columns:1fr} .bm-card{padding:var(--sp-lg)} }
+.sq{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); gap:var(--sp-3xl); align-items:center}
+.sq-text{display:flex; flex-direction:column; gap:var(--sp-md)}
+.sq-text .h3{margin:0}
+.sq-text .copy{margin:0; color:var(--text-2)}
+.sq-shot{margin:0; background:var(--c-white); box-shadow:0 12px 40px rgba(3,7,18,.08)}
+@media (max-width:900px){ .sq{grid-template-columns:1fr; gap:var(--sp-xl)} }
 #p-research #hz{padding-bottom:var(--sp-2xl)}
 #p-research > .sec--xl{padding-block:var(--sp-2xl) var(--section-md)}
 @media (max-width:820px){
@@ -1069,9 +1187,9 @@ textarea{min-height:7rem; resize:vertical}
 .inline-link:hover{text-decoration:underline}
 /* Comparison pages: FAQ heading on the left, questions as compact grey rows
    on the right, each with a round plus that turns into a minus when open. */
-.faq-split{display:grid; grid-template-columns:1fr 2fr; gap:var(--sp-3xl); align-items:start}
+.faq-split{display:grid; grid-template-columns:1.2fr 2fr; gap:var(--sp-3xl); align-items:start}
 .faq-hd{display:flex; flex-direction:column; gap:var(--sp-md); position:sticky; top:calc(var(--navh) + var(--sp-xl))}
-.faq-hd .h3{margin:0; max-width:14ch}
+.faq-hd .h3{margin:0}
 .faq-also{margin:0; font-size:var(--t-small); color:var(--text-2)}
 .faqs--cards{border-top:0; display:flex; flex-direction:column; gap:var(--sp-xs)}
 .faqs--cards .faq{border-bottom:0; background:var(--c-grey-100); border-radius:var(--r-sm)}
@@ -1154,6 +1272,7 @@ footer.site{padding-block:var(--sp-2xl) var(--sp-2xl)}
    hairline instead. Same device, correct value for the surface it sits on. */
 blockquote{border-left:2px solid var(--o-black-20); padding-left:var(--sp-lg); max-width:min(44ch,100%)}
 .inv blockquote{border-left-color:var(--c-neon)}
+#p-vs-poc .inv blockquote, #p-vs-bloodlab .inv blockquote{border-left-color:var(--c-blue)}
 blockquote p{font-size:var(--h3); line-height:1.1; letter-spacing:-.04em}
 blockquote footer{margin-top:var(--sp-lg); font-size:var(--t-small); color:var(--text-3);
   display:flex; flex-direction:column; gap:2px}
@@ -1270,7 +1389,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       <button class="np" type="button" aria-expanded="false" data-menu-btn>Science <i class="chev"></i></button>
       <div class="menu-panel">
         <a href="/science" data-link>The science <span class="k">Method</span></a>
-        <a href="/biomarkers" data-link>Biomarkers <span class="k">48</span></a>
+        <a href="/biomarkers" data-link>Biomarkers <span class="k">60+</span></a>
         <a href="/research" data-link>Research <span class="k">Herzrasen</span></a>
         <a href="/compare/point-of-care" data-link>vs Point of care <span class="k">Comparison</span></a>
         <a href="/compare/blood-labs" data-link>vs Blood labs <span class="k">Comparison</span></a>
@@ -2404,7 +2523,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
-      <h1 class="hero-title">The science behind the product.</h1>
+      <h1 class="hero-title">Science, not guesswork.</h1>
       <div class="btn-row">
         <a class="btn" href="/demo" data-link>Book a demo &#8599;</a>
       </div>
@@ -2415,11 +2534,11 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <section class="sec" id="sci-flow">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">How it works</span>
+      <span class="eyebrow">The Scientific Process</span>
       <h2 class="h2">From sample to decision.</h2>
     </div>
 
-    <div class="split">
+    <div class="sp">
       <div class="steps4" role="tablist" aria-label="Lab process sequence" data-tabs="sci-flow">
         <button type="button" class="step4" role="tab" aria-selected="true"
           id="tab-sf1" aria-controls="panel-sf1" data-tab="sf1">
@@ -2470,61 +2589,77 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
       <div class="flow-shots">
         <div data-panel="sf1" id="panel-sf1" role="tabpanel" aria-labelledby="tab-sf1">
-          <figure class="sci-shot"><img src="__IMG_scipre__"
+          <div class="sp-panel">
+            <figure class="sci-shot"><img src="__IMG_scipre__"
             alt="Saliva samples arranged in a vial rack, ready for pre-processing."></figure>
+            <div class="sp-text">
+              <span class="sp-n">01 / 05</span>
+              <h3 class="h4">Pre-processing</h3>
+              <p class="copy">Stabilised within hours, before any degradation sets in.</p>
+            </div>
+          </div>
         </div>
         <div data-panel="sf2" id="panel-sf2" role="tabpanel" aria-labelledby="tab-sf2" hidden>
-          <figure class="sci-shot"><img src="__IMG_scilcms__"
+          <div class="sp-panel">
+            <figure class="sci-shot"><img src="__IMG_scilcms__"
             alt="A lab technician running a sample through the LC-MS system."></figure>
+            <div class="sp-text">
+              <span class="sp-n">02 / 05</span>
+              <h3 class="h4">Gold standard LC-MS</h3>
+              <p class="copy">A unique spectral fingerprint for every biomarker, at once.</p>
+            </div>
+          </div>
         </div>
         <div data-panel="sf3" id="panel-sf3" role="tabpanel" aria-labelledby="tab-sf3" hidden>
-          <figure class="sci-shot"><img src="__IMG_qc__"
+          <div class="sp-panel">
+            <figure class="sci-shot"><img src="__IMG_qc__"
             alt="Quality control: every result checked against known standards."></figure>
+            <div class="sp-text">
+              <span class="sp-n">03 / 05</span>
+              <h3 class="h4">Quality control</h3>
+              <p class="copy">Every result is checked against known standards before it reaches a report.</p>
+            </div>
+          </div>
         </div>
         <div data-panel="sf4" id="panel-sf4" role="tabpanel" aria-labelledby="tab-sf4" hidden>
-          <figure class="sci-shot"><img src="__IMG_scidata__"
-            alt="A scientist reviewing processed spectral data across two screens."></figure>
+          <div class="sp-panel">
+            <figure class="sci-shot"><img src="__IMG_scianalysis__"
+            alt="A scientist in a lab coat working at an instrument bench, processing sample data on screen."></figure>
+            <div class="sp-text">
+              <span class="sp-n">04 / 05</span>
+              <h3 class="h4">Data processing &amp; analysis</h3>
+              <p class="copy">Raw spectra are processed and analysed into a result for every biomarker.</p>
+            </div>
+          </div>
         </div>
         <div data-panel="sf5" id="panel-sf5" role="tabpanel" aria-labelledby="tab-sf5" hidden>
-          <figure class="ph-shot"><span class="ph-shot-label">Placeholder image</span></figure>
+          <div class="sp-panel">
+            <figure class="ph-shot"><span class="ph-shot-label">Placeholder image</span></figure>
+            <div class="sp-text">
+              <span class="sp-n">05 / 05</span>
+              <h3 class="h4">AI interpretation</h3>
+              <p class="copy">Read against the athlete&rsquo;s own baseline, not an average.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="sec band-grey" id="sample-quality">
   <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Saliva against blood</span>
-      <h2 class="h2">One medium beats the other on everything except habit.</h2>
-    </div>
-    <div class="tbl">
-      <table>
-        <thead>
-          <tr><th scope="col">&nbsp;</th><th scope="col">Biolyz</th><th scope="col">Blood testing</th></tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Collection</th>
-            <td class="us">Saliva swab, 60 seconds, non-invasive</td>
-            <td class="them">Invasive blood draw via needle</td></tr>
-          <tr><th scope="row">Biomarkers per sample</th>
-            <td class="us">60+ biomarkers</td>
-            <td class="them">Max. 10 biomarkers</td></tr>
-          <tr><th scope="row">Where it happens</th>
-            <td class="us">Can be done anywhere</td>
-            <td class="them">Requires a sterile environment</td></tr>
-          <tr><th scope="row">Setup</th>
-            <td class="us">Modular, flexible</td>
-            <td class="them">Modular but not scalable</td></tr>
-          <tr><th scope="row">Infection risk</th>
-            <td class="us">Low infection risk</td>
-            <td class="them">Higher iatrogenic infection risk</td></tr>
-          <tr><th scope="row">Cost</th>
-            <td class="us">Cost-efficient, no vendor lock-in</td>
-            <td class="them">Expensive due to proprietary assays</td></tr>
-        </tbody>
-      </table>
+    <div class="sq">
+      <div class="sq-text">
+        <span class="eyebrow">Sample quality</span>
+        <h2 class="h3">A result is only as good as the swab it came from.</h2>
+        <p class="copy">See at a glance who was sampled when, how well each sample was
+          collected, and which players are overdue.</p>
+      </div>
+      <figure class="shot sq-shot">
+        <img src="__IMG_samples__" width="1920" height="1080" loading="lazy"
+          alt="Sample quality view: per-athlete sampling recency and collection quality across the squad, flagging players not sampled for several days.">
+      </figure>
     </div>
   </div>
 </section>
@@ -2533,7 +2668,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">How do we know it works?</span>
-      <h2 class="h2">From discovery to the field.</h2>
+      <h2 class="h2">Tested in the lab. Proven on the pitch.</h2>
     </div>
 
     <div class="lanes">
@@ -2602,7 +2737,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">Published</span>
-      <h2 class="h2">The literature we build on.</h2>
+      <h2 class="h2">The proof is in print.</h2>
     </div>
     <div class="papers">
       <article class="paper">
@@ -2644,29 +2779,16 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     </div>
     <div class="btn-row" style="margin-top:var(--sp-2xl)">
       <a class="btn btn--ghost" href="/literature" data-link>See all 77 studies &#8594;</a>
-      <a class="btn btn--ghost" href="/biomarkers" data-link>The 60+ panel &#8594;</a>
+      <a class="btn btn--ghost" href="/biomarkers" data-link>Full Panel &#8594;</a>
     </div>
-  </div>
-</section>
-
-<section class="sec inv">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Sample quality</span>
-      <h2 class="h2">A result is only as good as the swab it came from.</h2>
-    </div>
-    <figure class="shot shot--inv">
-      <img src="__IMG_samples__" width="1920" height="1080" loading="lazy"
-        alt="Sample quality view: per-athlete sampling recency and collection quality across the squad, flagging players not sampled for several days.">
-    </figure>
   </div>
 </section>
 
 <section class="sec--xl band-blue">
   <div class="wrap close-cta">
-    <span class="eyebrow">Discover the product</span>
-    <h2 class="h2">See the science as your staff would use it.</h2>
-    <a class="btn btn--ink" href="/product" data-link>Discover the product &#8594;</a>
+    <span class="eyebrow">Discover the Solution</span>
+    <h2 class="h2">From lab to locker room.</h2>
+    <a class="btn btn--ink" href="/product" data-link>Discover the Solution &#8594;</a>
   </div>
 </section>
 </div>
@@ -2698,8 +2820,32 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
    .wrap's padding-right for this row only (its left edge is untouched, so
    the steps column still starts at the normal gutter), and a much smaller
    gap than .split's default closes the distance to the text. */
-#sci-flow .split{gap:var(--sp-lg); margin-right:calc(var(--gutter) * -1)}
-@media (max-width:1100px){ #sci-flow .split{margin-right:0} }
+/* The Scientific Process, redesigned: the five steps as a horizontal
+   timeline (each with its own progress bar filling as it auto-advances), and
+   one large panel below with the current step's photo and its text. */
+#sci-flow .sp{display:flex; flex-direction:column; gap:var(--sp-xl)}
+#sci-flow .steps4{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:var(--sp-md)}
+#sci-flow .step4{border-bottom:0; padding:0; gap:var(--sp-sm)}
+#sci-flow .step4-top{flex-direction:column; align-items:stretch; gap:var(--sp-sm); width:100%}
+#sci-flow .step4-bar{width:100%; order:-1}
+#sci-flow .step4 .n{align-self:flex-start}
+#sci-flow .step4 .t{font-size:var(--t-regular)}
+#sci-flow .step4-detail{display:none}
+#sci-flow .flow-shots > [data-panel]{animation:sp-in .35s var(--ease)}
+@keyframes sp-in{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+#sci-flow .sp-panel{display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:var(--sp-xl);
+  align-items:center; background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-lg)}
+#sci-flow .sp-panel .sci-shot, #sci-flow .sp-panel .ph-shot{border:0}
+#sci-flow .sp-text{display:flex; flex-direction:column; gap:var(--sp-sm); padding-right:var(--sp-lg)}
+#sci-flow .sp-n{font-family:var(--mono); font-size:var(--t-small); color:var(--c-blue); letter-spacing:.04em}
+#sci-flow .sp-text .h4{margin:0}
+#sci-flow .sp-text .copy{margin:0; color:var(--text-2)}
+@media (max-width:900px){
+  #sci-flow .steps4{grid-template-columns:repeat(5,minmax(7.5rem,1fr)); overflow-x:auto;
+    padding-bottom:var(--sp-xs); scrollbar-width:none}
+  #sci-flow .sp-panel{grid-template-columns:1fr; padding:var(--sp-md)}
+  #sci-flow .sp-text{padding:0 var(--sp-xs) var(--sp-xs)}
+}
 </style>
 
 <!-- ======================================================================
@@ -2708,8 +2854,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
 <header class="pagehead">
   <div class="wrap inner">
-    <span class="eyebrow">The panel</span>
-    <h1 class="h1">Biomarkers.</h1>
+    <span class="eyebrow">Full Panel</span>
+    <h1 class="h1">60+ Biomarkers</h1>
   </div>
 </header>
 
@@ -2859,12 +3005,12 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">Analytical performance &middot; release 1.2.1</span>
-      <h2 class="h2">Measured the same way, every time.</h2>
-      <p class="copy">A result is only worth acting on if the same sample gives the same
-        answer tomorrow. We tested how reproducibly the panel measures one sample within a
-        run, between independently prepared runs, and across a change of instrument, and
-        assessed it against ICH M10 &mdash; the international guideline on bioanalytical
-        method validation that the EMA and FDA apply.</p>
+      <h2 class="h2">Consistent by design.</h2>
+      <p class="copy">A number you can&rsquo;t repeat is a number you can&rsquo;t trust. We
+        tested how reproducible the panel measures one sample within a run, between
+        independently prepared runs, and across a change of instrument, and assessed it
+        against ICH M10 (international guideline on bioanalytical method validation that
+        the EMA and FDA apply).</p>
     </div>
 
     <div class="figs figs--boxed ap-figs">
@@ -3150,13 +3296,18 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   });
   plot.addEventListener('mouseleave', function () { show(picked); });
 
+  function pickTab(t) {
+    if (mode === t.dataset.apTab) return;
+    mode = t.dataset.apTab;
+    tabs.forEach(function (o) { o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
+    panel.setAttribute('aria-labelledby', t.id);
+    draw();
+  }
+  /* On a mouse, resting on a measure switches to it; touch keeps tapping. */
+  var hoverable = window.matchMedia('(hover: hover)');
   tabs.forEach(function (t) {
-    t.addEventListener('click', function () {
-      mode = t.dataset.apTab;
-      tabs.forEach(function (o) { o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
-      panel.setAttribute('aria-labelledby', t.id);
-      draw();
-    });
+    t.addEventListener('click', function () { pickTab(t); });
+    t.addEventListener('mouseenter', function () { if (hoverable.matches) pickTab(t); });
   });
 
   /* Row height is a rem, and the root font size is fluid, so every resize
@@ -3173,7 +3324,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 })();
 </script>
 
-<section class="sec">
+<section class="sec" id="bm-analytes">
   <div class="wrap">
     <div class="list-toolbar">
       <span class="eyebrow">Quantified analytes</span>
@@ -3499,18 +3650,26 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     </ul>
     <p class="sm faint" id="analyte-empty" hidden style="margin-top:var(--sp-lg)">No biomarkers
       match that search.</p>
-    <div class="cols" style="margin-top:var(--sp-3xl)">
-      <div class="col">
-        <h3>Proteins</h3>
-        <p>Around 70 salivary proteins run alongside the small molecule panel by
-          proteomics &mdash; among them alpha-amylase, carbonic anhydrase 6, the cystatins,
-          serotransferrin, GAPDH, HSPB1, LDHA and CK. They are measured on a separate
-          platform, so they are not quantified in the list above.</p>
+    <div class="bm-more">
+      <div class="bm-card bm-card--us">
+        <span class="bm-k">Proteins</span>
+        <span class="bm-big">~70</span>
+        <p class="bm-lead">salivary proteins, on top of the small molecules.</p>
+        <p>Measured by proteomics on a separate platform, so they are not in the list above.
+          Among them:</p>
+        <ul class="bm-chips">
+          <li>Alpha-amylase</li><li>Carbonic anhydrase 6</li><li>Cystatins</li>
+          <li>Serotransferrin</li><li>GAPDH</li><li>HSPB1</li><li>LDHA</li><li>CK</li>
+        </ul>
       </div>
-      <div class="col">
-        <h3>In development</h3>
-        <p>Lactate, vitamin D, IgA, IgG, insulin and T4 are being brought into routine.
-          They are not reported yet, which is why they are not in the list.</p>
+      <div class="bm-card">
+        <span class="bm-k">In development</span>
+        <span class="bm-big">6</span>
+        <p class="bm-lead">markers on their way into routine.</p>
+        <p>Not reported yet, which is why they are not in the list.</p>
+        <ul class="bm-chips">
+          <li>Lactate</li><li>Vitamin D</li><li>IgA</li><li>IgG</li><li>Insulin</li><li>T4</li>
+        </ul>
       </div>
     </div>
     <div class="callout" style="margin-top:var(--sp-2xl)">Derived ratios sit on top of these
@@ -3520,11 +3679,11 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="bm-dashboard">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">In the dashboard</span>
-      <h2 class="h3">Every marker carries what it measures, and what it means in athletes.</h2>
+      <span class="eyebrow">Dashboard</span>
+      <h2 class="h3">From value to meaning.</h2>
     </div>
     <figure class="shot">
       <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
@@ -3536,7 +3695,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <section class="sec--xl band-blue">
   <div class="wrap close-cta">
     <span class="eyebrow">Get in touch</span>
-    <h2 class="h2">Ask us which markers matter for your sport.</h2>
+    <h2 class="h2">Let&rsquo;s build your panel together.</h2>
     <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;</a>
   </div>
 </section>
@@ -3547,145 +3706,145 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
      ====================================================================== -->
 <div class="page" id="p-about" data-title="Biolyz Manifesto" hidden>
 
-<header class="pagehead">
-  <div class="wrap inner">
+<header class="ab-hero">
+  <div class="wrap">
     <span class="eyebrow">About us</span>
-    <h1 class="h1">Not just a simple lab.</h1>
-    <p class="lead">We believe that the future of health isn&rsquo;t reactive &mdash;
-      it&rsquo;s proactive.</p>
+    <h1 class="ab-title">Not a lab. A new way to see health.</h1>
+    <p class="ab-lead">We believe that the future of health is proactive, not reactive.</p>
   </div>
 </header>
 
-<section class="sec">
+<section class="ab-sec">
   <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">Our motivation</span>
-        <h2 class="h3">Shaping diagnostics for the next decade.</h2>
-      </div>
-      <div>
-        <p class="copy">At Biolyz, we stand for uncompromising precision. In a world full of
-          guesswork, we&rsquo;re here to deliver clarity and certainty. Health should never
-          be left to chance.</p>
-        <p class="copy">Blood is simply not an ideal diagnostic medium for 99% of cases.
-          It&rsquo;s invasive, which limits how frequently samples can be taken. Without
-          consistent monitoring, true health and wellbeing remain elusive.</p>
-        <p class="copy">We&rsquo;re unlocking every body&rsquo;s data, effortlessly
-          revealing the inner insights that empower elite athletes, proactive health
-          seekers, and communities around the globe.</p>
-        <p class="copy">Our technology translates complex, hard science into clear,
-          immediate, and humane insights, so you can understand your body better, faster,
-          and more naturally.</p>
-        <p class="copy">We champion access and equality in advanced diagnostics, ensuring
-          everyone &mdash; everywhere &mdash; can take proactive steps toward their optimal
-          performance and well-being. We know data only matters if it improves real lives.</p>
-        <p class="copy" style="color:var(--text)">This is the era of clarity. This is the age
-          of precision. This is Biolyz.</p>
-      </div>
+    <div class="ab-head">
+      <span class="eyebrow">Our motivation</span>
+      <h2 class="h2">Shaping diagnostics for the next decade.</h2>
+      <p class="ab-statement">At Biolyz, we stand for uncompromising precision. In a world full of
+        guesswork, we&rsquo;re here to deliver clarity and certainty. Health should never be
+        left to chance.</p>
     </div>
+    <div class="ab-grid ab-grid--2">
+      <div class="ab-card"><span class="ab-n">01</span><h3>Beyond blood</h3>
+        <p>Blood is simply not an ideal diagnostic medium for 99% of cases. It&rsquo;s
+          invasive, which limits how frequently samples can be taken. Without consistent
+          monitoring, true health and wellbeing remain elusive.</p></div>
+      <div class="ab-card"><span class="ab-n">02</span><h3>Every body&rsquo;s data</h3>
+        <p>We bring every body&rsquo;s data to light, effortlessly revealing the inner
+          insights that empower elite athletes, proactive health seekers, and communities
+          around the globe.</p></div>
+      <div class="ab-card"><span class="ab-n">03</span><h3>Hard science, made human</h3>
+        <p>Our technology translates complex, hard science into clear, immediate, and humane
+          insights, so you can understand your body better, faster, and more naturally.</p></div>
+      <div class="ab-card"><span class="ab-n">04</span><h3>Access for everyone</h3>
+        <p>We champion access and equality in advanced diagnostics, ensuring everyone,
+          everywhere, can take proactive steps toward their optimal performance and
+          well-being. We know data only matters if it improves real lives.</p></div>
+    </div>
+    <p class="ab-claim">This is the era of clarity. This is the age of precision.
+      <b>This is Biolyz.</b></p>
   </div>
 </section>
 
-<section class="sec inv">
+<section class="ab-sec band-blue" id="about-manifesto">
   <div class="wrap">
-    <div class="hd">
+    <div class="ab-head">
       <span class="eyebrow">Manifesto</span>
       <h2 class="h2">We need to accelerate first principle prognostics.</h2>
     </div>
-    <div class="split">
-      <div>
-        <p class="copy">The world still runs on 20th century diagnostics: invasive,
-          expensive, episodic, reactive. Between doctor visits, humanity flies blind.</p>
-        <p class="copy" style="color:var(--text)">That ends with saliva.</p>
-        <p class="copy">A single drop carries the same hormones, metabolites, and proteins
-          doctors chase in blood &mdash; without the needle, the clinic, or the cost. The
-          signal was always there. The world just lacked the tools to read it.</p>
+    <div class="ab-mani">
+      <div class="ab-mani-step">
+        <span class="ab-mani-k">Today</span>
+        <p>The world still runs on 20th century diagnostics: invasive, expensive, episodic,
+          reactive. Between doctor visits, humanity flies blind.</p>
       </div>
-      <div>
-        <p class="copy">Our LC-MS platform measures it at scale: high throughput,
-          multiplexed, noninvasive, and orders of magnitude cheaper than blood.</p>
-        <p class="copy">That changes what diagnostics can be. Not an annual snapshot, but a
-          continuous feed. Not reacting to disease, but reading health as it happens.</p>
-        <p class="copy callout callout--neon" style="margin-top:var(--sp-lg); color:var(--text)">Where
-          others see saliva, we see signal.</p>
+      <div class="ab-mani-step">
+        <span class="ab-mani-k">The shift</span>
+        <p><b>That ends with saliva.</b> A single drop carries the same hormones,
+          metabolites, and proteins doctors chase in blood, without the needle, the clinic,
+          or the cost. The signal was always there. The world just lacked the tools to read
+          it.</p>
+      </div>
+      <div class="ab-mani-step">
+        <span class="ab-mani-k">Our platform</span>
+        <p>Our LC-MS platform measures it at scale: high throughput, multiplexed,
+          noninvasive, and orders of magnitude cheaper than blood. That changes what
+          diagnostics can be. Not an annual snapshot, but a continuous feed. Not reacting to
+          disease, but reading health as it happens.</p>
       </div>
     </div>
+    <blockquote class="ab-quote">Where others see saliva, we see signal.</blockquote>
   </div>
 </section>
 
-<section class="sec">
+<section class="ab-sec">
   <div class="wrap">
-    <div class="hd">
+    <div class="ab-head">
       <span class="eyebrow">From reactive to proactive</span>
       <h2 class="h2">Our master plan is three-tiered, ruthless in logic, clear in execution.</h2>
     </div>
-    <ol class="cards" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-      <li class="card"><span class="n">Tier 01</span><span class="t">Elite teams and individuals</span>
-        <span class="d">We start with elite athlete teams and individuals living at the
-          edge of biological performance. Painless daily monitoring of the molecules that
-          drive strength, recovery, inflammation, and hormone balance.</span></li>
-      <li class="card"><span class="n">Tier 02</span><span class="t">Vanguard individuals</span>
-        <span class="d">Next, the rising wave of high performance individuals &mdash;
-          athletes, biohackers, longevity pioneers. People who want radical ownership of
-          their biology, the early adopters of the post sickcare age.</span></li>
-      <li class="card"><span class="n">Tier 03</span><span class="t">Humanity</span>
-        <span class="d">Finally, everyone else. Schools, clinics, families &mdash; entire
-          populations monitored weekly, not once a year. Preventive diagnostics at
-          planetary scale: a new kind of healthcare infrastructure.</span></li>
+    <ol class="ab-plan">
+      <li class="ab-tier"><span class="ab-tier-n">01</span><h3>Elite teams and individuals</h3>
+        <p>We start with elite athlete teams and individuals living at the edge of
+          biological performance. Painless daily monitoring of the molecules that drive
+          strength, recovery, inflammation, and hormone balance.</p></li>
+      <li class="ab-tier"><span class="ab-tier-n">02</span><h3>Vanguard individuals</h3>
+        <p>Next, the rising wave of high performance individuals: athletes, biohackers,
+          longevity pioneers. People who want radical ownership of their biology, the early
+          adopters of the post sickcare age.</p></li>
+      <li class="ab-tier"><span class="ab-tier-n">03</span><h3>Humanity</h3>
+        <p>Finally, everyone else. Schools, clinics, families: entire populations monitored
+          weekly, not once a year. Preventive diagnostics at planetary scale, a new kind of
+          healthcare infrastructure.</p></li>
     </ol>
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="ab-sec band-grey">
   <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
+    <div class="ab-tech">
+      <div class="ab-head" style="margin:0">
         <span class="eyebrow">Technology and approach</span>
-        <h2 class="h3">We didn&rsquo;t pivot into this space. We engineered our way in.</h2>
+        <h2 class="h2">We didn&rsquo;t pivot into this space. We engineered our way in.</h2>
       </div>
-      <div>
-        <p class="copy">Our platform isn&rsquo;t a patchwork of commodity kits &mdash;
-          it&rsquo;s a vertically integrated diagnostic engine with the precision of a lab
-          and the scale of software. We&rsquo;re building the substrate personalized health
-          will run on.</p>
-        <p class="copy" style="color:var(--text); margin-top:var(--sp-xl)">This is not a
-          company. It&rsquo;s a movement.</p>
-        <p class="copy">We&rsquo;re recruiting missionaries, not mercenaries &mdash;
-          scientists, engineers, operators, and rebels who see biology as the next frontier
-          of intelligence and want to build the rails. Especially in the rising wake of
-          artificial intelligence.</p>
-        <p class="copy">This isn&rsquo;t a bet on another wellness app. It&rsquo;s
-          infrastructure for the biological internet, and we intend to be the architects of
-          a new medical epoch.</p>
+      <div class="ab-tech-body">
+        <p>Our platform isn&rsquo;t a patchwork of commodity kits. It&rsquo;s a vertically
+          integrated diagnostic engine with the precision of a lab and the scale of software.
+          We&rsquo;re building the substrate personalized health will run on.</p>
+        <p class="ab-tech-hl">This is not a company. It&rsquo;s a movement.</p>
+        <p>We&rsquo;re recruiting missionaries, not mercenaries: scientists, engineers,
+          operators, and rebels who see biology as the next frontier of intelligence and want
+          to build the rails. Especially in the rising wake of artificial intelligence.</p>
+        <p>This isn&rsquo;t a bet on another wellness app. It&rsquo;s infrastructure for the
+          biological internet, and we intend to be the architects of a new medical epoch.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="ab-sec">
   <div class="wrap">
-    <div class="hd">
+    <div class="ab-head">
       <span class="eyebrow">Our values</span>
       <h2 class="h2">Four, and we mean them literally.</h2>
     </div>
-    <div class="cols">
-      <div class="col"><h3>Truth</h3>
+    <div class="ab-grid ab-grid--4">
+      <div class="ab-card ab-value"><span class="ab-initial">T</span><h3>Truth</h3>
         <p>We always seek and speak the truth, no matter how uncomfortable the path may
           be.</p></div>
-      <div class="col"><h3>Tenacity</h3>
+      <div class="ab-card ab-value"><span class="ab-initial">T</span><h3>Tenacity</h3>
         <p>We are working to solve some of the world&rsquo;s hardest problems, and we refuse
           to fail for a lack of effort or focus.</p></div>
-      <div class="col"><h3>Craftsmanship</h3>
+      <div class="ab-card ab-value"><span class="ab-initial">C</span><h3>Craftsmanship</h3>
         <p>We take pride in the aesthetics of what we build, from our labs, our UIs to our
           backend infra.</p></div>
-      <div class="col"><h3>Humanity</h3>
+      <div class="ab-card ab-value"><span class="ab-initial">H</span><h3>Humanity</h3>
         <p>We believe that in an age of AI, humans must be served with deserving science,
           insights and love.</p></div>
     </div>
   </div>
 </section>
 
-<section class="sec--xl band-blue">
+<section class="sec--xl band-blue ab-join">
   <div class="wrap close-cta">
     <span class="eyebrow">Join us</span>
     <h2 class="h2">Missionaries, not mercenaries.</h2>
@@ -7255,8 +7414,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
           BIOLYZ FlexCo<br>Technopark 1<br>3430 Tulln an der Donau<br>Austria
         </address>
       </div>
-      <nav class="fcol" aria-label="Product">
-        <span class="ft">Product</span>
+      <nav class="fcol" aria-label="Solution">
+        <span class="ft">Solution</span>
         <a href="/product" data-link>Solution</a>
         <a href="/science" data-link>Science</a>
         <a href="/biomarkers" data-link>Biomarkers</a>
