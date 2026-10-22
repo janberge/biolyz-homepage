@@ -3706,13 +3706,17 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
      ====================================================================== -->
 <div class="page" id="p-about" data-title="Biolyz Manifesto" hidden>
 
-<header class="ab-hero">
+<section class="hero hero--photo hero--about inv">
+  <img class="hero-bg" src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="eyebrow">About us</span>
-    <h1 class="ab-title">Not a lab. A new way to see health.</h1>
-    <p class="ab-lead">We believe that the future of health is proactive, not reactive.</p>
+    <div class="hero-copy">
+      <span class="eyebrow">About us</span>
+      <h1 class="hero-title">Not a lab. A new way to see health.</h1>
+      <p class="hero-lead">We believe that the future of health is proactive, not reactive.</p>
+    </div>
   </div>
-</header>
+</section>
 
 <section class="ab-sec">
   <div class="wrap">
@@ -6814,6 +6818,11 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .hero--research .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
 .hero--research .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(52ch,100%)}
 .hero--research .hero-title{font-size:var(--h1)}
+/* About: black-and-white cyclists, same hero treatment. */
+.hero--about{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--about .hero-bg{filter:grayscale(1); object-position:center 45%}
+.hero--about .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
+.hero--about .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(44ch,100%)}
 /* So What?: the black-and-white pitch from above, same hero treatment. */
 .hero--sowhat{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
 .hero--sowhat .hero-bg{filter:grayscale(1)}
