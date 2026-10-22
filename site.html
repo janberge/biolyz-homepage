@@ -303,6 +303,14 @@ img{max-width:100%; display:block}
    the three read as one sequence. */
 .sec--tight{padding-block:var(--sp-2xl)}
 #p-sowhat .fw{gap:var(--sp-2xl)}
+/* Point of Care comparison: the same tight rhythm as Home and So What?. */
+#p-vs-poc > .sec, #p-vs-poc > .sec--md,
+#p-vs-bloodlab > .sec, #p-vs-bloodlab > .sec--md{padding-block:var(--sp-2xl)}
+#p-vs-poc > .sec .hd, #p-vs-bloodlab > .sec .hd{margin-bottom:var(--sp-xl)}
+#p-vs-poc .claimpair, #p-vs-bloodlab .claimpair{margin-bottom:var(--sp-xl)}
+#p-vs-poc .rule, #p-vs-bloodlab .rule{margin-block:var(--sp-2xl) !important}
+#p-vs-poc .poc-ex, #p-vs-bloodlab .poc-ex{margin-top:var(--sp-2xl)}
+#p-vs-poc > .sec--xl, #p-vs-bloodlab > .sec--xl{padding-block:var(--section-md)}
 .sec--tight .hd{margin-bottom:var(--sp-xl)}
 .sec--tight .saliva-proof{margin-top:var(--sp-2xl)}
 .sec--tight .saliva-staff-hd{margin-top:var(--sp-2xl)}
@@ -466,6 +474,7 @@ thead th:nth-child(2){color:var(--c-blue)}
 td.us::before{content:'\2713'; display:inline-block; margin-right:var(--sp-sm); color:var(--c-blue); font-weight:700}
 td.them{color:var(--text-3)}
 td.them::before{content:'\2013'; display:inline-block; margin-right:var(--sp-sm); color:var(--text-3)}
+#p-vs-poc td.them::before, #p-vs-bloodlab td.them::before{content:none}
 
 /* --- analyte list -------------------------------------------------------- */
 .list-toolbar{display:flex; justify-content:space-between; align-items:baseline; gap:var(--sp-lg);
@@ -846,6 +855,139 @@ textarea{min-height:7rem; resize:vertical}
 .claim-them{color:var(--text-3); max-width:min(26ch,100%)}
 .claim-us{color:var(--text); max-width:min(30ch,100%)}
 
+/* Point of Care page, "What is point of care?": intro on the left, the three
+   strengths as white rows with a key figure on the right, then the example
+   devices as small white cards. */
+.poc-what{display:grid; grid-template-columns:1fr 1.25fr; gap:var(--sp-3xl); align-items:start}
+.poc-what-l{display:flex; flex-direction:column; gap:var(--sp-md); position:sticky; top:calc(var(--navh, 64px) + var(--sp-lg))}
+.poc-str{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--sp-xs)}
+.poc-str li{display:grid; grid-template-columns:8.5rem 1fr; gap:var(--sp-lg); align-items:baseline;
+  background:var(--c-white); border-radius:var(--r-sm); padding:var(--sp-lg) var(--sp-xl)}
+.poc-k{font-size:var(--h5); letter-spacing:-.03em; line-height:1.1; color:var(--text)}
+.poc-str h3{font-size:var(--t-large); letter-spacing:-.02em; font-weight:400; margin:0 0 var(--sp-2xs)}
+.poc-str p{margin:0; color:var(--text-2); font-size:var(--t-small)}
+.poc-ex{margin-top:var(--sp-3xl); display:flex; flex-direction:column; gap:var(--sp-md)}
+.poc-ex ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-xl)}
+.poc-ex li{display:flex; flex-direction:column; gap:var(--sp-xs); padding-top:var(--sp-md);
+  border-top:var(--stroke) solid var(--c-grey-300)}
+.poc-ex li b{font-weight:400; color:var(--text); font-size:var(--t-large); letter-spacing:-.02em; line-height:1.2}
+.poc-t{align-self:flex-start; font-size:var(--t-small); color:var(--text); background:var(--c-white);
+  border-radius:999px; padding:.2rem .65rem; margin-bottom:var(--sp-xs); font-variant-numeric:tabular-nums}
+.poc-d{font-size:var(--t-small); color:var(--text-2)}
+.poc-ex--3 ul{grid-template-columns:repeat(3,1fr)}
+@media (max-width:1000px){ .poc-ex ul{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:820px){
+  .poc-what{grid-template-columns:1fr; gap:var(--sp-xl)}
+  .poc-what-l{position:static}
+  .poc-str li{grid-template-columns:1fr; gap:var(--sp-xs); padding:var(--sp-lg)}
+  .poc-ex ul{grid-template-columns:1fr}
+}
+
+/* Cost per Insight: the argument on the left, the three overlooked costs as
+   numbered white cards on the right; the one that matters most in blue. */
+.cost{display:grid; grid-template-columns:1fr 1.15fr; gap:var(--sp-3xl); align-items:start}
+.cost-head{display:flex; flex-direction:column; gap:var(--sp-md)}
+.cost-head .h2{margin:0}
+.cost-hidden{display:flex; flex-direction:column; gap:var(--sp-md)}
+.cost-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.cost-list{list-style:none; margin:0; padding:0; counter-reset:cost; display:flex; flex-direction:column; gap:var(--sp-xs)}
+.cost-list li{counter-increment:cost; display:grid; grid-template-columns:2.5rem 1fr; column-gap:var(--sp-md); row-gap:var(--sp-2xs);
+  background:var(--c-white); border-radius:var(--r-sm); padding:var(--sp-lg)}
+.cost-list li::before{content:counter(cost, decimal-leading-zero); grid-row:1 / span 2; font-size:var(--h5);
+  letter-spacing:-.03em; line-height:1.1; color:var(--text-3); font-variant-numeric:tabular-nums}
+.cost-list b{font-weight:400; font-size:var(--t-large); letter-spacing:-.02em; color:var(--text)}
+.cost-list span{font-size:var(--t-small); color:var(--text-2)}
+.cost-list .cost-key{background:var(--c-blue)}
+.cost-list .cost-key::before{color:var(--o-white-60)}
+.cost-list .cost-key b{color:var(--c-white)}
+.cost-list .cost-key span{color:var(--o-white-80)}
+@media (max-width:820px){ .cost{grid-template-columns:1fr; gap:var(--sp-xl)} }
+
+/* Which approach: one card per choice, each with the question it answers,
+   when to pick it and what you get. Point of Care grey, Biolyz blue, both
+   outlined. */
+.pick{display:grid; grid-template-columns:1fr 1fr .8fr; gap:var(--sp-xs); align-items:stretch}
+.pick-card{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-xl);
+  display:flex; flex-direction:column; gap:var(--sp-md)}
+.pick-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.pick-q{margin:0; font-size:var(--h5); letter-spacing:-.03em; line-height:1.2; color:var(--text)}
+.pick-if{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.pick-get{list-style:none; margin:0; padding:var(--sp-md) 0 0; border-top:var(--stroke) solid var(--c-grey-200);
+  display:flex; flex-direction:column; gap:var(--sp-xs); font-size:var(--t-small); color:var(--text-2)}
+.pick-get li{display:flex; gap:var(--sp-sm)}
+.pick-get li::before{content:"\2713"; color:var(--text-3)}
+.pick-card--us{background:var(--c-blue)}
+.pick-card--us .pick-k{color:var(--o-white-60)}
+.pick-card--us .pick-q{color:var(--c-white)}
+.pick-card--us .pick-if, .pick-card--us .pick-get{color:var(--o-white-80)}
+.pick-card--us .pick-get{border-top-color:rgba(255,255,255,.25)}
+.pick-card--us .pick-get li::before{color:var(--c-white)}
+.pick-card--both{background:none; border:var(--stroke) solid var(--c-grey-300)}
+@media (max-width:1000px){ .pick{grid-template-columns:1fr 1fr} .pick-card--both{grid-column:1 / -1} }
+@media (max-width:820px){ .pick{grid-template-columns:1fr} .pick-card{padding:var(--sp-lg)} }
+
+/* Testing day: one lane per approach, each step a white chip joined by an
+   arrow. Point of Care ends looping back (repeat per marker); Biolyz ends on
+   the dashboard, in blue. */
+.day{display:flex; flex-direction:column; gap:var(--sp-lg)}
+.day-lane{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.day-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.day-lane--us .day-k{color:var(--c-blue)}
+.day-steps{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; align-items:center; row-gap:var(--sp-sm)}
+.day-steps li{display:flex; align-items:center}
+.day-steps li + li::before{content:"\2192"; color:var(--c-grey-300); padding-inline:var(--sp-sm)}
+.day-steps span{background:var(--c-white); border-radius:var(--r-round); padding:.55rem 1rem;
+  font-size:var(--t-small); color:var(--text-2); line-height:1.25}
+.day-loop span{background:none; border:var(--stroke) dashed var(--c-grey-300); color:var(--text-3)}
+.day-lane--us .day-steps span{color:var(--text)}
+.day-end span{background:var(--c-blue); color:var(--c-white) !important}
+
+/* Limits: Point of Care in a grey box, Biolyz in a blue one, each with
+   its count of trade-offs as a large figure and the points as ruled rows. */
+.lim{display:grid; grid-template-columns:1.35fr 1fr; gap:var(--sp-xs); align-items:stretch}
+.lim-box{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-2xl);
+  display:flex; flex-direction:column; gap:var(--sp-md)}
+.lim-head{display:flex; justify-content:space-between; align-items:flex-start}
+.lim-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.lim-n{font-size:var(--h2); line-height:.9; letter-spacing:-.05em; color:var(--text)}
+.lim-intro{margin:0; font-size:var(--t-large); letter-spacing:-.02em; line-height:1.35; color:var(--text); max-width:34ch}
+.lim-list{list-style:none; margin:var(--sp-sm) 0 0; padding:0; counter-reset:lim}
+.lim-list li{counter-increment:lim; display:grid; grid-template-columns:2rem 1fr; gap:var(--sp-sm);
+  padding:var(--sp-md) 0; border-top:var(--stroke) solid var(--c-grey-200); font-size:var(--t-small); color:var(--text-2)}
+.lim-list li::before{content:counter(lim, decimal-leading-zero); color:var(--text-3); font-variant-numeric:tabular-nums}
+.lim-box--us{background:var(--c-blue)}
+.lim-box--us .lim-k{color:var(--o-white-60)}
+.lim-box--us .lim-n, .lim-box--us .lim-intro{color:var(--c-white)}
+.lim-box--us .lim-list li{border-top-color:rgba(255,255,255,.25); color:var(--o-white-80)}
+.lim-box--us .lim-list li::before{color:var(--o-white-60)}
+@media (max-width:820px){
+  .lim{grid-template-columns:1fr}
+  .lim-box{padding:var(--sp-lg)}
+}
+
+/* "What's the Difference?": Point of Care in a grey box, Biolyz in a blue one. */
+.vs-boxes{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-xs)}
+.vs-box{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-2xl);
+  display:flex; flex-direction:column; gap:var(--sp-md)}
+.vs-box p{margin:0; font-size:var(--t-large); letter-spacing:-.02em; line-height:1.4; color:var(--text-2)}
+.vs-box-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.vs-box--us{background:var(--c-blue)}
+.vs-box--us p{color:var(--c-white)}
+.vs-box--us .vs-box-k{color:var(--o-white-60)}
+@media (max-width:820px){
+  .vs-boxes{grid-template-columns:1fr}
+  .vs-box{padding:var(--sp-lg)}
+}
+
+/* Point of Care page: the two sides kept apart, Point of Care in grey and
+   Biolyz in brand blue, so it is clear at a glance which line is whose. */
+.vs-tag{display:inline-block; font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:var(--sp-sm)}
+.vs-tag--us{color:var(--c-blue)}
+.claimpair--vs .claim-us{color:var(--c-blue)}
+.splits--vs .vs-us{color:var(--c-blue)}
+.splits--vs .vs-them{color:var(--text-3)}
+
 .splits{display:flex; flex-direction:column; gap:0;
   border-top:var(--stroke) solid var(--border)}
 .splits li{padding:var(--sp-lg) 0; border-bottom:var(--hairline) solid var(--border);
@@ -876,6 +1018,24 @@ textarea{min-height:7rem; resize:vertical}
   max-width:min(74ch,100%)}
 .inline-link{color:var(--c-blue); text-decoration:none}
 .inline-link:hover{text-decoration:underline}
+/* Comparison pages: FAQ heading on the left, questions as compact grey rows
+   on the right, each with a round plus that turns into a minus when open. */
+.faq-split{display:grid; grid-template-columns:1fr 2fr; gap:var(--sp-3xl); align-items:start}
+.faq-hd{display:flex; flex-direction:column; gap:var(--sp-md); position:sticky; top:calc(var(--navh) + var(--sp-xl))}
+.faq-hd .h3{margin:0; max-width:14ch}
+.faq-also{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.faqs--cards{border-top:0; display:flex; flex-direction:column; gap:var(--sp-xs)}
+.faqs--cards .faq{border-bottom:0; background:var(--c-grey-100); border-radius:var(--r-sm)}
+.faqs--cards .faq > summary{font-size:var(--t-regular); padding:var(--sp-md) calc(var(--sp-lg) + 2rem) var(--sp-md) var(--sp-lg)}
+.faqs--cards .faq > summary::after{content:"+"; width:1.5rem; height:1.5rem; right:var(--sp-md); border:0;
+  border-radius:50%; background:var(--c-white); color:var(--text-2); display:flex; align-items:center;
+  justify-content:center; font-size:1rem; line-height:1; transform:translateY(-50%)}
+.faqs--cards .faq[open] > summary::after{content:"\2212"; transform:translateY(-50%); background:var(--c-blue); color:var(--c-white)}
+.faqs--cards .faq p{margin:0; padding:0 var(--sp-lg) var(--sp-md); font-size:var(--t-small)}
+@media (max-width:820px){
+  .faq-split{grid-template-columns:1fr; gap:var(--sp-lg)}
+  .faq-hd{position:static}
+}
 
 @media (max-width:820px){
   .claimpair{grid-template-columns:1fr; gap:var(--sp-md)}
@@ -1056,19 +1216,18 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap row">
     <span class="brand" aria-label="Biolyz">__SVG_biolyz__</span>
     <a class="np" href="/" data-link>Home</a>
-    <a class="np" href="/product" data-link>The Solution</a>
+    <a class="np" href="/product" data-link>Solution</a>
     <div class="menu" data-menu>
       <button class="np" type="button" aria-expanded="false" data-menu-btn>Science <i class="chev"></i></button>
       <div class="menu-panel">
         <a href="/science" data-link>The science <span class="k">Method</span></a>
         <a href="/biomarkers" data-link>Biomarkers <span class="k">48</span></a>
         <a href="/research" data-link>Research <span class="k">Herzrasen</span></a>
-        <a href="/compare/point-of-care" data-link>vs Point of care <span class="k">Compare</span></a>
-        <a href="/compare/blood-labs" data-link>vs Blood labs <span class="k">Compare</span></a>
+        <a href="/compare/point-of-care" data-link>vs Point of care <span class="k">Comparison</span></a>
+        <a href="/compare/blood-labs" data-link>vs Blood labs <span class="k">Comparison</span></a>
         <a href="/literature" data-link>Literature <span class="k">77</span></a>
       </div>
     </div>
-    <a class="np" href="/so-what" data-link>So What?</a>
     <a class="np" href="/about" data-link>About Us</a>
     <span class="spacer"></span>
     <a class="np np--cta" href="/waitlist" data-link>Join athlete waitlist</a>
@@ -1724,7 +1883,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The Swab</span>
       <h2 class="h2">Sample taking, transport and analysis.</h2>
     </div>
 
@@ -1788,7 +1946,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Analyze</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The indicators</span>
       <h2 class="h2">From single biomarkers to clear indicators.</h2>
     </div>
 
@@ -1891,7 +2048,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The dashboard</span>
       <h2 class="h2">Five views, from squad to single athlete.</h2>
     </div>
 
@@ -1964,7 +2120,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The context for your internal data</span>
       <h2 class="h2">Every data source, one platform.</h2>
     </div>
   </div>
@@ -2000,7 +2155,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Personalised recommendations</span>
       <h2 class="h2">The right intervention, at the right time.</h2>
       <p class="copy">Each athlete&rsquo;s indicators, read together with the context your staff
         add, become personalised recommendations: whether to step in at all, when the timing is
@@ -3507,86 +3661,93 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
      ====================================================================== -->
 <div class="page" id="p-vs-poc" data-title="Biolyz vs Point of Care" data-desc="Point of care gives one number in seconds; Biolyz reads 60+ biomarkers from a saliva swab in 24 to 48 hours. Panel size, needles, staff time and cost compared." hidden>
 
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">Comparison</span>
-    <h1 class="h1">Biolyz vs. Point of Care &mdash; Which is better for athlete monitoring?</h1>
-    <p class="lead">Point of care tells you one number right now, Biolyz tells you how an athlete is adapting, every day, across the whole team. Both want to answer the same question: Is this athlete ready to train and are they recovering? They just take very different routes to get there.</p>
+<section class="hero hero--photo hero--poc inv">
+  <img class="hero-bg" src="__IMG_pochero__" width="2400" height="1599" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Biolyz vs. POC</span>
+      <h1 class="hero-title">Point of Care gives a number. Biolyz gives the story.</h1>
+    </div>
   </div>
-</header>
+</section>
 
 <section class="sec--md">
   <div class="wrap">
-    <div class="claimpair">
-      <p class="h4 claim-them">Point of Care reads one marker, on the spot.</p>
-      <p class="h4 claim-us">Biolyz reads 60+ from a saliva swab and shows the whole picture, no needle involved.</p>
+    <div class="claimpair claimpair--vs">
+      <div><span class="vs-tag">Point of Care</span>
+        <p class="h4 claim-them">Point of Care reads one biomarker, on the spot.</p></div>
+      <div><span class="vs-tag vs-tag--us">Biolyz</span>
+        <p class="h4 claim-us">Biolyz reads 60+ biomarkers from a saliva swab and shows the whole picture, no needle involved.</p></div>
     </div>
-      <ul class="splits">
-        <li><b>Collection</b>A swab in under a minute, done by the athlete. Most point-of-care devices need a trained staff member and a finger prick for every test.</li>
-        <li><b>Speed</b>Point of care wins on speed: lactate in 10 seconds, cortisol in about 20 minutes. Biolyz returns the full 60+ biomarker panel in 24-48 hours, every time.</li>
-        <li><b>Frequency</b>Daily if the club wants it. With point of care, staff time per athlete and per device limits how often a whole squad can be tested.</li>
-        <li><b>Infrastructure</b>No devices to set up or calibrate on site. Point of care needs an analyzer, consumables and someone to run it for every marker.</li>
+      <ul class="splits splits--vs">
+        <li><b>Collection</b><span class="vs-us">A swab in under a minute, done by the athlete.</span>
+          <span class="vs-them">Most point-of-care devices need a trained staff member and a finger prick for every test.</span></li>
+        <li><b>Speed</b><span class="vs-them">Point of care wins on speed: lactate in 10 seconds, cortisol in about 20 minutes.</span>
+          <span class="vs-us">Biolyz returns the full 60+ biomarker panel in 24&ndash;48 hours, every time.</span></li>
+        <li><b>Frequency</b><span class="vs-us">Daily if the club wants it.</span>
+          <span class="vs-them">With point of care, staff time per athlete and per device limits how often a whole squad can be tested.</span></li>
+        <li><b>Infrastructure</b><span class="vs-us">No devices to set up or calibrate on site.</span>
+          <span class="vs-them">Point of care needs an analyzer, consumables and someone to run it for every marker.</span></li>
       </ul>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>POC</span></div></div>
   <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">What Biolyz is</span>
-        <h2 class="h3">What are the benefits?</h2>
+    <div class="poc-what">
+      <div class="poc-what-l">
+        <h2 class="h2">What is point of care?</h2>
+        <p class="copy">Point of care (POC) means testing right where the athlete is: on the training ground, in the treatment room or on the team bus, instead of sending a sample to a central lab. A small device analyses a drop of blood, saliva or sweat on the spot and shows a result within seconds to minutes. It has earned its place in sports science, and here is what it does well.</p>
       </div>
-      <div>
-      <p class="copy">Biolyz measures more than 60 biomarkers in saliva from active athletes to assess their performance capacity and regeneration. The basic idea is that athletes regularly provide saliva samples, which are then analyzed using mass spectrometry. By measuring different biomarkers, Biolyz gives insights into inflammation, metabolic stress, muscle damage, hormonal status, psychological stress, sleep and hydration. Essentially, it works like a blood laboratory without the need for blood draws. Instead of regularly taking blood samples, Biolyz analyses saliva, making it possible to measure biomarkers less invasive and more frequently.</p>
-      <p class="copy">Blood draws are more invasive and make frequent testing more complicated. Saliva samples, on the other hand, require almost no time or effort for the athletes. This makes it easier to collect a wide range of data and track changes in an athlete’s biomarkers over time, with a wide range of biomarkers than can be measured, from cortisol and melatonin to testosterone and many more.</p>
-        <h3 class="h5" style="margin-top:var(--sp-xl)">How does it work?</h3>
-      <p class="copy">The athlete provides a saliva sample, through one swab in under a minute, without the need for needles or clinical staff. This process allows the sampling to be quicker and less interruptive of training. The saliva sample is sent to Biolyz own laboratory, where the biomarkers are assessed using mass spectrometry. The regularly incoming results are processed and compared with the athlete’s previous measurements and individualized reference values. This ultimately gives the teams internal performance and medical staff or the athlete himself a clear picture to make more educated decisions about training load and recovery times.</p>
-      </div>
+      <ol class="poc-str">
+        <li><span class="poc-k">10&nbsp;sec</span>
+          <div><h3>Results in seconds to minutes</h3>
+          <p>A handheld lactate meter gives a reading in 10 seconds, for when a coach needs to adjust intensity mid-session.</p></div></li>
+        <li><span class="poc-k">On site</span>
+          <div><h3>Works anywhere, no lab needed</h3>
+          <p>Point-of-care devices run on the training ground, in a hotel room or on the team bus.</p></div></li>
+        <li><span class="poc-k">1 marker</span>
+          <div><h3>Proven tools for specific questions</h3>
+          <p>For a single, well-defined question, a single, well-known marker is often enough.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="poc-ex">
+      <span class="eyebrow">Examples of point-of-care systems</span>
+      <ul>
+        <li><span class="poc-t">10 sec</span><b>EKF Lactate Scout</b>
+          <span class="poc-d">Lactate from a drop of capillary blood</span></li>
+        <li><span class="poc-t">2&ndash;3 min</span><b>Roche Reflotron</b>
+          <span class="poc-d">17 clinical chemistry values, including CK, one test at a time</span></li>
+        <li><span class="poc-t">~20 min</span><b>Eli Health Hormometer</b>
+          <span class="poc-d">Cortisol from saliva, read by smartphone</span></li>
+        <li><span class="poc-t">Every few days</span><b>Orreco point of care</b>
+          <span class="poc-d">Finger prick testing alongside full blood draws</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Difference</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The difference</span>
       <h2 class="h2">What&rsquo;s the Difference?</h2>
     </div>
-    <div class="cols">
-      <div class="col"><p>A point-of-care device answers one question at a time. A lactate meter tells you lactate, a cortisol stick tells you cortisol, a CK test tells you about muscle damage. Each answer is useful, but it is a single number from a single moment.</p></div>
-      <div class="col"><p>Biolyz looks at many body systems from the same sample: stress, recovery, inflammation, sleep, hydration and nutrition. That is the difference between &rdquo;his CK is high&rdquo; and &rdquo;he is under-recovered, his inflammation markers are rising and he slept badly for three nights&rdquo;. The first is a data point. The second is a decision.</p></div>
+    <div class="vs-boxes">
+      <div class="vs-box"><span class="vs-box-k">Point of Care</span><p>A point-of-care device answers one question at a time. A lactate meter tells you lactate, a cortisol stick tells you cortisol, a CK test tells you about muscle damage. Each answer is useful, but it is a single number from a single moment.</p></div>
+      <div class="vs-box vs-box--us"><span class="vs-box-k">Biolyz</span><p>Biolyz looks at many body systems from the same sample: stress, recovery, inflammation, sleep, hydration and nutrition. That is the difference between &ldquo;his CK is high&rdquo; and &ldquo;he is under-recovered, his inflammation markers are rising and he slept badly for three nights&rdquo;. The first is a data point. The second is a decision.</p></div>
     </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The alternative</span>
-      <h2 class="h2">What is point of care?</h2>
-      <p class="copy">Point of care (POC) means testing right where the athlete is: on the training ground, in the treatment room or on the team bus, instead of sending a sample to a central lab. A small device analyses a drop of blood, saliva or sweat on the spot and shows a result within seconds to minutes. It has earned its place in sports science, and here is what it does well.</p>
-    </div>
-    <div class="cols">
-      <div class="col"><h3>Results in seconds to minutes</h3><p>A handheld lactate meter gives a reading in 10 seconds. That makes point of care the right tool when a coach needs to adjust intensity mid-session, for example in a step test.</p></div>
-      <div class="col"><h3>Works anywhere, no lab needed</h3><p>Point-of-care devices run on the training ground, in a hotel room or on the team bus. Nothing must be shipped, and nothing depends on a lab’s opening hours.</p></div>
-      <div class="col"><h3>Proven tools for specific questions</h3><p>For a single, well-defined question, a single, well-known marker is often enough. Lactate for thresholds, CK for muscle damage and cortisol for acute stress all have decades of research behind them.</p></div>
-    </div>
-    <p class="eyebrow" style="margin-top:var(--sp-2xl)">Examples of Point-of-Care systems are:</p>
-      <ul class="ticks">
-        <li>EKF Lactate Scout: lactate from a drop of capillary blood, in 10 seconds</li>
-        <li>Roche Reflotron: 17 clinical chemistry values, including CK, one test at a time, in 2 to 3 minutes</li>
-        <li>Eli Health Hormometer: cortisol from saliva, read by smartphone in about 20 minutes</li>
-        <li>Orreco point of care: finger prick testing every few days alongside full blood draws</li>
-      </ul>
   </div>
 </section>
 
 <section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Comparison</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Side by side</span>
-      <h2 class="h2">Side by Side Comparison</h2>
+      <h2 class="h2">Side-by-Side</h2>
     </div>
     <div class="tbl">
       <table>
@@ -3613,55 +3774,77 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 </section>
 
 <section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Limits</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Honest limits</span>
-      <h2 class="h2">Where Each One Has Its Limits</h2>
+      <h2 class="h2">No tool does it all.</h2>
     </div>
-    <div class="split split--even">
-      <div><h3 class="h5">Point of Care</h3>
-      <p class="copy">Point of care is built for one fast answer. Monitoring a whole squad every day asks for something else, and that is where its limits show.</p>
-      <ul class="ticks">
-        <li>Few markers per test, so one device rarely shows the full picture</li>
-        <li>Most blood-based devices need a finger prick, which athletes tolerate less well the more often it happens</li>
-        <li>A trained staff member has to run each test, which caps how often a whole squad can be tested</li>
-        <li>Precision varies by device, so small day-to-day changes can be hard to separate from noise</li>
-        <li>Each device has its own consumables, calibration and data, which adds up across several tools</li>
-      </ul>
+    <div class="lim">
+      <div class="lim-box">
+        <div class="lim-head"><span class="lim-k">Point of Care</span><span class="lim-n">5</span></div>
+        <p class="lim-intro">Built for one fast answer. Monitoring a whole squad every day asks for something else.</p>
+        <ol class="lim-list">
+          <li>Few markers per test, so one device rarely shows the full picture</li>
+          <li>Most blood-based devices need a finger prick, which athletes tolerate less well the more often it happens</li>
+          <li>A trained staff member has to run each test, which caps how often a whole squad can be tested</li>
+          <li>Precision varies by device, so small day-to-day changes can be hard to separate from noise</li>
+          <li>Each device has its own consumables, calibration and data, which adds up across several tools</li>
+        </ol>
       </div>
-      <div><h3 class="h5">Biolyz</h3>
-      <ul class="ticks">
-        <li>No result during the session itself: results arrive within 24 to 48 hours</li>
-        <li>The analysis runs in a lab, not on the training ground</li>
-      </ul>
+      <div class="lim-box lim-box--us">
+        <div class="lim-head"><span class="lim-k">Biolyz</span><span class="lim-n">2</span></div>
+        <p class="lim-intro">Built for the whole squad over weeks, not for the minute in front of you.</p>
+        <ol class="lim-list">
+          <li>No result during the session itself: results arrive within 24 to 48 hours</li>
+          <li>The analysis runs in a lab, not on the training ground</li>
+        </ol>
       </div>
     </div>
   </div>
 </section>
 
 <section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>In Practice</span></div></div>
   <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">In practice</span>
-        <h2 class="h3">What a Testing Day Looks Like</h2>
+    <div class="hd">
+      <h2 class="h2">What a Testing Day Looks Like</h2>
+      <p class="lead">Take a squad of 25 players.</p>
+    </div>
+    <div class="day">
+      <div class="day-lane">
+        <span class="day-k">Point of Care</span>
+        <ol class="day-steps">
+          <li><span>Set up each device</span></li>
+          <li><span>Prick every finger</span></li>
+          <li><span>Run each test</span></li>
+          <li><span>Log the result</span></li>
+          <li class="day-loop"><span>&#8635; Repeat per marker</span></li>
+        </ol>
       </div>
-      <div>      <p class="copy">Take a squad of 25 players. With point of care, a staff member sets up each device, pricks every finger, runs each test and logs the result, then does it again for the next marker. With Biolyz, each player takes a saliva swab in under a minute, the samples go to the Biolyz lab, and the whole squad&rsquo;s results land on one dashboard within 24 to 48 hours.</p>
+      <div class="day-lane day-lane--us">
+        <span class="day-k">Biolyz</span>
+        <ol class="day-steps">
+          <li><span>Swab in under a minute</span></li>
+          <li><span>Samples to our lab</span></li>
+          <li class="day-end"><span>Whole squad on one dashboard, 24&ndash;48 h</span></li>
+        </ol>
       </div>
     </div>
     <hr class="rule" style="margin-block:var(--sp-3xl)">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">Economics</span>
-        <h2 class="h3">Cost per Insight</h2>
+    <div class="steplabel"><span class="steplabel-tag"><span class="n">06</span>Cost</span></div>
+    <div class="cost">
+      <div class="cost-head">
+        <h2 class="h2">Cost per Insight</h2>
+        <p class="lead">The fair comparison is not price per test but price per useful insight.</p>
+        <p class="copy">A point-of-care device looks cheap per reading, but each reading answers one question. Covering stress, recovery, inflammation, sleep and hydration means several devices, each with its own consumables, calibration and staff time.</p>
       </div>
-      <div>      <p class="copy">The fair comparison is not price per test but price per useful insight. A point-of-care device looks cheap per reading, but each reading answers one question. Covering stress, recovery, inflammation, sleep and hydration means several devices, each with its own consumables, calibration and staff time.</p>
-        <p class="copy" style="margin-top:var(--sp-md)">Three costs are easy to overlook:</p>
-      <ul class="splits">
-        <li><b>Staff time</b>a trained person runs every point-of-care test. With Biolyz, athletes sample themselves in under a minute.</li>
-        <li><b>Several systems</b>each extra device adds strips, cartridges, maintenance and a separate data stream.</li>
-        <li><b>Missed signals</b>an overload or illness spotted a few days earlier can save weeks of lost training. That is where most of the value sits.</li>
-      </ul>
+      <div class="cost-hidden">
+        <span class="cost-k">Three costs that are easy to overlook</span>
+        <ol class="cost-list">
+          <li><b>Staff time</b><span>A trained person runs every point-of-care test. With Biolyz, athletes sample themselves in under a minute.</span></li>
+          <li><b>Several systems</b><span>Each extra device adds strips, cartridges, maintenance and a separate data stream.</span></li>
+          <li><b>Missed signals</b><span>An overload or illness spotted a few days earlier can save weeks of lost training. That is where most of the value sits.</span></li>
+        </ol>
       </div>
     </div>
   </div>
@@ -3672,31 +3855,36 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     <div class="hd">
       <span class="eyebrow">Which to choose</span>
       <h2 class="h2">Which Approach Fits Athletes Best?</h2>
-      <p class="copy">Point of care answers &rdquo;what is happening right now in this session?&rdquo; Biolyz answers &rdquo;how is this athlete adapting and recovering over days and weeks?&rdquo; They are not rivals so much as tools for two different jobs.</p>
+      <p class="lead">Not rivals, but tools for two different jobs.</p>
     </div>
-    <div class="cols">
-      <div class="col"><h3>What you get with point of care</h3>
-      <ul class="ticks">
-        <li>An answer in seconds to minutes, during the session</li>
-        <li>Testing anywhere, with no lab</li>
-        <li>Well-established single markers such as lactate and CK</li>
-      </ul>
+    <div class="pick">
+      <div class="pick-card">
+        <span class="pick-k">Choose Point of Care</span>
+        <p class="pick-q">&ldquo;What is happening right now in this session?&rdquo;</p>
+        <p class="pick-if">If you need an answer during the session, are testing one marker on a few athletes, or have no lab access.</p>
+        <ul class="pick-get">
+          <li>An answer in seconds to minutes</li>
+          <li>Testing anywhere, with no lab</li>
+          <li>Well-established single markers such as lactate and CK</li>
+        </ul>
       </div>
-      <div class="col"><h3>What you get with Biolyz</h3>
-      <ul class="ticks">
-        <li>60+ biomarkers across six body systems from one swab</li>
-        <li>Needle-free self-sampling for the whole squad, as often as daily</li>
-        <li>Lab-grade precision and individual baselines, so small changes can be trusted</li>
-        <li>One company and one dashboard, from sample to insight</li>
-      </ul>
+      <div class="pick-card pick-card--us">
+        <span class="pick-k">Choose Biolyz</span>
+        <p class="pick-q">&ldquo;How is this athlete adapting and recovering over days and weeks?&rdquo;</p>
+        <p class="pick-if">If you want to track recovery, stress and readiness for a whole squad, every day, without needles.</p>
+        <ul class="pick-get">
+          <li>60+ biomarkers across six body systems from one swab</li>
+          <li>Needle-free self-sampling, as often as daily</li>
+          <li>Lab-grade precision and individual baselines</li>
+          <li>One company and one dashboard, from sample to insight</li>
+        </ul>
+      </div>
+      <div class="pick-card pick-card--both">
+        <span class="pick-k">Use both</span>
+        <p class="pick-q">Point of care steers the session. Biolyz steers the week.</p>
+        <p class="pick-if">If you want in-session decisions and long-term monitoring.</p>
       </div>
     </div>
-    <h3 class="h5" style="margin-top:var(--sp-3xl)">Choosing the right tool</h3>
-      <ul class="ticks">
-        <li>Choose point of care if you need an answer during the session, are testing one marker on a few athletes, or have no lab access.</li>
-        <li>Choose Biolyz if you want to track recovery, stress and readiness for a whole squad, every day, without needles.</li>
-        <li>Use both if you want in-session decisions and long-term monitoring. Point of care steers the session; Biolyz steers the week.</li>
-      </ul>
   </div>
 </section>
 
@@ -3714,11 +3902,13 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 <section class="sec">
   <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">FAQ</span>
-      <h2 class="h2">FAQs on Biolyz vs. Point of Care</h2>
-    </div>
-    <div class="faqs">
+    <div class="faq-split">
+      <div class="faq-hd">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h3">FAQs on Biolyz vs. Point of Care</h2>
+        <p class="faq-also">Also worth reading: <a href="/compare/blood-labs" data-link class="inline-link">Biolyz vs sports blood labs</a>.</p>
+      </div>
+      <div class="faqs faqs--cards">
       <details class="faq"><summary>Is saliva as accurate as blood?</summary>
         <p>For the markers Biolyz measures, the method itself is lab grade: mass spectrometry with a typical variation of 4.8%, assessed against the ICH M10 guideline. Saliva and blood carry different information, though.</p></details>
       <details class="faq"><summary>How fast do I get Biolyz results?</summary>
@@ -3731,8 +3921,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
         <p>Borussia Dortmund tested players two to five times a week. Daily testing is possible when you want the closest view of recovery.</p></details>
       <details class="faq"><summary>Can I use Biolyz and point of care together?</summary>
         <p>Yes, and many teams should. Point of care steers the session, Biolyz shows how the athlete is responding over time.</p></details>
+      </div>
     </div>
-    <p class="copy" style="margin-top:var(--sp-2xl)">Also worth reading: <a href="/compare/blood-labs" data-link class="inline-link">Biolyz vs sports blood labs</a>.</p>
   </div>
 </section>
 
@@ -3747,88 +3937,91 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 <div class="page" id="p-vs-bloodlab" data-title="Biolyz vs Sports Blood Labs" data-desc="A sports blood lab gives a clinical snapshot a few times a season; Biolyz reads 60+ biomarkers from saliva, daily, with no needle. Panels, turnaround and cost compared." hidden>
 
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">Comparison</span>
-    <h1 class="h1">Biolyz vs. Bloodlab Companies &ndash; Which is better for athlete monitoring</h1>
-    <p class="lead">A blood lab company checks the foundation; Biolyz tracks the day-to-day. Both look at health and recovery, but one does it a few times a season and the other every day, without a needle.</p>
+<section class="hero hero--photo hero--blood inv">
+  <img class="hero-bg" src="__IMG_bloodhero__" width="2000" height="1335" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Biolyz vs. Blood Labs</span>
+      <h1 class="hero-title">Blood labs give a snapshot. Biolyz gives the story.</h1>
+    </div>
   </div>
-</header>
+</section>
 
 <section class="sec--md">
   <div class="wrap">
-    <div class="claimpair">
-      <p class="h4 claim-them">Bloodlabs read your athletes&rsquo; blood.</p>
-      <p class="h4 claim-us">Biolyz reads their saliva and gets the same biochemical depth, no needle involved.</p>
+    <div class="claimpair claimpair--vs">
+      <div><span class="vs-tag">Blood Labs</span>
+        <p class="h4 claim-them">Blood labs read your athletes&rsquo; blood, a few times a season.</p></div>
+      <div><span class="vs-tag vs-tag--us">Biolyz</span>
+        <p class="h4 claim-us">Biolyz reads their saliva and gets the same biochemical depth, no needle involved.</p></div>
     </div>
-      <ul class="splits">
-        <li><b>Collection</b>A swab under a minute, done by the athlete. Blood labs need a trained professional to draw blood.</li>
-        <li><b>Speed</b>The full 60+ biomarker panel comes back in 24 to 48 hours, every time. Bloodlabs full panel takes about a week.</li>
-        <li><b>Frequency</b>Daily, if a club wants it. Bloodlabs run the full panel a handful of times a season because a blood draw just doesn’t scale to daily use.</li>
-        <li><b>Infrastructure</b>Nothing to install, no dedicated space. Bloodlabs need an analyzer on-site and a controlled draw process.</li>
-      </ul>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">What Biolyz is</span>
-        <h2 class="h3">What are the benefits?</h2>
-      </div>
-      <div>
-      <p class="copy">Biolyz measures more than 60 biomarkers in saliva from active athletes to assess their performance capacity and regeneration. The basic idea is that athletes regularly provide saliva samples, which are then analyzed using mass spectrometry. By measuring different biomarkers, Biolyz gives insights into inflammation, metabolic stress, muscle damage, hormonal status, psychological stress, sleep and hydration. Essentially, it works like a blood laboratory without the need for blood draws. Instead of regularly taking blood samples, Biolyz analyses saliva, making it possible to measure biomarkers less invasive and more frequently.</p>
-      <p class="copy">Blood draws are more invasive and make frequent testing more complicated. Saliva samples, on the other hand, require almost no time or effort for the athletes. This makes it easier to collect a wide range of data and track changes in an athlete’s biomarkers over time, with a wide range of biomarkers than can be measured, from cortisol and melatonin to testosterone and many more.</p>
-        <h3 class="h5" style="margin-top:var(--sp-xl)">How does it work?</h3>
-      <p class="copy">The athlete provides a saliva sample, through one swab in under a minute, without the need for needles or clinical staff. This process allows the sampling to be quicker and less interruptive of training. The saliva sample is sent to Biolyz own laboratory, where the biomarkers are assessed using mass spectrometry. The regularly incoming results are processed and compared with the athlete’s previous measurements and individualized reference values. This ultimately gives the teams internal performance and medical staff or the athlete himself a clear picture to make more educated decisions about training load and recovery times.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec band-grey">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The difference</span>
-      <h2 class="h2">What’s the Difference?</h2>
-    </div>
-    <div class="cols">
-      <div class="col"><p>A blood lab company takes a venous sample, sends it to a clinical lab and returns a broad panel of 50+ markers. It is the gold standard for health screening: iron status, blood count, vitamins, hormones, liver and kidney function. But it is a snapshot, taken a few times a season.</p></div>
-      <div class="col"><p>Biolyz looks at stress, recovery, inflammation, sleep, hydration and nutrition from a saliva swab, as often as daily. That is the difference between a quarterly health check and a running picture of how each athlete responds to training. The first tells you where an athlete stands. The second tells you where they are heading.</p></div>
-    </div>
-    <div class="callout" style="margin-top:var(--sp-2xl)">
-      <b style="font-weight:400;color:var(--text)">Non-invasive by design.</b> There’s no version of a needle that becomes non-invasive with better software. A swab either replaces the blood draw or it doesn’t, and with Biolyz, it does. The athlete does it themselves, under a minute, with no clinical staff involved and no break in the training schedule. That matters beyond athlete comfort. It’s also why daily testing is realistic in the first place. A method that requires a trained professional and a controlled setting caps how often you can reasonably ask for it. Remove that requirement and frequency stops being a constraint.
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The alternative</span>
-      <h2 class="h2">What do Bloodlab Companies do?</h2>
-      <p class="copy">A sports blood lab analyses venous blood for athletes and teams. A doctor or phlebotomist draws the sample, it is cooled and shipped to an accredited lab, and the results arrive in a platform with sports-specific interpretation. Orreco, for example, works with Premier League clubs such as Liverpool and Newcastle United, as well as NBA and NFL teams. It has earned its place in elite sport, and here is what it does well.</p>
-    </div>
-    <div class="cols">
-      <div class="col"><h3>Clinical depth from one draw</h3><p>A full venous panel covers 50+ markers, including the ones only blood can give reliably: full blood count, ferritin and iron status, vitamin D, B12, liver and kidney function.</p></div>
-      <div class="col"><h3>Established reference ranges</h3><p>Blood markers have decades of clinical research and agreed reference ranges behind them. Team doctors know how to read them and act on them.</p></div>
-      <div class="col"><h3>Medical screening and diagnosis</h3><p>For pre-season screening, return-to-play decisions or a suspected deficiency, blood is the established standard and often the only accepted one.</p></div>
-    </div>
-    <p class="eyebrow" style="margin-top:var(--sp-2xl)">Examples of sports blood labs are:</p>
-      <ul class="ticks">
-        <li>Forth (Forth Edge): finger-prick home kits with 15 to 40+ markers, results in about 2 working days</li>
-        <li>Medichecks Ultimate Performance: 56 markers from a venous or finger-prick sample, results in about 3 working days</li>
-        <li>InsideTracker: up to 54 markers from a venous draw, results within about 7 business days</li>
+      <ul class="splits splits--vs">
+        <li><b>Collection</b><span class="vs-us">A swab in under a minute, done by the athlete.</span>
+          <span class="vs-them">Blood labs need a trained professional to draw blood.</span></li>
+        <li><b>Speed</b><span class="vs-us">The full 60+ biomarker panel comes back in 24&ndash;48 hours, every time.</span>
+          <span class="vs-them">A blood lab&rsquo;s full panel takes about a week.</span></li>
+        <li><b>Frequency</b><span class="vs-us">Daily, if the club wants it.</span>
+          <span class="vs-them">Blood labs run the full panel a handful of times a season, because a blood draw doesn&rsquo;t scale to daily use.</span></li>
+        <li><b>Infrastructure</b><span class="vs-us">Nothing to install, no dedicated space.</span>
+          <span class="vs-them">Blood labs need a controlled draw process, cooling and a courier for every round.</span></li>
       </ul>
   </div>
 </section>
 
 <section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Blood Labs</span></div></div>
+  <div class="wrap">
+    <div class="poc-what">
+      <div class="poc-what-l">
+        <h2 class="h2">What do blood lab companies do?</h2>
+        <p class="copy">A sports blood lab analyses venous blood for athletes and teams. A doctor or phlebotomist draws the sample, it is cooled and shipped to an accredited lab, and the results arrive in a platform with sports-specific interpretation. Orreco, for example, works with Premier League clubs such as Liverpool and Newcastle United, as well as NBA and NFL teams. It has earned its place in elite sport, and here is what it does well.</p>
+      </div>
+      <ol class="poc-str">
+        <li><span class="poc-k">50+</span>
+          <div><h3>Clinical depth from one draw</h3>
+          <p>A full venous panel covers 50+ markers, including blood count, ferritin, vitamin D, B12, liver and kidney function.</p></div></li>
+        <li><span class="poc-k">Decades</span>
+          <div><h3>Established reference ranges</h3>
+          <p>Blood markers have agreed reference ranges that team doctors know how to read and act on.</p></div></li>
+        <li><span class="poc-k">Standard</span>
+          <div><h3>Medical screening and diagnosis</h3>
+          <p>For pre-season screening, return-to-play or a suspected deficiency, blood is the accepted standard.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="poc-ex poc-ex--3">
+      <span class="eyebrow">Examples of sports blood labs</span>
+      <ul>
+        <li><span class="poc-t">~2 days</span><b>Forth (Forth Edge)</b>
+          <span class="poc-d">Finger-prick home kits with 15 to 40+ markers</span></li>
+        <li><span class="poc-t">~3 days</span><b>Medichecks Ultimate Performance</b>
+          <span class="poc-d">56 markers from a venous or finger-prick sample</span></li>
+        <li><span class="poc-t">~7 days</span><b>InsideTracker</b>
+          <span class="poc-d">Up to 54 markers from a venous draw</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Difference</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Side by side</span>
-      <h2 class="h2">Side by Side Comparison</h2>
+      <h2 class="h2">What&rsquo;s the Difference?</h2>
+    </div>
+    <div class="vs-boxes">
+      <div class="vs-box"><span class="vs-box-k">Blood Labs</span><p>A blood lab company takes a venous sample, sends it to a clinical lab and returns a broad panel of 50+ markers. It is the gold standard for health screening: iron status, blood count, vitamins, hormones, liver and kidney function. But it is a snapshot, taken a few times a season.</p></div>
+      <div class="vs-box vs-box--us"><span class="vs-box-k">Biolyz</span><p>Biolyz looks at stress, recovery, inflammation, sleep, hydration and nutrition from a saliva swab, as often as daily. That is the difference between a quarterly health check and a running picture of how each athlete responds to training. The first tells you where an athlete stands. The second tells you where they are heading.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Comparison</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <h2 class="h2">Side-by-Side</h2>
     </div>
     <div class="tbl">
       <table>
@@ -3855,56 +4048,77 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 </section>
 
 <section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Limits</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Honest limits</span>
-      <h2 class="h2">Where Each One Has Its Limits</h2>
+      <h2 class="h2">No tool does it all.</h2>
     </div>
-    <div class="split split--even">
-      <div><h3 class="h5">Sports Blood Labs</h3>
-      <p class="copy">A blood lab is built for a deep, clinical snapshot. Monitoring a whole squad every week asks for something else, and that is where its limits show.</p>
-      <ul class="ticks">
-        <li>A needle for every test, which athletes accept a few times a season but not every week</li>
-        <li>A doctor or phlebotomist has to draw each sample, which ties up medical staff</li>
-        <li>Samples need cooling, a courier and a partner lab, so several parties are involved</li>
-        <li>Results take about a week, so they describe how the athlete was, not how they are</li>
-        <li>A handful of draws per season leaves long gaps where overload or illness can build unnoticed</li>
-      </ul>
+    <div class="lim">
+      <div class="lim-box">
+        <div class="lim-head"><span class="lim-k">Blood Labs</span><span class="lim-n">5</span></div>
+        <p class="lim-intro">Built for a deep, clinical snapshot. Monitoring a whole squad every week asks for something else.</p>
+        <ol class="lim-list">
+          <li>A needle for every test, which athletes accept a few times a season but not every week</li>
+          <li>A doctor or phlebotomist has to draw each sample, which ties up medical staff</li>
+          <li>Samples need cooling, a courier and a partner lab, so several parties are involved</li>
+          <li>Results take about a week, so they describe how the athlete was, not how they are</li>
+          <li>A handful of draws per season leaves long gaps where overload or illness can build unnoticed</li>
+        </ol>
       </div>
-      <div><h3 class="h5">Biolyz</h3>
-      <ul class="ticks">
-        <li>No full blood count, iron status or other blood-only markers</li>
-        <li>Results arrive in 24 to 48 hours, not on the spot</li>
-        <li>Saliva reference ranges are younger than blood’s, so Biolyz compares each athlete with their own baseline</li>
-      </ul>
+      <div class="lim-box lim-box--us">
+        <div class="lim-head"><span class="lim-k">Biolyz</span><span class="lim-n">3</span></div>
+        <p class="lim-intro">Built for the whole squad week to week, not for a clinical diagnosis.</p>
+        <ol class="lim-list">
+          <li>No full blood count, iron status or other blood-only markers</li>
+          <li>Results arrive in 24 to 48 hours, not on the spot</li>
+          <li>Saliva reference ranges are younger than blood&rsquo;s, so Biolyz compares each athlete with their own baseline</li>
+        </ol>
       </div>
     </div>
   </div>
 </section>
 
 <section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>In Practice</span></div></div>
   <div class="wrap">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">In practice</span>
-        <h2 class="h3">What a Testing Day Looks Like</h2>
+    <div class="hd">
+      <h2 class="h2">What a Testing Day Looks Like</h2>
+      <p class="lead">Take a squad of 25 players.</p>
+    </div>
+    <div class="day">
+      <div class="day-lane">
+        <span class="day-k">Blood Labs</span>
+        <ol class="day-steps">
+          <li><span>Draw blood from every player</span></li>
+          <li><span>Cool the tubes</span></li>
+          <li><span>Courier to a partner lab</span></li>
+          <li class="day-loop"><span>Results about a week later</span></li>
+        </ol>
       </div>
-      <div>      <p class="copy">Take a squad of 25 players. With a sports blood lab, a doctor or phlebotomist draws blood from every player, the tubes are cooled and couriered to a partner lab, and results come back about a week later. With Biolyz, each player takes a saliva swab in under a minute, the samples go to the Biolyz lab, and the whole squad’s results land on one dashboard within 24 to 48 hours.</p>
+      <div class="day-lane day-lane--us">
+        <span class="day-k">Biolyz</span>
+        <ol class="day-steps">
+          <li><span>Swab in under a minute</span></li>
+          <li><span>Samples to our lab</span></li>
+          <li class="day-end"><span>Whole squad on one dashboard, 24&ndash;48 h</span></li>
+        </ol>
       </div>
     </div>
     <hr class="rule" style="margin-block:var(--sp-3xl)">
-    <div class="split">
-      <div class="hd" style="margin:0">
-        <span class="eyebrow">Economics</span>
-        <h2 class="h3">Cost per Insight</h2>
+    <div class="steplabel"><span class="steplabel-tag"><span class="n">06</span>Cost</span></div>
+    <div class="cost">
+      <div class="cost-head">
+        <h2 class="h2">Cost per Insight</h2>
+        <p class="lead">The fair comparison is not price per test but price per useful insight.</p>
+        <p class="copy">A blood panel delivers a lot of information per draw, but only a few draws fit into a season. Between them, there is no data at all.</p>
       </div>
-      <div>      <p class="copy">The fair comparison is not price per test but price per useful insight. A blood panel delivers a lot of information per draw, but only a few draws fit into a season. Between them, there is no data at all.</p>
-        <p class="copy" style="margin-top:var(--sp-md)">Three costs are easy to overlook:</p>
-      <ul class="splits">
-        <li><b>Staff time</b>a doctor or phlebotomist draws every sample. With Biolyz, athletes sample themselves in under a minute.</li>
-        <li><b>Logistics</b>tubes, cooling, couriers and partner labs add cost and coordination to every round of testing.</li>
-        <li><b>Missed signals</b>an overload or illness spotted a few days earlier can save weeks of lost training. Long gaps between blood draws are where those signals get missed.</li>
-      </ul>
+      <div class="cost-hidden">
+        <span class="cost-k">Three costs that are easy to overlook</span>
+        <ol class="cost-list">
+          <li><b>Staff time</b><span>A doctor or phlebotomist draws every sample. With Biolyz, athletes sample themselves in under a minute.</span></li>
+          <li><b>Logistics</b><span>Tubes, cooling, couriers and partner labs add cost and coordination to every round of testing.</span></li>
+          <li><b>Missed signals</b><span>An overload or illness spotted a few days earlier can save weeks of lost training. Long gaps between blood draws are where those signals get missed.</span></li>
+        </ol>
       </div>
     </div>
   </div>
@@ -3915,31 +4129,36 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     <div class="hd">
       <span class="eyebrow">Which to choose</span>
       <h2 class="h2">Which Approach Fits Athletes Best?</h2>
-      <p class="copy">A sports blood lab answers “is this athlete healthy, and are any values out of range?” Biolyz answers “how is this athlete adapting and recovering, day by day?” They are not rivals so much as tools for two different jobs.</p>
+      <p class="lead">Not rivals, but tools for two different jobs.</p>
     </div>
-    <div class="cols">
-      <div class="col"><h3>What you get with a sports blood lab</h3>
-      <ul class="ticks">
-        <li>A broad clinical panel with established reference ranges</li>
-        <li>Blood-only markers such as blood count, iron status and vitamins</li>
-        <li>The accepted standard for medical screening and diagnosis</li>
-      </ul>
+    <div class="pick">
+      <div class="pick-card">
+        <span class="pick-k">Choose a Blood Lab</span>
+        <p class="pick-q">&ldquo;Is this athlete healthy, and are any values out of range?&rdquo;</p>
+        <p class="pick-if">If you need a clinical health screening, blood-only markers or a medical diagnosis.</p>
+        <ul class="pick-get">
+          <li>A broad clinical panel with established reference ranges</li>
+          <li>Blood-only markers such as blood count, iron status and vitamins</li>
+          <li>The accepted standard for medical screening and diagnosis</li>
+        </ul>
       </div>
-      <div class="col"><h3>What you get with Biolyz</h3>
-      <ul class="ticks">
-        <li>60+ biomarkers across six body systems from one swab</li>
-        <li>Needle-free self-sampling for the whole squad, as often as daily</li>
-        <li>Results in 24 to 48 hours instead of about a week</li>
-        <li>One company and one dashboard, from sample to insight</li>
-      </ul>
+      <div class="pick-card pick-card--us">
+        <span class="pick-k">Choose Biolyz</span>
+        <p class="pick-q">&ldquo;How is this athlete adapting and recovering, day by day?&rdquo;</p>
+        <p class="pick-if">If you want to track recovery, stress and readiness for a whole squad, every day, without needles.</p>
+        <ul class="pick-get">
+          <li>60+ biomarkers across six body systems from one swab</li>
+          <li>Needle-free self-sampling, as often as daily</li>
+          <li>Results in 24 to 48 hours instead of about a week</li>
+          <li>One company and one dashboard, from sample to insight</li>
+        </ul>
+      </div>
+      <div class="pick-card pick-card--both">
+        <span class="pick-k">Use both</span>
+        <p class="pick-q">Blood checks the foundation. Biolyz steers the week.</p>
+        <p class="pick-if">If you want periodic health checks and continuous monitoring.</p>
       </div>
     </div>
-    <h3 class="h5" style="margin-top:var(--sp-3xl)">Choosing the right tool</h3>
-      <ul class="ticks">
-        <li>Choose a sports blood lab if you need a clinical health screening, blood-only markers or a medical diagnosis.</li>
-        <li>Choose Biolyz if you want to track recovery, stress and readiness for a whole squad, every day, without needles.</li>
-        <li>Use both if you want periodic health checks and continuous monitoring. Blood checks the foundation; Biolyz steers the week.</li>
-      </ul>
   </div>
 </section>
 
@@ -3957,11 +4176,13 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 <section class="sec">
   <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">FAQ</span>
-      <h2 class="h2">FAQs on Biolyz vs. Bloodlab Companies</h2>
-    </div>
-    <div class="faqs">
+    <div class="faq-split">
+      <div class="faq-hd">
+        <span class="eyebrow">FAQ</span>
+        <h2 class="h3">FAQs on Biolyz vs. Blood Labs</h2>
+        <p class="faq-also">Also worth reading: <a href="/compare/point-of-care" data-link class="inline-link">Biolyz vs point of care</a>.</p>
+      </div>
+      <div class="faqs faqs--cards">
       <details class="faq"><summary>Is saliva as accurate as blood?</summary>
         <p>For the markers Biolyz measures, the method itself is lab grade: mass spectrometry with a typical variation of 4.8%, assessed against the ICH M10 guideline. Saliva and blood carry different information, though, and some values such as iron status still need blood.</p></details>
       <details class="faq"><summary>Can Biolyz replace blood tests?</summary>
@@ -3974,8 +4195,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
         <p>Borussia Dortmund tested players two to five times a week with Biolyz. Blood panels typically run a few times a season, for example pre-season, mid-season and after injury.</p></details>
       <details class="faq"><summary>Can I use Biolyz and a sports blood lab together?</summary>
         <p>Yes, and many teams should. Blood checks the foundation a few times a season; Biolyz shows how each athlete is responding in between.</p></details>
+      </div>
     </div>
-    <p class="copy" style="margin-top:var(--sp-2xl)">Also worth reading: <a href="/compare/point-of-care" data-link class="inline-link">Biolyz vs point of care</a>.</p>
   </div>
 </section>
 
@@ -5742,7 +5963,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">What we do</span>
-      <h2 class="h2">Five steps, and the last one closes the loop.</h2>
+      <h2 class="h2">Five steps from a swab to your next move.</h2>
     </div>
 
     <ol class="fw">
@@ -6370,6 +6591,17 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
    the video the other heroes use, under the same scrim. Shorter than a full
    viewport. The rider sits right of centre, so phones crop towards them. */
 .hero--horses{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
+/* Point of Care comparison: black-and-white rapid-test photo. The photo is
+   light, so the scrim runs darker and further up than on the video heroes. */
+.hero--poc{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--poc .hero-bg{filter:grayscale(1); object-position:center 60%}
+.hero--poc .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.88), rgba(3,7,18,.5) 60%, rgba(3,7,18,.5))}
+/* Blood labs comparison: same header as Point of Care. The photo is already
+   black and white with only the blood vial left in colour (web/bloodhero.jpg),
+   so no grayscale filter here, which would drain the red as well. */
+.hero--blood{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--blood .hero-bg{object-position:55% 22%}
+.hero--blood .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.88), rgba(3,7,18,.5) 60%, rgba(3,7,18,.5))}
 /* So What?: the black-and-white pitch from above, same hero treatment. */
 .hero--sowhat{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
 .hero--sowhat .hero-bg{filter:grayscale(1)}
@@ -6972,14 +7204,14 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       </div>
       <nav class="fcol" aria-label="Product">
         <span class="ft">Product</span>
-        <a href="/product" data-link>The Solution</a>
+        <a href="/product" data-link>Solution</a>
         <a href="/science" data-link>Science</a>
         <a href="/biomarkers" data-link>Biomarkers</a>
         <a href="/research" data-link>Research</a>
         <a href="/compare/point-of-care" data-link>Biolyz vs point of care</a>
         <a href="/compare/blood-labs" data-link>Biolyz vs blood labs</a>
         <a href="/literature" data-link>Literature</a>
-        <a href="/so-what" data-link>So what?</a>
+        <a href="/so-what" data-link>So What?</a>
         <a href="/use-cases" data-link>Use case library</a>
         <a href="/changelog" data-link>Changelog</a>
       </nav>

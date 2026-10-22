@@ -109,9 +109,12 @@ ARTIFACT_VIDEO = os.environ.get("BIOLYZ_ARTIFACT_VIDEO") == "1"
 inline_loader = loader(
     {n: data_uri(p_, "image/jpeg") for n, p_ in IMG_SRC.items()},
     {n: data_uri(p_, "video/mp4") for n, p_ in VID_SRC.items()} if ARTIFACT_VIDEO else {})
+# Root-based, not relative: from a nested route such as /compare/point-of-care
+# a bare "assets/x.jpg" resolves to /compare/assets/x.jpg and 404s.
+_ASSET_ROOT = os.environ.get("BIOLYZ_BASE", "").rstrip("/") + "/assets/"
 file_loader = loader(
-    {n: "assets/" + n + ".jpg" for n in used},
-    {n: "assets/" + n + ".mp4" for n in usedv})
+    {n: _ASSET_ROOT + n + ".jpg" for n in used},
+    {n: _ASSET_ROOT + n + ".mp4" for n in usedv})
 def svg(path,cls):
     s=open(path,encoding="utf-8").read()
     s=re.sub(r'<defs>.*?</defs>','',s,flags=re.S).replace(' class="cls-1"','')
