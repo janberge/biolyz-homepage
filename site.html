@@ -216,6 +216,7 @@ img{max-width:100%; display:block}
 .pagehead .h1{max-width:min(20ch,100%)}
 .pagehead .lead{max-width:min(52ch,100%)}
 
+
 /* --- screenshot frame (EXTENSION 2) ------------------------------------- */
 .shot{
   border:var(--stroke) solid var(--border); border-radius:var(--r-sm);
@@ -279,6 +280,52 @@ img{max-width:100%; display:block}
 @media (max-width:820px){
   .wsc-grid{grid-template-columns:1fr}
 }
+/* Home "power of saliva": picture, number, title and one line of copy per
+   card, then the proof numbers as one connected blue strip right under it. */
+.wsc-grid--why .wsc-shot{aspect-ratio:4/3}
+.wsc-grid--why .cadence-card{padding:var(--sp-md)}
+.wsc-grid--why .cadence-chart-wrap, .wsc-grid--why .cadence-chart-svg{min-height:0}
+@media (max-width:820px){ .wsc-grid--why .wsc-shot{aspect-ratio:16/10} }
+.wsc-grid--why figcaption{display:flex; flex-direction:column; gap:var(--sp-xs)}
+.wsc-grid--why .wsc-n{font-size:var(--t-small); color:var(--c-blue); font-variant-numeric:tabular-nums;
+  letter-spacing:.04em; padding-top:var(--sp-xs); border-top:var(--stroke) solid var(--c-grey-200)}
+.wsc-grid--why .wsc-d{color:var(--text-2); max-width:34ch}
+.saliva-proof{margin-top:var(--sp-2xl); display:flex; flex-direction:column; gap:var(--sp-md)}
+.saliva-proof-l{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.saliva-proof-figs{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-xl)}
+.saliva-proof .fig{gap:var(--sp-xs); padding-top:var(--sp-md); border-top:var(--stroke) solid var(--c-grey-300)}
+.saliva-proof .fig .v{font-size:clamp(3rem,6.4vw,5.5rem); letter-spacing:-.05em; line-height:.95;
+  color:var(--text); margin-bottom:var(--sp-sm)}
+.saliva-proof .fig .k{font-size:var(--t-large); letter-spacing:-.02em; color:var(--text)}
+.saliva-proof .fig .s{color:var(--text-3); text-transform:none; letter-spacing:0; font-size:var(--t-regular)}
+.saliva-staff-hd{margin-top:var(--section-md)}
+/* Home saliva → science → day-to-day run: tighter than a default section so
+   the three read as one sequence. */
+.sec--tight{padding-block:var(--sp-2xl)}
+#p-sowhat .fw{gap:var(--sp-2xl)}
+.sec--tight .hd{margin-bottom:var(--sp-xl)}
+.sec--tight .saliva-proof{margin-top:var(--sp-2xl)}
+.sec--tight .saliva-staff-hd{margin-top:var(--sp-2xl)}
+.sec--tight .wrap > div[style*="margin-top:var(--sp-2xl)"]{margin-top:var(--sp-xl) !important}
+/* Feature columns: the same open look as the saliva cards (thin top rule,
+   blue marker, title, one line of copy) instead of filled grey boxes.
+   Used for the staff points and the science points on Home. */
+.feat-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-xl)}
+.feat{display:flex; flex-direction:column; gap:var(--sp-xs); padding-top:var(--sp-md);
+  border-top:var(--stroke) solid var(--c-grey-200)}
+.band-grey .feat{border-top-color:var(--c-grey-300)}
+.feat-icon{color:var(--c-blue); display:inline-flex; margin-bottom:var(--sp-xs)}
+.feat-icon svg{width:1.5rem; height:1.5rem}
+.feat .v{font-size:clamp(1.75rem,3.2vw,var(--h3)); white-space:nowrap; line-height:1.05; letter-spacing:-.04em; color:var(--c-blue);
+  margin-bottom:var(--sp-sm)}
+.feat .t{font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2}
+.feat .d{color:var(--text-2); max-width:36ch}
+@media (max-width:820px){
+  .feat-cols{grid-template-columns:1fr; gap:var(--sp-lg)}
+}
+@media (max-width:820px){
+  .saliva-proof-figs{grid-template-columns:1fr; gap:var(--sp-lg)}
+}
 
 /* "High frequency" card: no photo yet, so a flat brand-grey fill stands in
    for one, with the Cadence widget (supplied as a ready-made embed) laid
@@ -307,112 +354,88 @@ img{max-width:100%; display:block}
 .split{display:grid; grid-template-columns:1fr 1.2fr; gap:var(--sp-4xl); align-items:start}
 .split--even{grid-template-columns:1fr 1fr}
 
-/* --- departments: photo + stacked boxes, Atira's own pattern -------------
-   A photo on the left carries one dark caption per department, cross-faded
-   in; the three stacked boxes on the right are the control — same recipe
-   the site's earlier "scores" grid used, just one column instead of 3x3.
-   Selecting a box also swaps which questions+indicators show below. The
-   whole section is meant to read as one screen, so its own padding is
-   tighter than a normal .sec and its content is vertically centred rather
-   than top-anchored, the same idea as elsewhere on the site (one card, one
-   viewport) applied to a section rather than a single step. */
-.depts-section{
-  min-height:100vh; padding-block:calc(var(--navh) + var(--sp-xl)) var(--sp-xl);
-  display:flex; flex-direction:column; justify-content:center;
-}
-.depts-section .hd{margin-bottom:var(--sp-md)}
-.depts-section .hd .h2{max-width:none}
-.depts-panel.split{align-items:stretch; gap:0}
-.depts-media{
-  position:relative; overflow:hidden; border-radius:0 var(--r-sm) var(--r-sm) 0;
-  background:var(--c-grey-100); display:flex; flex-direction:column;
-}
-/* The overlay is what actually holds the questions and indicators, so it
-   sets the height itself — flex:1 on the wrapper and the (one visible)
-   panel makes it fill the column's full stretched height even when a
-   department's own content (e.g. Medical's two indicators) is short. */
-.depts-overlays{position:relative; z-index:1; flex:1 1 auto; display:flex; flex-direction:column}
-/* A hard, fixed height — not min-height, not flex-grow-to-content — so the
-   card is the exact same size for every department and every expand state.
-   Anything before used the tallest content to size itself, which meant any
-   *shorter* content (fewer questions, an unexpanded list) left the box free
-   to shrink back down, and switching between departments visibly resized
-   the boxes beside it via the grid stretch. Fixing the box and letting only
-   the indicator list flex/scroll inside it removes that variable entirely.
-   35rem is sized so the two-column indicator grid never needs to scroll —
-   in a 2-col grid a single expanded row grows *both* cells in that row, so
-   the number that matters is "any one row expanded", not just the single
-   longest description; 35rem is the smallest height at which every
-   indicator in every department (Nutrition's ten included) can be expanded,
-   one at a time, with zero overflow. It does make this column taller than
-   .dept-boxes (previously the reverse), so the section grows slightly —
-   about 15px over one 900px viewport, negligible. */
-.depts-overlay{
-  flex:none; height:35rem; padding:var(--sp-lg); overflow:hidden;
-  display:flex; flex-direction:column; gap:var(--sp-md);
-  background:var(--c-grey-100);
-}
-.depts-overlay h3{font-size:var(--h5); letter-spacing:-.03em; line-height:1.2}
-.depts-overlay .ind-list{
-  flex:1 1 auto; min-height:0; align-content:start;
-  overflow-y:auto; padding-right:var(--sp-sm);
-}
-@keyframes depts-in{from{opacity:0}to{opacity:1}}
-.depts-overlay:not([hidden]){animation:depts-in var(--dur-short) var(--ease)}
+/* --- Product steps: 01 Collect ... 05 Act --------------------------------
+   Each Product section opens with its step label, which stays pinned under
+   the nav while you scroll through that section and hands over to the next
+   section's label at its boundary (sticky, scoped to its own section).
+   --nav-real is the nav's measured height, which on narrow screens is more
+   than --navh because the links wrap. */
+.steplabel{margin-bottom:var(--sp-md); pointer-events:none}
+/* Once a section's own label has scrolled under the nav, one fixed label
+   takes over in the same spot and cross-fades from step to step (01 Collect
+   into 02 Analyze ...) instead of each label scrolling away. Two stacked
+   layers: the incoming one fades in as the outgoing one fades out. */
+.step-now{position:fixed; z-index:20; top:calc(var(--nav-real, var(--navh)) + var(--sp-sm));
+  pointer-events:none; opacity:0; transition:opacity var(--dur-short) var(--ease)}
+.step-now.is-on{opacity:1}
+.step-now .steplabel-tag{position:absolute; left:0; top:0; white-space:nowrap; opacity:0;
+  transition:opacity .45s var(--ease)}
+.step-now .steplabel-tag.is-current{opacity:1}
+.steplabel-tag{display:inline-flex; align-items:center; gap:var(--sp-sm);
+  padding:var(--sp-2xs) var(--sp-md) var(--sp-2xs) var(--sp-2xs); border-radius:var(--r-round);
+  background:rgba(255,255,255,.88); border:var(--stroke) solid var(--border);
+  backdrop-filter:var(--blur); -webkit-backdrop-filter:var(--blur);
+  font-size:var(--t-small); letter-spacing:.02em; color:var(--text);
+  box-shadow:0 2px 10px rgba(3,7,18,.06)}
+.steplabel-tag .n{display:inline-flex; align-items:center; justify-content:center;
+  min-width:2rem; height:2rem; padding:0 var(--sp-xs); border-radius:var(--r-round);
+  background:var(--c-blue); color:var(--c-white); font-variant-numeric:tabular-nums}
 
-.dept-boxes{
-  display:flex; flex-direction:column;
-  background:var(--border); border:1px solid var(--border);
-  border-radius:var(--r-sm) 0 0 var(--r-sm); overflow:hidden; gap:1px;
-}
-.dept-box{
-  display:flex; flex-direction:column; justify-content:space-between; gap:var(--sp-sm);
-  flex:1 1 0; padding:var(--sp-md); margin:0;
-  background:var(--c-white); border:0; text-align:left; font:inherit; color:inherit; cursor:pointer;
-  transition:background-color var(--dur-micro) var(--ease);
-}
-.dept-box:hover{background:var(--fill)}
-.dept-box[aria-selected="true"]{background:var(--fill)}
-.dept-box:focus-visible{outline:2px solid var(--focus); outline-offset:-2px}
-.dept-box-top{display:flex; flex-direction:column; gap:var(--sp-sm); align-items:flex-start}
-.dept-box-icon{width:1.5rem; height:1.5rem; color:var(--text-3)}
-.dept-box-icon svg{width:100%; height:100%; display:block}
-.dept-box-name{font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2; color:var(--text)}
-.dept-box-desc{font-size:var(--t-small); color:var(--text-2); max-width:42ch}
-.dept-box-more{
-  display:inline-flex; align-items:center; justify-content:center; position:relative;
+/* --- indicators: one box per indicator --------------------------------
+   Each box (a <details>) opens on hover — tap on touch screens — to show
+   the question it answers and the biomarkers behind it, in place, so the
+   boxes below move down and stay visible and reachable. Only one is open at
+   a time, and it stays open until another is hovered or the cursor leaves
+   the grid (see the script): closing on every mouseleave would collapse the
+   row under the cursor on the way to the next box. */
+.ind-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));
+  gap:var(--sp-xs); align-items:start}
+.ind-card{padding:0; gap:0; background:var(--c-white)}
+.ind-card:hover{background:var(--c-white)}
+.ind-card > summary{list-style:none; cursor:pointer; display:flex; align-items:center;
+  justify-content:space-between; gap:var(--sp-md); padding:var(--sp-md) var(--sp-lg);
+  font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2}
+.ind-card > summary::-webkit-details-marker{display:none}
+.ind-card > summary:focus-visible{outline:2px solid var(--focus); outline-offset:-2px; border-radius:var(--r-sm)}
+.ind-more{display:inline-flex; align-items:center; justify-content:center; position:relative;
   width:2rem; height:2rem; border-radius:var(--r-sm); background:var(--fill); flex:none;
-  transition:background-color var(--dur-micro) var(--ease);
-}
-.dept-box-more i{position:absolute; background:var(--text-3); border-radius:1px;
   transition:background-color var(--dur-micro) var(--ease)}
-.dept-box-more i:nth-child(1){width:10px; height:1.5px}
-.dept-box-more i:nth-child(2){width:1.5px; height:10px}
-.dept-box[aria-selected="true"] .dept-box-more{background:var(--c-blue)}
-.dept-box[aria-selected="true"] .dept-box-more i{background:var(--c-white)}
-
-@media (max-width:1100px){
-  .dept-boxes{border-radius:var(--r-sm) var(--r-sm) 0 0}
-  .depts-media{border-radius:0 0 var(--r-sm) var(--r-sm)}
-  /* Stacked layout: .dept-boxes and .depts-overlay are separate rows, not
-     two columns stretched to match each other, so the fixed height that
-     stops them fighting on desktop has nothing left to protect against
-     here — and at this width it only forces an otherwise-unnecessary
-     scrollbar. Natural height, one column (two would be cramped this
-     narrow), no scrolling. */
-  .depts-overlay{height:auto; overflow:visible}
-  .depts-overlay .ind-list{grid-template-columns:1fr; flex:none; overflow:visible}
-}
-
-.depts-overlay .qs{display:flex; flex-direction:column; gap:var(--sp-md)}
-
-.ind-list{display:grid; grid-template-columns:repeat(2,1fr); gap:0 var(--sp-xl)}
-.ind{border-top:var(--hairline) solid var(--border); padding:var(--sp-md) 0}
-.ind > summary{list-style:none; cursor:pointer; font-size:var(--t-regular);
-  transition:color var(--dur-micro) var(--ease)}
-.ind > summary::-webkit-details-marker{display:none}
-.ind > summary:hover{color:var(--c-blue)}
-.ind p{margin-top:var(--sp-2xs); font-size:var(--t-small); color:var(--text-2)}
+.ind-more i{position:absolute; background:var(--text-3); border-radius:1px}
+.ind-more i:nth-child(1){width:10px; height:1.5px}
+.ind-more i:nth-child(2){width:1.5px; height:10px}
+.ind-card[open] .ind-more{background:var(--c-blue)}
+.ind-card[open] .ind-more i{background:var(--c-white)}
+.ind-body{display:flex; flex-direction:column; gap:var(--sp-md); padding:0 var(--sp-lg) var(--sp-lg)}
+@keyframes ind-in{from{opacity:0; transform:translateY(-4px)}to{opacity:1; transform:none}}
+.ind-card[open] .ind-body{animation:ind-in var(--dur-short) var(--ease)}
+/* Recommendations: literature or club/athlete know-how -> the athlete's
+   recommendation. Two short input boxes joined by "or", an arrow, and an
+   example outcome as a blue box with examples per staff group. */
+.rec-flow{display:flex; flex-direction:column; align-items:stretch; gap:var(--sp-sm)}
+.rec-inputs{display:grid; grid-template-columns:1fr auto 1fr; gap:var(--sp-md); align-items:stretch}
+.rec-flow .card{padding:var(--sp-lg); gap:var(--sp-md)}
+.rec-flow .card:hover{background:var(--fill)}
+.rec-flow .d{font-size:var(--t-regular); max-width:min(52ch,100%)}
+.rec-plus, .rec-arrow{display:flex; align-items:center; justify-content:center; align-self:center;
+  width:2.5rem; height:2.5rem; border-radius:50%; background:var(--fill); color:var(--text-2);
+  font-size:var(--t-small); line-height:1}
+.rec-arrow svg{width:1.25rem; height:1.25rem}
+.rec-result{background:var(--c-blue); color:var(--c-white)}
+.rec-flow .rec-result:hover{background:var(--c-blue)}
+.rec-result .eyebrow{color:var(--o-white-80)}
+.rec-note{font-size:var(--t-small); color:var(--o-white-80); margin-top:calc(var(--sp-md) * -1 + var(--sp-2xs))}
+.rec-result .rec-groups li{color:var(--o-white-80)}
+.rec-result .rec-groups li::before{background:var(--c-white)}
+@media (max-width:820px){ .rec-inputs{grid-template-columns:1fr} }
+.rec-groups{display:grid; gap:var(--sp-md)}
+.rec-result .rec-groups{grid-template-columns:repeat(3,1fr); gap:var(--sp-lg)}
+@media (max-width:820px){ .rec-result .rec-groups{grid-template-columns:1fr} }
+.rec-groups ul{display:flex; flex-direction:column; gap:var(--sp-2xs); margin-top:var(--sp-2xs)}
+.rec-groups li{position:relative; padding-left:var(--sp-md); font-size:var(--t-small); color:var(--text-2)}
+.rec-groups li::before{content:''; position:absolute; left:0; top:.6em; width:6px; height:6px;
+  border-radius:50%; background:var(--c-blue)}
+/* .tag is uppercase by default, which would garble names like PGF2\03b1 */
+.ind-body .tag{text-transform:none; letter-spacing:0}
 
 .figs{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:var(--sp-xl)}
 .fig{display:flex; flex-direction:column; gap:var(--sp-sm)}
@@ -861,7 +884,7 @@ textarea{min-height:7rem; resize:vertical}
 /* --- footer -------------------------------------------------------------- */
 /* No border-top: the section above is the same band-blue, so a hairline here
    would just be a stray line on a solid field. */
-footer.site{padding-block:var(--section-md) var(--sp-2xl)}
+footer.site{padding-block:var(--sp-2xl) var(--sp-2xl)}
 .fgrid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:var(--sp-2xl)}
 .fbrand{display:flex; flex-direction:column; gap:var(--sp-lg)}
 .fbrand .tagline{font-size:var(--h4); line-height:1.1; letter-spacing:-.04em}
@@ -949,7 +972,10 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .band-blue .brand{color:var(--c-white)}
 .btn--ink{background:var(--c-white); color:var(--c-blue)}
 .btn--ink:hover{background:var(--c-off-white); color:var(--c-dark-blue)}
-.close-cta{display:flex; flex-direction:column; gap:var(--sp-xl); align-items:flex-start}
+.close-cta{display:flex; flex-direction:column; gap:var(--sp-lg); align-items:flex-start}
+/* The closing blue banner runs straight into the blue footer, so neither
+   needs much padding where they meet: one compact blue block. */
+.sec.band-blue, .sec--xl.band-blue{padding-block:var(--section-md) var(--sp-2xl)}
 .close-cta .h2{max-width:min(26ch,100%)}
 
 /* --- trust: four plain columns, Atira's own security-band shape — no card
@@ -1030,7 +1056,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   <div class="wrap row">
     <span class="brand" aria-label="Biolyz">__SVG_biolyz__</span>
     <a class="np" href="/" data-link>Home</a>
-    <a class="np" href="/product" data-link>Product</a>
+    <a class="np" href="/product" data-link>The Solution</a>
     <div class="menu" data-menu>
       <button class="np" type="button" aria-expanded="false" data-menu-btn>Science <i class="chev"></i></button>
       <div class="menu-panel">
@@ -1394,77 +1420,19 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 })();
 </script>
 
-<section class="sec">
+<section class="sec sec--tight">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Protocol</span>
-      <h2 class="h2">Non-invasive. Self-service.</h2>
-    </div>
-    <ol class="protocol-grid">
-      <li class="protocol-step">
-        <img src="__IMG_protocol1__" width="730" height="1151" loading="lazy"
-          alt="Selecting the athlete on the collection tablet.">
-        <span class="n">01</span><span class="t">Name selection</span>
-        <span class="d">Pick the athlete in the app, so the sample is attributed at the
-        point of collection rather than later.</span>
-      </li>
-      <li class="protocol-step">
-        <img src="__IMG_protocol2__" width="731" height="1150" loading="lazy"
-          alt="Taking the 60-second saliva sample.">
-        <span class="n">02</span><span class="t">60s saliva sample</span>
-        <span class="d">A swab in the mouth for one minute. No needles, no phlebotomist,
-        no medical staff on site.</span>
-      </li>
-      <li class="protocol-step">
-        <img src="__IMG_protocol3__" width="730" height="1151" loading="lazy"
-          alt="Scanning the tube's barcode on the tablet.">
-        <span class="n">03</span><span class="t">Barcode scan</span>
-        <span class="d">Scan the tube to bind it to the session record before it leaves
-        the room.</span>
-      </li>
-    </ol>
-
-    <div class="hd" style="margin-top:var(--section-md)">
-      <h3 class="h3" style="max-width:none">So what does that mean for your staff?</h3>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><path d="M12 13V9"/><path d="M9.5 3h5"/></svg></span>
-        <span class="t">Little staff effort required</span>
-        <span class="d">Collection takes a minute and fits into the routine staff already
-          run, no new workflow to learn.</span>
-      </div>
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
-        <span class="t">Expanded view of internal load data</span>
-        <span class="d">Recovery and physiological status, read from inside the
-          athlete&rsquo;s own biology rather than external load and GPS alone.</span>
-      </div>
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M9 10h6M9 13h4"/></svg></span>
-        <span class="t">Interpretation help</span>
-        <span class="d">We help you read what a flagged marker likely means, drawn from
-          experience and research.</span>
-      </div>
-    </div>
-
-    <div style="margin-top:var(--sp-2xl)">
-      <a class="btn btn--ghost" href="/product" data-link>See the whole process &#8594;</a>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Why saliva</span>
+      <span class="eyebrow">Truth hurts? Not anymore</span>
       <h2 class="h2">Discover the power of saliva.</h2>
+      <p class="lead">Three things a blood panel cannot give you.</p>
     </div>
-    <div class="wsc-grid">
+    <div class="wsc-grid wsc-grid--why">
       <figure class="wsc-card">
         <div class="wsc-shot has-photo"><img src="__IMG_wscnoninvasive__"
           alt="A smiling athlete, ordinary and at ease — no needle, no clinic."></div>
-        <figcaption class="wsc-card-t">Non-invasive</figcaption>
+        <figcaption><span class="wsc-n">01</span><span class="wsc-card-t">Non-invasive</span>
+          <span class="wsc-d">A painless saliva swab replaces blood draws and finger pricks.</span></figcaption>
       </figure>
       <figure class="wsc-card">
         <div class="wsc-shot wsc-shot--cadence">
@@ -1486,13 +1454,53 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             </div>
           </div>
         </div>
-        <figcaption class="wsc-card-t">High frequency</figcaption>
+        <figcaption><span class="wsc-n">02</span><span class="wsc-card-t">High frequency</span>
+          <span class="wsc-d">Collection is effortless, so testing can happen daily.</span></figcaption>
       </figure>
       <figure class="wsc-card">
         <div class="wsc-shot has-photo"><img src="__IMG_wscselfservice__"
           alt="An athlete collecting their own sample and scanning it in, no lab technician needed."></div>
-        <figcaption class="wsc-card-t">Self-service</figcaption>
+        <figcaption><span class="wsc-n">03</span><span class="wsc-card-t">No supervision needed</span>
+          <span class="wsc-d">Athletes take the sample themselves, with no doctor, nurse or
+          phlebotomist present.</span></figcaption>
       </figure>
+    </div>
+    <div class="saliva-proof">
+      <span class="saliva-proof-l">Proven at scale</span>
+      <div class="saliva-proof-figs">
+      <div class="fig"><span class="v">11,000+</span><span class="k">Active sessions</span>
+        <span class="s">From top pros to youth teams</span></div>
+      <div class="fig"><span class="v">25,000+</span><span class="k">Samples</span>
+        <span class="s">In the last 12 months</span></div>
+      <div class="fig"><span class="v">2.5M+</span><span class="k">Analysed biomarkers</span>
+        <span class="s">For impactful decision making</span></div>
+      </div>
+    </div>
+    <div class="hd saliva-staff-hd">
+      <h3 class="h3" style="max-width:none">Less work. More insight.</h3>
+    </div>
+    <div class="feat-cols">
+      <div class="feat">
+        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><path d="M12 13V9"/><path d="M9.5 3h5"/></svg></span>
+        <span class="t">Little staff effort required</span>
+        <span class="d">Collection takes a minute and fits into the routine staff already
+          run, no new workflow to learn.</span>
+      </div>
+      <div class="feat">
+        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
+        <span class="t">Expanded view of internal load data</span>
+        <span class="d">Recovery and physiological status, read from inside the
+          athlete&rsquo;s own biology rather than external load and GPS alone.</span>
+      </div>
+      <div class="feat">
+        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M9 10h6M9 13h4"/></svg></span>
+        <span class="t">Interpretation help</span>
+        <span class="d">We help you read what a flagged marker likely means, drawn from
+          experience and research.</span>
+      </div>
+    </div>
+    <div style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="/product" data-link>Discover the Solution &#8594;</a>
     </div>
   </div>
 </section>
@@ -1537,11 +1545,43 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 })();
 </script>
 
-<section class="sec" id="flow">
+<section class="sec band-grey sec--tight">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">How it works day to day</span>
-      <h2 class="h2">From flagged data to a decision your staff can stand behind.</h2>
+      <span class="eyebrow">The science</span>
+      <h2 class="h2">Lab precision in every swab.</h2>
+      <p class="lead">From sample to readout, held to clinical standards.</p>
+    </div>
+    <div class="feat-cols">
+      <div class="feat">
+        <span class="v">LC&ndash;MS/MS</span>
+        <span class="t">Gold standard mass spectrometry</span>
+        <span class="d">LC&ndash;MS/MS, the same method clinical labs rely on for precise
+          quantification.</span>
+      </div>
+      <div class="feat">
+        <span class="v">60+</span>
+        <span class="t">Biomarkers from one swab</span>
+        <span class="d">One swab reads more markers than a blood panel typically can.</span>
+      </div>
+      <div class="feat">
+        <span class="v">Peer-reviewed</span>
+        <span class="t">High internal standards</span>
+        <span class="d">Every batch runs against our own quality standards, and every
+          marker traces back to published research.</span>
+      </div>
+    </div>
+    <div style="margin-top:var(--sp-2xl)">
+      <a class="btn btn--ghost" href="/science" data-link>Explore the science &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--tight" id="flow">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Your daily workflow</span>
+      <h2 class="h2">From red flag to right call.</h2>
     </div>
 
     <div class="split">
@@ -1614,51 +1654,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec band-grey">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The science</span>
-      <h2 class="h2">The process behind every result.</h2>
-    </div>
-    <div class="cards">
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h3l2.5-8 3 13 2.5-9 2 4h5"/></svg></span>
-        <span class="t">Gold standard mass spectrometry</span>
-        <span class="d">LC&ndash;MS/MS, the same method clinical labs rely on for precise
-          quantification.</span>
-      </div>
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><circle cx="5" cy="6" r="1.5"/><circle cx="19" cy="6" r="1.5"/><circle cx="5" cy="18" r="1.5"/><circle cx="19" cy="18" r="1.5"/><path d="M12 12 5 6M12 12l14-6M12 12 5 18M12 12l7 6"/></svg></span>
-        <span class="t">60+ biomarkers</span>
-        <span class="d">One swab reads more markers than a blood panel typically can.</span>
-      </div>
-      <div class="card">
-        <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <span class="t">High internal standards, peer-reviewed</span>
-        <span class="d">Every batch runs against our own quality standards, and every
-          marker traces back to published research.</span>
-      </div>
-    </div>
-    <div style="margin-top:var(--sp-2xl)">
-      <a class="btn btn--ghost" href="/science" data-link>Explore the science &#8594;</a>
-    </div>
-  </div>
-</section>
-
-<section class="sec testimonial-band">
-  <div class="wrap">
-    <div class="figs figs--boxed testimonial-stats">
-      <div class="fig"><span class="v">11,000+</span><span class="k">Active sessions</span>
-        <span class="s">From top pros to youth teams</span></div>
-      <div class="fig"><span class="v">25,000+</span><span class="k">Samples</span>
-        <span class="s">In the last 12 months</span></div>
-      <div class="fig"><span class="v">2.5M+</span><span class="k">Analysed biomarkers</span>
-        <span class="s">For impactful decision making</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
+<section class="sec sec--tight">
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">Security</span>
@@ -1708,7 +1704,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <!-- ======================================================================
      PRODUCT
      ====================================================================== -->
-<div class="page" id="p-product" data-title="Biolyz Product" hidden>
+<div class="page" id="p-product" data-title="Biolyz Solution" hidden>
 
 <section class="hero hero--product inv">
   <video class="hero-bg" src="__VIDEO_producthero__" poster="__IMG_productheroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
@@ -1725,10 +1721,11 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 </section>
 
 <section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The process</span>
-      <h2 class="h2">From sample to report.</h2>
+      <span class="eyebrow">The Swab</span>
+      <h2 class="h2">Sample taking, transport and analysis.</h2>
     </div>
 
     <div class="proc">
@@ -1758,11 +1755,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
           based on LC&ndash;MS</span>
           <span class="d">Saliva is ionised and sorted by mass-to-charge ratio into a
             spectral fingerprint.</span></button>
-        <button type="button" class="card proc-step" data-step="06" data-side="lab" data-img-key="qc">
-          <span class="n">06</span><span class="t">Quality control &amp;
-          data analysis</span>
-          <span class="d">Every result is checked against known standards before it
-            reaches a report.</span></button>
         <!-- Each overlay sits in the OPPOSITE column from the steps that drive it
              (room steps fill the lab-side overlay and vice versa), spanning all
              three of that column's rows via explicit grid placement so it covers
@@ -1771,7 +1763,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
         <div class="proc-pic" data-pic="room">
           <img class="proc-pic-img" src="__IMG_logistics__" alt="" hidden>
           <img class="proc-pic-img" src="__IMG_lcms__" alt="" hidden>
-          <img class="proc-pic-img" src="__IMG_qc__" alt="" hidden>
           <div class="proc-pic-placeholder">
             <span class="proc-pic-n"></span>
             <span class="proc-pic-t"></span>
@@ -1793,7 +1784,111 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="sec band-grey" id="indicators">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Analyze</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The indicators</span>
+      <h2 class="h2">From single biomarkers to clear indicators.</h2>
+    </div>
+
+    <div class="ind-grid">
+      <details class="card ind-card" name="ind">
+        <summary>Inflammation<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about inflammatory / immune activation?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">PGF2α</span>
+              <span class="tag">Neopterin</span>
+              <span class="tag">Kynurenine</span>
+              <span class="tag">Tryptophan</span>
+              <span class="tag">Phe/Tyr</span>
+              <span class="tag">Kyn/Trp</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Metabolic stress<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about elevated purine / metabolic turnover?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">Hypoxanthine</span>
+              <span class="tag">Xanthine</span>
+              <span class="tag">Xanthine/Hypoxanthine</span>
+              <span class="tag">Uric acid</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Muscle damage<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about muscle fibre disruption?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">LDHA</span>
+              <span class="tag">HSPB1</span>
+              <span class="tag">ACTA1</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Hormonal status<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about anabolic&ndash;catabolic balance?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">Cortisol</span>
+              <span class="tag">Testosterone</span>
+              <span class="tag">Testosterone:Cortisol ratio</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Psychological stress<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about stress-response activation?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">Cortisol AM</span>
+              <span class="tag">DHEAS</span>
+              <span class="tag">Alpha-amylase</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Sleep<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about circadian / sleep disruption?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">Melatonin</span>
+              <span class="tag">Trigonelline</span>
+          </div>
+        </div>
+      </details>
+      <details class="card ind-card" name="ind">
+        <summary>Hydration<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
+        <div class="ind-body">
+          <p class="role-q">Is there a concern about fluid balance / hydration status?</p>
+          <span class="eyebrow">Biomarkers</span>
+          <div class="tags">
+              <span class="tag">Salivary creatinine</span>
+              <span class="tag">Protein concentration</span>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div style="margin-top:var(--sp-md)">
+      <a class="btn btn--ghost" href="/biomarkers" data-link>See the full biomarker panel &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">The dashboard</span>
@@ -1857,138 +1952,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec depts-section">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Indicators</span>
-      <h2 class="h2">For every department the right indicator.</h2>
-    </div>
-
-    <div class="split split--even depts-panel">
-      <div class="dept-boxes" role="tablist" aria-label="Departments" data-tabs="depts">
-        <button type="button" class="dept-box" role="tab" aria-selected="true" data-tab="d1">
-          <span class="dept-box-top">
-            <span class="dept-box-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z"/></svg></span>
-            <span class="dept-box-name">Performance</span>
-            <span class="dept-box-desc">How training load and fixture congestion translate
-              into physiological stress and recovery.</span>
-          </span>
-          <span class="dept-box-more" aria-hidden="true"><i></i><i></i></span>
-        </button>
-        <button type="button" class="dept-box" role="tab" aria-selected="false" data-tab="d2">
-          <span class="dept-box-top">
-            <span class="dept-box-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2-6 4 12 2-6h6"/></svg></span>
-            <span class="dept-box-name">Medical</span>
-            <span class="dept-box-desc">Squad-wide health patterns and physiological changes
-              worth a closer medical look.</span>
-          </span>
-          <span class="dept-box-more" aria-hidden="true"><i></i><i></i></span>
-        </button>
-        <button type="button" class="dept-box" role="tab" aria-selected="false" data-tab="d3">
-          <span class="dept-box-top">
-            <span class="dept-box-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21c0-9 6-15 15-15-1 9-7 15-15 15Z"/><path d="M5 21c3-4 7-9 12-13"/></svg></span>
-            <span class="dept-box-name">Nutrition</span>
-            <span class="dept-box-desc">Nutrition, hydration, and whether supplementation is
-              actually supporting recovery.</span>
-          </span>
-          <span class="dept-box-more" aria-hidden="true"><i></i><i></i></span>
-        </button>
-      </div>
-
-      <div class="depts-media">
-        <div class="depts-overlays">
-          <div class="depts-overlay" data-panel="d1">
-            <h3>Performance</h3>
-            <div class="qs">
-              <p class="role-q">&ldquo;How is each player&rsquo;s body responding internally
-                to this week&rsquo;s training load and fixture schedule?&rdquo;</p>
-              <p class="role-q">&ldquo;Which players are adapting well to the current
-                block, and which show accumulating stress ahead of selection?&rdquo;</p>
-              <p class="role-q">&ldquo;Did the deload actually land, or only on
-                paper?&rdquo;</p>
-            </div>
-            <div class="ind-list">
-              <details class="ind" name="ind-d1"><summary>Inflammation</summary>
-                <p>A panel of markers that together flag systemic inflammation
-                  early.</p></details>
-              <details class="ind" name="ind-d1"><summary>Metabolic stress</summary>
-                <p>Purine breakdown markers that flag metabolic strain from training or
-                  competition load.</p></details>
-              <details class="ind" name="ind-d1"><summary>Hormonal status</summary>
-                <p>Testosterone and cortisol, read as a ratio to flag anabolic/catabolic
-                  balance.</p></details>
-              <details class="ind" name="ind-d1"><summary>Muscle damage</summary>
-                <p>Markers that flag muscle damage from training or match load, before
-                  soreness is reported.</p></details>
-            </div>
-          </div>
-          <div class="depts-overlay" data-panel="d2" hidden>
-            <h3>Medical</h3>
-            <div class="qs">
-              <p class="role-q">&ldquo;Which players&rsquo; physiological markers have
-                shifted meaningfully from their own baseline this week?&rdquo;</p>
-              <p class="role-q">&ldquo;Are there squad-wide patterns, like elevated
-                inflammation, worth a closer medical look?&rdquo;</p>
-            </div>
-            <div class="ind-list">
-              <details class="ind" name="ind-d2"><summary>Psychological Stress</summary>
-                <p>Cortisol and related markers that flag elevated psychological or
-                  physiological stress.</p></details>
-              <details class="ind" name="ind-d2"><summary>Dental health</summary>
-                <p>Markers linked to oral health and inflammation, flagged before
-                  discomfort is reported.</p></details>
-            </div>
-          </div>
-          <div class="depts-overlay" data-panel="d3" hidden>
-            <h3>Nutrition</h3>
-            <div class="qs">
-              <p class="role-q">&ldquo;Is a player&rsquo;s nutrition or hydration supporting
-                recovery between matches?&rdquo;</p>
-              <p class="role-q">&ldquo;Is a player&rsquo;s current supplementation covering
-                what their biomarkers show they actually need?&rdquo;</p>
-            </div>
-            <div class="ind-list">
-              <details class="ind" name="ind-d3"><summary>Creatine consumption</summary>
-                <p>Shows whether a creatine supplement is actually showing up in this
-                  athlete&rsquo;s biology.</p></details>
-              <details class="ind" name="ind-d3"><summary>Omega 6</summary>
-                <p>Tracks intake of omega-6 fatty acids, one side of the dietary
-                  inflammatory balance.</p></details>
-              <details class="ind" name="ind-d3"><summary>Omega 3</summary>
-                <p>Tracks omega-3 intake, the counterweight to omega-6 in that
-                  balance.</p></details>
-              <details class="ind" name="ind-d3"><summary>AA/EPA Ratio</summary>
-                <p>A single number for the omega-6/omega-3 balance, read against this
-                  athlete&rsquo;s history.</p></details>
-              <details class="ind" name="ind-d3"><summary>Hydration</summary>
-                <p>Fluid balance markers from the same swab, no separate test
-                  needed.</p></details>
-              <details class="ind" name="ind-d3"><summary>Beet root consumption</summary>
-                <p>Confirms a beetroot/nitrate supplement is actually showing up in the
-                  athlete&rsquo;s biology.</p></details>
-              <details class="ind" name="ind-d3"><summary>Melatonin</summary>
-                <p>Tracks melatonin, relevant to sleep quality and recovery.</p></details>
-              <details class="ind" name="ind-d3"><summary>Vitamin B3</summary>
-                <p>Shows whether vitamin B3 (niacin) sits in this athlete&rsquo;s normal
-                  range.</p></details>
-              <details class="ind" name="ind-d3"><summary>Coffee consumption</summary>
-                <p>Confirms caffeine intake and tracks it against this athlete&rsquo;s own
-                  baseline.</p></details>
-              <details class="ind" name="ind-d3"><summary>Vitamin E</summary>
-                <p>Shows whether vitamin E, an antioxidant nutrient, sits in this
-                  athlete&rsquo;s normal range.</p></details>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:var(--sp-md)">
-      <a class="btn btn--ghost" href="/biomarkers" data-link>See the full biomarker panel &#8594;</a>
-    </div>
-  </div>
-</section>
-
 <!-- ======================================================================
      INTEGRATIONS — an infinite horizontal strip of partner/device cards.
      Two identical sets of cards sit back to back in one track (the second
@@ -1998,9 +1961,10 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
      <img> per card once real logos exist, no other markup changes needed.
      ====================================================================== -->
 <section class="sec band-grey" id="integrations">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Context for your internal data</span>
+      <span class="eyebrow">The context for your internal data</span>
       <h2 class="h2">Every data source, one platform.</h2>
     </div>
   </div>
@@ -2030,23 +1994,55 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec">
+<!-- Personalised recommendations: the two kinds, then the note that Biolyz
+     sits alongside a club's existing systems. -->
+<section class="sec" id="recommendations">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Truth hurts? Not anymore</span>
-      <h2 class="h2">Four things a blood panel cannot give you.</h2>
+      <span class="eyebrow">Personalised recommendations</span>
+      <h2 class="h2">The right intervention, at the right time.</h2>
+      <p class="copy">Each athlete&rsquo;s indicators, read together with the context your staff
+        add, become personalised recommendations: whether to step in at all, when the timing is
+        right, and what an intervention could look like.</p>
     </div>
-    <div class="cards cards--blue">
-      <div class="card"><span class="t">Non-invasive</span>
-        <span class="d">A painless saliva swab replaces blood draws and finger
-          pricks.</span></div>
-      <div class="card"><span class="t">High-frequency</span>
-        <span class="d">Collection is effortless, so testing can happen daily.</span></div>
-      <div class="card"><span class="t">Proprietary process</span>
-        <span class="d">Custom mass spectrometry with clinical grade precision.</span></div>
-      <div class="card"><span class="t">Recommendations</span>
-        <span class="d">Every flagged marker comes with a plain-language explanation,
-          drawn from research and clinical experience, not a black box.</span></div>
+    <!-- Literature or club/athlete know-how -> the athlete's recommendations:
+         two short input boxes joined by "or", and an example outcome as a
+         blue box below with examples per staff group. -->
+    <div class="rec-flow">
+      <div class="rec-inputs">
+        <div class="card">
+          <span class="t">Literature-based recommendations</span>
+          <p class="d">Generated with AI from the published research behind each indicator.</p>
+        </div>
+        <span class="rec-plus">or</span>
+        <div class="card">
+          <span class="t">Club and athlete historical know-how</span>
+          <p class="d">Shaped by your club&rsquo;s own context and the input of your staff.</p>
+        </div>
+      </div>
+      <span class="rec-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+      <div class="card rec-result">
+        <span class="t">Personalised recommendations for each athlete</span>
+        <p class="rec-note">An example of what a recommendation can look like.</p>
+      <div class="rec-groups">
+        <div><span class="eyebrow">Performance</span>
+          <ul>
+            <li>Reduce high-intensity load for 24&ndash;48&nbsp;h if inflammation persists</li>
+            <li>Prioritise recovery when muscle damage stays raised</li>
+          </ul></div>
+        <div><span class="eyebrow">Medical</span>
+          <ul>
+            <li>Clinical review if a marker is very high or comes with illness symptoms</li>
+            <li>Endocrine referral if hormonal status is clinically flagged</li>
+          </ul></div>
+        <div><span class="eyebrow">Nutrition</span>
+          <ul>
+            <li>Standard recovery nutrition: refuel and repair</li>
+            <li>Review the hydration strategy against sweat and body-mass loss</li>
+          </ul></div>
+      </div>
+      </div>
     </div>
     <div class="assure" style="margin-top:var(--section-md)">
       <p class="sm muted" style="max-width:min(52ch,100%)">Your GPS, load and wellness systems stay
@@ -2092,6 +2088,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .steps4.is-in .step4:nth-child(2){transition-delay:120ms}
 .steps4.is-in .step4:nth-child(3){transition-delay:240ms}
 .steps4.is-in .step4:nth-child(4){transition-delay:360ms}
+.steps4.is-in .step4:nth-child(5){transition-delay:480ms}
 .step4-top{display:flex; align-items:center; gap:var(--sp-sm)}
 .step4 .n{
   display:inline-flex; align-items:center; padding:var(--sp-2xs) var(--sp-sm);
@@ -2139,12 +2136,16 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
    ~428px regardless of grid size), but the box is now much closer to
    square, so the photos crop far less than the wide/short 700x470 version. */
 .proc-grid{display:grid; grid-template-columns:1fr 1fr;
-  grid-template-rows:repeat(3,1fr); gap:var(--sp-xs); max-width:1200px; height:570px; margin-inline:auto}
+  grid-template-rows:repeat(6,1fr); gap:var(--sp-xs); max-width:1200px; height:570px; margin-inline:auto}
 .proc-step[data-side="room"]{grid-column:1}
 .proc-step[data-side="lab"]{grid-column:2}
-.proc-step[data-step="01"],.proc-step[data-step="04"]{grid-row:1}
-.proc-step[data-step="02"],.proc-step[data-step="05"]{grid-row:2}
-.proc-step[data-step="03"],.proc-step[data-step="06"]{grid-row:3}
+/* Three changing-room steps share the left column in thirds, two lab steps
+   the right column in halves (six grid rows), so both columns end level. */
+.proc-step[data-step="01"]{grid-row:1 / 3}
+.proc-step[data-step="02"]{grid-row:3 / 5}
+.proc-step[data-step="03"]{grid-row:5 / 7}
+.proc-step[data-step="04"]{grid-row:1 / 4}
+.proc-step[data-step="05"]{grid-row:4 / 7}
 /* Steps are buttons now: hovering (or focusing) one fills the PICTURE
    overlay sitting over the opposite column (room steps drive the lab-side
    picture, lab steps drive the room-side one), spanning that column's three
@@ -2161,7 +2162,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
    .proc-grid), so the picture, filling that same narrower column, comes
    along with it rather than needing its own separate ratio or inset. */
 .proc-pic{
-  position:relative; grid-row:1 / 4; z-index:1; border-radius:var(--r-sm);
+  position:relative; grid-row:1 / 7; z-index:1; border-radius:var(--r-sm);
   background:var(--c-grey-100); border:var(--stroke) dashed var(--c-grey-300);
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:var(--sp-2xs); text-align:center; padding:var(--sp-xl);
@@ -2183,7 +2184,9 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .proc-pic-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit}
 @media (max-width:820px){
   .proc-grid{grid-template-columns:1fr; grid-template-rows:none; grid-auto-flow:row; height:auto}
-  .proc-step{grid-column:auto; grid-row:auto}
+  /* .proc-grid prefix: must out-rank the [data-side]/[data-step] placement
+     rules above, or the steps keep their desktop columns at phone width. */
+  .proc-grid .proc-step{grid-column:auto; grid-row:auto}
   .proc-pic{display:none}
 }
 </style>
@@ -2230,7 +2233,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             <span class="n">02</span>
             <span class="step4-bar"><i></i></span>
           </span>
-          <span class="t">LC-MS</span>
+          <span class="t">Gold standard LC-MS</span>
           <span class="step4-detail"><span class="d">A unique spectral fingerprint for every biomarker, at once.</span></span>
         </button>
         <button type="button" class="step4" role="tab" aria-selected="false"
@@ -2239,13 +2242,22 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             <span class="n">03</span>
             <span class="step4-bar"><i></i></span>
           </span>
-          <span class="t">Data processing</span>
-          <span class="step4-detail"><span class="d">Every peak validated against reference standards before reporting.</span></span>
+          <span class="t">Quality control</span>
+          <span class="step4-detail"><span class="d">Every result is checked against known standards before it reaches a report.</span></span>
         </button>
         <button type="button" class="step4" role="tab" aria-selected="false"
           id="tab-sf4" aria-controls="panel-sf4" data-tab="sf4">
           <span class="step4-top">
             <span class="n">04</span>
+            <span class="step4-bar"><i></i></span>
+          </span>
+          <span class="t">Data processing &amp; analysis</span>
+          <span class="step4-detail"><span class="d">Raw spectra are processed and analysed into a result for every biomarker.</span></span>
+        </button>
+        <button type="button" class="step4" role="tab" aria-selected="false"
+          id="tab-sf5" aria-controls="panel-sf5" data-tab="sf5">
+          <span class="step4-top">
+            <span class="n">05</span>
             <span class="step4-bar"><i></i></span>
           </span>
           <span class="t">AI interpretation</span>
@@ -2263,10 +2275,14 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             alt="A lab technician running a sample through the LC-MS system."></figure>
         </div>
         <div data-panel="sf3" id="panel-sf3" role="tabpanel" aria-labelledby="tab-sf3" hidden>
+          <figure class="sci-shot"><img src="__IMG_qc__"
+            alt="Quality control: every result checked against known standards."></figure>
+        </div>
+        <div data-panel="sf4" id="panel-sf4" role="tabpanel" aria-labelledby="tab-sf4" hidden>
           <figure class="sci-shot"><img src="__IMG_scidata__"
             alt="A scientist reviewing processed spectral data across two screens."></figure>
         </div>
-        <div data-panel="sf4" id="panel-sf4" role="tabpanel" aria-labelledby="tab-sf4" hidden>
+        <div data-panel="sf5" id="panel-sf5" role="tabpanel" aria-labelledby="tab-sf5" hidden>
           <figure class="ph-shot"><span class="ph-shot-label">Placeholder image</span></figure>
         </div>
       </div>
@@ -5425,6 +5441,42 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .ph::before{content:"TO CONFIRM"; letter-spacing:.08em; font-size:.6875rem}
 
 /* --- the seven questions ------------------------------------------------- */
+/* So What? indicators: a list of the seven on the left (blue when selected,
+   like the Horses answer pills), one white detail panel on the right. */
+.ix{display:grid; grid-template-columns:minmax(15rem,1fr) 2.4fr; gap:var(--sp-lg); align-items:start}
+.ix-list{display:flex; flex-direction:column; gap:var(--sp-2xs, 4px)}
+.ix-tab{all:unset; box-sizing:border-box; cursor:pointer; display:flex; align-items:baseline; gap:var(--sp-md);
+  padding:var(--sp-md) var(--sp-lg); border-radius:var(--r-sm); font-size:var(--t-large); letter-spacing:-.02em;
+  color:var(--text-2); transition:background .2s, color .2s}
+.ix-tab .n{font-size:var(--t-small); font-variant-numeric:tabular-nums; color:var(--text-3); transition:color .2s}
+.ix-tab:hover{color:var(--c-blue)}
+.ix-tab:hover .n{color:var(--c-blue)}
+.ix-tab[aria-selected="true"]{background:var(--c-blue); color:var(--c-white)}
+.ix-tab[aria-selected="true"] .n{color:var(--o-white-60)}
+.ix-tab:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+.ix-panel{background:var(--c-white); border-radius:var(--r-sm); padding:var(--sp-2xl);
+  display:flex; flex-direction:column; gap:var(--sp-lg); min-height:100%}
+.ix-k{font-size:var(--t-small); letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue)}
+.ix-q{font-size:var(--h4, var(--h5)); letter-spacing:-.03em; line-height:1.15; max-width:24ch; margin:0}
+.ix-l, .ix-meta dt{display:block; font-size:.6875rem; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--text-3); margin-bottom:var(--sp-sm)}
+.ix-chips, .ix-who{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:var(--sp-xs)}
+.ix-chips li{padding:.35rem .7rem; border-radius:999px; background:var(--c-grey-100); font-size:var(--t-small)}
+.ix-meta{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-lg); margin:0;
+  padding-top:var(--sp-lg); border-top:var(--stroke) solid var(--c-grey-200)}
+.ix-meta dd{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.ix-who li{padding:.2rem .6rem; border-radius:999px; border:var(--stroke) solid var(--c-blue);
+  color:var(--c-blue); font-size:var(--t-small)}
+.ix-link{font-size:var(--t-small); color:var(--c-blue); text-decoration:none; align-self:flex-start}
+.ix-link:hover{text-decoration:underline}
+.ix-panel .uc-empty{font-size:var(--t-small); color:var(--text-3); margin:0}
+@media (max-width:820px){
+  .ix{grid-template-columns:1fr}
+  .ix-list{flex-direction:row; flex-wrap:wrap; gap:var(--sp-xs)}
+  .ix-tab{padding:var(--sp-sm) var(--sp-md); font-size:var(--t-regular); background:var(--c-white)}
+  .ix-panel{padding:var(--sp-lg)}
+  .ix-meta{grid-template-columns:1fr}
+}
 .ck{display:grid; grid-template-columns:repeat(auto-fit,minmax(21rem,1fr));
   gap:var(--sp-xs)}
 .ck-item{background:var(--fill); border-radius:var(--r-sm); overflow:hidden}
@@ -5669,47 +5721,79 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-sowhat" data-title="So What? What Your Club Gets From Biolyz"
   data-desc="Seven readiness questions, answered from saliva. The biomarkers behind each one, who acts on the result, real cases, and what an absence costs." hidden>
 
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">So what?</span>
-    <h1 class="h1">Catch the cracks before the collapse.</h1>
-    <p class="lead">Regular saliva samples, more than 60 biomarkers measured by mass
-      spectrometry, an individual baseline for every athlete.</p>
-    <div class="btn-row" style="margin-top:var(--sp-md)">
-      <a class="btn" href="/demo" data-link>Book a demo &#8599;</a>
-      <a class="btn btn--ghost" href="#cases" data-sw-jump="cases">See use cases</a>
+<section class="hero hero--sowhat inv">
+  <img class="hero-bg" src="__IMG_pitch__" width="2400" height="1395" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">So what?</span>
+      <h1 class="hero-title">Catch the cracks before the collapse.</h1>
+      <p class="hero-lead">Regular saliva samples, more than 60 biomarkers measured by mass
+        spectrometry, an individual baseline for every athlete.</p>
+      <div class="btn-row">
+        <a class="btn" href="/demo" data-link>Book a demo &#8599;</a>
+        <a class="btn btn--glass" href="#cases" data-sw-jump="cases">See use cases</a>
+      </div>
     </div>
   </div>
-</header>
+</section>
 
-<section class="sec">
+<section class="sec sec--tight">
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">What we do</span>
-      <h2 class="h2">Four steps, and the last one closes the loop.</h2>
+      <h2 class="h2">Five steps, and the last one closes the loop.</h2>
     </div>
 
     <ol class="fw">
       <li class="fw-step fw-step--now">
         <span class="fw-badge"><b>01</b> Sample</span>
-        <h3 class="h3">Biomarkers become one indicator.</h3>
-        <p class="copy">An athlete gives a saliva sample. We measure more than 60 biomarkers
-          by mass spectrometry and read each one against that athlete&rsquo;s own baseline.
-          Related markers that move together are aggregated into a single indicator, so
-          staff read one status per area rather than sixty numbers.</p>
+        <h3 class="h3">A swab in under a minute.</h3>
+        <p class="copy">The athlete takes the sample themselves, in the changing room, with no
+          needle and no medical staff present. The tube is scanned to the athlete, then
+          shipped to our laboratory.</p>
         <div class="fw-dia">
           <div class="tree">
             <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Collect</span>A swab in under a minute, taken by the athlete</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Measure</span>Mass spectrometry, in our own laboratory</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Biomarkers</span>60+ per sample, each read against that athlete&rsquo;s own range</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Indicators</span>Related markers grouped by what they say together</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Aggregate</span>One status per area, not sixty numbers</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Scan</span>The tube is bound to the athlete before it leaves the room</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Ship</span>Sent to our own laboratory</div></div>
           </div>
         </div>
       </li>
 
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>02</b> Context</span>
+        <span class="fw-badge"><b>02</b> Analyze</span>
+        <h3 class="h3">Biomarkers become one indicator.</h3>
+        <p class="copy">We measure more than 60 biomarkers by mass spectrometry. Related
+          markers that move together are aggregated into a single indicator, so staff read
+          one status per area rather than sixty numbers.</p>
+        <div class="fw-dia">
+          <div class="tree">
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Measure</span>Mass spectrometry, in our own laboratory</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Biomarkers</span>60+ per sample</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Indicators</span>Related markers grouped by what they say together</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--l tree-n--us"><span class="k">Aggregate</span>One status per area, not sixty numbers</div></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="fw-step fw-step--now">
+        <span class="fw-badge"><b>03</b> Personalize</span>
+        <h3 class="h3">Every athlete is their own baseline.</h3>
+        <p class="copy">A value means little against a population average. Each indicator is
+          read against that athlete&rsquo;s own range, built from their previous samples, so a
+          flag means this athlete has moved away from their normal.</p>
+        <div class="fw-dia">
+          <div class="tree">
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">History</span>Every previous sample from this athlete</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Own range</span>An individual baseline per indicator</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Flag</span>Raised when the athlete leaves their own normal</div></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="fw-step fw-step--now">
+        <span class="fw-badge"><b>04</b> Context</span>
         <h3 class="h3">The stressor behind the signal.</h3>
         <p class="copy">An indicator on its own says something changed, not why. So we bring
           the context in alongside it: what the athlete reports and what staff observe, and
@@ -5742,35 +5826,20 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       </li>
 
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>03</b> Recommend</span>
-        <h3 class="h3">A next step, not just a number.</h3>
-        <p class="copy">Each flag carries a recommendation. It is drawn from peer reviewed
-          research and assembled by our multi agent AI against the indicator, its context
-          and the athlete. Your own interventions sit in the same framework: what has worked
-          for this athlete before goes into the recommendation alongside the literature,
-          because individualisation is the point, not a footnote.</p>
+        <span class="fw-badge"><b>05</b> Act</span>
+        <h3 class="h3">A next step, and proof it worked.</h3>
+        <p class="copy">Each flag carries a recommendation, drawn from peer reviewed research
+          and assembled by our multi agent AI against the indicator, its context and the
+          athlete, alongside what has worked for this athlete before. Once staff act, the
+          next samples show whether the indicator came back into range, and that answer
+          feeds the next recommendation.</p>
         <div class="fw-dia">
           <div class="tree">
             <div class="tree-row tree-row--split">
               <div class="tree-n"><span class="k">Peer reviewed research</span>Assembled by our multi agent AI</div>
               <div class="tree-n tree-n--us"><span class="k">Your own interventions</span>What has worked for this athlete before</div>
             </div>
-            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Matched against</span>The indicator, its context, and this athlete&rsquo;s history</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--l tree-n--us"><span class="k">Delivered to</span>The person who acts on it, with the reasoning attached</div></div>
-          </div>
-        </div>
-      </li>
-
-      <li class="fw-step">
-        <span class="fw-badge"><b>04</b> Measure</span>
-        <h3 class="h3">Did it work?</h3>
-        <p class="copy">An intervention is a hypothesis until the next samples answer it. We
-          record what was done, then measure whether the indicator came back into the
-          athlete&rsquo;s range and how long it took. That answer goes back into step 03, so
-          what the squad learns about one athlete is available the next time.</p>
-        <div class="fw-dia">
-          <div class="tree">
-            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Apply</span>The intervention is recorded against the athlete</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Recommend</span>Delivered to the person who acts on it, with the reasoning attached</div></div>
             <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Re-sample</span>The following samples carry the answer</div></div>
             <div class="tree-row tree-row--split">
               <div class="tree-n tree-n--us"><span class="k">Back in range</span>And how fast it got there</div>
@@ -5787,115 +5856,131 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec band-grey" id="checklist">
+<section class="sec band-grey sec--tight" id="checklist">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The readiness checklist</span>
+      <span class="eyebrow">The Indicators</span>
       <h2 class="h2">Seven questions. Answered from saliva.</h2>
-      <p class="copy">The Biolyz Athlete Biomarker Readiness Checklist, adapted from the
-        Athlete Health &amp; Readiness Checklist (AHaRC, Jeukendrup et al. 2024). Open a
-        question to see the biomarkers behind it and who acts on the result.</p>
     </div>
 
-    <div class="ck">
-      <details class="ck-item" data-row="1">
-        <summary><span class="ck-n">01<b>Inflammation</b></span>
-          <span class="ck-q">Is there a concern about inflammatory or immune activation?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">PGF2&alpha;, neopterin, kynurenine, tryptophan, Phe/Tyr, Kyn/Trp</dd>
-            <dt>Sampling</dt><dd>Weekly</dd>
-            <dt>Typical stressors</dt><dd>Training and match load, muscle damage, illness, psychological stress</dd>
-            <dt>Who acts</dt><dd>Performance, Medical, Nutrition</dd>
+    <div class="ix">
+      <div class="ix-list" role="tablist" aria-label="The seven indicators" data-tabs="ix">
+        <button type="button" class="ix-tab" role="tab" aria-selected="true" id="ix-tab-1"
+          aria-controls="ix-panel-1" data-tab="ix1"><span class="n">01</span>Inflammation</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-2"
+          aria-controls="ix-panel-2" data-tab="ix2"><span class="n">02</span>Metabolic stress</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-3"
+          aria-controls="ix-panel-3" data-tab="ix3"><span class="n">03</span>Muscle damage</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-4"
+          aria-controls="ix-panel-4" data-tab="ix4"><span class="n">04</span>Hormonal status</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-5"
+          aria-controls="ix-panel-5" data-tab="ix5"><span class="n">05</span>Psychological stress</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-6"
+          aria-controls="ix-panel-6" data-tab="ix6"><span class="n">06</span>Sleep</button>
+        <button type="button" class="ix-tab" role="tab" aria-selected="false" id="ix-tab-7"
+          aria-controls="ix-panel-7" data-tab="ix7"><span class="n">07</span>Hydration</button>
+      </div>
+      <div class="ix-panels">
+        <div class="ix-panel" data-panel="ix1" id="ix-panel-1" role="tabpanel" aria-labelledby="ix-tab-1">
+          <span class="ix-k">01 &middot; Inflammation</span>
+          <h3 class="ix-q">Is there a concern about inflammatory or immune activation?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>PGF2&alpha;</li><li>neopterin</li><li>kynurenine</li><li>tryptophan</li><li>Phe/Tyr</li><li>Kyn/Trp</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Weekly</dd></div>
+            <div><dt>Typical stressors</dt><dd>Training and match load, muscle damage, illness, psychological stress</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Performance</li><li>Medical</li><li>Nutrition</li></ul></dd></div>
           </dl>
-          <a href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="2">
-        <summary><span class="ck-n">02<b>Metabolic stress</b></span>
-          <span class="ck-q">Is there a concern about elevated purine or metabolic turnover?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Hypoxanthine, xanthine, xanthine/hypoxanthine, uric acid</dd>
-            <dt>Sampling</dt><dd>Weekly</dd>
-            <dt>Typical stressors</dt><dd>High intensity, prolonged or repeated sprint exercise</dd>
-            <dt>Who acts</dt><dd>Performance</dd>
+        <div class="ix-panel" data-panel="ix2" id="ix-panel-2" role="tabpanel" aria-labelledby="ix-tab-2" hidden>
+          <span class="ix-k">02 &middot; Metabolic stress</span>
+          <h3 class="ix-q">Is there a concern about elevated purine or metabolic turnover?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Hypoxanthine</li><li>xanthine</li><li>xanthine/hypoxanthine</li><li>uric acid</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Weekly</dd></div>
+            <div><dt>Typical stressors</dt><dd>High intensity, prolonged or repeated sprint exercise</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Performance</li></ul></dd></div>
           </dl>
-          <a href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="3">
-        <summary><span class="ck-n">03<b>Muscle damage</b></span>
-          <span class="ck-q">Is there a concern about muscle fibre disruption?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Alpha-actin (ACTA1) first, then LDHA and HSPB1</dd>
-            <dt>Sampling</dt><dd>Weekly, or after a session</dd>
-            <dt>Typical stressors</dt><dd>Novel, eccentric, high volume or contact loading</dd>
-            <dt>Who acts</dt><dd>Performance, Physio</dd>
+        <div class="ix-panel" data-panel="ix3" id="ix-panel-3" role="tabpanel" aria-labelledby="ix-tab-3" hidden>
+          <span class="ix-k">03 &middot; Muscle damage</span>
+          <h3 class="ix-q">Is there a concern about muscle fibre disruption?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Alpha-actin (ACTA1)</li><li>LDHA</li><li>HSPB1</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Weekly, or after a session</dd></div>
+            <div><dt>Typical stressors</dt><dd>Novel, eccentric, high volume or contact loading</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Performance</li><li>Physio</li></ul></dd></div>
           </dl>
-          <a href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases/alpha-actin" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="4">
-        <summary><span class="ck-n">04<b>Hormonal status</b></span>
-          <span class="ck-q">Is there a concern about the balance between anabolic and catabolic states?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Cortisol, testosterone, testosterone:cortisol ratio</dd>
-            <dt>Sampling</dt><dd>Weekly</dd>
-            <dt>Typical stressors</dt><dd>Load against recovery, match density, sleep, energy availability</dd>
-            <dt>Who acts</dt><dd>Performance, Medical</dd>
+        <div class="ix-panel" data-panel="ix4" id="ix-panel-4" role="tabpanel" aria-labelledby="ix-tab-4" hidden>
+          <span class="ix-k">04 &middot; Hormonal status</span>
+          <h3 class="ix-q">Is there a concern about the balance between anabolic and catabolic states?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Cortisol</li><li>testosterone</li><li>testosterone:cortisol ratio</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Weekly</dd></div>
+            <div><dt>Typical stressors</dt><dd>Load against recovery, match density, sleep, energy availability</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Performance</li><li>Medical</li></ul></dd></div>
           </dl>
-          <a href="/use-cases" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="5">
-        <summary><span class="ck-n">05<b>Psychological stress</b></span>
-          <span class="ck-q">Is there a concern about stress response activation?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Morning cortisol, DHEAS, alpha-amylase</dd>
-            <dt>Sampling</dt><dd>Daily or weekly</dd>
-            <dt>Typical stressors</dt><dd>Life stress, competition anticipation, sleep disruption</dd>
-            <dt>Who acts</dt><dd>Psychology, Medical</dd>
+        <div class="ix-panel" data-panel="ix5" id="ix-panel-5" role="tabpanel" aria-labelledby="ix-tab-5" hidden>
+          <span class="ix-k">05 &middot; Psychological stress</span>
+          <h3 class="ix-q">Is there a concern about stress response activation?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Morning cortisol</li><li>DHEAS</li><li>alpha-amylase</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Daily or weekly</dd></div>
+            <div><dt>Typical stressors</dt><dd>Life stress, competition anticipation, sleep disruption</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Psychology</li><li>Medical</li></ul></dd></div>
           </dl>
-          <a href="/use-cases" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="6">
-        <summary><span class="ck-n">06<b>Sleep</b></span>
-          <span class="ck-q">Is there a concern about circadian rhythm or sleep disruption?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Melatonin, trigonelline (caffeine)</dd>
-            <dt>Sampling</dt><dd>Daily, from the morning sample</dd>
-            <dt>Typical stressors</dt><dd>Travel, schedule changes, light, caffeine, late sessions</dd>
-            <dt>Who acts</dt><dd>Performance, Medical</dd>
+        <div class="ix-panel" data-panel="ix6" id="ix-panel-6" role="tabpanel" aria-labelledby="ix-tab-6" hidden>
+          <span class="ix-k">06 &middot; Sleep</span>
+          <h3 class="ix-q">Is there a concern about circadian rhythm or sleep disruption?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Melatonin</li><li>trigonelline (caffeine)</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Daily, from the morning sample</dd></div>
+            <div><dt>Typical stressors</dt><dd>Travel, schedule changes, light, caffeine, late sessions</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Performance</li><li>Medical</li></ul></dd></div>
           </dl>
-          <a href="/use-cases" data-link>See it in a real case &#8594;</a>
+          <a class="ix-link" href="/use-cases" data-link>See it in a real case &#8594;</a>
         </div>
-      </details>
-
-      <details class="ck-item" data-row="7">
-        <summary><span class="ck-n">07<b>Hydration</b></span>
-          <span class="ck-q">Is there a concern about fluid balance or hydration?</span></summary>
-        <div class="ck-body">
-          <dl>
-            <dt>Biomarkers</dt><dd class="mk">Salivary creatinine, protein concentration</dd>
-            <dt>Sampling</dt><dd>Daily, or after a session</dd>
-            <dt>Typical stressors</dt><dd>Sweat loss, heat, inadequate fluid replacement</dd>
-            <dt>Who acts</dt><dd>Nutrition, Medical</dd>
+        <div class="ix-panel" data-panel="ix7" id="ix-panel-7" role="tabpanel" aria-labelledby="ix-tab-7" hidden>
+          <span class="ix-k">07 &middot; Hydration</span>
+          <h3 class="ix-q">Is there a concern about fluid balance or hydration?</h3>
+          <div class="ix-mk">
+            <span class="ix-l">Biomarkers</span>
+            <ul class="ix-chips"><li>Salivary creatinine</li><li>protein concentration</li></ul>
+          </div>
+          <dl class="ix-meta">
+            <div><dt>Sampling</dt><dd>Daily, or after a session</dd></div>
+            <div><dt>Typical stressors</dt><dd>Sweat loss, heat, inadequate fluid replacement</dd></div>
+            <div><dt>Who acts</dt><dd><ul class="ix-who"><li>Nutrition</li><li>Medical</li></ul></dd></div>
           </dl>
           <p class="uc-empty">No published case for this row yet.
             <span class="ph">a hydration use case for row 7</span></p>
         </div>
-      </details>
+      </div>
     </div>
 
     <p class="callout" style="margin-top:var(--sp-2xl)">No single marker is diagnostic on its
@@ -5904,7 +5989,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec band-grey" id="cases">
+<section class="sec band-grey sec--tight" id="cases">
   <div class="wrap" data-cc>
     <div class="cc-head">
       <div class="hd" style="margin:0">
@@ -5980,7 +6065,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <section class="sec--xl band-blue">
   <div class="wrap close-cta">
     <span class="eyebrow">So what?</span>
-    <h2 class="h2">See what your team isn&rsquo;t telling you yet.</h2>
+    <h2 class="h2">Discover the trends before they become problems.</h2>
     <div class="btn-row">
       <a class="btn btn--ink" href="/demo" data-link>Book a demo &#8599;</a>
       <a class="btn btn--glass" href="/use-cases" data-link>Open the use case library</a>
@@ -6269,6 +6354,604 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 })();
 </script>
 
+<!-- ======================================================================
+     HORSES  ·  /horses
+     A standalone landing page from 261002-BiolyzxHorses-v2.docx: the home
+     page and The Solution, retold for stables, breeders and owners. It is
+     deliberately NOT linked from the nav, the footer or anywhere else on the
+     site — it is reached by its URL only. Every yellow item in the source
+     document is a visible .ph here rather than an invented answer.
+     ====================================================================== -->
+<div class="page" id="p-horses" data-title="Biolyz for Horses"
+     data-desc="Saliva biomarker monitoring at home or at the competition, for breeders and horse owners: stress, recovery, gastric ulcer risk and stallion fertility from one painless swab, no needle and no vet." hidden>
+
+<style>
+/* The horses hero: a still photograph (a horse at full gallop) in place of
+   the video the other heroes use, under the same scrim. Shorter than a full
+   viewport. The rider sits right of centre, so phones crop towards them. */
+.hero--horses{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
+/* So What?: the black-and-white pitch from above, same hero treatment. */
+.hero--sowhat{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
+.hero--sowhat .hero-bg{filter:grayscale(1)}
+.hero--sowhat .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(44ch,100%)}
+.hero--horses .hero-bg{object-position:60% 15%}
+.hero--horses .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(44ch,100%)}
+
+/* The horses page is long and mostly text, so its sections sit closer
+   together than the site default (about half). */
+#p-horses .sec{padding-block:calc(var(--section-md) * .7)}
+/* ...and a heading sits closer to the text that follows it. */
+#p-horses .sec .hd{margin-bottom:var(--sp-lg)}
+/* Where a heading and its text sit side by side, they stack on narrower
+   screens; keep that stacked gap just as tight. */
+#p-horses .split, #p-horses .hz-split{row-gap:var(--sp-lg)}
+#p-horses .hz-split > .hd{margin-bottom:0}
+
+/* Horses page key points: a split layout. The section's statement sits on
+   the left, its points stack on the right as quiet rows: a blue icon, the
+   title with its key figure beside it, then the text. No boxes. */
+.hz-split{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);
+  gap:var(--sp-xl) var(--section-md); align-items:start}
+.hz-split > .hd{margin:0; position:sticky; top:calc(var(--nav-real, var(--navh)) + var(--section-sm))}
+.hz-why, .hz-mini{display:flex; flex-direction:column}
+.hz-why-card, .hz-mini-card{display:grid; grid-template-columns:2rem minmax(0,1fr); column-gap:var(--sp-md);
+  row-gap:var(--sp-2xs); padding:var(--sp-lg) 0; border-top:var(--stroke) solid var(--border)}
+.hz-why-card:first-child, .hz-mini-card:first-child{border-top:0; padding-top:0}
+.hz-why-icon{grid-column:1; grid-row:1 / span 3; color:var(--c-blue); padding-top:.15rem}
+.hz-why-icon svg{width:1.4rem; height:1.4rem; display:block}
+.hz-why-card > :not(.hz-why-icon), .hz-mini-card > *{grid-column:2}
+.hz-why-card .t, .hz-mini-card .t{order:1; font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2}
+.hz-why-fig{order:2; font-size:var(--t-small); letter-spacing:.06em; text-transform:uppercase; color:var(--c-blue)}
+.hz-why-card .d, .hz-why-card p, .hz-mini-card .d{order:3; font-size:var(--t-regular);
+  color:var(--text-2); max-width:min(58ch,100%)}
+.hz-why-card p + p{margin-top:var(--sp-xs)}
+/* The cost comparison under Financial: one short line, set off in blue. */
+.hz-why-card .hz-compare{color:var(--text); border-left:2px solid var(--c-blue);
+  padding-left:var(--sp-md); margin-top:var(--sp-xs)}
+/* Answers: big words left (the selected one in blue, the rest muted), the
+   selected topic's details right, behind a thin blue rule. */
+.hz-answers{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);
+  gap:var(--sp-xl) var(--section-md); align-items:start}
+.hz-words{display:flex; flex-direction:column; align-items:flex-start; gap:var(--sp-xs)}
+.hz-word{background:none; border:0; padding:0; cursor:pointer; text-align:left;
+  font-size:var(--h2); line-height:1.1; letter-spacing:-.04em; color:var(--text-3);
+  transition:color var(--dur-micro) var(--ease)}
+.hz-word:hover{color:var(--text)}
+.hz-word[aria-selected="true"]{color:var(--c-blue)}
+.hz-word:focus-visible{outline:2px solid var(--focus); outline-offset:4px; border-radius:var(--r-sm)}
+.hz-answer{display:flex; flex-direction:column; gap:var(--sp-sm); border-left:2px solid var(--c-blue);
+  padding:var(--sp-xs) 0 var(--sp-xs) var(--sp-lg)}
+.hz-answer:not([hidden]){animation:ind-in var(--dur-short) var(--ease)}
+.hz-q-question{font-size:var(--h5); letter-spacing:-.03em; line-height:1.25; margin-bottom:var(--sp-xs)}
+.hz-answer .tag{text-transform:none; letter-spacing:0; background:var(--c-white)}
+.hz-q-note{font-size:var(--t-small); color:var(--c-blue)}
+.hz-a-bio{font-size:var(--t-regular); color:var(--text-2); margin-bottom:var(--sp-xs)}
+.hz-q-for{font-size:var(--t-small); color:var(--text-2)}
+.hz-q-for b{font-weight:400; color:var(--text)}
+@media (max-width:900px){
+  .hz-answers{grid-template-columns:1fr}
+  .hz-words{flex-direction:row; flex-wrap:wrap; gap:var(--sp-xs) var(--sp-lg)}
+  .hz-word{font-size:var(--h4)}
+}
+/* Option B: the topics as a row of pills (hovered / selected one blue), and the
+   selected topic's details in one panel underneath. */
+.hz-answers--pills{grid-template-columns:1fr; gap:var(--sp-lg)}
+.hz-answers--pills .hz-words{flex-direction:row; flex-wrap:wrap; gap:var(--sp-xs)}
+.hz-answers--pills .hz-word{font-size:var(--t-large); letter-spacing:-.02em; line-height:1;
+  padding:var(--sp-sm) var(--sp-lg); border-radius:var(--r-round); color:var(--text);
+  background:var(--c-white); border:var(--stroke) solid var(--border)}
+.hz-answers--pills .hz-word:hover,
+.hz-answers--pills .hz-word[aria-selected="true"]{background:var(--c-blue); color:var(--c-white);
+  border-color:var(--c-blue)}
+.hz-answers--pills .hz-answer{border-left:0; padding:var(--sp-lg) 0 0;
+  border-top:var(--stroke) solid var(--border); max-width:min(64ch,100%)}
+/* How it works: the five steps at a glance, one row of five. */
+.hz-flow{display:grid; grid-template-columns:repeat(5,1fr); gap:var(--sp-xs)}
+.hz-flow li{display:flex; flex-direction:column; gap:var(--sp-xs); padding:var(--sp-lg);
+  background:var(--c-white); border-radius:var(--r-sm)}
+.hz-flow .n{display:inline-flex; align-items:center; justify-content:center; width:2.25rem; height:2.25rem;
+  border-radius:50%; background:var(--c-blue); color:var(--c-white); font-size:var(--t-small);
+  font-variant-numeric:tabular-nums; margin-bottom:var(--sp-sm)}
+.hz-flow .t{font-size:var(--t-large); letter-spacing:-.03em}
+.hz-flow .d{font-size:var(--t-small); color:var(--text-2)}
+@media (max-width:1100px){ .hz-flow{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:620px){ .hz-flow{grid-template-columns:1fr} }
+.hz-steps.hz-steps--2{grid-template-columns:1fr 1fr}
+/* 01 Collect: hovering a card shows its photo over the other card. The
+   cards are taller so the photos have room; phones skip the photos. */
+.hz-collect{position:relative}
+.hz-collect .card{min-height:20rem; cursor:default}
+.hz-collect .card[data-hz="swab"]{grid-column:1; grid-row:1}
+.hz-collect .card[data-hz="ship"]{grid-column:2; grid-row:1}
+.hz-collect-pic{position:relative; grid-row:1; z-index:1; border-radius:var(--r-sm); overflow:hidden; opacity:0;
+  pointer-events:none; transform:scale(.98);
+  transition:opacity var(--dur-short) var(--ease), transform var(--dur-short) var(--ease)}
+.hz-collect-pic img{position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover}
+.hz-collect-pic--swab{grid-column:2}
+.hz-collect-pic--ship{grid-column:1}
+.hz-collect:has(.card[data-hz="swab"]:hover, .card[data-hz="swab"]:focus-visible) .hz-collect-pic--swab,
+.hz-collect:has(.card[data-hz="ship"]:hover, .card[data-hz="ship"]:focus-visible) .hz-collect-pic--ship{
+  opacity:1; transform:none}
+.hz-collect:has(.card[data-hz="swab"]:hover, .card[data-hz="swab"]:focus-visible) .card[data-hz="swab"],
+.hz-collect:has(.card[data-hz="ship"]:hover, .card[data-hz="ship"]:focus-visible) .card[data-hz="ship"]{
+  box-shadow:inset 3px 0 0 var(--c-blue)}
+@media (max-width:620px){
+  .hz-steps.hz-steps--2{grid-template-columns:1fr}
+  .hz-collect .card{grid-column:auto; grid-row:auto; min-height:0}
+  .hz-collect .card[data-hz]{grid-column:auto; grid-row:auto}
+  .hz-collect-pic{display:none}
+}
+/* 02 Analyze: the lab, in one line under the answers. */
+.hz-lab{margin-top:var(--section-sm); padding-top:var(--sp-lg); border-top:var(--stroke) solid var(--border);
+  display:flex; flex-direction:column; gap:var(--sp-sm)}
+.hz-lab p{font-size:var(--t-large); letter-spacing:-.02em; line-height:1.35; max-width:min(60ch,100%)}
+/* Small notes under the dashboard and the context placeholder. */
+.hz-note{margin-top:var(--sp-md); font-size:var(--t-small); color:var(--text-2)}
+/* The routine has no icons: a blue tick drawn in their place. */
+.hz-mini-card::before{content:''; grid-column:1; grid-row:1 / span 2; width:.7rem; height:.4rem;
+  margin:.45rem 0 0 .3rem; border-left:2px solid var(--c-blue); border-bottom:2px solid var(--c-blue);
+  transform:rotate(-45deg)}
+.hz-mini-card .d{font-size:var(--t-small)}
+@media (max-width:900px){
+  .hz-split{grid-template-columns:1fr}
+  .hz-split > .hd{position:static}
+}
+/* The four steps: the number as a blue circle, like the icons above. */
+.hz-steps .card{padding:var(--sp-xl); gap:var(--sp-sm)}
+.sec:not(.band-grey) .hz-steps .card{background:var(--c-grey-100)}
+.hz-steps .n{display:inline-flex; align-items:center; justify-content:center; width:3rem;
+  height:3rem; border-radius:50%; background:var(--c-blue); color:var(--c-white);
+  font-variant-numeric:tabular-nums; margin-bottom:var(--sp-md)}
+.hz-steps .t{font-size:var(--t-large)}
+.hz-steps .d{font-size:var(--t-regular)}
+/* Who are we: the company figures in one light panel, a short label and
+   description on top, three figures side by side split by hairlines. */
+.hz-stats{margin-top:var(--section-sm); padding:var(--sp-xl); border-radius:var(--r-sm);
+  background:var(--c-grey-100)}
+.hz-stats-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:var(--sp-xs) var(--sp-md);
+  padding-bottom:var(--sp-lg); margin-bottom:var(--sp-lg); border-bottom:var(--stroke) solid var(--border)}
+.hz-stats-head p{font-size:var(--t-regular); color:var(--text-2)}
+.hz-stats-row{display:grid; grid-template-columns:repeat(5,1fr)}
+@media (max-width:1000px) and (min-width:701px){
+  .hz-stats-row{grid-template-columns:1fr 1fr; row-gap:var(--sp-lg)}
+  .hz-stat:nth-child(odd){padding-left:0; border-left:0}
+}
+.hz-stat{display:flex; flex-direction:column; gap:var(--sp-2xs); padding:0 var(--sp-xl)}
+.hz-stat:first-child{padding-left:0}
+.hz-stat + .hz-stat{border-left:var(--stroke) solid var(--border)}
+.hz-stat .v{font-size:var(--h3); line-height:1; letter-spacing:-.04em; color:var(--c-blue);
+  font-variant-numeric:tabular-nums; margin-bottom:var(--sp-sm)}
+.hz-stat .k{font-size:var(--t-large); letter-spacing:-.03em; line-height:1.2}
+.hz-stat .s{font-size:var(--t-small); color:var(--text-2)}
+@media (max-width:700px){
+  .hz-stats-row{grid-template-columns:1fr; gap:var(--sp-lg)}
+  .hz-stat{padding:0}
+  .hz-stat + .hz-stat{border-left:0; border-top:var(--stroke) solid var(--border); padding-top:var(--sp-lg)}
+}
+/* Who are we: the clubs and the stud we work with, as black-and-white
+   logos (the marks are in colour; a greyscale filter keeps them quiet). */
+.hz-partners{display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-md) var(--sp-2xl);
+  margin-top:var(--sp-xl)}
+.hz-partner{display:inline-flex; align-items:center; filter:grayscale(1) contrast(1.15); opacity:.85}
+.hz-partner svg{height:3rem; width:auto; display:block}
+.hz-partner--img img{height:3.75rem; width:auto; display:block; mix-blend-mode:multiply;
+  filter:brightness(1.08)}
+/* Who are we: the key figures plain, numbers in blue. */
+#p-horses .figs--boxed .fig{background:none; padding:var(--sp-lg) 0 0; border-radius:0;
+  border-top:var(--stroke) solid var(--border)}
+#p-horses .figs--boxed .fig .v{color:var(--c-blue)}
+
+
+/* "Most relevant for", under the biomarker tags in each question card. */
+.hz-for{font-size:var(--t-small); color:var(--text-2)}
+.hz-for b{font-weight:400; color:var(--text)}
+
+/* The four steps sit on a grey band, where the default card fill vanishes,
+   and four cards on auto-fit wrap 3 + 1 at tablet widths. Four, two, one. */
+.hz-steps{grid-template-columns:repeat(4,1fr)}
+.hz-steps .card{background:var(--c-white)}
+@media (max-width:1100px){ .hz-steps{grid-template-columns:1fr 1fr} }
+@media (max-width:620px){ .hz-steps{grid-template-columns:1fr} }
+</style>
+
+<section class="hero hero--horses inv">
+  <img class="hero-bg" src="__IMG_horsehero__" width="2000" height="1429" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Biolyz for Horses</span>
+      <h1 class="hero-title">Saliva biomarker monitoring at home or at the competition, for
+        breeders and horse owners.</h1>
+      <p class="hero-lead">What your horse hides, its saliva shows.</p>
+      <div class="btn-row">
+        <a class="btn" href="/contact" data-link>Talk to us &#8599;</a>
+        <a class="btn btn--glass" href="#hz-how" data-sw-jump="hz-how">The Process</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="split">
+      <div class="hd" style="margin:0">
+        <span class="eyebrow">Who are we</span>
+        <h2 class="h3">From elite athletes to equine athletes.</h2>
+      </div>
+      <div>
+        <p class="copy">Biolyz is an Austrian diagnostics company based in Tulln an der Donau,
+          operating its own laboratories in Dortmund, Tulln and London. We analyse saliva for a broad
+          panel of biomarkers, covering hormones, stress and recovery, and metabolism, all from
+          one small sample.</p>
+        <p class="copy">We monitor training load, recovery and stress across full seasons for
+          professional teams in football and cycling. Sport horses face the same demands as
+          human athletes, from intense training, competition and breeding, to travel and
+          recovery, which makes them a natural next step for our technology.</p>
+      </div>
+    </div>
+    <!-- Company figures from human sport, labelled as such so they are not
+         read as horse figures. -->
+    <div class="hz-stats">
+      <div class="hz-stats-head">
+        <span class="eyebrow">Biolyz in elite sport</span>
+        <p>What we have built with professional football and cycling teams, and our first
+          step with horses.</p>
+      </div>
+      <div class="hz-stats-row">
+        <div class="hz-stat"><span class="v">25,000+</span><span class="k">Samples analysed</span>
+          <span class="s">In the last 12 months</span></div>
+        <div class="hz-stat"><span class="v">2.5M+</span><span class="k">Biomarker measurements</span>
+          <span class="s">Across football and cycling</span></div>
+        <div class="hz-stat"><span class="v">3</span><span class="k">Own laboratories</span>
+          <span class="s">Dortmund, Tulln and London</span></div>
+        <div class="hz-stat"><span class="v">1</span><span class="k">Pilot horse project</span>
+          <span class="s">Running now with Gest&uuml;t Erlenhof</span></div>
+        <div class="hz-stat"><span class="v">5+</span><span class="k">Research papers</span>
+          <span class="s">Behind our saliva method</span></div>
+      </div>
+    </div>
+    <div class="hz-partners">
+      <span class="eyebrow">Trusted by</span>
+      <span class="hz-partner" title="Borussia Dortmund">__SVG_bvb__<span class="sr-only">Borussia Dortmund</span></span>
+      <span class="hz-partner" title="Bayer 04 Leverkusen">__SVG_b04__<span class="sr-only">Bayer 04 Leverkusen</span></span>
+      <span class="hz-partner hz-partner--img" title="Gest&uuml;t Erlenhof"><img src="__IMG_erlenhof__" width="424" height="252" alt="Gest&uuml;t Erlenhof"></span>
+    </div>
+  </div>
+</section>
+
+<!-- The same three promises as the home page's blue cards, for a horse. -->
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hz-split">
+    <div class="hd">
+      <span class="eyebrow">The power of saliva</span>
+      <h2 class="h2">Painless for your horse. Simple for you.</h2>
+    </div>
+    <div class="hz-why">
+      <div class="hz-why-card">
+        <span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3 4 5.5 7 5.5 10a5.5 5.5 0 0 1-11 0C6.5 10 9 7 12 3Z"/></svg></span>
+        <span class="hz-why-fig">2&ndash;3&nbsp;min</span>
+        <span class="t">Painless</span>
+        <span class="d">A cotton swab in the side of the mouth for two to three minutes
+          replaces the blood draw.</span>
+      </div>
+      <div class="hz-why-card">
+        <span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 9"/><path d="M20 4v5h-5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15"/><path d="M4 20v-5h5"/></svg></span>
+        <span class="hz-why-fig">Daily</span>
+        <span class="t">Repeatable</span>
+        <span class="d">Sample daily, weekly or after every competition and see trends over
+          weeks, months or seasons.</span>
+      </div>
+      <div class="hz-why-card">
+        <span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-5h6v5"/></svg></span>
+        <span class="hz-why-fig">Stable-side</span>
+        <span class="t">Done in the stable</span>
+        <span class="d">Owner, groom or Biolyz staff take the sample after a short
+          instruction. No vet has to be there.</span>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="hz-split">
+    <div class="hd">
+      <span class="eyebrow">So What?</span>
+      <h2 class="h2">Early signs, fewer setbacks.</h2>
+    </div>
+    <div class="hz-why hz-why--2">
+      <div class="hz-why-card">
+        <span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10Z"/></svg></span>
+        <h3 class="t">Health</h3>
+        <p>Horses hide pain and stress. Overload, joint damage or gastric ulcers often only
+          show once the horse is lame or off its feed.</p>
+        <p>Saliva monitoring picks up the change earlier, so you can adjust training, feeding
+          and transport before a small problem becomes a long break.</p>
+      </div>
+      <div class="hz-why-card">
+        <span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M15 9.5a3.5 3.5 0 1 0 0 5M8 11h5M8 13h5"/></svg></span>
+        <h3 class="t">Financial</h3>
+        <p>Every unplanned break costs: vet bills, lost training, missed competitions and, for
+          breeders, missed covers. Your horse&rsquo;s value depends on its soundness.</p>
+        <p class="hz-compare">One year of monitoring vs. one gastroscopy and ulcer
+          treatment, or one missed season.</p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works: the whole process at a glance, then one section per step,
+     each with The Solution's pinned step label. -->
+<section class="sec band-grey" id="hz-how">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The Process</span>
+      <h2 class="h2">From swab to decision, in five steps.</h2>
+    </div>
+    <ol class="hz-flow">
+      <li><span class="n">01</span><span class="t">Collect</span><span class="d">A two-minute saliva swab in the stable, sent to our lab.</span></li>
+      <li><span class="n">02</span><span class="t">Analyze</span><span class="d">The full biomarker panel, turned into clear indicators.</span></li>
+      <li><span class="n">03</span><span class="t">Personalize</span><span class="d">Every value read against your horse&rsquo;s own baseline.</span></li>
+      <li><span class="n">04</span><span class="t">Context</span><span class="d">Your stable&rsquo;s own data, alongside the biomarkers.</span></li>
+      <li><span class="n">05</span><span class="t">Act</span><span class="d">Recommendations for training, care and breeding.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The swab</span>
+      <h2 class="h2">Swab, seal, send.</h2>
+    </div>
+    <!-- Hovering a card shows its photo over the other card: the horse being
+         swabbed over "Logistics", the cooling box over "Swab". -->
+    <div class="cards hz-steps hz-steps--2 hz-collect">
+      <div class="card" data-hz="swab" tabindex="0">
+        <span class="n">01</span><span class="t">Swab</span>
+        <span class="d">A cotton swab is held in the side of the horse&rsquo;s mouth with swab
+          forceps for about two to three minutes, until roughly 2&nbsp;ml of saliva has been
+          collected.</span>
+      </div>
+      <div class="card" data-hz="ship" tabindex="0">
+        <span class="n">02</span><span class="t">Logistics supported and handled by Biolyz</span>
+        <span class="d">Consumables out, samples back - collection and cooling are part of
+          the platform.</span>
+      </div>
+      <div class="hz-collect-pic hz-collect-pic--swab" aria-hidden="true">
+        <img src="__IMG_horseswab__" width="1543" height="1019" alt=""></div>
+      <div class="hz-collect-pic hz-collect-pic--ship" aria-hidden="true">
+        <img src="__IMG_logistics__" width="1254" height="1254" alt=""></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey" id="hz-questions">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Analyze</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The Indicators</span>
+      <h2 class="h2">Four answers from one sample.</h2>
+    </div>
+    <div class="hz-answers hz-answers--pills">
+      <div class="hz-words" role="tablist" aria-label="Questions" data-tabs="hz-answers">
+        <button type="button" class="hz-word" role="tab" aria-selected="true" id="tab-hza1" aria-controls="panel-hza1" data-tab="hza1">Stress</button>
+        <button type="button" class="hz-word" role="tab" aria-selected="false" id="tab-hza2" aria-controls="panel-hza2" data-tab="hza2">Recovery</button>
+        <button type="button" class="hz-word" role="tab" aria-selected="false" id="tab-hza3" aria-controls="panel-hza3" data-tab="hza3">EGUS</button>
+        <button type="button" class="hz-word" role="tab" aria-selected="false" id="tab-hza4" aria-controls="panel-hza4" data-tab="hza4">Fertility</button>
+      </div>
+      <div class="hz-answer-panel">
+        <div class="hz-answer" data-panel="hza1" id="panel-hza1" role="tabpanel" aria-labelledby="tab-hza1">
+            <p class="hz-q-question">Is my horse coping with its training, or is it under chronic stress?</p>
+            <p class="hz-a-bio">Cortisol is the main stress hormone: short peaks after training or transport are normal, but values that stay high point to chronic stress, which slows recovery, raises ulcer risk and suppresses reproductive hormones.</p>
+            <div class="tags"><span class="tag">Cortisol</span><span class="tag">Further stress markers</span></div>
+            <span class="hz-q-for"><b>Most relevant for</b> sport horses and young horses in training</span>
+        </div>
+        <div class="hz-answer" data-panel="hza2" id="panel-hza2" role="tabpanel" aria-labelledby="tab-hza2" hidden>
+            <p class="hz-q-question">Is my horse recovering fully between sessions and competitions?</p>
+            <p class="hz-a-bio">If stress markers have not settled by the next session, recovery is incomplete, and that is how overload builds up over weeks.</p>
+            <div class="tags"><span class="tag">Cortisol</span><span class="tag">Recovery markers</span></div>
+            <span class="hz-q-for"><b>Most relevant for</b> sport and competition horses</span>
+        </div>
+        <div class="hz-answer" data-panel="hza3" id="panel-hza3" role="tabpanel" aria-labelledby="tab-hza3" hidden>
+            <p class="hz-q-question">Is my horse at higher risk of gastric ulcers (EGUS)?</p>
+            <p class="hz-a-bio">Up to 90% of racehorses have gastric ulcers, which only a gastroscopy can confirm; saliva does not replace it, but flags horses and periods at risk so the vet can be brought in earlier.</p>
+            <div class="tags"><span class="tag">Cortisol</span><span class="tag">EGUS related markers</span></div>
+            <span class="hz-q-note">EGUS markers in development</span>
+            <span class="hz-q-for"><b>Most relevant for</b> racehorses, competition and breeding horses</span>
+        </div>
+        <div class="hz-answer" data-panel="hza4" id="panel-hza4" role="tabpanel" aria-labelledby="tab-hza4" hidden>
+            <p class="hz-q-question">Is my stallion ready for the breeding season, and is competing affecting his fertility?</p>
+            <p class="hz-a-bio">Testosterone rises with longer days and falls in winter; chronic stress lowers it, which can mean reduced libido and poorer semen quality, so tracking both markers helps plan the season.</p>
+            <div class="tags"><span class="tag">Testosterone</span><span class="tag">Cortisol</span></div>
+            <span class="hz-q-for"><b>Most relevant for</b> breeding stallions, and stallions that compete and breed</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--sp-xl)">
+      <a class="btn btn--ghost" href="/biomarkers" data-link>See the full biomarker panel &#8594;</a>
+    </div>
+
+    <div class="hz-lab">
+      <span class="eyebrow">The lab</span>
+      <p>Every sample is analysed by mass spectrometry in our own laboratories in Dortmund,
+        Tulln and London.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The dashboard</span>
+      <h2 class="h2">What has changed for this horse, not just high or low.</h2>
+      <p class="copy">Results arrive 24 hours after the sample reaches the lab, each value
+        compared with your horse&rsquo;s own baseline presented in one dashboard.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Dashboard views" data-tabs="hz-dash">
+      <button class="tab" role="tab" aria-selected="true"  data-tab="hzd1">Stable Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hzd2">Biomarker Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hzd3">Horse Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hzd4">Individual Indicator</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hzd5">Individual Biomarker</button>
+    </div>
+
+    <div data-panel="hzd1">
+      <figure class="shot" style="margin-top:var(--sp-lg)">
+        <img src="__IMG_full__" width="1920" height="1080" loading="lazy"
+          alt="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad.">
+      </figure>
+    </div>
+    <div data-panel="hzd2" hidden>
+      <p class="copy">One marker across the whole stable, with trends and outliers measured against each horse&rsquo;s own history.</p>
+      <figure class="shot" style="margin-top:var(--sp-lg)">
+        <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
+          alt="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread.">
+      </figure>
+    </div>
+    <div data-panel="hzd3" hidden>
+      <p class="copy">Everything about one horse on one page: what changed since you last looked, and what it is likely to mean.</p>
+      <figure class="shot" style="margin-top:var(--sp-lg)">
+        <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
+          alt="Player Overview: one athlete's share of markers inside his own range, an at-a-glance indicator grid, and his indicator tiles grouped by department.">
+      </figure>
+    </div>
+    <div data-panel="hzd4" hidden>
+      <p class="copy">Each indicator shows how many of its biomarkers sit inside the horse&rsquo;s own range, and you can always open it to see which ones.</p>
+      <figure class="shot" style="margin-top:var(--sp-lg)">
+        <img src="__IMG_playerind__" width="1920" height="1080" loading="lazy"
+          alt="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting inside the player's own range, so higher is better.">
+      </figure>
+    </div>
+    <div data-panel="hzd5" hidden>
+      <p class="copy">Marker by marker, day by day, against the horse&rsquo;s own range rather than a textbook one.</p>
+      <figure class="shot" style="margin-top:var(--sp-lg)">
+        <img src="__IMG_playermk__" width="1920" height="1080" loading="lazy"
+          alt="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median.">
+      </figure>
+    </div>
+
+    <p class="hz-note">Shown with data from professional football; the stable view works the same way.</p>
+    <p class="callout" style="margin-top:var(--sp-xl)">Biolyz monitoring supports your vet and
+      does not replace veterinary diagnosis or treatment.</p>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The context for your internal data</span>
+      <h2 class="h2">Every data source, one platform.</h2>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="mq-card">__SVG_catapult__<span class="sr-only">Catapult</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_statsports__" alt="STATSports"></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_kinexon__" alt="Kinexon"></div>
+      <div class="mq-card">__SVG_trainingpeaks__<span class="sr-only">TrainingPeaks</span></div>
+      <div class="mq-card">__SVG_garmin__<span class="sr-only">Garmin</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_wahoo__" alt="Wahoo"></div>
+      <div class="mq-card"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_oura__" alt="Oura"></div>
+      <div class="mq-card">__SVG_whoop__<span class="sr-only">WHOOP</span></div>
+      <div class="mq-card"><span class="mq-card-name">+ more</span></div>
+      <div class="mq-card" aria-hidden="true">__SVG_catapult__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_statsports__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_kinexon__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_trainingpeaks__</div>
+      <div class="mq-card" aria-hidden="true">__SVG_garmin__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_wahoo__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_oura__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_whoop__</div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">+ more</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Personalised recommendations</span>
+      <h2 class="h2">The right intervention, at the right time.</h2>
+    </div>
+    <div class="rec-flow">
+      <div class="rec-inputs">
+        <div class="card">
+          <span class="t">Literature-based recommendations</span>
+          <p class="d">Generated with AI from the published research behind each indicator.</p>
+        </div>
+        <span class="rec-plus">or</span>
+        <div class="card">
+          <span class="t">What you and your vet already know</span>
+          <p class="d">Shaped by your horse&rsquo;s own context and the input of your stable team.</p>
+        </div>
+      </div>
+      <span class="rec-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
+      <div class="card rec-result">
+        <span class="t">Personalised recommendations for each horse</span>
+        <p class="rec-note">An example of what a recommendation can look like.</p>
+        <div class="rec-groups">
+          <div><span class="eyebrow">Training and care</span>
+            <ul>
+              <li>Ease the training load until stress markers settle</li>
+              <li>Plan transport and turnout around recovery</li>
+            </ul></div>
+          <div><span class="eyebrow">Vet</span>
+            <ul>
+              <li>Bring the vet in early when ulcer risk is flagged</li>
+              <li>Review feeding during high-risk phases</li>
+            </ul></div>
+          <div><span class="eyebrow">Breeding</span>
+            <ul>
+              <li>Time the breeding season around testosterone and stress</li>
+              <li>Balance competition and covers in stallions that do both</li>
+            </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey">
+  <div class="wrap">
+    <div class="hz-split">
+    <div class="hd">
+      <span class="eyebrow">Get started</span>
+      <h2 class="h2">Start with one horse, or the whole stable.</h2>
+    </div>
+    <div class="hz-why">
+      <div class="hz-why-card"><span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l9 9-8 8-9-9Z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></span><span class="t">Pricing</span>
+        <span class="d"><span class="ph">price per sample, packages, minimum number of horses
+        or samples</span></span></div>
+      <div class="hz-why-card"><span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><span class="t">Pilot offer</span>
+        <span class="d"><span class="ph">optional, e.g. a trial period for a
+        stable</span></span></div>
+      <div class="hz-why-card"><span class="hz-why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span class="t">Contact</span>
+        <span class="d"><span class="ph">name, email and phone for equine enquiries</span></span></div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec--xl band-blue">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Know more. Hurt less.</span>
+    <h2 class="h2">See what your horse is not showing you.</h2>
+    <a class="btn btn--ink" href="/contact" data-link>Talk to us &#8599;</a>
+  </div>
+</section>
+</div>
+
 </main>
 
 <!--US:GATE-->
@@ -6289,7 +6972,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       </div>
       <nav class="fcol" aria-label="Product">
         <span class="ft">Product</span>
-        <a href="/product" data-link>Product</a>
+        <a href="/product" data-link>The Solution</a>
         <a href="/science" data-link>Science</a>
         <a href="/biomarkers" data-link>Biomarkers</a>
         <a href="/research" data-link>Research</a>
@@ -6347,6 +7030,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     '/so-what': 'p-sowhat',
     '/use-cases': 'p-usecases',
     '/use-cases/alpha-actin': 'p-case-actin',
+    '/horses': 'p-horses',       // unlisted: no nav or footer link, by design
     '/compare/point-of-care': 'p-vs-poc',
     '/compare/blood-labs': 'p-vs-bloodlab',
     '/research': 'p-research',
@@ -6645,12 +7329,16 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   function canHover() { return window.matchMedia('(hover: hover)').matches; }
   var procTapOpen = null;
   var procHideTimers = {};
+  // room and lab steps each fill the other column's picture.
+  var procTarget = { room: 'lab', lab: 'room' };
+  function procTargetFor(btn) { return procTarget[btn.dataset.side]; }
   function showProcPic(btn) {
-    var side = btn.dataset.side, target = side === 'room' ? 'lab' : 'room';
+    var side = btn.dataset.side, target = procTargetFor(btn);
     if (procHideTimers[target]) { clearTimeout(procHideTimers[target]); procHideTimers[target] = null; }
     [].forEach.call(document.querySelectorAll('.proc-step[data-side="' + side + '"]'), function (b) {
       b.classList.toggle('is-active', b === btn);
     });
+    if (!target) return;
     var pic = document.querySelector('.proc-pic[data-pic="' + target + '"]');
     if (!pic) return;
     // A side's overlay can carry more than one real photo now (one per step
@@ -6675,8 +7363,9 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     pic.classList.add('is-active');
   }
   function hideProcPic(btn) {
-    var side = btn.dataset.side, target = side === 'room' ? 'lab' : 'room';
+    var target = procTargetFor(btn);
     btn.classList.remove('is-active');
+    if (!target) return;
     procHideTimers[target] = setTimeout(function () {
       var pic = document.querySelector('.proc-pic[data-pic="' + target + '"]');
       if (pic) pic.classList.remove('is-active');
@@ -6695,6 +7384,91 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       if (canHover()) return;
       if (procTapOpen === btn) { hideProcPic(btn); procTapOpen = null; }
       else { showProcPic(btn); procTapOpen = btn; }
+    });
+  });
+
+  // The nav's real height (its links wrap on narrow screens), for the
+  // Product page's sticky step labels.
+  var navEl = document.getElementById('nav');
+  function setNavReal() {
+    if (navEl) document.documentElement.style.setProperty('--nav-real', navEl.offsetHeight + 'px');
+  }
+  setNavReal();
+  window.addEventListener('resize', setNavReal);
+
+  // Step labels: one fixed label under the nav shows the step whose section
+  // is on screen, once that section's own label has scrolled up under the
+  // nav, and cross-fades to the next step's label at the hand-over.
+  (function () {
+    var holder = document.createElement('div');
+    holder.className = 'step-now';
+    holder.setAttribute('aria-hidden', 'true');
+    holder.innerHTML = '<span class="steplabel-tag"></span><span class="steplabel-tag"></span>';
+    document.body.appendChild(holder);
+    var layers = holder.children, front = 0, shown = null, ticking = false;
+    function update() {
+      ticking = false;
+      var page = document.querySelector('.page:not([hidden])');
+      var labels = page ? page.querySelectorAll('.steplabel') : [];
+      var navH = navEl ? navEl.offsetHeight : 0, active = null;
+      // The latest label to pass under the nav stays until the next one
+      // arrives (so each step fades straight into the next); it only goes
+      // once the last step's section has scrolled away.
+      for (var i = 0; i < labels.length; i++) {
+        if (labels[i].getBoundingClientRect().top < navH + 8) { active = labels[i]; }
+      }
+      if (active && active === labels[labels.length - 1] &&
+          active.parentElement.getBoundingClientRect().bottom < navH + 80) { active = null; }
+      if (!active) { holder.classList.remove('is-on'); shown = null; return; }
+      var tag = active.querySelector('.steplabel-tag');
+      holder.style.left = tag.getBoundingClientRect().left + 'px';
+      if (shown !== active) {
+        front = 1 - front;
+        layers[front].innerHTML = tag.innerHTML;
+        layers[front].classList.add('is-current');
+        layers[1 - front].classList.remove('is-current');
+        shown = active;
+      }
+      holder.classList.add('is-on');
+    }
+    function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    window.addEventListener('popstate', request);
+    document.addEventListener('click', function () { setTimeout(request, 50); });
+    request();
+  })();
+
+  // Indicator boxes: hovering one opens it and closes the others; it stays
+  // open until another box is hovered or the cursor leaves the grid. Boxes
+  // open in place, so closing one on every mouseleave would collapse its row
+  // under the cursor on the way down to the next box. Without real hover
+  // (touch), the <details> keeps its own tap to open / tap to close; on a
+  // mouse, a click does nothing extra, so it can't snap an open box shut.
+  // Keyboard Enter/Space (a click with detail 0) still toggles as usual.
+  // Each .ind-grid (indicators, recommendations) is its own group.
+  [].forEach.call(document.querySelectorAll('.ind-grid'), function (grid) {
+    var cards = [].slice.call(grid.querySelectorAll('.ind-card'));
+    cards.forEach(function (d) {
+      d.addEventListener('mouseenter', function () {
+        if (!canHover()) return;
+        cards.forEach(function (o) { o.open = o === d; });
+      });
+      d.querySelector('summary').addEventListener('click', function (e) {
+        if (canHover() && e.detail > 0) e.preventDefault();
+      });
+    });
+    grid.addEventListener('mouseleave', function () {
+      if (canHover()) cards.forEach(function (o) { o.open = false; });
+    });
+  });
+
+  // Horses "Answers": hovering a word selects it, as a click would; the
+  // selection stays when the cursor moves on to the details. Touch keeps
+  // tapping.
+  [].forEach.call(document.querySelectorAll('.hz-word'), function (w) {
+    w.addEventListener('mouseenter', function () {
+      if (canHover() && w.getAttribute('aria-selected') !== 'true') w.click();
     });
   });
 
@@ -6790,6 +7564,17 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       selectTab(scope, b.dataset.tab);
       var flow = stepFlowRegistry[list.dataset.tabs];
       if (flow) flow.onTabClick(b.dataset.tab);
+    });
+  });
+
+  /* So What? indicators: on a mouse, resting on an indicator opens it, no
+     click needed. Touch keeps tapping. */
+  [].forEach.call(document.querySelectorAll('[data-tabs="ix"]'), function (list) {
+    var scope = list.closest('section') || document;
+    list.addEventListener('mouseover', function (e) {
+      if (!canHover()) return;
+      var b = e.target.closest('[data-tab]');
+      if (b && b.getAttribute('aria-selected') !== 'true') selectTab(scope, b.dataset.tab);
     });
   });
 
@@ -6891,7 +7676,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
         flowMs += dt;
         if (flowMs >= SEG) {
           flowMs = 0;
-          flowStep = flowStep % 4 + 1;
+          flowStep = flowStep % flowTabs.length + 1;
           selectTab(flowSec, tabPrefix + flowStep);
         }
         paintFlow(flowMs / SEG);

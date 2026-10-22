@@ -271,6 +271,20 @@ approval. One open item does **not** surface anywhere in published copy and so
 is recorded only here: the "cracks" case uses kynurenic acid and glutamine,
 while checklist row 1 lists kynurenine and does not include glutamine.
 
+### Horses (`/horses`)
+
+Built from `261002-BiolyzxHorses-v2.docx`: the home page and The Solution
+retold for stables, breeders and owners, out of the same components (blue
+promise cards, indicator cards, step labels, figures, closing CTA).
+
+**It is unlisted on purpose.** The route is in `ROUTES`, but nothing in the
+nav, the footer or any other page links to it; it is reached by its URL only.
+Do not add it to a menu without checking with marketing first.
+
+Items still to be confirmed with the business are visible `.ph` markers on
+the page, not invented answers. The hero is a still photo (`web/horsehero.jpg`)
+until horse footage exists.
+
 ### Page weight
 
 There are **two outputs and they are not the same shape**:
