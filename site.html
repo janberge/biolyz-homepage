@@ -352,6 +352,10 @@ img{max-width:100%; display:block}
 /* Literature: the list starts close under the title, no rule between. */
 #p-literature > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-literature > .pagehead + .sec{padding-top:var(--sp-md)}
+/* Book a demo: the form starts close under the intro, no rule between. */
+#p-demo > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
+#p-demo > .pagehead + .sec{padding-top:var(--sp-md); padding-bottom:var(--sp-2xl)}
+#p-demo .field > label{color:var(--c-blue)}
 #p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
 /* Science page: the tight rhythm used across the site, no rule under the
    research heading, and the sample-quality view as a light split
@@ -5180,9 +5184,9 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <header class="pagehead">
   <div class="wrap inner">
     <span class="eyebrow">Book a demo</span>
-    <h1 class="h1">See it on your own squad, not a demo dataset.</h1>
-    <p class="lead">We run the platform against your last two weeks of training data, using
-      your own athletes&rsquo; baselines. Forty-five minutes, your staff, your questions.</p>
+    <h1 class="h1">Skip the sample data. Use yours.</h1>
+    <p class="lead">No generic demo. Your training data, your athletes&rsquo; baselines,
+      and 45 minutes with your staff.</p>
   </div>
 </header>
 
@@ -5245,8 +5249,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
       <div>
         <div class="hd">
-          <span class="eyebrow">What happens on the call</span>
-          <h2 class="h4">Three things, in this order.</h2>
+          <h2 class="h4">What to expect</h2>
         </div>
         <ol class="cards" style="grid-template-columns:1fr">
           <li class="card"><span class="n">01</span><span class="t">Your data, loaded</span>
