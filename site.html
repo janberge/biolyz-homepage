@@ -346,6 +346,10 @@ img{max-width:100%; display:block}
 #p-research > .hero + .sec--md{padding-block:var(--sp-2xl)}
 #p-research #hz{padding-top:var(--sp-2xl)}
 #p-research #hz .hd{margin-bottom:var(--sp-lg)}
+/* Literature: the list starts close under the title, no rule between. */
+#p-literature > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
+#p-literature > .pagehead + .sec{padding-top:var(--sp-md)}
+#p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
 #p-research #hz{padding-bottom:var(--sp-2xl)}
 #p-research > .sec--xl{padding-block:var(--sp-2xl) var(--section-md)}
 @media (max-width:820px){
@@ -4369,15 +4373,14 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-literature" data-title="Biolyz Literature" hidden>
 <header class="pagehead">
   <div class="wrap inner">
-    <span class="eyebrow">Literature</span>
-    <h1 class="h1">Literature.</h1>
+    <h1 class="h1">Literature</h1>
   </div>
 </header>
 
 <section class="sec">
   <div class="wrap">
     <div class="list-toolbar">
-      <span class="eyebrow">All studies</span>
+      <span class="eyebrow eyebrow--blue">All studies</span>
       <span class="mono xs faint" id="lit-count">77 studies &middot; newest first</span>
     </div>
     <div class="field" style="max-width:24rem; margin:var(--sp-lg) 0">
