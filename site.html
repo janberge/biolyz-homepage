@@ -490,6 +490,9 @@ img{max-width:100%; display:block}
    over it — the widget's own card has no background of its own, so the
    fill behind it reads through exactly like it would over a real photo. */
 .wsc-shot--cadence{position:relative; background:#b8bec9; border-style:solid}
+/* High frequency: a wide chart screenshot, shown whole on its own light ground. */
+.wsc-shot--chart{background:#ededed}
+.wsc-shot--chart img{object-fit:contain}
 .cadence-card{
   position:absolute; inset:0; padding:var(--sp-lg); display:flex; flex-direction:column;
   justify-content:space-between; color:#fff; pointer-events:none;
@@ -1853,25 +1856,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
           <span class="wsc-d">A painless saliva swab replaces blood draws and finger pricks.</span></figcaption>
       </figure>
       <figure class="wsc-card">
-        <div class="wsc-shot wsc-shot--cadence">
-          <div class="cadence-card">
-            <div class="cadence-top">
-              <div class="cadence-title">Cadence</div>
-              <svg class="cadence-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 20.5c-4.5-3-9-6.3-9-11A5 5 0 0 1 12 6.2 5 5 0 0 1 21 9.5c0 4.7-4.5 8-9 11z"/>
-              </svg>
-            </div>
-            <div class="cadence-chart-wrap">
-              <svg class="cadence-chart-svg" id="cadenceChartSvg">
-                <path class="cadence-line" id="cadenceLinePath" d=""></path>
-                <g id="cadenceDots"></g>
-              </svg>
-              <div class="cadence-day-labels">
-                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="wsc-shot has-photo wsc-shot--chart"><img src="__IMG_frequency__"
+          alt="A biomarker plotted daily across five weeks, each sample marked green, amber or red against the athlete's own range."></div>
         <figcaption><span class="wsc-n">02</span><span class="wsc-card-t">High frequency</span>
           <span class="wsc-d">Collection is effortless, so testing can happen daily.</span></figcaption>
       </figure>
@@ -1922,46 +1908,6 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
     </div>
   </div>
 </section>
-
-<script>
-(function () {
-  // Edit these two lines to change the shape of the line / which dots are blue
-  var HEIGHTS = [20, 45, 35, 60, 55, 75, 65]; // 0-100, one per day Mon-Sun
-  var ACTIVE  = [true, true, false, true, false, true, false]; // true = #0013e9 dot
-
-  var N = HEIGHTS.length;
-  var PAD = 12;
-  var svg = document.getElementById('cadenceChartSvg');
-  var linePath = document.getElementById('cadenceLinePath');
-  var dotsG = document.getElementById('cadenceDots');
-
-  function draw() {
-    var rect = svg.getBoundingClientRect();
-    var w = rect.width, h = rect.height;
-    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
-
-    var pts = HEIGHTS.map(function (height, i) {
-      return { x: PAD + (i / (N - 1)) * (w - PAD * 2), y: PAD + (1 - height / 100) * (h - PAD * 2) };
-    });
-
-    linePath.setAttribute('d', 'M ' + pts.map(function (p) { return p.x + ' ' + p.y; }).join(' L '));
-
-    dotsG.innerHTML = '';
-    pts.forEach(function (p, i) {
-      var active = ACTIVE[i];
-      var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-      circle.setAttribute('cx', p.x);
-      circle.setAttribute('cy', p.y);
-      circle.setAttribute('r', active ? 7 : 6);
-      circle.setAttribute('fill', active ? '#0013e9' : 'rgba(255,255,255,0.85)');
-      dotsG.appendChild(circle);
-    });
-  }
-
-  draw();
-  window.addEventListener('resize', draw);
-})();
-</script>
 
 <section class="sec band-grey sec--tight">
   <div class="wrap">
@@ -2738,8 +2684,8 @@ markers: 60+
       <div class="flow-shots">
         <div data-panel="sf1" id="panel-sf1" role="tabpanel" aria-labelledby="tab-sf1">
           <div class="sp-panel">
-            <figure class="sci-shot"><img src="__IMG_scipre__"
-            alt="Saliva samples arranged in a vial rack, ready for pre-processing."></figure>
+            <figure class="sci-ill" role="img" aria-label="Saliva samples in a rack, stabilised within hours"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<rect width="640" height="400" fill="#fff"/><rect x="40" y="48" width="360" height="304" rx="8" fill="#f3f4f6"/><text x="64" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">SAMPLE RACK</text><circle cx="84" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="84" cy="124" r="11" fill="#0013e9"/><circle cx="136" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="136" cy="124" r="11" fill="#0013e9"/><circle cx="188" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="188" cy="124" r="11" fill="#0013e9"/><circle cx="240" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="240" cy="124" r="11" fill="#0013e9"/><circle cx="292" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="292" cy="124" r="11" fill="#0013e9"/><circle cx="344" cy="124" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="344" cy="124" r="11" fill="#0013e9"/><circle cx="84" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="84" cy="180" r="11" fill="#0013e9"/><circle cx="136" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="136" cy="180" r="11" fill="#0013e9"/><circle cx="188" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="188" cy="180" r="11" fill="#0013e9"/><circle cx="240" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="240" cy="180" r="11" fill="#0013e9"/><circle cx="292" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="292" cy="180" r="11" fill="#0013e9"/><circle cx="344" cy="180" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="344" cy="180" r="11" fill="#0013e9"/><circle cx="84" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="84" cy="236" r="11" fill="#0013e9"/><circle cx="136" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="136" cy="236" r="11" fill="#0013e9"/><circle cx="188" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="188" cy="236" r="11" fill="#0013e9"/><circle cx="240" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="240" cy="236" r="11" fill="#0013e9"/><circle cx="292" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="292" cy="236" r="11" fill="#0013e9"/><circle cx="344" cy="236" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="84" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="136" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="188" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="240" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="292" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><circle cx="344" cy="292" r="18" fill="#fff" stroke="#e6e6e6" stroke-width="1.5"/><rect x="424" y="48" width="176" height="304" rx="8" fill="#f3f4f6"/><text x="448" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">STABILISED</text><circle cx="512" cy="196" r="56" fill="none" stroke="#e6e6e6" stroke-width="10"/><path d="M512 140 A56 56 0 1 1 457.0 185.5" fill="none" stroke="#0013e9" stroke-width="10" stroke-linecap="round"/><text x="512" y="202" font-size="22" fill="#181818" text-anchor="middle" letter-spacing="0" font-weight="400">&lt; 4 h</text><text x="512" y="288" font-size="13" fill="#646464" text-anchor="middle" letter-spacing="0" font-weight="400">17 / 24 tubes</text><text x="512" y="312" font-size="13" fill="#646464" text-anchor="middle" letter-spacing="0" font-weight="400">cooled &amp; logged</text></svg></figure>
             <div class="sp-text">
               <span class="sp-n">01 / 05</span>
               <h3 class="h4">Pre-processing</h3>
@@ -2749,8 +2695,8 @@ markers: 60+
         </div>
         <div data-panel="sf2" id="panel-sf2" role="tabpanel" aria-labelledby="tab-sf2" hidden>
           <div class="sp-panel">
-            <figure class="sci-shot"><img src="__IMG_scilcms__"
-            alt="A lab technician running a sample through the LC-MS system."></figure>
+            <figure class="sci-ill" role="img" aria-label="A mass spectrum with individual biomarker peaks highlighted"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<rect width="640" height="400" fill="#fff"/><rect x="40" y="48" width="560" height="304" rx="8" fill="#f3f4f6"/><text x="64" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">MASS SPECTRUM</text><text x="576" y="82" font-size="11" fill="#0013e9" text-anchor="end" letter-spacing="1.2" font-weight="400">LC-MS/MS</text><line x1="72" y1="310" x2="568" y2="310" stroke="#a0a0a0" stroke-width="1"/><line x1="80.0" y1="310" x2="80.0" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="87.0" y1="310" x2="87.0" y2="292" stroke="#a0a0a0" stroke-width="1.2"/><line x1="93.9" y1="310" x2="93.9" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="100.9" y1="310" x2="100.9" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="107.8" y1="310" x2="107.8" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="114.8" y1="310" x2="114.8" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="121.7" y1="310" x2="121.7" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="128.7" y1="310" x2="128.7" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="135.7" y1="310" x2="135.7" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="142.6" y1="310" x2="142.6" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="149.6" y1="310" x2="149.6" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="156.5" y1="310" x2="156.5" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="163.5" y1="310" x2="163.5" y2="160" stroke="#0013e9" stroke-width="2.5"/><circle cx="163.5" cy="160" r="3.5" fill="#0013e9"/><text x="163.47826086956522" y="150" font-size="11.5" fill="#0013e9" text-anchor="middle" letter-spacing="0" font-weight="400">Cortisol</text><line x1="170.4" y1="310" x2="170.4" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="177.4" y1="310" x2="177.4" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="184.3" y1="310" x2="184.3" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="191.3" y1="310" x2="191.3" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="198.3" y1="310" x2="198.3" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="205.2" y1="310" x2="205.2" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="212.2" y1="310" x2="212.2" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="219.1" y1="310" x2="219.1" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="226.1" y1="310" x2="226.1" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="233.0" y1="310" x2="233.0" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="240.0" y1="310" x2="240.0" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="247.0" y1="310" x2="247.0" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="253.9" y1="310" x2="253.9" y2="292" stroke="#a0a0a0" stroke-width="1.2"/><line x1="260.9" y1="310" x2="260.9" y2="280" stroke="#a0a0a0" stroke-width="1.2"/><line x1="267.8" y1="310" x2="267.8" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="274.8" y1="310" x2="274.8" y2="292" stroke="#a0a0a0" stroke-width="1.2"/><line x1="281.7" y1="310" x2="281.7" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="288.7" y1="310" x2="288.7" y2="280" stroke="#a0a0a0" stroke-width="1.2"/><line x1="295.7" y1="310" x2="295.7" y2="114" stroke="#0013e9" stroke-width="2.5"/><circle cx="295.7" cy="114" r="3.5" fill="#0013e9"/><text x="295.6521739130435" y="104" font-size="11.5" fill="#0013e9" text-anchor="middle" letter-spacing="0" font-weight="400">Melatonin</text><line x1="302.6" y1="310" x2="302.6" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="309.6" y1="310" x2="309.6" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="316.5" y1="310" x2="316.5" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="323.5" y1="310" x2="323.5" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="330.4" y1="310" x2="330.4" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="337.4" y1="310" x2="337.4" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="344.3" y1="310" x2="344.3" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="351.3" y1="310" x2="351.3" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="358.3" y1="310" x2="358.3" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="365.2" y1="310" x2="365.2" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="372.2" y1="310" x2="372.2" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="379.1" y1="310" x2="379.1" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="386.1" y1="310" x2="386.1" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="393.0" y1="310" x2="393.0" y2="280" stroke="#a0a0a0" stroke-width="1.2"/><line x1="400.0" y1="310" x2="400.0" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="407.0" y1="310" x2="407.0" y2="190" stroke="#0013e9" stroke-width="2.5"/><circle cx="407.0" cy="190" r="3.5" fill="#0013e9"/><text x="406.95652173913044" y="180" font-size="11.5" fill="#0013e9" text-anchor="middle" letter-spacing="0" font-weight="400">Testosterone</text><line x1="413.9" y1="310" x2="413.9" y2="286" stroke="#a0a0a0" stroke-width="1.2"/><line x1="420.9" y1="310" x2="420.9" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="427.8" y1="310" x2="427.8" y2="280" stroke="#a0a0a0" stroke-width="1.2"/><line x1="434.8" y1="310" x2="434.8" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="441.7" y1="310" x2="441.7" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="448.7" y1="310" x2="448.7" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="455.7" y1="310" x2="455.7" y2="280" stroke="#a0a0a0" stroke-width="1.2"/><line x1="462.6" y1="310" x2="462.6" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="469.6" y1="310" x2="469.6" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="476.5" y1="310" x2="476.5" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="483.5" y1="310" x2="483.5" y2="142" stroke="#0013e9" stroke-width="2.5"/><circle cx="483.5" cy="142" r="3.5" fill="#0013e9"/><text x="483.4782608695652" y="132" font-size="11.5" fill="#0013e9" text-anchor="middle" letter-spacing="0" font-weight="400">Kynurenine</text><line x1="490.4" y1="310" x2="490.4" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="497.4" y1="310" x2="497.4" y2="292" stroke="#a0a0a0" stroke-width="1.2"/><line x1="504.3" y1="310" x2="504.3" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="511.3" y1="310" x2="511.3" y2="296" stroke="#a0a0a0" stroke-width="1.2"/><line x1="518.3" y1="310" x2="518.3" y2="302" stroke="#a0a0a0" stroke-width="1.2"/><line x1="525.2" y1="310" x2="525.2" y2="298" stroke="#a0a0a0" stroke-width="1.2"/><line x1="532.2" y1="310" x2="532.2" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="539.1" y1="310" x2="539.1" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="546.1" y1="310" x2="546.1" y2="270" stroke="#a0a0a0" stroke-width="1.2"/><line x1="553.0" y1="310" x2="553.0" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><line x1="560.0" y1="310" x2="560.0" y2="300" stroke="#a0a0a0" stroke-width="1.2"/><text x="568" y="334" font-size="10.5" fill="#646464" text-anchor="end" letter-spacing="0" font-weight="400">m/z</text></svg></figure>
             <div class="sp-text">
               <span class="sp-n">02 / 05</span>
               <h3 class="h4">Gold standard LC-MS</h3>
@@ -2760,8 +2706,8 @@ markers: 60+
         </div>
         <div data-panel="sf3" id="panel-sf3" role="tabpanel" aria-labelledby="tab-sf3" hidden>
           <div class="sp-panel">
-            <figure class="sci-shot"><img src="__IMG_qc__"
-            alt="Quality control: every result checked against known standards."></figure>
+            <figure class="sci-ill" role="img" aria-label="A quality control chart and a list of passed checks"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<rect width="640" height="400" fill="#fff"/><rect x="40" y="48" width="340" height="304" rx="8" fill="#f3f4f6"/><text x="64" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">CONTROL CHART</text><line x1="64" y1="200" x2="356" y2="200" stroke="#a0a0a0" stroke-width="1"/><line x1="64" y1="140" x2="356" y2="140" stroke="#a0a0a0" stroke-width="1" stroke-dasharray="4 4"/><line x1="64" y1="260" x2="356" y2="260" stroke="#a0a0a0" stroke-width="1" stroke-dasharray="4 4"/><text x="356" y="134" font-size="10" fill="#646464" text-anchor="end" letter-spacing="0" font-weight="400">+2 SD</text><text x="356" y="276" font-size="10" fill="#646464" text-anchor="end" letter-spacing="0" font-weight="400">−2 SD</text><polyline points="84,168 106,171 128,194 150,220 172,168 194,167 216,199 238,233 260,217 282,196 304,209 326,204 348,162" fill="none" stroke="#0013e9" stroke-width="1.5" opacity=".45"/><circle cx="84" cy="168" r="4" fill="#0013e9"/><circle cx="106" cy="171" r="4" fill="#0013e9"/><circle cx="128" cy="194" r="4" fill="#0013e9"/><circle cx="150" cy="220" r="4" fill="#0013e9"/><circle cx="172" cy="168" r="4" fill="#0013e9"/><circle cx="194" cy="167" r="4" fill="#0013e9"/><circle cx="216" cy="199" r="4" fill="#0013e9"/><circle cx="238" cy="233" r="4" fill="#0013e9"/><circle cx="260" cy="217" r="4" fill="#0013e9"/><circle cx="282" cy="196" r="4" fill="#0013e9"/><circle cx="304" cy="209" r="4" fill="#0013e9"/><circle cx="326" cy="204" r="4" fill="#0013e9"/><circle cx="348" cy="162" r="4" fill="#0013e9"/><rect x="404" y="48" width="196" height="304" rx="8" fill="#f3f4f6"/><text x="428" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">CHECKS</text><circle cx="438" cy="120" r="9" fill="#0013e9"/><path d="M433.5 120 l3 3 l5.5 -6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="456" y="124" font-size="13" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Calibration</text><circle cx="438" cy="164" r="9" fill="#0013e9"/><path d="M433.5 164 l3 3 l5.5 -6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="456" y="168" font-size="13" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Internal standards</text><circle cx="438" cy="208" r="9" fill="#0013e9"/><path d="M433.5 208 l3 3 l5.5 -6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="456" y="212" font-size="13" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Blank check</text><circle cx="438" cy="252" r="9" fill="#0013e9"/><path d="M433.5 252 l3 3 l5.5 -6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><text x="456" y="256" font-size="13" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Reference sample</text><rect x="428" y="300" width="148" height="32" rx="4" fill="none" stroke="#0013e9" stroke-width="1.5"/><text x="502" y="321" font-size="11" fill="#0013e9" text-anchor="middle" letter-spacing="1.6" font-weight="400">PASSED</text></svg></figure>
             <div class="sp-text">
               <span class="sp-n">03 / 05</span>
               <h3 class="h4">Quality control</h3>
@@ -2771,8 +2717,8 @@ markers: 60+
         </div>
         <div data-panel="sf4" id="panel-sf4" role="tabpanel" aria-labelledby="tab-sf4" hidden>
           <div class="sp-panel">
-            <figure class="sci-shot"><img src="__IMG_scianalysis__"
-            alt="A scientist in a lab coat working at an instrument bench, processing sample data on screen."></figure>
+            <figure class="sci-ill" role="img" aria-label="Raw spectra processed into a value for every biomarker"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<rect width="640" height="400" fill="#fff"/><rect x="40" y="48" width="200" height="304" rx="8" fill="#f3f4f6"/><text x="64" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">RAW SIGNAL</text><rect x="64" y="112" width="139" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="138" width="125" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="164" width="101" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="190" width="94" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="216" width="143" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="242" width="87" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="268" width="107" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="294" width="116" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><rect x="64" y="320" width="96" height="6" rx="3" fill="#a0a0a0" opacity=".55"/><path d="M256 200 h44" stroke="#0013e9" stroke-width="2"/><path d="M294 192 l10 8 l-10 8" fill="none" stroke="#0013e9" stroke-width="2" stroke-linejoin="round"/><rect x="320" y="48" width="280" height="304" rx="8" fill="#f3f4f6"/><text x="344" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">RESULT PER BIOMARKER</text><text x="344" y="122" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Cortisol</text><rect x="452" y="113" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="113" width="86" height="8" rx="4" fill="#0013e9"/><text x="344" y="158" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Testosterone</text><rect x="452" y="149" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="149" width="58" height="8" rx="4" fill="#0013e9"/><text x="344" y="194" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Melatonin</text><rect x="452" y="185" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="185" width="72" height="8" rx="4" fill="#0013e9"/><text x="344" y="230" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Kynurenine</text><rect x="452" y="221" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="221" width="42" height="8" rx="4" fill="#0013e9"/><text x="344" y="266" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Uric acid</text><rect x="452" y="257" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="257" width="98" height="8" rx="4" fill="#0013e9"/><text x="344" y="302" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Creatinine</text><rect x="452" y="293" width="120" height="8" rx="4" fill="#e6e6e6"/><rect x="452" y="293" width="66" height="8" rx="4" fill="#0013e9"/></svg></figure>
             <div class="sp-text">
               <span class="sp-n">04 / 05</span>
               <h3 class="h4">Data processing &amp; analysis</h3>
@@ -2782,7 +2728,8 @@ markers: 60+
         </div>
         <div data-panel="sf5" id="panel-sf5" role="tabpanel" aria-labelledby="tab-sf5" hidden>
           <div class="sp-panel">
-            <figure class="ph-shot"><span class="ph-shot-label">Placeholder image</span></figure>
+            <figure class="sci-ill" role="img" aria-label="A reading flagged against the athlete’s own baseline, with a suggested next step"><svg viewBox="0 0 640 400" xmlns="http://www.w3.org/2000/svg" font-family="inherit">
+<rect width="640" height="400" fill="#fff"/><rect x="40" y="48" width="560" height="304" rx="8" fill="#f3f4f6"/><text x="64" y="82" font-size="10.5" fill="#646464" text-anchor="start" letter-spacing="1.2" font-weight="400">CORTISOL · OWN BASELINE</text><rect x="64" y="150" width="512" height="80" rx="4" fill="#0013e9" opacity=".08"/><line x1="64" y1="190" x2="576" y2="190" stroke="#0013e9" stroke-width="1" stroke-dasharray="4 4" opacity=".5"/><text x="72" y="142" font-size="10.5" fill="#0013e9" text-anchor="start" letter-spacing="0" font-weight="400">Usual range</text><polyline points="84,188 128,176 172,198 216,182 260,206 304,170 348,194 392,186 436,210 480,180 524,262" fill="none" stroke="#a0a0a0" stroke-width="1.5"/><circle cx="84" cy="188" r="4" fill="#a0a0a0"/><circle cx="128" cy="176" r="4" fill="#a0a0a0"/><circle cx="172" cy="198" r="4" fill="#a0a0a0"/><circle cx="216" cy="182" r="4" fill="#a0a0a0"/><circle cx="260" cy="206" r="4" fill="#a0a0a0"/><circle cx="304" cy="170" r="4" fill="#a0a0a0"/><circle cx="348" cy="194" r="4" fill="#a0a0a0"/><circle cx="392" cy="186" r="4" fill="#a0a0a0"/><circle cx="436" cy="210" r="4" fill="#a0a0a0"/><circle cx="480" cy="180" r="4" fill="#a0a0a0"/><circle cx="524" cy="262" r="11" fill="none" stroke="#0013e9" stroke-width="2"/><circle cx="524" cy="262" r="5" fill="#0013e9"/><rect x="300" y="276" width="276" height="56" rx="6" fill="#fff" stroke="#0013e9" stroke-width="1.5"/><text x="316" y="298" font-size="12.5" fill="#181818" text-anchor="start" letter-spacing="0" font-weight="400">Outside this athlete&#8217;s own range</text><text x="316" y="318" font-size="11.5" fill="#0013e9" text-anchor="start" letter-spacing="0" font-weight="400">Suggested: lighter session, re-test in 48 h</text></svg></figure>
             <div class="sp-text">
               <span class="sp-n">05 / 05</span>
               <h3 class="h4">AI interpretation</h3>
@@ -2984,6 +2931,10 @@ markers: 60+
 #sci-flow .sp-panel{display:grid; grid-template-columns:minmax(0,1.7fr) minmax(0,1fr); gap:var(--sp-xl);
   align-items:center; background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-lg)}
 #sci-flow .sp-panel .sci-shot, #sci-flow .sp-panel .ph-shot{border:0}
+/* Step illustrations: drawn in the site palette (white, light grey, blue)
+   so all five read as one set. */
+.sci-ill{margin:0; aspect-ratio:16/10; width:100%; border-radius:var(--r-sm); overflow:hidden; background:#fff}
+.sci-ill svg{display:block; width:100%; height:100%}
 #sci-flow .sp-text{display:flex; flex-direction:column; gap:var(--sp-sm); padding-right:var(--sp-lg)}
 #sci-flow .sp-n{font-family:var(--mono); font-size:var(--t-small); color:var(--c-blue); letter-spacing:.04em}
 #sci-flow .sp-text .h4{margin:0}
