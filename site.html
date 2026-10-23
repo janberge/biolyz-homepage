@@ -3442,12 +3442,16 @@ markers: 60+
      BIOMARKERS
      ====================================================================== -->
 <div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">Full Panel</span>
-    <h1 class="h1">60+ Biomarkers</h1>
+<section class="hero hero--photo hero--bm hero--portrait inv">
+  <img class="hero-bg" src="__IMG_biomarkershero__" width="1080" height="1616" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Full Panel</span>
+      <h1 class="hero-title">60+ Biomarkers</h1>
+    </div>
   </div>
-</header>
+</section>
 
 <style>
 /* ==========================================================================
@@ -5031,7 +5035,7 @@ markers: 60+
 
 <div class="page" id="p-research" data-title="Biolyz Research" hidden>
 
-<section class="hero hero--photo hero--research inv">
+<section class="hero hero--photo hero--research hero--portrait inv">
   <img class="hero-bg" src="__IMG_herzrasenhero__" width="1080" height="1350" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
@@ -7443,6 +7447,19 @@ markers: 60+
 .hero--research .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
 .hero--research .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(52ch,100%)}
 .hero--research .hero-title{font-size:var(--h1)}
+.hero--bm{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--bm .hero-bg{filter:grayscale(1); object-position:center 28%}
+.hero--bm .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
+.hero--bm .hero-title{font-size:var(--h1)}
+/* Portrait photos (Herzrasen, Biomarkers): full-bleed on a wide screen they
+   would be cropped to a zoomed slice, so from tablet width up the whole
+   picture sits in the right part of the header and fades into the dark. */
+@media (min-width:821px){
+  .hero--portrait .hero-bg{left:auto; right:0; width:min(46%,38rem); object-position:center 40%;
+    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 35%); mask-image:linear-gradient(to right, transparent 0, #000 35%)}
+  .hero--portrait .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.75), rgba(3,7,18,.25) 55%, rgba(3,7,18,.2))}
+  .hero--bm.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 12%}
+}
 /* About: black-and-white cyclists, same hero treatment. */
 .hero--about{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
 .hero--about .hero-bg{filter:grayscale(1); object-position:center 45%}
