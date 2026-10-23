@@ -844,6 +844,21 @@ td.them{color:var(--text-3)}
 td.them::before{content:'\2013'; display:inline-block; margin-right:var(--sp-sm); color:var(--text-3)}
 #p-vs-poc td.them::before, #p-vs-bloodlab td.them::before{content:none}
 
+/* Comparison pages: the team quote on a rounded tile in the site blue,
+   white type, with the speaker in a small white card. */
+.qt{margin:0; position:relative; overflow:hidden; border-radius:16px; padding:var(--sp-2xl) var(--sp-2xl) var(--sp-xl);
+  display:flex; flex-direction:column; gap:var(--sp-lg);
+  background:var(--c-blue); color:var(--c-white)}
+.qt .eyebrow{color:var(--o-white-80)}
+.qt-q{border:0; padding:0; margin:0; max-width:min(46ch,100%)}
+.qt-q p{font-size:var(--h3); line-height:1.15; letter-spacing:-.035em; color:var(--c-white)}
+.qt-who{align-self:flex-start; display:flex; align-items:center; gap:.7rem; background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-radius:12px; padding:.65rem .9rem .65rem .7rem;
+  box-shadow:0 12px 34px rgba(3,7,18,.12); font-size:var(--t-small)}
+.qt-who b{display:block; font-weight:400; color:#181818}
+.qt-who span span{color:#646464}
+@media (max-width:700px){ .qt{padding:var(--sp-xl) var(--sp-md) var(--sp-md)} }
+
 /* --- analyte list -------------------------------------------------------- */
 .list-toolbar{display:flex; justify-content:space-between; align-items:baseline; gap:var(--sp-lg);
   flex-wrap:wrap; padding-bottom:var(--sp-sm); border-bottom:var(--stroke) solid var(--c-grey-300)}
@@ -4682,15 +4697,16 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec inv">
+<section class="sec band-grey">
   <div class="wrap">
-    <span class="eyebrow">What Are Teams Saying?</span>
-    <blockquote style="margin-top:var(--sp-xl)">
-      <p>&ldquo;I was skeptical at first, but when you experience the power of
+    <figure class="qt">
+      <span class="eyebrow">What Are Teams Saying?</span>
+      <blockquote class="qt-q"><p>&ldquo;I was skeptical at first, but when you experience the power of
         looking inside a player on a daily basis, that can really change how you
-        work and compete.&rdquo;</p>
-      <footer><b>Dr. Markus Braun</b><span>Head Team Physician, Borussia Dortmund (BVB)</span></footer>
-    </blockquote>
+        work and compete.&rdquo;</p></blockquote>
+      <figcaption class="qt-who"><span class="proc-av">MB</span><span><b>Dr. Markus Braun</b>
+        <span>Head Team Physician, Borussia Dortmund (BVB)</span></span></figcaption>
+    </figure>
   </div>
 </section>
 
@@ -4956,15 +4972,16 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec inv">
+<section class="sec band-grey">
   <div class="wrap">
-    <span class="eyebrow">What Are Teams Saying?</span>
-    <blockquote style="margin-top:var(--sp-xl)">
-      <p>&ldquo;I was skeptical at first, but when you experience the power of
+    <figure class="qt">
+      <span class="eyebrow">What Are Teams Saying?</span>
+      <blockquote class="qt-q"><p>&ldquo;I was skeptical at first, but when you experience the power of
         looking inside a player on a daily basis, that can really change how you
-        work and compete.&rdquo;</p>
-      <footer><b>Dr. Markus Braun</b><span>Head Team Physician, Borussia Dortmund (BVB)</span></footer>
-    </blockquote>
+        work and compete.&rdquo;</p></blockquote>
+      <figcaption class="qt-who"><span class="proc-av">MB</span><span><b>Dr. Markus Braun</b>
+        <span>Head Team Physician, Borussia Dortmund (BVB)</span></span></figcaption>
+    </figure>
   </div>
 </section>
 
