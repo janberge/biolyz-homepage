@@ -356,6 +356,13 @@ img{max-width:100%; display:block}
 #p-demo > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-demo > .pagehead + .sec{padding-top:var(--sp-md); padding-bottom:var(--sp-2xl)}
 #p-demo .field > label{color:var(--c-blue)}
+/* Athlete waitlist: tight rhythm, blue titles and form labels. */
+#p-waitlist > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
+#p-waitlist > .pagehead + .sec{padding-top:var(--sp-md)}
+#p-waitlist #wl-view{padding-bottom:var(--sp-xl)}
+#p-waitlist #wl-form{padding-top:var(--sp-xl)}
+#p-waitlist .wl-cols h3{color:var(--c-blue)}
+#p-waitlist .field > label{color:var(--c-blue)}
 #p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
 /* Science page: the tight rhythm used across the site, no rule under the
    research heading, and the sample-quality view as a light split
@@ -1096,6 +1103,86 @@ textarea{min-height:7rem; resize:vertical}
 .pick-card--both{background:none; border:var(--stroke) solid var(--c-grey-300)}
 @media (max-width:1000px){ .pick{grid-template-columns:1fr 1fr} .pick-card--both{grid-column:1 / -1} }
 @media (max-width:820px){ .pick{grid-template-columns:1fr} .pick-card{padding:var(--sp-lg)} }
+
+/* Solution overview: the five steps as one connected strip on light grey.
+   Each column holds a small white mock screen at a staggered height; one SVG
+   drawn across the whole strip links them in blue (a 1000 x 300 box, so it
+   lines up with the five 20% columns and the cards' fixed px tops). The
+   column under the cursor turns white. */
+.sol-map{background:none; color:var(--text); padding:var(--sp-xl) var(--gutter) 0}
+.sol-map + .sec{padding-top:var(--sp-2xl)}
+.sol-map .sol-text{padding-bottom:var(--sp-md)}
+.sol-grid{position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr))}
+.sol-wires{position:absolute; left:0; top:0; width:100%; height:300px; z-index:1; pointer-events:none;
+  fill:none; stroke:var(--c-blue); stroke-width:1.25; overflow:visible}
+.sol-wires path{vector-effect:non-scaling-stroke}
+.sol-wires circle{fill:var(--c-blue); stroke:none}
+.sol-col{position:relative; border-radius:var(--r-sm);
+  transition:background-color var(--dur-short) var(--ease)}
+.sol-col:first-of-type{border-left:0}
+.sol-col:hover{background:var(--c-grey-100)}
+.sol-col{display:block; color:inherit; text-decoration:none; cursor:pointer}
+.sol-col:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+.sol-stage{position:relative; height:300px}
+.sol-win{position:absolute; left:8%; right:8%; height:170px; z-index:2;
+  background:var(--c-white); border:var(--stroke) solid var(--c-grey-200); border-radius:4px;
+  padding:.7rem .75rem; display:flex; flex-direction:column; gap:.5rem; overflow:hidden;
+  font-size:.6875rem; color:var(--text-2); box-shadow:0 6px 20px rgba(3,7,18,.05);
+  transition:border-color var(--dur-short) var(--ease), box-shadow var(--dur-short) var(--ease), transform var(--dur-short) var(--ease)}
+.sol-col:hover .sol-win{border-color:var(--c-blue); box-shadow:0 12px 30px rgba(0,19,233,.12); transform:translateY(-3px)}
+.sw-bar{display:flex; gap:4px}
+.sw-bar i{width:6px; height:6px; border-radius:1px; background:var(--c-grey-300)}
+.sw-line{height:4px; width:70%; border-radius:2px; background:var(--c-grey-200)}
+.sw-line--w{width:85%}
+.sw-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.3rem}
+.sw-list li{display:flex; justify-content:space-between; padding:.3rem .45rem; border:var(--stroke) solid var(--c-grey-200); border-radius:3px}
+.sw-list b{font-weight:400; color:var(--c-blue)}
+.sw-cta{margin-top:auto; text-align:center; padding:.45rem; border:1.5px solid var(--c-blue); border-radius:3px;
+  letter-spacing:.1em; text-transform:uppercase; font-size:.625rem; color:var(--c-blue)}
+.sw-code{margin:0; font-family:var(--mono); font-size:.625rem; line-height:1.55; color:var(--text); white-space:pre}
+.sw-rows{margin-top:auto; display:flex; flex-direction:column; gap:4px}
+.sw-rows i{height:3px; border-radius:2px; background:var(--c-grey-200)}
+.sw-rows i:nth-child(1){width:90%} .sw-rows i:nth-child(2){width:60%} .sw-rows i:nth-child(3){width:75%}
+.sw-top{display:flex; align-items:center; justify-content:space-between; gap:.4rem}
+.sw-top .sw-line{width:40%}
+.sw-tag{font-size:.5625rem; letter-spacing:.08em; text-transform:uppercase; padding:.1rem .35rem;
+  border:var(--stroke) solid var(--c-blue); color:var(--c-blue); border-radius:2px}
+.sw-menu{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.2rem; font-size:.625rem}
+.sw-menu li{color:var(--text-3)}
+.sw-menu li.is-on{color:var(--c-blue)}
+.sw-menu li.is-on::before{content:""; display:inline-block; width:10px; height:2px; margin-right:.35rem; vertical-align:middle; background:var(--c-blue)}
+.sw-dots{margin-top:auto; display:flex; gap:.4rem; justify-content:center}
+.sw-dots i{width:14px; height:14px; border:var(--stroke) solid var(--c-grey-300); border-radius:2px}
+.sw-dots i.is-on{border-color:var(--c-blue); box-shadow:inset 0 0 0 3px var(--c-white), inset 0 0 0 7px var(--c-blue)}
+.sw-tiles{display:grid; grid-template-columns:1fr 1fr; gap:.3rem}
+.sw-tiles span{padding:.4rem .3rem; text-align:center; border:var(--stroke) solid var(--c-grey-200); border-radius:3px; font-size:.625rem}
+.sw-row{display:flex; justify-content:space-between; align-items:center; padding:.45rem .5rem;
+  border:var(--stroke) solid var(--c-grey-200); border-radius:3px}
+.sw-row em{font-style:normal; font-size:.5625rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.sw-row.is-on{border:1.5px solid var(--c-blue); background:rgba(0,19,233,.05); color:var(--c-blue)}
+.sw-row.is-on em{color:var(--c-blue)}
+.sw-row--caps span{font-size:.5625rem; letter-spacing:.08em; text-transform:uppercase}
+.sol-text{padding:var(--sp-md) var(--sp-lg) var(--sp-2xl)}
+.sol-text h3{display:flex; gap:.6rem; align-items:baseline; font-size:var(--t-large); letter-spacing:-.02em;
+  font-weight:400; margin:0 0 var(--sp-sm); color:var(--text)}
+.sol-text h3 .n{font-size:var(--t-regular); color:var(--c-blue); font-variant-numeric:tabular-nums}
+.sol-text p{margin:0; font-size:var(--t-small); color:var(--text-2)}
+@media (max-width:1100px){
+  .sol-grid{grid-template-columns:1fr}
+  .sol-wires{display:none}
+  .sol-map{padding:var(--sp-md) 0 0}
+  .sol-col{border-radius:0; display:grid;
+    grid-template-columns:minmax(0,15rem) minmax(0,1fr); align-items:center; gap:var(--sp-lg);
+    padding:var(--sp-lg) var(--gutter)}
+  .sol-col:first-of-type{border-top:0}
+  .sol-stage{height:auto}
+  .sol-win{position:static; height:170px; top:auto !important}
+  .sol-text{padding:0}
+}
+@media (max-width:600px){
+  .sol-col{grid-template-columns:1fr}
+  .sol-win{max-width:16rem}
+}
 
 /* Testing day: one lane per approach, each step a white chip joined by an
    arrow. Point of Care ends looping back (repeat per marker); Biolyz ends on
@@ -2051,7 +2138,64 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec">
+<section class="sol-map" aria-label="The Biolyz Solution in five steps">
+  <div class="sol-grid">
+    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 175.0 416 175.0"/><circle cx="416" cy="175.0" r="3"/><path d="M584 175.0 C600.0 175.0 600.0 140.0 616 140.0"/><circle cx="616" cy="140.0" r="3"/><path d="M784 140.0 C800.0 140.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
+    <a class="sol-col" href="#sol-collect" data-sw-jump="sol-collect" aria-label="Go to Collect">
+      <div class="sol-stage"><div class="sol-win" style="top:70px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-line sw-line--w"></div>
+          <ul class="sw-list">
+            <li><span>Name selection</span><b>&#10003;</b></li>
+            <li><span>60s saliva swab</span><b>&#10003;</b></li>
+          </ul>
+          <div class="sw-cta">Scan tube</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">01</span>Collect</h3><p>A one-minute saliva swab, taken by the athlete, scanned and shipped to our lab.</p></div>
+    </a>
+    <a class="sol-col" href="#indicators" data-sw-jump="indicators" aria-label="Go to Analyze">
+      <div class="sol-stage"><div class="sol-win" style="top:40px">
+          <div class="sw-line sw-line--w"></div>
+          <pre class="sw-code">sample:  S-0247
+method:  LC-MS/MS
+markers: 60+
+&#8594; indicators: 7</pre>
+          <div class="sw-rows"><i></i><i></i><i></i></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">02</span>Analyze</h3><p>Mass spectrometry reads 60+ biomarkers and groups them into clear indicators.</p></div>
+    </a>
+    <a class="sol-col" href="#sol-personalize" data-sw-jump="sol-personalize" aria-label="Go to Personalize">
+      <div class="sol-stage"><div class="sol-win" style="top:90px">
+          <div class="sw-top"><div class="sw-line"></div><span class="sw-tag">&#9632; Live</span></div>
+          <ul class="sw-menu">
+            <li>Team Overview</li><li>Team Biomarkers</li><li class="is-on">Player Overview</li>
+            <li>Player Indicator</li><li>Player Biomarker</li>
+          </ul>
+          <div class="sw-dots"><i></i><i class="is-on"></i><i></i></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">03</span>Personalize</h3><p>Every result read against the athlete&rsquo;s own baseline, from squad to single player.</p></div>
+    </a>
+    <a class="sol-col" href="#integrations" data-sw-jump="integrations" aria-label="Go to Context">
+      <div class="sol-stage"><div class="sol-win" style="top:55px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-tiles"><span>GPS</span><span>Heart rate</span><span>Force plates</span><span>Wellness</span></div>
+          <div class="sw-cta">Your data</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">04</span>Context</h3><p>Load, GPS, heart rate and wellness, next to the biomarkers on one platform.</p></div>
+    </a>
+    <a class="sol-col" href="#recommendations" data-sw-jump="recommendations" aria-label="Go to Act">
+      <div class="sol-stage"><div class="sol-win" style="top:80px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-row"><span>Flag raised</span><em>Ready</em></div>
+          <div class="sw-row is-on"><span>Recommendation</span><em>Now</em></div>
+          <div class="sw-row sw-row--caps"><span>Decision stays with staff</span><em>&mdash;</em></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">05</span>Act</h3><p>A recommendation for every flag. The decision stays with your staff.</p></div>
+    </a>
+  </div>
+</section>
+
+<section class="sec" id="sol-collect">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
   <div class="wrap">
     <div class="hd">
@@ -2216,7 +2360,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="sol-personalize">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
   <div class="wrap">
     <div class="hd">
@@ -5283,31 +5427,30 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-waitlist" data-title="Biolyz Athlete Waitlist" hidden>
 <header class="pagehead">
   <div class="wrap inner">
-    <span class="eyebrow">Join athlete waitlist</span>
-    <h1 class="h1">Your body, your data, your page.</h1>
-    <p class="lead">Biolyz runs through teams today. The athlete view is how an individual
-      will use it &mdash; and it is deliberately narrower than what staff see. Join the
-      waitlist and we will come to you in order.</p>
+    <span class="eyebrow">Early access for athletes</span>
+    <h1 class="h1">Your body, your data, your dashboard.</h1>
+    <p class="lead">Today, Biolyz works with teams. Soon, individual athletes get their own
+      view. Join the waitlist and we&rsquo;ll let you know when it&rsquo;s your turn.</p>
   </div>
 </header>
 
-<section class="sec">
+<section class="sec" id="wl-view">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">What a player sees</span>
-      <h2 class="h3">Their own markers. Not the squad&rsquo;s.</h2>
-      <p class="copy">One page: where their markers sit against their own usual range, what
-        patterns are open, and whether what they are taking is showing up. No squad ranking,
-        no teammates, no comparison they did not ask for.</p>
+      <span class="eyebrow">Player&rsquo;s View</span>
+      <h2 class="h3">Your markers. Nobody else&rsquo;s.</h2>
+      <p class="copy">One page that shows how each of your markers compares with your own
+        baseline, which patterns to keep an eye on, and whether what you take is working. No
+        rankings, no teammates, no comparisons you didn&rsquo;t ask for.</p>
     </div>
     <figure class="shot">
       <img src="__IMG_athlete__" width="1920" height="1382" loading="lazy"
         alt="Athlete view: one player's own page showing 51% of markers in their usual range, an at-a-glance grid of fourteen indicators, and performance, medical and nutrition sections.">
     </figure>
-    <div class="cols" style="margin-top:var(--section-md)">
+    <div class="cols wl-cols" style="margin-top:var(--sp-2xl)">
       <div class="col"><h3>60 seconds, no needles</h3>
-        <p>A swab in the mouth for a minute. That is the whole collection burden, which is
-          what makes daily testing realistic in the first place.</p></div>
+        <p>One swab, one minute. That&rsquo;s all it takes, which is why testing every day is
+          actually realistic.</p></div>
       <div class="col"><h3>Your own baseline</h3>
         <p>Every reading is judged against your history, not a population reference range.
           The line on your chart is your own median.</p></div>
@@ -5318,7 +5461,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="sec band-grey" id="wl-form">
   <div class="wrap">
     <div class="split">
       <form data-form="waitlist" novalidate>
@@ -5359,15 +5502,14 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
               from the waitlist.</span></label>
         </div>
         <div class="btn-row"><button class="btn" type="submit">Join the waitlist &#8599;</button></div>
-        <p class="formnote">We will not pass your address to a club, a federation or anyone
-          else.</p>
+        <p class="formnote">Your data is safe with us.</p>
       </form>
       <div>
         <div class="hd">
           <span class="eyebrow">Honest expectations</span>
-          <h2 class="h4">What the waitlist is, and is not.</h2>
+          <h2 class="h4">The fine print, upfront.</h2>
         </div>
-        <div class="cols" style="grid-template-columns:1fr; gap:var(--sp-lg)">
+        <div class="cols wl-cols" style="grid-template-columns:1fr; gap:var(--sp-lg)">
           <div class="col"><h3>It is not a queue for a product you can buy today</h3>
             <p>Individual access comes after teams, by design &mdash; that is tier two of a
               three-tier plan, and we would rather say so than take a pre-order.</p></div>
