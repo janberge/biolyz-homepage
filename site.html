@@ -653,6 +653,50 @@ img{max-width:100%; display:block}
    a time, and it stays open until another is hovered or the cursor leaves
    the grid (see the script): closing on every mouseleave would collapse the
    row under the cursor on the way to the next box. */
+/* Solution Analyze, ElevenLabs-style: the seven indicators as a list on the
+   left; the chosen one appears on a blue gradient tile as a floating white
+   card (its biomarkers, each with a decorative bar), with a smaller card
+   behind it for the method. */
+.az{display:grid; grid-template-columns:minmax(0,5fr) minmax(0,7fr); gap:var(--sp-xl); align-items:stretch}
+.az-list{display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-200)}
+.az-tab{all:unset; box-sizing:border-box; cursor:pointer; display:flex; align-items:baseline; gap:.9rem;
+  padding:1rem .25rem; border-bottom:var(--stroke) solid var(--c-grey-200); font-size:var(--t-large);
+  letter-spacing:-.02em; color:var(--text-3); transition:color var(--dur-short) var(--ease)}
+.az-tab:hover{color:var(--text)}
+.az-tab[aria-selected="true"]{color:var(--text)}
+.az-tab:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+.az-n{font-size:var(--t-small); font-variant-numeric:tabular-nums; color:var(--text-3)}
+.az-tab[aria-selected="true"] .az-n{color:var(--c-blue)}
+.az-c{margin-left:auto; font-size:var(--t-tiny); letter-spacing:0; color:var(--text-3); opacity:0;
+  transition:opacity var(--dur-short) var(--ease)}
+.az-tab[aria-selected="true"] .az-c, .az-tab:hover .az-c{opacity:1}
+.az-stage{position:relative; min-height:30rem; border-radius:16px; overflow:hidden; background:
+    radial-gradient(70% 60% at 20% 15%, #6f7cff 0%, rgba(111,124,255,0) 70%),
+    radial-gradient(60% 70% at 90% 40%, #0013e9 0%, rgba(0,19,233,0) 70%),
+    radial-gradient(80% 60% at 40% 100%, #b9c1ff 0%, rgba(185,193,255,0) 70%), #3a49f2}
+.az-panel{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; padding:var(--sp-xl)}
+.az-panel[hidden]{display:none}
+.az-card{position:relative; z-index:2; width:min(26rem,100%); background:rgba(255,255,255,.96);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); border-radius:14px; padding:1.1rem 1.2rem 1.2rem;
+  box-shadow:0 18px 50px rgba(3,7,18,.25); display:flex; flex-direction:column; gap:.55rem; color:#181818;
+  animation:procFloat .45s var(--ease)}
+.az-card--back{position:absolute; z-index:1; width:auto; top:9%; right:7%; padding:.65rem .8rem; gap:.15rem;
+  background:rgba(255,255,255,.82); box-shadow:0 10px 30px rgba(3,7,18,.18)}
+.az-card--back b{font-weight:400; font-size:1.05rem; letter-spacing:-.02em}
+.az-head{display:flex; justify-content:space-between; align-items:center}
+.az-pill{font-size:.6875rem; color:#0013e9; border:1px solid rgba(0,19,233,.35); border-radius:999px; padding:.1rem .5rem}
+.az-name{font-weight:400; font-size:1.6rem; letter-spacing:-.03em; line-height:1.15}
+.az-rows{list-style:none; margin:.2rem 0 0; padding:0; display:flex; flex-direction:column; gap:.5rem}
+.az-rows li{display:grid; grid-template-columns:minmax(0,1fr) 40%; align-items:center; gap:.8rem; font-size:.8125rem}
+.az-rows i{display:block; height:6px; border-radius:3px; background:linear-gradient(90deg,#0013e9 var(--w),#e6e8f5 var(--w))}
+.az-q{margin:.35rem 0 0; padding-top:.65rem; border-top:1px solid #ececec; font-size:.8125rem; color:#646464}
+@media (max-width:900px){
+  .az{grid-template-columns:1fr; gap:var(--sp-lg)}
+  .az-stage{min-height:26rem}
+  .az-panel{padding:var(--sp-lg) var(--sp-md); align-items:flex-end}
+  .az-card--back{top:6%; right:6%}
+  .az-tab{font-size:var(--t-regular); padding:.8rem .25rem}
+}
 .ind-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(280px,100%),1fr));
   gap:var(--sp-xs); align-items:start}
 .ind-card{padding:0; gap:0; background:var(--c-white)}
@@ -2165,39 +2209,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec sec--tight" id="home-staff">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">For your staff</span>
-      <h2 class="h2">Less work. More insight.</h2>
-    </div>
-    <div class="feat-cols">
-      <div class="feat">
-        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="7"/><path d="M12 13V9"/><path d="M9.5 3h5"/></svg></span>
-        <span class="t">Little staff effort required</span>
-        <span class="d">Collection takes a minute and fits into the routine staff already
-          run, no new workflow to learn.</span>
-      </div>
-      <div class="feat">
-        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="2.5"/></svg></span>
-        <span class="t">Expanded view of internal load data</span>
-        <span class="d">Recovery and physiological status, read from inside the
-          athlete&rsquo;s own biology rather than external load and GPS alone.</span>
-      </div>
-      <div class="feat">
-        <span class="feat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H8l-4 4V5Z"/><path d="M9 10h6M9 13h4"/></svg></span>
-        <span class="t">Interpretation help</span>
-        <span class="d">We help you read what a flagged marker likely means, drawn from
-          experience and research.</span>
-      </div>
-    </div>
-    <div style="margin-top:var(--sp-2xl)">
-      <a class="btn btn--ghost" href="/product" data-link>Discover the Solution &#8594;</a>
-    </div>
-  </div>
-</section>
-
-<section class="sec band-grey sec--tight">
+<section class="sec sec--tight">
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">The science</span>
@@ -2229,7 +2241,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   </div>
 </section>
 
-<section class="sec sec--tight" id="flow">
+<section class="sec band-grey sec--tight" id="flow">
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">Your daily workflow</span>
@@ -2520,93 +2532,81 @@ markers: 60+
       <h2 class="h2">From single biomarkers to clear indicators.</h2>
     </div>
 
-    <div class="ind-grid">
-      <details class="card ind-card" name="ind">
-        <summary>Inflammation<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about inflammatory / immune activation?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">PGF2α</span>
-              <span class="tag">Neopterin</span>
-              <span class="tag">Kynurenine</span>
-              <span class="tag">Tryptophan</span>
-              <span class="tag">Phe/Tyr</span>
-              <span class="tag">Kyn/Trp</span>
+    <div class="az">
+      <div class="az-list" role="tablist" aria-label="Indicators" data-tabs="az">
+        <button type="button" class="az-tab" role="tab" aria-selected="true" id="tab-az0" aria-controls="panel-az0" data-tab="az0"><span class="az-n">01</span>Inflammation<span class="az-c">6 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az1" aria-controls="panel-az1" data-tab="az1"><span class="az-n">02</span>Metabolic stress<span class="az-c">4 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az2" aria-controls="panel-az2" data-tab="az2"><span class="az-n">03</span>Muscle damage<span class="az-c">3 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az3" aria-controls="panel-az3" data-tab="az3"><span class="az-n">04</span>Hormonal status<span class="az-c">3 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az4" aria-controls="panel-az4" data-tab="az4"><span class="az-n">05</span>Psychological stress<span class="az-c">3 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az5" aria-controls="panel-az5" data-tab="az5"><span class="az-n">06</span>Sleep<span class="az-c">2 markers</span></button>
+        <button type="button" class="az-tab" role="tab" aria-selected="false" id="tab-az6" aria-controls="panel-az6" data-tab="az6"><span class="az-n">07</span>Hydration<span class="az-c">2 markers</span></button>
+      </div>
+      <div class="az-stage">
+        <div class="az-panel" data-panel="az0" id="panel-az0" role="tabpanel" aria-labelledby="tab-az0">
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">6 biomarkers</span></div>
+            <b class="az-name">Inflammation</b>
+            <ul class="az-rows"><li><span>PGF2α</span><i style="--w:64%"></i></li><li><span>Neopterin</span><i style="--w:38%"></i></li><li><span>Kynurenine</span><i style="--w:82%"></i></li><li><span>Tryptophan</span><i style="--w:47%"></i></li><li><span>Phe/Tyr</span><i style="--w:71%"></i></li><li><span>Kyn/Trp</span><i style="--w:29%"></i></li></ul>
+            <p class="az-q">Is there a concern about inflammatory / immune activation?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Metabolic stress<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about elevated purine / metabolic turnover?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">Hypoxanthine</span>
-              <span class="tag">Xanthine</span>
-              <span class="tag">Xanthine/Hypoxanthine</span>
-              <span class="tag">Uric acid</span>
+        <div class="az-panel" data-panel="az1" id="panel-az1" role="tabpanel" aria-labelledby="tab-az1" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">4 biomarkers</span></div>
+            <b class="az-name">Metabolic stress</b>
+            <ul class="az-rows"><li><span>Hypoxanthine</span><i style="--w:47%"></i></li><li><span>Xanthine</span><i style="--w:71%"></i></li><li><span>Xanthine/Hypoxanthine</span><i style="--w:29%"></i></li><li><span>Uric acid</span><i style="--w:55%"></i></li></ul>
+            <p class="az-q">Is there a concern about elevated purine / metabolic turnover?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Muscle damage<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about muscle fibre disruption?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">LDHA</span>
-              <span class="tag">HSPB1</span>
-              <span class="tag">ACTA1</span>
+        <div class="az-panel" data-panel="az2" id="panel-az2" role="tabpanel" aria-labelledby="tab-az2" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">3 biomarkers</span></div>
+            <b class="az-name">Muscle damage</b>
+            <ul class="az-rows"><li><span>LDHA</span><i style="--w:55%"></i></li><li><span>HSPB1</span><i style="--w:90%"></i></li><li><span>ACTA1</span><i style="--w:42%"></i></li></ul>
+            <p class="az-q">Is there a concern about muscle fibre disruption?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Hormonal status<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about anabolic&ndash;catabolic balance?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">Cortisol</span>
-              <span class="tag">Testosterone</span>
-              <span class="tag">Testosterone:Cortisol ratio</span>
+        <div class="az-panel" data-panel="az3" id="panel-az3" role="tabpanel" aria-labelledby="tab-az3" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">3 biomarkers</span></div>
+            <b class="az-name">Hormonal status</b>
+            <ul class="az-rows"><li><span>Cortisol</span><i style="--w:64%"></i></li><li><span>Testosterone</span><i style="--w:38%"></i></li><li><span>Testosterone:Cortisol ratio</span><i style="--w:82%"></i></li></ul>
+            <p class="az-q">Is there a concern about anabolic&ndash;catabolic balance?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Psychological stress<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about stress-response activation?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">Cortisol AM</span>
-              <span class="tag">DHEAS</span>
-              <span class="tag">Alpha-amylase</span>
+        <div class="az-panel" data-panel="az4" id="panel-az4" role="tabpanel" aria-labelledby="tab-az4" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">3 biomarkers</span></div>
+            <b class="az-name">Psychological stress</b>
+            <ul class="az-rows"><li><span>Cortisol AM</span><i style="--w:47%"></i></li><li><span>DHEAS</span><i style="--w:71%"></i></li><li><span>Alpha-amylase</span><i style="--w:29%"></i></li></ul>
+            <p class="az-q">Is there a concern about stress-response activation?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Sleep<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about circadian / sleep disruption?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">Melatonin</span>
-              <span class="tag">Trigonelline</span>
+        <div class="az-panel" data-panel="az5" id="panel-az5" role="tabpanel" aria-labelledby="tab-az5" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">2 biomarkers</span></div>
+            <b class="az-name">Sleep</b>
+            <ul class="az-rows"><li><span>Melatonin</span><i style="--w:55%"></i></li><li><span>Trigonelline</span><i style="--w:90%"></i></li></ul>
+            <p class="az-q">Is there a concern about circadian / sleep disruption?</p>
           </div>
         </div>
-      </details>
-      <details class="card ind-card" name="ind">
-        <summary>Hydration<span class="ind-more" aria-hidden="true"><i></i><i></i></span></summary>
-        <div class="ind-body">
-          <p class="role-q">Is there a concern about fluid balance / hydration status?</p>
-          <span class="eyebrow">Biomarkers</span>
-          <div class="tags">
-              <span class="tag">Salivary creatinine</span>
-              <span class="tag">Protein concentration</span>
+        <div class="az-panel" data-panel="az6" id="panel-az6" role="tabpanel" aria-labelledby="tab-az6" hidden>
+          <div class="az-card az-card--back"><span class="wsc-float-k">LC&ndash;MS/MS</span><b>60+ biomarkers</b><span class="wsc-float-sub">One swab</span></div>
+          <div class="az-card">
+            <div class="az-head"><span class="wsc-float-k">Indicator</span><span class="az-pill">2 biomarkers</span></div>
+            <b class="az-name">Hydration</b>
+            <ul class="az-rows"><li><span>Salivary creatinine</span><i style="--w:64%"></i></li><li><span>Protein concentration</span><i style="--w:38%"></i></li></ul>
+            <p class="az-q">Is there a concern about fluid balance / hydration status?</p>
           </div>
         </div>
-      </details>
+      </div>
     </div>
 
     <div style="margin-top:var(--sp-md)">
@@ -8609,7 +8609,7 @@ method:  LC-MS/MS
 
   /* So What? indicators: on a mouse, resting on an indicator opens it, no
      click needed. Touch keeps tapping. */
-  [].forEach.call(document.querySelectorAll('[data-tabs="ix"]'), function (list) {
+  [].forEach.call(document.querySelectorAll('[data-tabs="ix"], [data-tabs="az"]'), function (list) {
     var scope = list.closest('section') || document;
     list.addEventListener('mouseover', function (e) {
       if (!canHover()) return;
