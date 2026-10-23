@@ -788,7 +788,7 @@ img{max-width:100%; display:block}
 .rx-arrow{display:inline-grid; place-items:center; width:1.8rem; height:1.8rem; border-radius:50%;
   background:var(--c-blue); color:#fff; font-size:.9rem}
 .rx-stage{position:relative; margin:0; min-height:34rem; border-radius:16px; overflow:hidden;
-  display:flex; align-items:center; justify-content:center; padding:5.5rem var(--sp-xl); background:
+  display:flex; align-items:center; justify-content:center; padding:var(--sp-2xl) var(--sp-xl); background:
     #eef0f4}
 .rx-chip--a{top:1.25rem; left:1.25rem}
 .rx-chip--b{bottom:1.25rem; right:1.25rem}
@@ -803,7 +803,7 @@ img{max-width:100%; display:block}
 .rx-groups li::before{content:""; position:absolute; left:0; top:.55em; width:5px; height:5px; border-radius:50%; background:#0013e9}
 @media (max-width:900px){
   .rx{grid-template-columns:1fr; gap:var(--sp-lg)}
-  .rx-stage{min-height:0; padding:5.25rem var(--sp-md)}
+  .rx-stage{min-height:0; padding:var(--sp-xl) var(--sp-md)}
 }
 .rec-flow{display:flex; flex-direction:column; align-items:stretch; gap:var(--sp-sm)}
 .rec-inputs{display:grid; grid-template-columns:1fr auto 1fr; gap:var(--sp-md); align-items:stretch}
@@ -8067,40 +8067,32 @@ method:  LC-MS/MS
       <span class="eyebrow">Personalised recommendations</span>
       <h2 class="h2">The right intervention, at the right time.</h2>
     </div>
-    <div class="rec-flow">
-      <div class="rec-inputs">
-        <div class="card">
-          <span class="t">Literature-based recommendations</span>
-          <p class="d">Generated with AI from the published research behind each indicator.</p>
-        </div>
-        <span class="rec-plus">or</span>
-        <div class="card">
-          <span class="t">What you and your vet already know</span>
-          <p class="d">Shaped by your horse&rsquo;s own context and the input of your stable team.</p>
-        </div>
+    <div class="rx">
+      <div class="rx-side">
+        <div class="rx-src"><span class="rx-n">01</span><span class="t">Literature-based recommendations</span>
+          <span class="d">Generated with AI from the published research behind each indicator.</span></div>
+        <span class="rx-or">or</span>
+        <div class="rx-src"><span class="rx-n">02</span><span class="t">What you and your vet already know</span>
+          <span class="d">Shaped by your horse&rsquo;s own context and the input of your stable team.</span></div>
+        <div class="rx-out"><span class="rx-arrow" aria-hidden="true">&rarr;</span>Personalised recommendations for each horse</div>
       </div>
-      <span class="rec-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></span>
-      <div class="card rec-result">
-        <span class="t">Personalised recommendations for each horse</span>
-        <p class="rec-note">An example of what a recommendation can look like.</p>
-        <div class="rec-groups">
-          <div><span class="eyebrow">Training and care</span>
-            <ul>
+      <figure class="rx-stage" role="img" aria-label="An example recommendation for one horse, grouped for training and care, the vet and breeding">
+        <div class="rx-card">
+          <div class="az-head"><span class="wsc-float-k">Recommendation &middot; example</span><span class="az-pill">Step in now</span></div>
+          <div class="rx-who"><span class="proc-av">CA</span><span><b>Caramel</b><span class="wsc-float-sub">Cortisol raised &middot; ulcer risk flagged</span></span></div>
+          <div class="rx-groups">
+            <div><span class="wsc-float-k">Training and care</span><ul>
               <li>Ease the training load until stress markers settle</li>
-              <li>Plan transport and turnout around recovery</li>
-            </ul></div>
-          <div><span class="eyebrow">Vet</span>
-            <ul>
+              <li>Plan transport and turnout around recovery</li></ul></div>
+            <div><span class="wsc-float-k">Vet</span><ul>
               <li>Bring the vet in early when ulcer risk is flagged</li>
-              <li>Review feeding during high-risk phases</li>
-            </ul></div>
-          <div><span class="eyebrow">Breeding</span>
-            <ul>
+              <li>Review feeding during high-risk phases</li></ul></div>
+            <div><span class="wsc-float-k">Breeding</span><ul>
               <li>Time the breeding season around testosterone and stress</li>
-              <li>Balance competition and covers in stallions that do both</li>
-            </ul></div>
+              <li>Balance competition and covers in stallions that do both</li></ul></div>
+          </div>
         </div>
-      </div>
+      </figure>
     </div>
   </div>
 </section>
