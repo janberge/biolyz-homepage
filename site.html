@@ -334,6 +334,67 @@ img{max-width:100%; display:block}
 @media (max-width:820px){
   .feat-cols{grid-template-columns:1fr; gap:var(--sp-lg)}
 }
+/* Home "power of saliva" pictures, Seamflow-style tiles: edge to edge with
+   a thin line between them, square corners, a dark fade at the foot, the
+   title in white on the picture. On hover the picture zooms a little and the
+   line of detail slides in under the title. Without hover (touch) the
+   detail is always shown. */
+.wsc-grid.wsc-grid--why{gap:1px; background:var(--c-grey-200); border:1px solid var(--c-grey-200)}
+.wsc-grid--why .wsc-card{position:relative; gap:0; overflow:hidden; background:var(--c-off-black); cursor:default}
+.wsc-grid--why .wsc-shot, .wsc-grid--why .wsc-shot.has-photo{aspect-ratio:4/5; border:0; border-radius:0}
+.wsc-grid--why .wsc-shot img{transition:transform .8s var(--ease)}
+.wsc-grid--why .wsc-card:hover .wsc-shot img{transform:scale(1.05)}
+.wsc-grid--why .wsc-card::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to top, rgba(3,7,18,.82) 0%, rgba(3,7,18,.35) 38%, rgba(3,7,18,0) 62%)}
+.wsc-grid--why figcaption{position:absolute; left:0; right:0; bottom:0; z-index:1; padding:var(--sp-lg);
+  display:flex; flex-direction:column; gap:var(--sp-xs); color:var(--c-white)}
+.wsc-grid--why .wsc-n{border-top:0; padding-top:0; color:rgba(255,255,255,.7)}
+.wsc-grid--why .wsc-card-t{color:var(--c-white); font-size:var(--h5)}
+.wsc-grid--why .wsc-d{color:rgba(255,255,255,.85); max-width:30ch; font-size:var(--t-small);
+  max-height:0; opacity:0; overflow:hidden; transform:translateY(6px);
+  transition:max-height .45s var(--ease), opacity .35s var(--ease), transform .45s var(--ease)}
+.wsc-grid--why .wsc-card:hover .wsc-d{max-height:6em; opacity:1; transform:none}
+.wsc-grid--why .wsc-shot--chart{background:#ededed}
+@media (hover:none){ .wsc-grid--why .wsc-d{max-height:none; opacity:1; transform:none} }
+@media (max-width:820px){ .wsc-grid--why .wsc-shot, .wsc-grid--why .wsc-shot.has-photo{aspect-ratio:4/3} }
+
+/* Home numbers, Seamflow-style: three columns between thin rules, a small
+   index, a large blue figure with a small unit, a title and one line.
+   Columns fade in one after another and the figures count up from zero
+   the first time the block scrolls into view. */
+.saliva-proof .saliva-proof-figs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0;
+  border-top:var(--stroke) solid var(--c-grey-200)}
+.sp-fig{display:flex; flex-direction:column; gap:var(--sp-xs); padding:var(--sp-lg) var(--sp-xl) var(--sp-md);
+  border-left:var(--stroke) solid var(--c-grey-200)}
+.sp-fig:first-child{border-left:0; padding-left:0}
+.sp-i{font-size:var(--t-small); color:var(--text-3); font-variant-numeric:tabular-nums; margin-bottom:var(--sp-sm)}
+.sp-v{display:flex; align-items:baseline; gap:.35rem; color:var(--c-blue); line-height:1}
+.sp-v b{font-weight:400; font-size:clamp(2.5rem,4.4vw,3.75rem); letter-spacing:-.04em; font-variant-numeric:tabular-nums}
+.sp-v small{font-size:var(--t-large); letter-spacing:-.02em}
+.sp-k{margin-top:var(--sp-md); font-size:var(--t-large); letter-spacing:-.02em; color:var(--text)}
+.sp-s{font-size:var(--t-small); color:var(--text-2); max-width:34ch}
+[data-count-group] .sp-fig{opacity:0; transform:translateY(12px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease)}
+[data-count-group].is-in .sp-fig{opacity:1; transform:none}
+[data-count-group].is-in .sp-fig:nth-child(2){transition-delay:.15s}
+[data-count-group].is-in .sp-fig:nth-child(3){transition-delay:.3s}
+@media (prefers-reduced-motion:reduce){ [data-count-group] .sp-fig{opacity:1; transform:none; transition:none} }
+@media (max-width:820px){
+  .saliva-proof .saliva-proof-figs{grid-template-columns:1fr}
+  .sp-fig{border-left:0; padding:var(--sp-lg) 0; border-bottom:var(--stroke) solid var(--c-grey-200)}
+}
+/* The same count-up figures as Home, for every other number block. */
+.cnt{display:grid; grid-template-columns:repeat(var(--cols,3),minmax(0,1fr)); gap:0;
+  border-top:var(--stroke) solid var(--c-grey-200)}
+.cnt .sp-fig:first-child{border-left:0; padding-left:0}
+.cnt .sp-fig{padding-inline:var(--sp-lg); min-width:0}
+.cnt[style*="--cols:4"] .sp-v b{font-size:clamp(2.25rem,3.6vw,3.25rem)}
+.cnt[style*="--cols:5"] .sp-v b{font-size:clamp(2rem,2.9vw,2.6rem)}
+.cnt[style*="--cols:5"] .sp-k{font-size:var(--t-regular)}
+@media (max-width:1000px){ .cnt{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cnt .sp-fig:nth-child(odd){border-left:0; padding-left:0} }
+@media (max-width:600px){ .cnt{grid-template-columns:1fr}
+  .cnt .sp-fig{border-left:0; padding:var(--sp-lg) 0; border-bottom:var(--stroke) solid var(--c-grey-200)} }
 /* The same open, oversized figures as the Home numbers, for other pages. */
 .figs.figs--open{grid-template-columns:repeat(4,1fr); gap:var(--sp-xl)}
 .figs--open .fig{gap:var(--sp-xs); padding-top:var(--sp-md); border-top:var(--stroke) solid var(--c-grey-300)}
@@ -1107,6 +1168,56 @@ textarea{min-height:7rem; resize:vertical}
 @media (max-width:1000px){ .pick{grid-template-columns:1fr 1fr} .pick-card--both{grid-column:1 / -1} }
 @media (max-width:820px){ .pick{grid-template-columns:1fr} .pick-card{padding:var(--sp-lg)} }
 
+/* Detail shots: a cropped part of a dashboard screen in a white frame with
+   a fine border and soft shadow, shown at its own size rather than stretched
+   (same look as the Personalize views on Solution). */
+.shot.shot--detail{background:#fff; border:var(--stroke) solid var(--c-grey-200); border-radius:var(--r-sm);
+  box-shadow:0 14px 40px rgba(3,7,18,.07); overflow:hidden; aspect-ratio:auto; width:fit-content; max-width:100%}
+.shot.shot--detail img{display:block; width:auto; max-width:100%; height:auto}
+.shot.shot--narrow{max-width:38rem}
+.shot.shot--small{max-width:24rem}
+/* Window frame (as on seamflow.com): a header bar with the screen's name in
+   caps and a blue live marker, above the cropped dashboard view. */
+.shot--detail[data-title], .pz-shot[data-title]{position:relative; padding-top:2.25rem}
+.shot--detail[data-title]::before, .pz-shot[data-title]::before{content:attr(data-title); position:absolute; left:0; right:0; top:0;
+  height:2.25rem; display:flex; align-items:center; padding:0 .9rem; box-sizing:border-box;
+  border-bottom:var(--stroke) solid var(--c-grey-200); background:var(--c-white);
+  font-size:.6875rem; letter-spacing:.09em; text-transform:uppercase; color:var(--text-2)}
+.shot--detail[data-title]::after, .pz-shot[data-title]::after{content:"\25CF\00a0 Live"; position:absolute; right:.9rem; top:0;
+  height:2.25rem; display:flex; align-items:center; font-size:.6875rem; color:var(--c-blue)}
+/* Personalize, Seamflow-style: the five views as a row of columns; the open
+   one is wide (text and a cropped view of that screen), the rest collapse to
+   their number and name. Resting the cursor on a column opens it. */
+.pz{display:flex; gap:0; border-top:var(--stroke) solid var(--c-grey-200); border-bottom:var(--stroke) solid var(--c-grey-200); min-height:30rem}
+.pz-item{position:relative; flex:1 1 0; min-width:0; padding:var(--sp-lg) var(--sp-md);
+  border-left:var(--stroke) solid var(--c-grey-200); cursor:pointer; overflow:hidden;
+  transition:flex-grow .5s var(--ease), background-color var(--dur-short) var(--ease)}
+.pz-item:first-child{border-left:0}
+.pz-item:hover{background:var(--c-grey-100)}
+.pz-item.is-open{flex-grow:7; cursor:default; background:none}
+.pz-item:focus-visible{outline:2px solid var(--focus); outline-offset:-2px}
+.pz-head{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.pz-n{font-size:var(--t-small); color:var(--text-3); font-variant-numeric:tabular-nums}
+.pz-item.is-open .pz-n{color:var(--c-blue)}
+.pz-head h3{margin:0; font-size:var(--t-large); font-weight:400; letter-spacing:-.02em; line-height:1.2}
+.pz-body{display:grid; grid-template-columns:minmax(0,1fr); gap:var(--sp-lg); align-items:start;
+  margin-top:var(--sp-lg); opacity:0; visibility:hidden; transition:opacity .35s var(--ease) .15s}
+.pz-item.is-open .pz-body{opacity:1; visibility:visible}
+.pz-item:not(.is-open) .pz-body{position:absolute; left:var(--sp-md); right:var(--sp-md); pointer-events:none}
+.pz-body .copy{margin:0; font-size:var(--t-small); color:var(--text-2); max-width:56ch}
+.pz-shot{margin:0; border:var(--stroke) solid var(--c-grey-200); border-radius:var(--r-sm); overflow:hidden;
+  background:#fff; box-shadow:0 14px 40px rgba(3,7,18,.07)}
+.pz-shot img{display:block; width:100%; height:auto}
+.pz-shot--pz1{max-width:24rem}
+@media (max-width:1000px){
+  .pz{flex-direction:column; min-height:0; border-bottom:0}
+  .pz-item{border-left:0; border-bottom:var(--stroke) solid var(--c-grey-200); padding:var(--sp-lg) 0}
+  .pz-item, .pz-item.is-open{flex:none; background:none}
+  .pz-head{flex-direction:row; align-items:baseline; gap:var(--sp-md)}
+  .pz-body, .pz-item:not(.is-open) .pz-body{position:static; opacity:1; visibility:visible; pointer-events:auto;
+    grid-template-columns:1fr; gap:var(--sp-md)}
+}
+
 /* Solution overview: the five steps as one connected strip on light grey.
    Each column holds a small white mock screen at a staggered height; one SVG
    drawn across the whole strip links them in blue (a 1000 x 300 box, so it
@@ -1869,15 +1980,21 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
           phlebotomist present.</span></figcaption>
       </figure>
     </div>
-    <div class="saliva-proof">
+    <div class="saliva-proof" data-count-group>
       <span class="saliva-proof-l">Proven at scale</span>
       <div class="saliva-proof-figs">
-      <div class="fig"><span class="v">11,000+</span><span class="k">Active sessions</span>
-        <span class="s">From top pros to youth teams</span></div>
-      <div class="fig"><span class="v">25,000+</span><span class="k">Samples</span>
-        <span class="s">In the last 12 months</span></div>
-      <div class="fig"><span class="v">2.5M+</span><span class="k">Analysed biomarkers</span>
-        <span class="s">For impactful decision making</span></div>
+        <div class="sp-fig"><span class="sp-i">01</span>
+          <span class="sp-v"><b data-count="11000" data-dec="0">11,000</b><small>+</small></span>
+          <span class="sp-k">Active sessions</span>
+          <span class="sp-s">From top pros to youth teams.</span></div>
+        <div class="sp-fig"><span class="sp-i">02</span>
+          <span class="sp-v"><b data-count="25000" data-dec="0">25,000</b><small>+</small></span>
+          <span class="sp-k">Samples</span>
+          <span class="sp-s">Analysed in the last 12 months.</span></div>
+        <div class="sp-fig"><span class="sp-i">03</span>
+          <span class="sp-v"><b data-count="2.5" data-dec="1">2.5</b><small>M+</small></span>
+          <span class="sp-k">Analysed biomarkers</span>
+          <span class="sp-s">For impactful decision making.</span></div>
       </div>
     </div>
     <div class="hd saliva-staff-hd">
@@ -1990,27 +2107,27 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
       <div class="flow-shots">
         <div data-panel="f1" id="panel-f1" role="tabpanel" aria-labelledby="tab-f1">
-          <figure class="shot">
-            <img src="__IMG_full__" width="1920" height="1080" loading="lazy"
-              alt="Team Overview: the squad triaged into who needs attention today, with the week's load and the indicators currently out of range.">
+          <figure class="shot shot--detail" data-title="Team overview">
+          <img src="__IMG_dt1__" width="794" height="314" loading="lazy"
+            alt="Team Overview: framework indicator cards showing which players sit outside their own range for each indicator.">
           </figure>
         </div>
         <div data-panel="f2" id="panel-f2" role="tabpanel" aria-labelledby="tab-f2" hidden>
-          <figure class="shot">
-            <img src="__IMG_digest__" width="1920" height="1080" loading="lazy"
-              alt="Weekly digest view: the week's findings grouped by who on staff needs to act on them.">
+          <figure class="shot shot--detail" data-title="Weekly digest">
+          <img src="__IMG_dt2__" width="796" height="512" loading="lazy"
+            alt="Weekly digest: the week’s flagged players and the biomarkers furthest outside players’ own bands.">
           </figure>
         </div>
         <div data-panel="f3" id="panel-f3" role="tabpanel" aria-labelledby="tab-f3" hidden>
-          <figure class="shot">
-            <img src="__IMG_knowledge__" width="1920" height="1080" loading="lazy"
-              alt="Knowledge view: the interpretation library, pairing an observed marker pattern with what it typically means and the evidence behind that reading.">
+          <figure class="shot shot--detail" data-title="Knowledge">
+          <img src="__IMG_dt3__" width="884" height="254" loading="lazy"
+            alt="Knowledge: the Cortisol elevation entry, separating acute, chronic and systemic patterns.">
           </figure>
         </div>
         <div data-panel="f4" id="panel-f4" role="tabpanel" aria-labelledby="tab-f4" hidden>
-          <figure class="shot">
-            <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
-              alt="Player Overview: one athlete's page, where staff record the decision taken and what it was based on.">
+          <figure class="shot shot--detail shot--narrow" data-title="Player overview">
+          <img src="__IMG_dt4__" width="604" height="362" loading="lazy"
+            alt="Player Overview: one athlete’s performance and medical indicator cards.">
           </figure>
         </div>
       </div>
@@ -2313,59 +2430,42 @@ markers: 60+
       <h2 class="h2">Five views, from squad to single athlete.</h2>
     </div>
 
-    <div class="tabs" role="tablist" aria-label="Dashboard views" data-tabs="dash">
-      <button class="tab" role="tab" aria-selected="true"  data-tab="d1">Team Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="d2">Team Biomarker Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="d3">Player Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="d4">Player Indicator</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="d5">Player Biomarker</button>
-    </div>
-
-    <div data-panel="d1">
-      <p class="copy">The five-minute read. Who needs you
-        today, what the week&rsquo;s load looked like, and which indicators are off
-        &mdash; before anyone opens a single player.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_full__" width="1920" height="1080" loading="lazy"
-          alt="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad.">
-      </figure>
-    </div>
-    <div data-panel="d2" hidden>
-      <p class="copy">One marker, the whole squad. Trend
-        and outlier flags come from each player&rsquo;s own seven-day and rolling windows,
-        not from a population reference range.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
-          alt="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread.">
-      </figure>
-    </div>
-    <div data-panel="d3" hidden>
-      <p class="copy">Everything known about one athlete on
-        one page: what is open, what changed since you last looked, and what it is likely
-        to mean.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
-          alt="Player Overview: one athlete's share of markers inside his own range, an at-a-glance indicator grid, and his indicator tiles grouped by department.">
-      </figure>
-    </div>
-    <div data-panel="d4" hidden>
-      <p class="copy">An indicator is not a black-box
-        score. It is the share of that indicator&rsquo;s biomarkers currently sitting
-        outside this athlete&rsquo;s own range &mdash; so you can always open it and see
-        which markers put it there.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_playerind__" width="1920" height="1080" loading="lazy"
-          alt="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting inside the player's own range, so higher is better.">
-      </figure>
-    </div>
-    <div data-panel="d5" hidden>
-      <p class="copy">Marker by marker, day by day, against
-        the athlete&rsquo;s own band rather than a textbook one. The reference line is
-        their personal median.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_playermk__" width="1920" height="1080" loading="lazy"
-          alt="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median.">
-      </figure>
+    <div class="pz" data-pz>
+      <div class="pz-item is-open" tabindex="0" role="button" aria-expanded="true">
+        <div class="pz-head"><span class="pz-n">01</span><h3>Team Overview</h3></div>
+        <div class="pz-body">
+          <p class="copy">The five-minute read. Who needs you today, what the week&rsquo;s load looked like, and which indicators are off &mdash; before anyone opens a single player.</p>
+          <figure class="pz-shot pz-shot--pz1" data-title="Team overview"><img src="__IMG_pz1__" width="392" height="312" loading="lazy" alt="Team Overview: the Creatine consumption indicator across the squad, with the players currently outside their own range."></figure>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">02</span><h3>Team Biomarker Overview</h3></div>
+        <div class="pz-body">
+          <p class="copy">One marker, the whole squad. Trend and outlier flags come from each player&rsquo;s own seven-day and rolling windows, not from a population reference range.</p>
+          <figure class="pz-shot pz-shot--pz2" data-title="Biomarker overview"><img src="__IMG_pz2__" width="1602" height="498" loading="lazy" alt="Team Biomarker Overview: cortisol for every player over time, with outliers marked in red."></figure>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">03</span><h3>Player Overview</h3></div>
+        <div class="pz-body">
+          <p class="copy">Everything known about one athlete on one page: what is open, what changed since you last looked, and what it is likely to mean.</p>
+          <figure class="pz-shot pz-shot--pz3" data-title="Player overview"><img src="__IMG_pz3__" width="1606" height="260" loading="lazy" alt="Player Overview: one athlete with their share of markers in their own range and the At a glance grid of indicators."></figure>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">04</span><h3>Player Indicator</h3></div>
+        <div class="pz-body">
+          <p class="copy">An indicator is not a black-box score. It is the share of that indicator&rsquo;s biomarkers currently sitting outside this athlete&rsquo;s own range &mdash; so you can always open it and see which markers put it there.</p>
+          <figure class="pz-shot pz-shot--pz4" data-title="Player indicator"><img src="__IMG_pz4__" width="1602" height="524" loading="lazy" alt="Player Indicator: the metabolic stress indicator for one athlete over the season."></figure>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">05</span><h3>Player Biomarker</h3></div>
+        <div class="pz-body">
+          <p class="copy">Marker by marker, day by day, against the athlete&rsquo;s own band rather than a textbook one. The reference line is their personal median.</p>
+          <figure class="pz-shot pz-shot--pz5" data-title="Player biomarker"><img src="__IMG_pz5__" width="1602" height="524" loading="lazy" alt="Player Biomarker: 3-Hydroxyglutaric acid for one athlete against their own range, with one excursion marked."></figure>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2751,9 +2851,9 @@ markers: 60+
         <p class="copy">See at a glance who was sampled when, how well each sample was
           collected, and which players are overdue.</p>
       </div>
-      <figure class="shot sq-shot">
-        <img src="__IMG_samples__" width="1920" height="1080" loading="lazy"
-          alt="Sample quality view: per-athlete sampling recency and collection quality across the squad, flagging players not sampled for several days.">
+      <figure class="shot sq-shot shot--detail" data-title="Sample quality">
+          <img src="__IMG_dt5__" width="1604" height="170" loading="lazy"
+            alt="Sample quality: samples in the window, unusable samples and players affected.">
       </figure>
     </div>
   </div>
@@ -3112,30 +3212,23 @@ markers: 60+
         the EMA and FDA apply).</p>
     </div>
 
-    <div class="figs figs--boxed ap-figs">
-      <div class="fig">
-        <span class="v">26<span class="of">&#8202;/&#8202;27</span></span>
-        <span class="k">meet the ICH M10 standard</span>
-        <span class="s">At or under 15&#8201;% variation within and between runs. Two further
-          markers are still in optimisation.</span>
-      </div>
-      <div class="fig">
-        <span class="v">4.8&#8201;%</span>
-        <span class="k">typical variation</span>
-        <span class="s">The median spread of a single result on any given day.</span>
-      </div>
-      <div class="fig">
-        <span class="v">13&#8201;%</span>
-        <span class="k">smallest real change</span>
-        <span class="s">A larger change between two samples is very unlikely to be
-          measurement noise.</span>
-      </div>
-      <div class="fig">
-        <span class="v">1,000&times;</span>
-        <span class="k">dynamic range</span>
-        <span class="s">17 of 29 biomarkers quantified across three orders of
-          magnitude.</span>
-      </div>
+    <div class="cnt ap-figs" data-count-group style="--cols:4">
+      <div class="sp-fig"><span class="sp-i">01</span>
+        <span class="sp-v"><b data-count="26" data-dec="0">26</b><small>/ 27</small></span>
+        <span class="sp-k">meet the ICH M10 standard</span>
+        <span class="sp-s">At or under 15&#8201;% variation within and between runs. Two further markers are still in optimisation.</span></div>
+      <div class="sp-fig"><span class="sp-i">02</span>
+        <span class="sp-v"><b data-count="4.8" data-dec="1">4.8</b><small>%</small></span>
+        <span class="sp-k">typical variation</span>
+        <span class="sp-s">The median spread of a single result on any given day.</span></div>
+      <div class="sp-fig"><span class="sp-i">03</span>
+        <span class="sp-v"><b data-count="13" data-dec="0">13</b><small>%</small></span>
+        <span class="sp-k">smallest real change</span>
+        <span class="sp-s">A larger change between two samples is very unlikely to be measurement noise.</span></div>
+      <div class="sp-fig"><span class="sp-i">04</span>
+        <span class="sp-v"><b data-count="1000" data-dec="0">1,000</b><small>&times;</small></span>
+        <span class="sp-k">dynamic range</span>
+        <span class="sp-s">17 of 29 biomarkers quantified across three orders of magnitude.</span></div>
     </div>
 
     <div class="ap" data-ap>
@@ -3210,6 +3303,76 @@ markers: 60+
    optimisation, so they are drawn as open rows rather than left out, which
    would quietly turn 29 markers into 27.
    ======================================================================= */
+(function () {
+
+  /* Count-up figures (Home "Proven at scale"): reveal the columns and run the
+     numbers from zero the first time the block is on screen. */
+  (function () {
+    /* Looked up on every check, not once: this script runs before the later
+       pages in the file (Research, Horses, the use cases) have been parsed. */
+    function groupsNow() { return [].slice.call(document.querySelectorAll('[data-count-group]')); }
+    var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function fmt(v, dec) {
+      return dec ? v.toFixed(dec) : Math.round(v).toLocaleString('en-US');
+    }
+    function run(g) {
+      g.classList.add('is-in');
+      if (still) return;
+      [].forEach.call(g.querySelectorAll('[data-count]'), function (el, k) {
+        var to = parseFloat(el.dataset.count), dec = +el.dataset.dec || 0;
+        var dur = 1600, t0 = null, delay = k * 150;
+        el.textContent = fmt(0, dec);
+        function step(ts) {
+          if (t0 === null) t0 = ts + delay;
+          var f = Math.min(1, Math.max(0, (ts - t0) / dur));
+          var e = 1 - Math.pow(1 - f, 3);
+          el.textContent = fmt(to * e, dec);
+          if (f < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }
+    /* Checked on scroll, resize and page change rather than with an
+       IntersectionObserver: these blocks live on pages that start hidden,
+       and a block that only becomes visible on a route change must still
+       start its count. */
+    var ticking = false;
+    function check() {
+      ticking = false;
+      groupsNow().forEach(function (g) {
+        if (g.classList.contains('is-in')) return;
+        var r = g.getBoundingClientRect();
+        if (r.height && r.top < window.innerHeight * 0.85 && r.bottom > 0) run(g);
+      });
+    }
+    function request() { if (!ticking) { ticking = true; setTimeout(check, 60); } }
+    window.addEventListener('scroll', request, { passive: true });
+    window.addEventListener('resize', request);
+    window.addEventListener('popstate', function () { setTimeout(check, 60); });
+    document.addEventListener('click', function () { setTimeout(check, 120); });
+    document.addEventListener('DOMContentLoaded', check);
+    check();
+  })();
+  /* Personalize views (Solution): resting the cursor on a column opens it;
+     click, tap or Enter does the same. */
+  [].forEach.call(document.querySelectorAll('[data-pz]'), function (pz) {
+    var items = [].slice.call(pz.querySelectorAll('.pz-item'));
+    function open(it) {
+      items.forEach(function (o) {
+        o.classList.toggle('is-open', o === it);
+        o.setAttribute('aria-expanded', o === it ? 'true' : 'false');
+      });
+    }
+    var hoverable = window.matchMedia('(hover: hover)');
+    items.forEach(function (it) {
+      it.addEventListener('mouseenter', function () { if (hoverable.matches) open(it); });
+      it.addEventListener('click', function () { open(it); });
+      it.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(it); }
+      });
+    });
+  });
+})();
 (function () {
   'use strict';
   var root = document.querySelector('[data-ap]');
@@ -3784,9 +3947,9 @@ markers: 60+
       <span class="eyebrow">Dashboard</span>
       <h2 class="h3">From value to meaning.</h2>
     </div>
-    <figure class="shot">
-      <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
-        alt="Biomarker overview with the cortisol panel selected, showing the squad median, spread, and an explanation of what cortisol measures and what elevation means in athletes.">
+    <figure class="shot shot--detail" data-title="Biomarker overview">
+          <img src="__IMG_pz2__" width="1602" height="498" loading="lazy"
+            alt="Biomarker overview: cortisol for every player over time, with outliers marked in red.">
     </figure>
   </div>
 </section>
@@ -4538,15 +4701,23 @@ markers: 60+
 
 <section class="sec--md">
   <div class="wrap">
-    <div class="figs figs--open figs--blue">
-      <div class="fig"><span class="v">3</span><span class="k">Timepoints</span>
-        <span class="s">Rest &middot; post-load &middot; +1 h</span></div>
-      <div class="fig"><span class="v">2</span><span class="k">Matrices</span>
-        <span class="s">Venous blood &amp; saliva, paired</span></div>
-      <div class="fig"><span class="v">2</span><span class="k">Arms</span>
-        <span class="s">Daytime and night-time</span></div>
-      <div class="fig"><span class="v">77</span><span class="k">Markers</span>
-        <span class="s">Across seven analyte families</span></div>
+    <div class="cnt" data-count-group style="--cols:4">
+      <div class="sp-fig"><span class="sp-i">01</span>
+        <span class="sp-v"><b data-count="3" data-dec="0">3</b></span>
+        <span class="sp-k">Timepoints</span>
+        <span class="sp-s">Rest &middot; post-load &middot; +1 h</span></div>
+      <div class="sp-fig"><span class="sp-i">02</span>
+        <span class="sp-v"><b data-count="2" data-dec="0">2</b></span>
+        <span class="sp-k">Matrices</span>
+        <span class="sp-s">Venous blood &amp; saliva, paired</span></div>
+      <div class="sp-fig"><span class="sp-i">03</span>
+        <span class="sp-v"><b data-count="2" data-dec="0">2</b></span>
+        <span class="sp-k">Arms</span>
+        <span class="sp-s">Daytime and night-time</span></div>
+      <div class="sp-fig"><span class="sp-i">04</span>
+        <span class="sp-v"><b data-count="77" data-dec="0">77</b></span>
+        <span class="sp-k">Markers</span>
+        <span class="sp-s">Across seven analyte families</span></div>
     </div>
   </div>
 </section>
@@ -5394,9 +5565,9 @@ markers: 60+
         baseline, which patterns to keep an eye on, and whether what you take is working. No
         rankings, no teammates, no comparisons you didn&rsquo;t ask for.</p>
     </div>
-    <figure class="shot">
-      <img src="__IMG_athlete__" width="1920" height="1382" loading="lazy"
-        alt="Athlete view: one player's own page showing 51% of markers in their usual range, an at-a-glance grid of fourteen indicators, and performance, medical and nutrition sections.">
+    <figure class="shot shot--detail" data-title="Athlete view">
+          <img src="__IMG_dt6__" width="842" height="300" loading="lazy"
+            alt="Athlete view: the player’s own page with their share of markers in range and the At a glance grid.">
     </figure>
     <div class="cols wl-cols" style="margin-top:var(--sp-2xl)">
       <div class="col"><h3>60 seconds, no needles</h3>
@@ -6696,10 +6867,16 @@ markers: 60+
 
 <section class="sec--md">
   <div class="wrap">
-    <div class="figs figs--boxed">
-      <div class="fig"><span class="v">11 days</span><span class="k">between the first signal and the injury</span></div>
-      <div class="fig"><span class="v">4 markers</span><span class="k">pointing in the same direction</span></div>
-      <div class="fig"><span class="v">1 question</span><span class="k">&ldquo;Is there a concern about muscle fibre disruption?&rdquo;</span></div>
+    <div class="cnt" data-count-group style="--cols:3">
+      <div class="sp-fig"><span class="sp-i">01</span>
+        <span class="sp-v"><b data-count="11" data-dec="0">11</b><small>days</small></span>
+        <span class="sp-k">between the first signal and the injury</span></div>
+      <div class="sp-fig"><span class="sp-i">02</span>
+        <span class="sp-v"><b data-count="4" data-dec="0">4</b><small>markers</small></span>
+        <span class="sp-k">pointing in the same direction</span></div>
+      <div class="sp-fig"><span class="sp-i">03</span>
+        <span class="sp-v"><b data-count="1" data-dec="0">1</b><small>question</small></span>
+        <span class="sp-k">&ldquo;Is there a concern about muscle fibre disruption?&rdquo;</span></div>
     </div>
   </div>
 </section>
@@ -7146,17 +7323,27 @@ markers: 60+
         <p>What we have built with professional football and cycling teams, and our first
           step with horses.</p>
       </div>
-      <div class="hz-stats-row">
-        <div class="hz-stat"><span class="v">25,000+</span><span class="k">Samples analysed</span>
-          <span class="s">In the last 12 months</span></div>
-        <div class="hz-stat"><span class="v">2.5M+</span><span class="k">Biomarker measurements</span>
-          <span class="s">Across football and cycling</span></div>
-        <div class="hz-stat"><span class="v">3</span><span class="k">Own laboratories</span>
-          <span class="s">Dortmund, Tulln and London</span></div>
-        <div class="hz-stat"><span class="v">1</span><span class="k">Pilot horse project</span>
-          <span class="s">Running now with Gest&uuml;t Erlenhof</span></div>
-        <div class="hz-stat"><span class="v">5+</span><span class="k">Research papers</span>
-          <span class="s">Behind our saliva method</span></div>
+      <div class="cnt" data-count-group style="--cols:5">
+        <div class="sp-fig"><span class="sp-i">01</span>
+          <span class="sp-v"><b data-count="25000" data-dec="0">25,000</b><small>+</small></span>
+          <span class="sp-k">Samples analysed</span>
+          <span class="sp-s">In the last 12 months</span></div>
+        <div class="sp-fig"><span class="sp-i">02</span>
+          <span class="sp-v"><b data-count="2.5" data-dec="1">2.5</b><small>M+</small></span>
+          <span class="sp-k">Biomarker measurements</span>
+          <span class="sp-s">Across football and cycling</span></div>
+        <div class="sp-fig"><span class="sp-i">03</span>
+          <span class="sp-v"><b data-count="3" data-dec="0">3</b></span>
+          <span class="sp-k">Own laboratories</span>
+          <span class="sp-s">Dortmund, Tulln and London</span></div>
+        <div class="sp-fig"><span class="sp-i">04</span>
+          <span class="sp-v"><b data-count="1" data-dec="0">1</b></span>
+          <span class="sp-k">Pilot horse project</span>
+          <span class="sp-s">Running now with Gest&uuml;t Erlenhof</span></div>
+        <div class="sp-fig"><span class="sp-i">05</span>
+          <span class="sp-v"><b data-count="5" data-dec="0">5</b><small>+</small></span>
+          <span class="sp-k">Research papers</span>
+          <span class="sp-s">Behind our saliva method</span></div>
       </div>
     </div>
     <div class="hz-partners">
@@ -7352,37 +7539,37 @@ markers: 60+
     </div>
 
     <div data-panel="hzd1">
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_full__" width="1920" height="1080" loading="lazy"
-          alt="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad.">
+      <figure class="shot shot--detail shot--small" style="margin-top:var(--sp-lg)" data-title="Team overview">
+          <img src="__IMG_pz1__" width="392" height="312" loading="lazy"
+            alt="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad.">
       </figure>
     </div>
     <div data-panel="hzd2" hidden>
       <p class="copy">One marker across the whole stable, with trends and outliers measured against each horse&rsquo;s own history.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_markers__" width="1920" height="1080" loading="lazy"
-          alt="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread.">
+      <figure class="shot shot--detail" style="margin-top:var(--sp-lg)" data-title="Biomarker overview">
+          <img src="__IMG_pz2__" width="1602" height="498" loading="lazy"
+            alt="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread.">
       </figure>
     </div>
     <div data-panel="hzd3" hidden>
       <p class="copy">Everything about one horse on one page: what changed since you last looked, and what it is likely to mean.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_player__" width="1920" height="1080" loading="lazy"
-          alt="Player Overview: one athlete's share of markers inside his own range, an at-a-glance indicator grid, and his indicator tiles grouped by department.">
+      <figure class="shot shot--detail" style="margin-top:var(--sp-lg)" data-title="Player overview">
+          <img src="__IMG_pz3__" width="1606" height="260" loading="lazy"
+            alt="Player Overview: one athlete's share of markers inside his own range, an at-a-glance indicator grid, and his indicator tiles grouped by department.">
       </figure>
     </div>
     <div data-panel="hzd4" hidden>
       <p class="copy">Each indicator shows how many of its biomarkers sit inside the horse&rsquo;s own range, and you can always open it to see which ones.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_playerind__" width="1920" height="1080" loading="lazy"
-          alt="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting inside the player's own range, so higher is better.">
+      <figure class="shot shot--detail" style="margin-top:var(--sp-lg)" data-title="Player indicator">
+          <img src="__IMG_pz4__" width="1602" height="524" loading="lazy"
+            alt="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting inside the player's own range, so higher is better.">
       </figure>
     </div>
     <div data-panel="hzd5" hidden>
       <p class="copy">Marker by marker, day by day, against the horse&rsquo;s own range rather than a textbook one.</p>
-      <figure class="shot" style="margin-top:var(--sp-lg)">
-        <img src="__IMG_playermk__" width="1920" height="1080" loading="lazy"
-          alt="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median.">
+      <figure class="shot shot--detail" style="margin-top:var(--sp-lg)" data-title="Player biomarker">
+          <img src="__IMG_pz5__" width="1602" height="524" loading="lazy"
+            alt="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median.">
       </figure>
     </div>
 
