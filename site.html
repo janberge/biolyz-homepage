@@ -1296,6 +1296,7 @@ textarea{min-height:7rem; resize:vertical}
 .poc-str h3{font-size:var(--t-large); letter-spacing:-.02em; font-weight:400; margin:0 0 var(--sp-2xs)}
 .poc-str p{margin:0; color:var(--text-2); font-size:var(--t-small)}
 .poc-ex{margin-top:var(--sp-3xl); display:flex; flex-direction:column; gap:var(--sp-md)}
+.hd + .poc-ex{margin-top:0}
 .poc-ex ul{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-xl)}
 .poc-ex li{display:flex; flex-direction:column; gap:var(--sp-xs); padding-top:var(--sp-md);
   border-top:var(--stroke) solid var(--c-grey-300)}
@@ -4369,7 +4370,7 @@ markers: 60+
 <div class="page" id="p-about" data-title="Biolyz Manifesto" hidden>
 
 <section class="hero hero--photo hero--about inv">
-  <video class="hero-bg" src="__VIDEO_aboutvideo__" poster="__IMG_aboutvideoposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
+  <img class="hero-bg" src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -4518,26 +4519,11 @@ markers: 60+
 <section class="sec band-grey">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>POC</span></div></div>
   <div class="wrap">
-    <div class="poc-what">
-      <div class="poc-what-l">
-        <h2 class="h2">What is point of care?</h2>
-        <p class="copy">Point of care (POC) means testing right where the athlete is: on the training ground, in the treatment room or on the team bus, instead of sending a sample to a central lab. A small device analyses a drop of blood, saliva or sweat on the spot and shows a result within seconds to minutes. It has earned its place in sports science, and here is what it does well.</p>
-      </div>
-      <ol class="poc-str">
-        <li><span class="poc-k">10&nbsp;sec</span>
-          <div><h3>Results in seconds to minutes</h3>
-          <p>A handheld lactate meter gives a reading in 10 seconds, for when a coach needs to adjust intensity mid-session.</p></div></li>
-        <li><span class="poc-k">On site</span>
-          <div><h3>Works anywhere, no lab needed</h3>
-          <p>Point-of-care devices run on the training ground, in a hotel room or on the team bus.</p></div></li>
-        <li><span class="poc-k">1 marker</span>
-          <div><h3>Proven tools for specific questions</h3>
-          <p>For a single, well-defined question, a single, well-known marker is often enough.</p></div></li>
-      </ol>
+    <div class="hd">
+      <h2 class="h2">Examples of point-of-care systems</h2>
     </div>
 
     <div class="poc-ex">
-      <span class="eyebrow">Examples of point-of-care systems</span>
       <ul>
         <li><span class="poc-t">10 sec</span><b>EKF Lactate Scout</b>
           <span class="poc-d">Lactate from a drop of capillary blood</span></li>
@@ -5035,8 +5021,8 @@ markers: 60+
 
 <div class="page" id="p-research" data-title="Biolyz Research" hidden>
 
-<section class="hero hero--photo hero--research hero--portrait inv">
-  <img class="hero-bg" src="__IMG_herzrasenhero__" width="1080" height="1350" alt="" aria-hidden="true">
+<section class="hero hero--photo hero--research inv">
+  <img class="hero-bg" src="__IMG_researchhero__" width="1500" height="2000" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -7443,7 +7429,7 @@ markers: 60+
 .hero--blood .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.88), rgba(3,7,18,.5) 60%, rgba(3,7,18,.5))}
 /* Research (Herzrasen): black-and-white runners, same hero treatment. */
 .hero--research{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
-.hero--research .hero-bg{filter:grayscale(1); object-position:center 50%}
+.hero--research .hero-bg{filter:grayscale(1); object-position:center 70%}
 .hero--research .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
 .hero--research .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(52ch,100%)}
 .hero--research .hero-title{font-size:var(--h1)}
@@ -7460,17 +7446,11 @@ markers: 60+
   .hero--portrait .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.75), rgba(3,7,18,.25) 55%, rgba(3,7,18,.2))}
   .hero--bm.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 12%}
 }
+
 /* About: black-and-white cyclists, same hero treatment. */
 .hero--about{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
 .hero--about .hero-bg{filter:grayscale(1); object-position:center 45%}
-/* The About header video is a portrait phone clip. Full-bleed on a wide
-   screen it would show only a zoomed torso, so from tablet width up it sits
-   whole in the right part of the header and fades into the dark ground. */
-@media (min-width:821px){
-  .hero--about .hero-bg{left:auto; right:0; width:min(46%,38rem); object-position:center 30%;
-    -webkit-mask-image:linear-gradient(to right, transparent 0, #000 35%); mask-image:linear-gradient(to right, transparent 0, #000 35%)}
-  .hero--about .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.75), rgba(3,7,18,.25) 55%, rgba(3,7,18,.2))}
-}
+
 .hero--about .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
 .hero--about .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(44ch,100%)}
 /* So What?: the black-and-white pitch from above, same hero treatment. */
