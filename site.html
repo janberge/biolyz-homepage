@@ -1369,6 +1369,10 @@ textarea{min-height:7rem; resize:vertical}
    column under the cursor turns white. */
 .sol-map{background:none; color:var(--text); padding:var(--sp-xl) var(--gutter) 0}
 .sol-map + .sec{padding-top:var(--sp-2xl)}
+/* The same strip inside a section (Horses "The Process"): no own padding, and
+   on a grey band the hovered column lifts to white instead of grey. */
+.sol-map--inline{padding:0}
+.band-grey .sol-col:hover{background:var(--c-white)}
 .sol-map .sol-text{padding-bottom:var(--sp-md)}
 .sol-grid{position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr))}
 .sol-wires{position:absolute; left:0; top:0; width:100%; height:300px; z-index:1; pointer-events:none;
@@ -1441,6 +1445,9 @@ textarea{min-height:7rem; resize:vertical}
   .sol-col{grid-template-columns:1fr}
   .sol-win{max-width:16rem}
 }
+/* Inside .wrap the page gutter is already there, so the inline strip's
+   columns drop their own side padding on narrow screens. */
+@media (max-width:1100px){ .sol-map--inline{padding:0} .sol-map--inline .sol-col{padding-inline:0} }
 
 /* Testing day: one lane per approach, each step a white chip joined by an
    arrow. Point of Care ends looping back (repeat per marker); Biolyz ends on
@@ -2383,6 +2390,10 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 </section>
 
 <section class="sol-map" aria-label="The Biolyz Solution in five steps">
+  <div class="hd">
+    <span class="eyebrow">The Process</span>
+    <h2 class="h2">From swab to decision, in five steps.</h2>
+  </div>
   <div class="sol-grid">
     <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 175.0 416 175.0"/><circle cx="416" cy="175.0" r="3"/><path d="M584 175.0 C600.0 175.0 600.0 140.0 616 140.0"/><circle cx="616" cy="140.0" r="3"/><path d="M784 140.0 C800.0 140.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
     <a class="sol-col" href="#sol-collect" data-sw-jump="sol-collect" aria-label="Go to Collect">
@@ -7650,17 +7661,65 @@ markers: 60+
       <span class="eyebrow">The Process</span>
       <h2 class="h2">From swab to decision, in five steps.</h2>
     </div>
-    <ol class="hz-flow">
-      <li><span class="n">01</span><span class="t">Collect</span><span class="d">A two-minute saliva swab in the stable, sent to our lab.</span></li>
-      <li><span class="n">02</span><span class="t">Analyze</span><span class="d">The full biomarker panel, turned into clear indicators.</span></li>
-      <li><span class="n">03</span><span class="t">Personalize</span><span class="d">Every value read against your horse&rsquo;s own baseline.</span></li>
-      <li><span class="n">04</span><span class="t">Context</span><span class="d">Your stable&rsquo;s own data, alongside the biomarkers.</span></li>
-      <li><span class="n">05</span><span class="t">Act</span><span class="d">Recommendations for training, care and breeding.</span></li>
-    </ol>
+    <div class="sol-map sol-map--inline">
+    <div class="sol-grid">
+    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 175.0 416 175.0"/><circle cx="416" cy="175.0" r="3"/><path d="M584 175.0 C600.0 175.0 600.0 140.0 616 140.0"/><circle cx="616" cy="140.0" r="3"/><path d="M784 140.0 C800.0 140.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
+    <a class="sol-col" href="#hz-collect" data-sw-jump="hz-collect" aria-label="Go to Collect">
+      <div class="sol-stage"><div class="sol-win" style="top:70px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-line sw-line--w"></div>
+          <ul class="sw-list">
+            <li><span>Horse selected</span><b>&#10003;</b></li>
+            <li><span>2&ndash;3 min swab</span><b>&#10003;</b></li>
+          </ul>
+          <div class="sw-cta">Ship to lab</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">01</span>Collect</h3><p>A two-minute saliva swab in the stable, sent to our lab.</p></div>
+    </a>
+    <a class="sol-col" href="#hz-questions" data-sw-jump="hz-questions" aria-label="Go to Analyze">
+      <div class="sol-stage"><div class="sol-win" style="top:40px">
+          <div class="sw-line sw-line--w"></div>
+          <pre class="sw-code">sample:  H-0112
+method:  LC-MS/MS
+&#8594; indicators: 4</pre>
+          <div class="sw-rows"><i></i><i></i><i></i></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">02</span>Analyze</h3><p>The full biomarker panel, turned into clear indicators.</p></div>
+    </a>
+    <a class="sol-col" href="#hz-personalize" data-sw-jump="hz-personalize" aria-label="Go to Personalize">
+      <div class="sol-stage"><div class="sol-win" style="top:90px">
+          <div class="sw-top"><div class="sw-line"></div><span class="sw-tag">&#9632; Live</span></div>
+          <ul class="sw-menu">
+            <li>Stable Overview</li><li>Biomarker Overview</li><li class="is-on">Horse Overview</li>
+            <li>Individual Indicator</li><li>Individual Biomarker</li>
+          </ul>
+          <div class="sw-dots"><i></i><i class="is-on"></i><i></i></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">03</span>Personalize</h3><p>Every value read against your horse&rsquo;s own baseline.</p></div>
+    </a>
+    <a class="sol-col" href="#hz-context" data-sw-jump="hz-context" aria-label="Go to Context">
+      <div class="sol-stage"><div class="sol-win" style="top:55px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-tiles"><span>Training</span><span>Heart rate</span><span>Feeding</span><span>Vet notes</span></div>
+          <div class="sw-cta">Your data</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">04</span>Context</h3><p>Your stable&rsquo;s own data, alongside the biomarkers.</p></div>
+    </a>
+    <a class="sol-col" href="#hz-act" data-sw-jump="hz-act" aria-label="Go to Act">
+      <div class="sol-stage"><div class="sol-win" style="top:80px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-row"><span>Flag raised</span><em>Ready</em></div>
+          <div class="sw-row is-on"><span>Recommendation</span><em>Now</em></div>
+          <div class="sw-row sw-row--caps"><span>Decision stays with you</span><em>&mdash;</em></div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">05</span>Act</h3><p>Recommendations for training, care and breeding.</p></div>
+    </a>
+    </div>
+    </div>
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="hz-collect">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
   <div class="wrap">
     <div class="hd">
@@ -7744,7 +7803,7 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="hz-personalize">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
   <div class="wrap">
     <div class="hd">
@@ -7824,7 +7883,7 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec band-grey">
+<section class="sec band-grey" id="hz-context">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
   <div class="wrap">
     <div class="hd">
@@ -7858,7 +7917,7 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec">
+<section class="sec" id="hz-act">
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
   <div class="wrap">
     <div class="hd">
