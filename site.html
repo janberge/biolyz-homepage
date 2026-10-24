@@ -1759,6 +1759,12 @@ footer.site{padding-block:var(--sp-2xl) var(--sp-2xl)}
    wrapped it anyway. A wider, fixed cap (rather than another ch guess) fits
    it on one line and still yields to 100% on narrow screens. */
 .hero--science .hero-copy{max-width:min(36rem,100%)}
+/* Science header video in blue shades: the colour is taken out, then a
+   layer in the brand blue lends its hue back (blend mode "color" keeps the
+   video's own light and dark, so it reads as a blue monochrome). */
+.hero--science .hero-bg{filter:grayscale(1) contrast(1.05)}
+.hero--science::before{content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:#0013e9; mix-blend-mode:color}
 .proof{display:flex; gap:var(--sp-2xl); align-items:flex-start; flex-wrap:wrap; justify-content:space-between}
 .proof--stacked{flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-2xl)}
 .proof--stacked .proof-group{align-items:center; text-align:center}
