@@ -41,7 +41,7 @@
 
   --sp-2xs:.25rem; --sp-xs:.375rem; --sp-sm:.5rem; --sp-md:1rem; --sp-lg:1.5rem;
   --sp-xl:2rem; --sp-2xl:3.5rem; --sp-3xl:4rem; --sp-4xl:5rem;
-  --section-sm:2rem; --section-md:5rem; --section-lg:7rem; --section-xl:12rem;
+  --section-sm:2rem; --section-md:4rem; --section-lg:5rem; --section-xl:9rem;
   --gutter:calc(2rem + 125px); --container:110rem; --reading:88rem;
 
   --r-sm:4px; --r-md:6px; --r-round:99px;
@@ -1430,6 +1430,10 @@ textarea{min-height:7rem; resize:vertical}
 .mk-chip .l i{display:block; height:2px; border-radius:2px}
 .mk-dot{width:.55em; height:.55em; border-radius:50%; background:#d92d20; display:inline-block}
 .mk-spark{width:100%; height:auto; display:block}
+.mk-pills{display:flex; flex-wrap:wrap; gap:.4em}
+.mk-weights{display:flex; flex-wrap:wrap; align-items:baseline; gap:.35em .9em; font-size:.82em; color:#646464}
+.mk-weights b{font-weight:400; color:#0013e9}
+.mk-reasons{display:flex; flex-wrap:wrap; gap:.4em}
 .mk-route{display:flex; align-items:center; gap:.7em; padding:.6em .75em; border:1px solid #e6e6e6; border-radius:.55em; font-size:.95em}
 .mk-route > span:not(.mk-av){flex:1}
 .mk-route b{font-weight:400}
@@ -1759,12 +1763,7 @@ footer.site{padding-block:var(--sp-2xl) var(--sp-2xl)}
    wrapped it anyway. A wider, fixed cap (rather than another ch guess) fits
    it on one line and still yields to 100% on narrow screens. */
 .hero--science .hero-copy{max-width:min(36rem,100%)}
-/* Science header video in blue shades: the colour is taken out, then a
-   layer in the brand blue lends its hue back (blend mode "color" keeps the
-   video's own light and dark, so it reads as a blue monochrome). */
-.hero--science .hero-bg{filter:grayscale(1) contrast(1.05)}
-.hero--science::before{content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:#0013e9; mix-blend-mode:color}
+
 .proof{display:flex; gap:var(--sp-2xl); align-items:flex-start; flex-wrap:wrap; justify-content:space-between}
 .proof--stacked{flex-direction:column; align-items:center; justify-content:center; gap:var(--sp-2xl)}
 .proof--stacked .proof-group{align-items:center; text-align:center}
@@ -1884,6 +1883,272 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .sitenav.on-dark .menu-panel .k{color:var(--o-white-30)}
 @media (max-width:700px){:root{--navh:3.25rem}}
 .mark{width:100%; height:auto; display:block}
+
+/* ==========================================================================
+   ABOUT US MENU PAGES  ·  Team, Customer Stories, Blog, Careers, news pill
+   ========================================================================== */
+/* News pill in the menu bar (as on atira.ai): one short line at a time,
+   cycling through what matters now. */
+.nav-news{position:relative; display:inline-grid; align-items:center; justify-items:start; box-sizing:border-box;
+  height:2.4rem; padding:0 1.15rem; border-radius:999px; background:var(--c-blue); color:#fff; font-size:.875rem;
+  letter-spacing:0; text-decoration:none; white-space:nowrap; overflow:hidden;
+  transition:width .45s var(--ease), background-color var(--dur-short) var(--ease)}
+.nav-news:hover{background:var(--c-dark-blue, #0010c4); color:#fff}
+.nav-news-t{grid-area:1/1; opacity:0; transform:translateY(-6px); transition:opacity .2s var(--ease), transform .2s var(--ease)}
+.nav-news-t.is-on{opacity:1; transform:none; transition-duration:.4s; transition-delay:.22s}
+.sitenav.on-dark .nav-news{background:var(--c-blue); color:#fff}
+@media (max-width:1359px){ .nav-news{display:none} }
+/* Team: redalpine-style headline */
+.tm-head .inner{gap:var(--sp-lg)}
+.tm-head + .sec{padding-top:var(--sp-2xl)}
+.tm-h1{margin:0; font-size:clamp(2.6rem,7vw,6rem); line-height:1; letter-spacing:-.045em; font-weight:400}
+/* Rolling word, as on redalpine.com/team: one column of words that glides
+   up one line at a time and loops without a jump. */
+.tm-roll{display:inline-block; height:1.08em; overflow:hidden; vertical-align:bottom; color:var(--c-blue)}
+.tm-track{display:flex; flex-direction:column; transition:transform .5s cubic-bezier(.65,0,.35,1)}
+.tm-track span{display:block; height:1.08em; line-height:1.08; white-space:nowrap}
+.tm-w{grid-area:1/1; opacity:0; transform:translateY(-.3em); transition:opacity .22s var(--ease), transform .22s var(--ease); white-space:nowrap}
+.tm-w.is-on{opacity:1; transform:none; transition-duration:.45s; transition-delay:.24s}
+.tm-w:not(.is-on){pointer-events:none}
+.tm-figs{display:flex; flex-wrap:wrap; gap:var(--sp-xl); margin-top:var(--sp-sm)}
+.tm-figs div{display:flex; flex-direction:column; gap:.2rem}
+.tm-figs b{font-weight:400; font-size:var(--h4, 1.75rem); color:var(--c-blue); letter-spacing:-.03em}
+.tm-figs span{font-size:var(--t-small); color:var(--text-2)}
+.tm-filter{display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:var(--sp-xl)}
+.tm-f{all:unset; cursor:pointer; padding:.45rem .95rem; border-radius:999px; border:var(--stroke) solid var(--c-grey-200);
+  font-size:var(--t-small); color:var(--text-2); transition:all var(--dur-short) var(--ease)}
+.tm-f:hover{border-color:var(--c-blue); color:var(--c-blue)}
+.tm-f.is-on{background:var(--c-blue); border-color:var(--c-blue); color:#fff}
+.tm-f:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
+.tm-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(15.5rem,100%),1fr)); gap:var(--sp-xl) var(--sp-lg)}
+.tm-card{display:flex; flex-direction:column; gap:var(--sp-md)}
+.tm-card[hidden]{display:none}
+.tm-photo{aspect-ratio:4/5; border-radius:16px; overflow:hidden; background:#eef0f4}
+.tm-photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(1); transition:filter .5s var(--ease), transform .8s var(--ease)}
+.tm-card:hover .tm-photo img{filter:none; transform:scale(1.03)}
+.tm-meta{display:flex; flex-direction:column; gap:.3rem}
+.tm-meta h3{margin:0; font-size:var(--t-large); font-weight:400; letter-spacing:-.02em}
+.tm-tag{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue)}
+.tm-role{font-size:var(--t-small); color:var(--text-2)}
+.tm-meta p{margin:.2rem 0 0; font-size:var(--t-small); color:var(--text-3); line-height:1.5}
+.tm-card--adv .tm-photo{aspect-ratio:1; max-width:9rem; border-radius:50%}
+
+/* Photo headers for Customer Stories, Blog and Careers (same treatment as
+   the other photo headers: black and white under a dark fade). */
+.hero--cust, .hero--blog, .hero--careers{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--cust .hero-bg, .hero--blog .hero-bg, .hero--careers .hero-bg{filter:grayscale(1)}
+.hero--cust .hero-bg{object-position:center 70%}
+.hero--blog .hero-bg{object-position:center 80%}
+.hero--careers .hero-bg{object-position:center 50%}
+.hero--cust .hero-scrim, .hero--blog .hero-scrim, .hero--careers .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
+.hero--cust .hero-title, .hero--blog .hero-title, .hero--careers .hero-title{font-size:var(--h1)}
+.hero--cust .hero-lead, .hero--blog .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(46ch,100%)}
+/* Blog tiles carry a photo now; the outlet name sits on it. */
+.bl-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(1); transition:transform .8s var(--ease)}
+/* Each tile carries the outlet's own name as a wordmark on its colour,
+   in the manner of elevenlabs.io/blog. */
+.bl-logo{display:flex; flex-direction:column; align-items:center; gap:.2em; font-weight:700; letter-spacing:-.01em; line-height:1; text-align:center}
+.bl-logo small{font-size:.38em; font-weight:400; letter-spacing:.08em; text-transform:uppercase; opacity:.8}
+.bl-logo svg{display:block; height:2.6rem; width:auto; max-width:70%}
+.bl-feat .bl-logo svg{height:4rem}
+.bl-tile .bl-logo{font-size:2rem}
+.bl-feat .bl-tile .bl-logo{font-size:3rem}
+.bl-tile:has(.bl-logo--sportico){background:#fff; border:1px solid var(--c-grey-200)}
+.bl-tile:has(.bl-logo--boltwise){background:#10213f; color:#fff}
+.bl-tile:has(.bl-logo--orf){background:#d9001b; color:#fff}
+.bl-tile:has(.bl-logo--oe24){background:#e30613; color:#fff}
+.bl-tile:has(.bl-logo--brut){background:#111; color:#fff}
+.bl-logo--brut{font-weight:800; letter-spacing:-.03em}
+.bl-tile:has(.bl-logo--accent){background:#f3f4f6; color:#181818}
+.bl-logo--accent{font-weight:500; font-style:italic}
+.bl-tile:has(.bl-logo--athletech){background:#000; color:#fff}
+.bl-logo--athletech{letter-spacing:.04em}
+.bl-tile:has(.bl-logo--playbook){background:#f4efe6; color:#181818}
+.bl-logo--playbook{font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-style:italic}
+.bl-tile:has(.bl-logo--fitt){background:#fff; color:#181818; border:1px solid var(--c-grey-200)}
+.bl-logo--fitt{letter-spacing:.12em; font-size:1.5rem !important}
+.bl-tile:has(.bl-logo--athletic){background:#fff; color:#181818; border:1px solid var(--c-grey-200)}
+.bl-tile:has(.bl-logo--kicker){background:#fff; border:1px solid var(--c-grey-200)}
+.bl-lang{z-index:1}
+.bl-card:hover .bl-logo, .bl-feat:hover .bl-logo{transform:scale(1.04)}
+.bl-logo{transition:transform .6s var(--ease)}
+/* Customer stories */
+.cs-feature{display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:var(--sp-2xl); align-items:start}
+.cs-side{display:flex; flex-direction:column; gap:var(--sp-md); align-items:flex-start}
+.cs-logo{width:4.5rem; height:4.5rem}
+.cs-logo svg{width:100%; height:100%; display:block}
+.cs-logo--sm{width:3.25rem; height:3.25rem}
+.cs-figs{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-lg); width:100%; margin:var(--sp-sm) 0}
+.cs-figs div{display:flex; flex-direction:column; gap:.25rem; padding-top:var(--sp-sm); border-top:var(--stroke) solid var(--c-grey-200)}
+.cs-figs b{font-weight:400; font-size:var(--h4, 1.75rem); color:var(--c-blue); letter-spacing:-.03em}
+.cs-figs span{font-size:var(--t-small); color:var(--text-2)}
+.cs-quotes{display:flex; flex-direction:column; gap:var(--sp-md)}
+.cs-q{margin:0; border-radius:16px; padding:var(--sp-xl); background:var(--c-blue); color:#fff; display:flex; flex-direction:column; gap:var(--sp-lg)}
+.cs-q blockquote{margin:0; border:0; padding:0; max-width:none; font-size:var(--t-large); line-height:1.35; letter-spacing:-.02em}
+.cs-q figcaption{display:flex; align-items:center; gap:.7rem; font-size:var(--t-small); color:var(--o-white-80)}
+.cs-q figcaption img{width:3rem; height:3rem; border-radius:50%; object-fit:cover}
+.cs-q figcaption b{display:block; font-weight:400; color:#fff}
+.cs-q--light{background:#eef0f4; color:var(--text)}
+.cs-q--light figcaption{color:var(--text-2)}
+.cs-q--light figcaption b{color:var(--text)}
+.cs-more{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(18rem,100%),1fr)); gap:var(--sp-md)}
+.cs-club{display:flex; flex-direction:column; gap:.4rem; padding:var(--sp-lg); border-radius:16px; background:#fff}
+.cs-club b{font-weight:400; font-size:var(--t-large); letter-spacing:-.02em; margin-top:var(--sp-sm)}
+.cs-club span{font-size:var(--t-small); color:var(--text-2)}
+.cs-club--cta{background:var(--c-blue); color:#fff}
+.cs-club--cta span{color:var(--o-white-80)}
+.cs-club--cta .btn{align-self:flex-start; margin-top:var(--sp-sm); background:#fff; color:var(--c-blue)}
+/* Blog */
+.bl-feat{display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:var(--sp-xl); align-items:center;
+  color:inherit; text-decoration:none; margin-bottom:var(--sp-2xl)}
+.bl-tile{aspect-ratio:16/10; border-radius:16px; background:#eef0f4; display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden; transition:background-color var(--dur-short) var(--ease)}
+.bl-src{font-size:clamp(1.4rem,3vw,2.6rem); letter-spacing:-.03em; color:var(--text)}
+.bl-tile--sm .bl-src{font-size:1.5rem}
+.bl-lang{position:absolute; top:.8rem; right:.8rem; font-size:.6875rem; letter-spacing:.08em; color:var(--text-3);
+  border:1px solid var(--c-grey-200); border-radius:999px; padding:.1rem .5rem; background:#fff}
+.bl-body{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.bl-body .h3{margin:0}
+.bl-meta{font-size:.75rem; letter-spacing:.06em; text-transform:uppercase; color:var(--text-3)}
+.bl-more{color:var(--c-blue); font-size:var(--t-small)}
+.bl-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(19rem,100%),1fr)); gap:var(--sp-2xl) var(--sp-lg)}
+.bl-card{display:flex; flex-direction:column; gap:.55rem; color:inherit; text-decoration:none}
+.bl-card h3{margin:.2rem 0 0; font-size:var(--t-large); font-weight:400; letter-spacing:-.02em; line-height:1.25}
+.bl-card p{margin:0; font-size:var(--t-small); color:var(--text-2)}
+.bl-card:hover h3{color:var(--c-blue)}
+.bl-card:focus-visible, .bl-feat:focus-visible{outline:2px solid var(--focus); outline-offset:4px; border-radius:16px}
+
+/* Job pages */
+.jd-head .inner{gap:var(--sp-md); align-items:flex-start}
+.jd-back{font-size:var(--t-small); color:var(--text-2); text-decoration:none}
+.jd-back:hover{color:var(--c-blue)}
+.jd-title{color:var(--c-blue); max-width:min(22ch,100%)}
+.jd-facts{display:flex; flex-wrap:wrap; gap:var(--sp-sm) var(--sp-xl); margin:0}
+.jd-facts div{display:flex; flex-direction:column; gap:.15rem}
+.jd-facts dt{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:var(--text-3)}
+.jd-facts dd{margin:0; font-size:var(--t-regular); color:var(--text)}
+.jd{display:grid; grid-template-columns:minmax(0,1fr) minmax(16rem,22rem); gap:var(--sp-2xl); align-items:start}
+.jd-body{display:flex; flex-direction:column; gap:var(--sp-xl); max-width:46rem}
+.jd-sec{display:flex; flex-direction:column; gap:var(--sp-sm)}
+.jd-sec .h4{margin:0; color:var(--c-blue); font-size:clamp(1.25rem,1.6vw,1.5rem); letter-spacing:-.02em}
+.jd-sec p{margin:0; color:var(--text-2); line-height:1.6}
+.jd-sec ul{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.55rem}
+.jd-sec li{position:relative; padding-left:1.1rem; color:var(--text-2); line-height:1.55}
+.jd-sec li::before{content:""; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--c-blue)}
+.jd-about{padding-top:var(--sp-lg); border-top:var(--stroke) solid var(--c-grey-200)}
+.jd-card{position:sticky; top:calc(var(--navh) + var(--sp-lg)); display:flex; flex-direction:column; gap:var(--sp-md);
+  padding:var(--sp-lg); border-radius:16px; background:#eef0f4}
+.jd-facts--col{flex-direction:column; gap:var(--sp-sm)}
+.jd-card .btn{align-self:stretch; text-align:center; justify-content:center}
+.jd-card .inline-link{font-size:var(--t-small)}
+@media (max-width:900px){ .jd{grid-template-columns:1fr} .jd-card{position:static} }
+
+/* Changelog: photo header, then one row per release note */
+.hero--changelog{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
+.hero--changelog .hero-bg{filter:grayscale(1); object-position:center 50%}
+.hero--changelog .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
+.hero--changelog .hero-title{font-size:var(--h1)}
+.hero--changelog .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(48ch,100%)}
+.cl{display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-200)}
+.cl-row{display:grid; grid-template-columns:minmax(0,14rem) minmax(0,1fr); gap:var(--sp-xl); padding:var(--sp-lg) 0;
+  border-bottom:var(--stroke) solid var(--c-grey-200)}
+.cl-when{display:flex; flex-direction:column; align-items:flex-start; gap:.5rem; font-size:var(--t-small); color:var(--text-3)}
+.cl-tag{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue);
+  border:1px solid rgba(0,19,233,.3); border-radius:999px; padding:.15rem .6rem}
+.cl-what{display:flex; flex-direction:column; gap:.4rem; max-width:46rem}
+.cl-t{margin:0; font-size:var(--t-large); font-weight:400; letter-spacing:-.02em; color:var(--c-blue)}
+.cl-what p{margin:0; color:var(--text-2); line-height:1.6}
+.stub--blue{border-left-color:var(--c-blue)}
+@media (max-width:700px){ .cl-row{grid-template-columns:1fr; gap:.6rem} .cl-when{flex-direction:row; align-items:center} }
+
+/* ERDF page */
+.erdf-title{color:var(--c-blue); max-width:min(22ch,100%)}
+.erdf{display:grid; grid-template-columns:minmax(0,1fr) minmax(16rem,24rem); gap:var(--sp-2xl); align-items:start}
+.erdf-body{display:flex; flex-direction:column; gap:var(--sp-md); max-width:46rem; align-items:flex-start}
+.erdf-body p{margin:0; color:var(--text-2); line-height:1.65}
+.erdf-h{margin:var(--sp-sm) 0 0; font-size:clamp(1.25rem,1.6vw,1.5rem); font-weight:400; letter-spacing:-.02em; color:var(--c-blue)}
+.erdf-card{position:sticky; top:calc(var(--navh) + var(--sp-lg)); display:flex; flex-direction:column; gap:var(--sp-md);
+  padding:var(--sp-lg); border-radius:16px; background:#eef0f4}
+.erdf-logos{display:flex; flex-direction:column; gap:var(--sp-md); padding:var(--sp-md); border-radius:12px; background:#fff}
+.erdf-logos img{display:block; width:100%; height:auto; max-width:16rem}
+.erdf-more{margin:0; font-size:var(--t-small); color:var(--text-2)}
+@media (max-width:900px){ .erdf{grid-template-columns:1fr} .erdf-card{position:static} }
+
+/* Press kit */
+.pk-hero{background:#0016e6; color:#fff; min-height:72vh; min-height:72dvh; display:flex}
+.pk-hero-in{flex:1; display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-2xl);
+  padding-top:calc(var(--navh) + var(--section-md)); padding-bottom:var(--section-md)}
+.pk-hero-copy{display:flex; flex-direction:column; gap:var(--sp-lg); align-items:flex-start; max-width:min(34rem,100%)}
+.pk-hero-t{font-size:var(--h1); margin:0; color:#fff}
+.pk-hero-lead{margin:0; font-size:var(--t-large); color:var(--o-white-80)}
+.pk-tagline{margin:0; align-self:center; font-size:clamp(2.5rem,5.2vw,4.6rem); line-height:1.02; letter-spacing:-.035em; color:#fff}
+@media (max-width:820px){ .pk-hero-in{flex-direction:column-reverse; align-items:flex-start; justify-content:flex-end} .pk-tagline{align-self:flex-end; margin-top:var(--sp-xl)} }
+.pk-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr)); gap:var(--sp-lg)}
+.pk-mark{margin:0; display:flex; flex-direction:column; gap:var(--sp-md)}
+.pk-tile{aspect-ratio:4/3; border-radius:16px; background:#eef0f4; display:flex; align-items:center; justify-content:center; color:var(--c-off-black)}
+.pk-tile--inv{background:var(--c-black-blue); color:var(--c-off-white)}
+.pk-logo{width:min(60%,14rem)}
+.pk-logo--signet{width:4.75rem}
+.pk-logo svg{display:block; width:100%; height:auto}
+.pk-mark figcaption{display:flex; flex-direction:column; gap:.25rem}
+.pk-mark figcaption b{font-weight:400; font-size:var(--t-large); letter-spacing:-.02em; color:var(--c-blue)}
+.pk-mark figcaption span{font-size:var(--t-small); color:var(--text-2)}
+.pk-facts{margin:0; display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-300)}
+.pk-row{display:grid; grid-template-columns:minmax(0,14rem) minmax(0,1fr); gap:var(--sp-xl); padding:var(--sp-md) 0;
+  border-bottom:var(--stroke) solid var(--c-grey-300)}
+.pk-row dt{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue); padding-top:.3em}
+.pk-row dd{margin:0; color:var(--text); line-height:1.55}
+@media (max-width:700px){ .pk-row{grid-template-columns:1fr; gap:.35rem} }
+
+/* Legal pages (privacy, data security, impressum, cookies) in the site style */
+.legal-page .pagehead .h1{color:var(--c-blue)}
+.legal-page .prose{max-width:46rem}
+.legal-page .prose h2{color:var(--c-blue); font-size:clamp(1.25rem,1.6vw,1.5rem); font-weight:400; letter-spacing:-.02em}
+.legal-page .prose dl{display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-200); margin:var(--sp-md) 0}
+.legal-page .prose dt{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue); padding-top:var(--sp-md); margin:0}
+.legal-page .prose dd{margin:.3rem 0 0; padding-bottom:var(--sp-md); border-bottom:var(--stroke) solid var(--c-grey-200); color:var(--text)}
+.legal-page .prose ul{list-style:none; padding:0}
+.legal-page .prose ul li{position:relative; padding-left:1.1rem}
+.legal-page .prose ul li::before{content:""; position:absolute; left:0; top:.6em; width:6px; height:6px; border-radius:50%; background:var(--c-blue)}
+.legal-page .prose a{color:var(--c-blue)}
+.legal-page .stub{border-left-color:var(--c-blue)}
+.legal-page .cols{gap:var(--sp-md)}
+.legal-page .cols .col{background:#eef0f4; border-radius:16px; padding:var(--sp-lg); border:0}
+.legal-page .cols .col h3{color:var(--c-blue)}
+.legal-page .check{background:#eef0f4; border-radius:16px; padding:var(--sp-md) var(--sp-lg)}
+.legal-page .check b{color:var(--c-blue) !important}
+
+/* Home "Working with": crests link to Customer Stories, and the quote sits
+   right under them instead of in a popup. */
+a.club{text-decoration:none}
+.proof-quote{margin:var(--sp-sm) 0 0; max-width:34rem; padding:var(--sp-lg); border-radius:16px; background:#eef0f4;
+  display:flex; flex-direction:column; gap:var(--sp-md); text-align:left}
+.pq-club{display:flex; align-items:center; gap:.7rem; padding-bottom:var(--sp-md); border-bottom:1px solid #dfe2ea; font-size:var(--t-small); color:var(--text-2)}
+.pq-crest{width:2.4rem; height:2.4rem; flex:none}
+.pq-crest svg{width:100%; height:100%; display:block}
+.pq-club span:last-child{display:flex; flex-direction:column}
+.pq-club b{font-weight:400; color:var(--text); font-size:var(--t-regular)}
+.proof-quote blockquote{margin:0; border:0; padding:0; max-width:none; font-size:var(--t-regular); line-height:1.5; color:var(--text)}
+.proof-quote figcaption{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap; font-size:var(--t-small); color:var(--text-2)}
+.proof-quote img{width:2.75rem; height:2.75rem; border-radius:50%; object-fit:cover}
+.proof-quote figcaption span{display:flex; flex-direction:column; flex:1; min-width:12rem}
+.proof-quote figcaption b{font-weight:400; color:var(--text)}
+.proof-quote .inline-link{color:var(--c-blue); white-space:nowrap}
+/* Careers: open positions */
+.jobs{display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-200)}
+.job{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto; gap:var(--sp-lg); align-items:center;
+  padding:var(--sp-lg) .25rem; border-bottom:var(--stroke) solid var(--c-grey-200); color:inherit; text-decoration:none;
+  transition:background-color var(--dur-short) var(--ease)}
+.job:hover{background:var(--c-grey-100)}
+.job-t{font-size:var(--t-large); letter-spacing:-.02em}
+.job-m{font-size:var(--t-small); color:var(--text-2)}
+.job-a{font-size:var(--t-small); color:var(--c-blue); white-space:nowrap}
+.jobs-note{margin-top:var(--sp-lg); font-size:var(--t-small); color:var(--text-2)}
+@media (max-width:900px){
+  .cs-feature, .bl-feat{grid-template-columns:1fr}
+  .job{grid-template-columns:1fr; gap:.3rem}
+  .cs-figs{grid-template-columns:1fr 1fr 1fr; gap:var(--sp-sm)}
+}
 </style>
 
 <nav class="sitenav" id="nav" aria-label="Primary">
@@ -1897,12 +2162,25 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
         <a href="/science" data-link>Science <span class="k">Method</span></a>
         <a href="/biomarkers" data-link>Biomarkers</a>
         <a href="/research" data-link>Research</a>
-        <a href="/compare/point-of-care" data-link>vs Point of Care <span class="k">Comparison</span></a>
-        <a href="/compare/blood-labs" data-link>vs Blood Labs <span class="k">Comparison</span></a>
         <a href="/literature" data-link>Literature</a>
       </div>
     </div>
-    <a class="np" href="/about" data-link>About Us</a>
+    <div class="menu" data-menu>
+      <button class="np" type="button" aria-expanded="false" data-menu-btn>About Us <i class="chev"></i></button>
+      <div class="menu-panel">
+        <a href="/about" data-link>About Us <span class="k">Mission</span></a>
+        <a href="/team" data-link>Team</a>
+        <a href="/customers" data-link>Customer Stories</a>
+        <a href="/blog" data-link>Blog <span class="k">Press</span></a>
+        <a href="/careers" data-link>Careers</a>
+      </div>
+    </div>
+    <span class="spacer"></span>
+    <a class="nav-news" href="/careers" data-link data-news aria-live="polite">
+      <span class="nav-news-t" data-href="/careers">We&rsquo;re hiring: 4 open roles</span>
+      <span class="nav-news-t" data-href="/customers">BVB signs for three years</span>
+      <span class="nav-news-t" data-href="/blog">Sportico: Biolyz eyes the US</span>
+    </a>
     <span class="spacer"></span>
     <a class="np np--cta" href="/waitlist" data-link>Join athlete waitlist</a>
     <a class="np np--solid" href="/demo" data-link>Book a demo &#8599;</a>
@@ -1917,7 +2195,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-home" data-title="Biolyz Saliva Biomarker Platform">
 
 <section class="hero inv">
-  <video class="hero-bg" src="__VIDEO_hero__" poster="__IMG_heroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video class="hero-bg" src="__VIDEO_producthero__" poster="__IMG_productheroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -1951,35 +2229,19 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
       <div class="proof-group">
         <span class="eyebrow">Working with</span>
         <div class="marks">
-          <div class="club-wrap">
-            <button type="button" class="club" aria-describedby="testi-b04" aria-expanded="false">__SVG_b04__</button>
-            <div class="testi-pop" id="testi-b04" role="tooltip">
-              <span class="testi-pop-arrow" aria-hidden="true"></span>
-              <blockquote>
-                <p>&ldquo;Add the Bayer 04 Leverkusen testimonial here.&rdquo;</p>
-              </blockquote>
-              <div class="testi-pop-person">
-                <span class="testi-pop-avatar" aria-hidden="true"></span>
-                <div><b>Name, role</b><span>Bayer 04 Leverkusen</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="club-wrap">
-            <button type="button" class="club" aria-describedby="testi-bvb" aria-expanded="false">__SVG_bvb__</button>
-            <div class="testi-pop" id="testi-bvb" role="tooltip">
-              <span class="testi-pop-arrow" aria-hidden="true"></span>
-              <blockquote>
-                <p>&ldquo;I was skeptical at first, but when you experience the power of
-                  looking inside a player on a daily basis, that can really change how you
-                  work and compete.&rdquo;</p>
-              </blockquote>
-              <div class="testi-pop-person">
-                <img src="__IMG_braun__" width="80" height="80" loading="lazy" alt="">
-                <div><b>Dr. Markus Braun</b><span>Head Team Physician, Borussia Dortmund (BVB)</span></div>
-              </div>
-            </div>
-          </div>
+          <a class="club" href="/customers" data-link aria-label="Bayer 04 Leverkusen, see our customer stories">__SVG_b04__</a>
+          <a class="club" href="/customers" data-link aria-label="Borussia Dortmund, read the customer story">__SVG_bvb__</a>
         </div>
+        <figure class="proof-quote">
+          <div class="pq-club"><span class="pq-crest">__SVG_bvb__</span><span><b>Borussia Dortmund</b>Bundesliga &middot; Biolyz partner since 2024</span></div>
+          <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
+            inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
+          <figcaption>
+            <img src="__IMG_braun__" width="80" height="80" loading="lazy" alt="">
+            <span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span>
+            <a class="inline-link" href="/customers" data-link>Read the story &rarr;</a>
+          </figcaption>
+        </figure>
       </div>
     </div>
   </div>
@@ -2386,7 +2648,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             <span class="step4-bar"><i></i></span>
           </span>
           <span class="t">Routed</span>
-          <span class="step4-detail"><span class="d" data-i18n="step2">The dashboard shows who on staff needs to see this, and who needs to act before the next session.</span></span>
+          <span class="step4-detail"><span class="d" data-i18n="step2">The flag is grouped into its indicator, here inflammation, and the dashboard shows who on staff needs to see it before the next session.</span></span>
         </button>
         <button type="button" class="step4" role="tab" aria-selected="false"
           id="tab-f3" aria-controls="panel-f3" data-tab="f3">
@@ -2395,7 +2657,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             <span class="step4-bar"><i></i></span>
           </span>
           <span class="t">Interpreted</span>
-          <span class="step4-detail"><span class="d" data-i18n="step3">A pattern like this after a congested run of competition typically points to an under-recovered window ahead of the next session.</span></span>
+          <span class="step4-detail"><span class="d" data-i18n="step3">A pattern like this after a congested run of competition typically points to an under-recovered window. Staff can add their own context, such as a knock, travel or poor sleep, so the reading fits the athlete.</span></span>
         </button>
         <button type="button" class="step4" role="tab" aria-selected="false"
           id="tab-f4" aria-controls="panel-f4" data-tab="f4">
@@ -2403,8 +2665,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
             <span class="n">04</span>
             <span class="step4-bar"><i></i></span>
           </span>
-          <span class="t">Decided</span>
-          <span class="step4-detail"><span class="d" data-i18n="step4">Staff and player have a specific, shared reason to talk. A decision gets made: adjust the next session, monitor, or intervene.</span></span>
+          <span class="t">Recommended</span>
+          <span class="step4-detail"><span class="d" data-i18n="step4">Biolyz turns it into a personalised recommendation for this athlete. The team then decides the intervention: adjust the next session, monitor, or step in.</span></span>
         </button>
       </div>
 
@@ -2423,30 +2685,36 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 </div></figure>
         </div>
         <div data-panel="f2" id="panel-f2" role="tabpanel" aria-labelledby="tab-f2" hidden>
-          <figure class="mock" style="--pad:75%" role="img" aria-label="Weekly digest: the week’s flagged players and the biomarkers furthest outside players’ own bands."><div class="mk-stage">
-<div class="mk-card" style="width:78%">
-  <div class="mk-head"><b>Weekly digest</b><span class="mk-cap">3&ndash;9 Sep</span></div>
-  <div class="mk-cap">Who needs to see this</div><div class="mk-route on"><span class="mk-av blue">PC</span><span><b>Performance coach</b><br><small>2 players to review</small></span><em>&rarr;</em></div><div class="mk-route"><span class="mk-av ">TD</span><span><b>Team doctor</b><br><small>1 player to review</small></span><em>&rarr;</em></div><div class="mk-route"><span class="mk-av ">NU</span><span><b>Nutritionist</b><br><small>3 players to review</small></span><em>&rarr;</em></div>
+          <figure class="mock" style="--pad:75%" role="img" aria-label="Routed: the flag grouped into the Inflammation indicator, and the staff members who need to see it."><div class="mk-stage">
+<div class="mk-card" style="width:80%">
+  <div class="mk-head"><b>Routed</b><span class="mk-cap">Advid Daler</span></div>
+  <div class="mk-cap">Grouped into indicator</div>
+  <div class="mk-pills"><span class="mk-pill on">Inflammation</span><span class="mk-pill ">Muscle damage</span><span class="mk-pill ">Hormonal status</span></div>
+  <div class="mk-sub">Kynurenine <span style="color:#d92d20">&uarr; 38%</span> &middot; Kyn/Trp <span style="color:#d92d20">&uarr; 22%</span></div>
+  <div class="mk-cap">Who needs to see this</div><div class="mk-route on"><span class="mk-av blue">PC</span><span><b>Performance coach</b><br><small>Before Thursday&rsquo;s session</small></span><em>&rarr;</em></div><div class="mk-route"><span class="mk-av ">TD</span><span><b>Team doctor</b><br><small>For information</small></span><em>&rarr;</em></div>
 </div>
 </div></figure>
         </div>
         <div data-panel="f3" id="panel-f3" role="tabpanel" aria-labelledby="tab-f3" hidden>
-          <figure class="mock" style="--pad:75%" role="img" aria-label="Knowledge: the Cortisol elevation entry, separating acute, chronic and systemic patterns."><div class="mk-stage">
+          <figure class="mock" style="--pad:75%" role="img" aria-label="Interpreted: what the raised inflammation indicator likely means, with context added by the physio."><div class="mk-stage">
 <div class="mk-card" style="width:84%">
-  <div class="mk-head"><b class="mk-l">Cortisol elevation</b><span class="mk-pill ">Medical</span></div>
+  <div class="mk-head"><b class="mk-l">Inflammation &middot; raised</b><span class="mk-pill ">Performance</span></div>
   <div class="mk-cap">What is happening</div>
-  <div class="mk-tri"><div class="on"><b>Acute</b><span>One morning reading 30% above his own band</span></div><div><b>Chronic</b><span>Out on more of the last three weeks</span></div><div><b>Systemic</b><span>Recurs around away fixtures</span></div></div>
+  <div class="mk-tri"><div class="on"><b>Acute</b><span>Kynurenine 38% above his own band</span></div><div><b>Chronic</b><span>Not out over the last three weeks</span></div><div><b>Systemic</b><span>No repeat pattern</span></div></div>
+  <div class="mk-route on"><span class="mk-av blue">PH</span><span><b>Context added by physio</b><br><small>Poor sleep after the away trip, minor knock to the calf</small></span><em>+</em></div>
   <div class="mk-note"><b>Likely meaning</b>An under-recovered window after a congested run of matches.</div>
 </div>
 </div></figure>
         </div>
         <div data-panel="f4" id="panel-f4" role="tabpanel" aria-labelledby="tab-f4" hidden>
-          <figure class="mock" style="--pad:75%" role="img" aria-label="Player Overview: one athlete’s performance and medical indicator cards."><div class="mk-stage">
-<div class="mk-card" style="width:76%">
-  <div class="mk-head"><b>Decision</b><span class="mk-cap">Advid Daler</span></div>
-  <div class="mk-opt on"><i></i>Adjust next session</div><div class="mk-opt"><i></i>Monitor</div><div class="mk-opt"><i></i>Intervene</div>
-  <div class="mk-field">Lighter session, re-test in 48 h</div>
-  <div class="mk-btn">Save to player record</div>
+          <figure class="mock" style="--pad:75%" role="img" aria-label="Recommended: a personalised recommendation for one athlete, and the team choosing the intervention."><div class="mk-stage">
+<div class="mk-card" style="width:80%">
+  <div class="mk-head"><b>Recommendation</b><span class="mk-pill on">Personalised</span></div>
+  <div class="mk-row mk-row--plain"><span class="mk-av ">AD</span><span><b>Advid Daler</b><br><small>Inflammation raised &middot; context: poor sleep</small></span></div>
+  <div class="mk-note"><b>Suggested</b>Reduce high-intensity load for 24&ndash;48&nbsp;h, prioritise sleep and recovery, re-test Thursday.</div>
+  <div class="mk-cap">The team decides</div>
+  <div class="mk-opt on"><i></i>Adjust next session</div><div class="mk-opt"><i></i>Monitor</div><div class="mk-opt"><i></i>Step in</div>
+  <div class="mk-btn">Save decision</div>
 </div>
 </div></figure>
         </div>
@@ -2508,7 +2776,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 <div class="page" id="p-product" data-title="Biolyz Solution" hidden>
 
 <section class="hero hero--product inv">
-  <video class="hero-bg" src="__VIDEO_producthero__" poster="__IMG_productheroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video class="hero-bg" src="__VIDEO_scienceproduct__" poster="__IMG_scienceproductposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -2740,11 +3008,11 @@ markers: 60+
         <div class="pz-head"><span class="pz-n">01</span><h3>Team Overview</h3></div>
         <div class="pz-body">
           <p class="copy">The five-minute read. Who needs you today, what the week&rsquo;s load looked like, and which indicators are off &mdash; before anyone opens a single player.</p>
-          <figure class="mock" style="--pad:62.5%" role="img" aria-label="Team Overview: the Creatine consumption indicator across the squad, with the players currently outside their own range."><div class="mk-stage">
+          <figure class="mock" style="--pad:62.5%" role="img" aria-label="Team Overview: the Inflammation indicator across the squad, with the players currently outside their own range."><div class="mk-stage">
 <div class="mk-stack">
   <div class="mk-card mk-back" style="--x:18%;--y:-12%"><div class="mk-head"><b>Omega 6</b><span class="mk-pill ">Nutrition</span></div><div class="mk-big-row"><svg class="mk-ring" viewBox="0 0 40 40" style="width:3.4em;height:3.4em"><circle cx="20" cy="20" r="16" fill="none" stroke="#e6e6e6" stroke-width="3.2"/><circle cx="20" cy="20" r="16" fill="none" stroke="#d92d20" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="24.1 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24.5" text-anchor="middle" font-size="12" fill="#181818">24</text></svg></div></div>
   <div class="mk-card" style="width:68%">
-    <div class="mk-head"><b>Creatine consumption</b><span class="mk-pill ">Nutrition</span></div>
+    <div class="mk-head"><b>Inflammation</b><span class="mk-pill ">Performance</span></div>
     <div class="mk-big-row"><svg class="mk-ring" viewBox="0 0 40 40" style="width:4.2em;height:4.2em"><circle cx="20" cy="20" r="16" fill="none" stroke="#e6e6e6" stroke-width="3.2"/><circle cx="20" cy="20" r="16" fill="none" stroke="#181818" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="62.3 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24.5" text-anchor="middle" font-size="12" fill="#181818">62</text></svg><div><div class="mk-xl">62%</div><div class="mk-sub">21 of 34 players in their own range</div></div></div>
     <div class="mk-cap">Outside their range</div><div class="mk-row"><span class="mk-av ">JD</span><span>Janiel Danssen</span><span class="mk-pill bad">0%</span></div><div class="mk-row"><span class="mk-av ">AR</span><span>Ansmus Radersen</span><span class="mk-pill bad">0%</span></div><div class="mk-row"><span class="mk-av ">KN</span><span>Kokolas Niwalski</span><span class="mk-pill bad">0%</span></div>
   </div></div>
@@ -2780,13 +3048,14 @@ markers: 60+
       <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
         <div class="pz-head"><span class="pz-n">04</span><h3>Player Indicator</h3></div>
         <div class="pz-body">
-          <p class="copy">An indicator is not a black-box score. It is the share of that indicator&rsquo;s biomarkers currently sitting outside this athlete&rsquo;s own range &mdash; so you can always open it and see which markers put it there.</p>
+          <p class="copy">An indicator is not a black-box score. Its biomarkers are weighted by how relevant each one is to that indicator, and the score shows how much of that weight sits outside this athlete&rsquo;s own range &mdash; so you can always open it and see which markers put it there.</p>
           <figure class="mock" style="--pad:62.5%" role="img" aria-label="Player Indicator: the metabolic stress indicator for one athlete over the season."><div class="mk-stage">
 <div class="mk-card" style="width:84%">
   <div class="mk-head"><b class="mk-l">Metabolic stress</b><span class="mk-tools"><span class="mk-pill ">Performance</span><span class="mk-pill bad">&#9679; 0% in range</span></span></div>
   <svg class="mk-chart" viewBox="0 0 400 190"><rect x="24" y="34" width="352" height="126" fill="#f3f4f6"/><line x1="24" y1="34" x2="376" y2="34" stroke="#a0a0a0" stroke-dasharray="3 3"/>
    <polyline points="24.0,41.2 59.2,160.0 94.4,41.2 129.6,160.0 164.8,41.2 200.0,41.2 235.2,160.0 270.4,41.2 305.6,41.2 340.8,41.2 376.0,160.0" fill="none" stroke="#181818" stroke-width="1.6"/><polyline points="24.0,80.8 59.2,88.0 94.4,95.2 129.6,91.6 164.8,88.0 200.0,77.2 235.2,70.0 270.4,52.0 305.6,62.8 340.8,73.6 376.0,91.6" fill="none" stroke="#0013e9" stroke-width="2.4"/><rect x="20.5" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="55.7" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="90.9" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="126.1" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="161.3" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="196.5" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="231.7" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="266.9" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="302.1" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="337.3" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="372.5" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/></svg>
   <div class="mk-legend"><span><i style="background:#181818"></i>Metabolic stress</span><span><i style="background:#0013e9"></i>Trend</span><span><i style="background:#e6e6e6"></i>Own range</span></div>
+  <div class="mk-weights"><span class="mk-cap">Weighted by relevance</span><span>Hypoxanthine <b>high</b></span><span>Xanthine <b>medium</b></span><span>Uric acid <b>low</b></span></div>
 </div>
 </div></figure>
         </div>
@@ -3070,7 +3339,7 @@ markers: 60+
 <div class="page" id="p-science" data-title="Biolyz Science" hidden>
 
 <section class="hero hero--science inv">
-  <video class="hero-bg" src="__VIDEO_sciencehero__" poster="__IMG_scienceheroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
+  <video class="hero-bg" src="__VIDEO_hero__" poster="__IMG_heroposter__" preload="none" autoplay muted loop playsinline aria-hidden="true"></video>
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -3203,11 +3472,12 @@ markers: 60+
         <p class="copy">See at a glance who was sampled when, how well each sample was
           collected, and which players are overdue.</p>
       </div>
-      <figure class="mock" style="--pad:62.5%" role="img" aria-label="Sample quality: samples in the window, unusable samples and players affected."><div class="mk-stage">
+      <figure class="mock" style="--pad:62.5%" role="img" aria-label="Sample quality: samples in the window, unusable samples with the reason, and players affected."><div class="mk-stage">
 <div class="mk-card" style="width:86%">
   <div class="mk-head"><b class="mk-l">Sample quality</b><span class="mk-pill on">28 days</span></div>
   <div class="mk-stats"><div><span class="mk-cap">In window</span><b>248</b></div><div><span class="mk-cap">Unusable</span><b>3<small> / 248</small></b></div><div><span class="mk-cap">Overdue</span><b style="color:#d92d20">1</b></div></div>
   <div class="mk-row"><span class="mk-av ">AD</span><span>Advid Daler</span><span class="mk-st ok">Sampled today</span></div><div class="mk-row"><span class="mk-av ">JD</span><span>Janiel Danssen</span><span class="mk-st ok">Sampled today</span></div><div class="mk-row"><span class="mk-av ">NE</span><span>Nyil Emberg</span><span class="mk-st late">Overdue &middot; 4 days</span></div>
+  <div class="mk-reasons mk-mt"><span class="mk-pill bad">Discoloured &middot; 2</span><span class="mk-pill bad">Too little saliva &middot; 1</span></div>
 </div>
 </div></figure>
     </div>
@@ -5124,7 +5394,7 @@ markers: 60+
 <section class="sec--xl">
   <div class="wrap close-cta">
     <span class="eyebrow">Full Panel</span>
-    <h2 class="h3">Your heart&rsquo;s racing? Wait till you see all 77.</h2>
+    <h2 class="h3">Your heart&rsquo;s racing? Wait till you see all 77 Biomarkers.</h2>
     <a class="btn" href="/demo" data-link>Book a call &#8599;</a>
   </div>
 </section>
@@ -5701,68 +5971,52 @@ markers: 60+
      CHANGELOG
      ====================================================================== -->
 <div class="page" id="p-changelog" data-title="Biolyz Changelog" hidden>
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">Changelog</span>
-    <h1 class="h1">What shipped, and when.</h1>
-    <p class="lead">Product changes to the staff dashboard and the athlete view. Assay and
-      panel changes are versioned separately, on the science page.</p>
+<section class="hero hero--photo hero--changelog inv">
+  <img class="hero-bg" src="__IMG_changeloghero__" width="1500" height="1126" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Changelog</span>
+      <h1 class="hero-title">What shipped, and when.</h1>
+      <p class="hero-lead">Product changes to the staff dashboard and the athlete view. Assay and
+        panel changes are versioned separately, on the science page.</p>
+    </div>
   </div>
-</header>
+</section>
 
 <section class="sec">
   <div class="wrap">
-    <div class="papers">
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">The five-minute read</span>
-          <span class="sub">Team Overview now opens in Brief: the squad triaged into who
-            needs attention today, with Full one click away. Added &ldquo;since you last
-            looked&rdquo;.</span></span>
-        <span class="yr">Dashboard</span>
+    <div class="hd">
+      <span class="eyebrow">Latest releases</span>
+      <h2 class="h2">September 2026</h2>
+    </div>
+    <div class="cl">
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Dashboard</span></div>
+        <div class="cl-what"><h2 class="cl-t">The five-minute read</h2><p>Team Overview now opens in Brief: the squad triaged into who needs attention today, with Full one click away. Added &ldquo;since you last looked&rdquo;.</p></div>
       </article>
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">Indicators show their working</span>
-          <span class="sub">An indicator is now the share of its biomarkers sitting outside
-            that athlete&rsquo;s own range, not an opaque 0&ndash;100 score. Where the assay
-            has no coverage, the surface says so in words instead of showing a
-            zero.</span></span>
-        <span class="yr">Dashboard</span>
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Dashboard</span></div>
+        <div class="cl-what"><h2 class="cl-t">Indicators show their working</h2><p>An indicator is now the share of its biomarkers sitting outside that athlete&rsquo;s own range, not an opaque 0&ndash;100 score. Where the assay has no coverage, the surface says so in words instead of showing a zero.</p></div>
       </article>
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">Knowledge library</span>
-          <span class="sub">Alerts, active patterns and the use case library became one
-            object with one vocabulary: a pattern, what it typically means, and the evidence
-            behind that reading.</span></span>
-        <span class="yr">Dashboard</span>
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Dashboard</span></div>
+        <div class="cl-what"><h2 class="cl-t">Knowledge library</h2><p>Alerts, active patterns and the use case library became one object with one vocabulary: a pattern, what it typically means, and the evidence behind that reading.</p></div>
       </article>
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">Dark theme, and a rail that follows it</span>
-          <span class="sub">Full light and dark themes across every view, including the
-            navigation rail. Toggle with T.</span></span>
-        <span class="yr">Dashboard</span>
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Dashboard</span></div>
+        <div class="cl-what"><h2 class="cl-t">Dark theme, and a rail that follows it</h2><p>Full light and dark themes across every view, including the navigation rail. Toggle with T.</p></div>
       </article>
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">Compare, sample quality and the weekly digest</span>
-          <span class="sub">Three new surfaces: two athletes or two windows side by side,
-            collection quality per athlete, and a weekly digest grouped by who needs to
-            act.</span></span>
-        <span class="yr">Dashboard</span>
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Dashboard</span></div>
+        <div class="cl-what"><h2 class="cl-t">Compare, sample quality and the weekly digest</h2><p>Three new surfaces: two athletes or two windows side by side, collection quality per athlete, and a weekly digest grouped by who needs to act.</p></div>
       </article>
-      <article class="paper">
-        <span class="src">September 2026</span>
-        <span><span class="ttl">Athlete view</span>
-          <span class="sub">A player&rsquo;s own page, deliberately narrower than the staff
-            view: their status, their open patterns, their markers, and nothing about the
-            rest of the squad.</span></span>
-        <span class="yr">Athlete</span>
+      <article class="cl-row">
+        <div class="cl-when"><span>September 2026</span><span class="cl-tag">Athlete</span></div>
+        <div class="cl-what"><h2 class="cl-t">Athlete view</h2><p>A player&rsquo;s own page, deliberately narrower than the staff view: their status, their open patterns, their markers, and nothing about the rest of the squad.</p></div>
       </article>
     </div>
-    <p class="stub" style="margin-top:var(--sp-2xl)"><b>Build note.</b> These entries are
+    <p class="stub stub--blue" style="margin-top:var(--sp-xl)"><b>Build note.</b> These entries are
       real changes from the September 2026 dashboard work, written as public release notes.
       Confirm the wording and the dates against your own release log before this page
       goes live.</p>
@@ -5988,78 +6242,357 @@ markers: 60+
      CAREERS
      ====================================================================== -->
 <div class="page" id="p-careers" data-title="Biolyz Careers" hidden>
-<header class="pagehead">
+<section class="hero hero--photo hero--careers inv">
+  <img class="hero-bg" src="__IMG_careershero__" width="2000" height="1333" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Join Biolyz</span>
+      <h1 class="hero-title">Careers</h1>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="open-roles">
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">Open positions (4)</span>
+      <h2 class="h2" style="color:var(--c-blue)">Find your role.</h2>
+    </div>
+    <div class="jobs">
+      <a class="job" href="/careers/lab-technician" data-link><span class="job-t">Laboratory Technician (CTA/MTA/BTA)</span><span class="job-m">Lab &middot; Dortmund, on-site</span><span class="job-a">View role &rarr;</span></a>
+      <a class="job" href="/careers/business-medical-intern" data-link><span class="job-t">Business &amp; Medical Development Intern</span><span class="job-m">Internship &middot; Hamburg &middot; 5&ndash;6 months</span><span class="job-a">View role &rarr;</span></a>
+      <a class="job" href="/careers/marketing-intern" data-link><span class="job-t">Marketing (Content &amp; Social Media) Intern</span><span class="job-m">Internship &middot; Full time &middot; Hamburg or remote &middot; ASAP</span><span class="job-a">View role &rarr;</span></a>
+      <a class="job" href="/careers/founders-associate" data-link><span class="job-t">Founder&rsquo;s Associate</span><span class="job-m">Works directly with the CEO</span><span class="job-a">View role &rarr;</span></a>
+    </div>
+    <p class="jobs-note">Nothing that fits? <a class="inline-link" href="https://jobs.needle.so/biolyz" target="_blank" rel="noopener">See our job board</a> or <a class="inline-link" href="/contact" data-link>write to us</a>.</p>
+  </div>
+</section>
+
+
+
+</div>
+
+<!-- ======================================================================
+     TEAM  (About Us menu) — headline in the manner of redalpine.com/team:
+     "We are" + a word that keeps switching.
+     ====================================================================== -->
+<div class="page" id="p-team" data-title="Biolyz Team" hidden>
+<header class="pagehead tm-head">
   <div class="wrap inner">
-    <span class="eyebrow">Careers</span>
-    <h1 class="h1">Missionaries, not mercenaries.</h1>
-    <p class="lead">Scientists, engineers, operators, and rebels who see biology as the next
-      frontier of intelligence and want to build the rails. Especially in the rising wake of
-      artificial intelligence.</p>
+    <span class="eyebrow">Team</span>
+    <h1 class="tm-h1">We are <span class="tm-roll" data-roll aria-label="one team"><span class="tm-track"><span>one team.</span><span>sport scientists.</span><span>chemists.</span><span>medical doctors.</span><span>data scientists.</span><span>partners.</span><span>investors.</span><span>athletes.</span><span>one team.</span></span></span></h1>
+    <p class="lead">Chemists, engineers and sports scientists who build the methods, run the labs and
+      work daily with elite performance staff. 25+ specialists. Two labs. Both ours: Dortmund and
+      London, fully owned and fully staffed, so no third-party lab ever handles club data.</p>
+    <div class="tm-figs">
+      <div><b>25+</b><span>Specialists</span></div>
+      <div><b>2</b><span>In-house labs, Dortmund and London</span></div>
+      <div><b>ISO 27001</b><span>SOC 2 aligned &middot; data stays in-house</span></div>
+    </div>
   </div>
 </header>
 
 <section class="sec">
   <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Join us if you are passionate about</span>
-      <h2 class="h2">Four problems, all of them open.</h2>
+    <div class="tm-grid">
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teammarlon__" alt="Marlon Millard" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Chemistry</span><h3>Marlon Millard</h3><span class="tm-role">CEO &middot; Founder</span><p>Drug synthesis and cheminformatics, analytical chemistry and data science. M.Sc. Chemistry, M.Sc. Drug Discovery.</p></div>
+        </article>
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teamjan__" alt="Jan Berssenbrügge" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Go-to-market</span><h3>Jan Berssenbrügge</h3><span class="tm-role">CCO</span><p>10+ years in VC-backed companies. Co-founder and COO of Lhotse, VP Business Development at Clark. M.Sc. Management, LBS.</p></div>
+        </article>
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teamphilipp__" alt="Prof. Dr. Dr. Philipp Zimmer" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Sports medicine</span><h3>Prof. Dr. Dr. Philipp Zimmer</h3><span class="tm-role">CSO</span><p>Chair of Sports Medicine, TU Dortmund. Exercise immunology, sport and cancer. Previously DSHS Cologne and DKFZ Heidelberg.</p></div>
+        </article>
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teamdiarmuid__" alt="Dr. Diarmuid Daniels" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Sport science</span><h3>Dr. Diarmuid Daniels</h3><span class="tm-role">Head of Sport Science</span><p>Performance scientist and researcher with a PhD in biomarker monitoring. Previously Newcastle United, Orreco and the Insight Centre for Data Analytics.</p></div>
+        </article>
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teampaul__" alt="Paul Symmers" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Engineering</span><h3>Paul Symmers</h3><span class="tm-role">Director of Engineering</span><p>Data scientist and chemist. Building Atlas, Datavant, Sky. PhD in Supramolecular Chemistry.</p></div>
+        </article>
+        <article class="tm-card" data-group="lead">
+          <div class="tm-photo"><img src="__IMG_teamfelix__" alt="Felix Lorenzen" loading="lazy"></div>
+          <div class="tm-meta"><span class="tm-tag">Product</span><h3>Felix Lorenzen</h3><span class="tm-role">Product Lead</span><p>Product manager and founder of Autonome. Previously CHAPTR and Razor Group. M.Sc. Management, ESCP.</p></div>
+        </article>
     </div>
-    <ol class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
-      <li class="card"><span class="n">01</span><span class="t">Laboratory &amp; chemistry</span>
-        <span class="d">Solving laboratory and chemical problems that push the boundaries of
-          what is currently possible.</span></li>
-      <li class="card"><span class="n">02</span><span class="t">AI development</span>
-        <span class="d">Building AI that is truthful, with verifiably correct outputs that
-          infer health benefits.</span></li>
-      <li class="card"><span class="n">03</span><span class="t">High-throughput analysis</span>
-        <span class="d">Accelerating the advent of high-throughput analyses and laboratory
-          savoir.</span></li>
-      <li class="card"><span class="n">04</span><span class="t">Cross-disciplinary problems</span>
-        <span class="d">Solving open problems in engineering, design, and beyond.</span></li>
-    </ol>
+  </div>
+</section>
+
+<section class="sec--xl band-blue">
+  <div class="wrap close-cta">
+    <span class="eyebrow">Join us</span>
+    <h2 class="h2">Missionaries, not mercenaries.</h2>
+    <a class="btn btn--ink" href="/careers" data-link>See open roles &#8594;</a>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     CUSTOMER STORIES  (About Us menu)
+     ====================================================================== -->
+<div class="page" id="p-customers" data-title="Biolyz Customer Stories" hidden>
+<section class="hero hero--photo hero--cust inv">
+  <img class="hero-bg" src="__IMG_customershero__" width="2000" height="1118" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Customer stories</span>
+      <h1 class="hero-title">Trusted where performance is measured.</h1>
+      <p class="hero-lead">Biolyz works with 13 football clubs across Europe, from the Bundesliga to the Premier League.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <article class="cs-feature">
+      <div class="cs-side">
+        <div class="cs-logo">__SVG_bvb__</div>
+        <span class="eyebrow">Borussia Dortmund &middot; Bundesliga</span>
+        <h2 class="h3">From a one-season pilot to a three-year partnership.</h2>
+        <p class="copy">Dortmund tested Biolyz through the 2024/25 Bundesliga season, with players
+          sampled two to five times a week. In December 2025 the club signed a three-year
+          agreement and is rolling saliva testing out across its performance and medical
+          operations.</p>
+        <div class="cs-figs">
+          <div><b>12,000+</b><span>Samples in the pilot season</span></div>
+          <div><b>2&ndash;5&times;</b><span>Tests per player, per week</span></div>
+          <div><b>3 years</b><span>Partnership from 2025</span></div>
+        </div>
+        <a class="btn btn--ghost" href="/blog" data-link>Read the coverage &#8594;</a>
+      </div>
+      <div class="cs-quotes">
+        <figure class="cs-q">
+          <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
+            inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
+          <figcaption><img src="__IMG_braun__" alt="" width="48" height="48" loading="lazy"><span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span></figcaption>
+        </figure>
+        <figure class="cs-q cs-q--light">
+          <blockquote>&ldquo;Today, we are facing far fewer injuries thanks to more precise control over
+            workload and recovery.&rdquo;</blockquote>
+          <figcaption><span class="proc-av">SK</span><span><b>Sebastian Kehl</b>Sporting Director, Borussia Dortmund</span></figcaption>
+        </figure>
+      </div>
+    </article>
   </div>
 </section>
 
 <section class="sec band-grey">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">How we work</span>
-      <h2 class="h3">Four values, and we mean them literally.</h2>
+      <span class="eyebrow">Also working with Biolyz</span>
+      <h2 class="h3">More stories on the way.</h2>
     </div>
-    <div class="cols">
-      <div class="col"><h3>Truth</h3><p>We always seek and speak the truth, no matter how
-        uncomfortable the path may be.</p></div>
-      <div class="col"><h3>Tenacity</h3><p>We are working to solve some of the world&rsquo;s
-        hardest problems, and we refuse to fail for a lack of effort or focus.</p></div>
-      <div class="col"><h3>Craftsmanship</h3><p>We take pride in the aesthetics of what we
-        build, from our labs, our UIs to our backend infra.</p></div>
-      <div class="col"><h3>Humanity</h3><p>We believe that in an age of AI, humans must be
-        served with deserving science, insights and love.</p></div>
+    <div class="cs-more">
+      <div class="cs-club"><div class="cs-logo cs-logo--sm">__SVG_b04__</div><b>Bayer 04 Leverkusen</b><span>Bundesliga &middot; story coming soon</span></div>
+      <div class="cs-club cs-club--cta"><b>Your club here?</b><span>See what Biolyz would show on your own squad.</span><a class="btn" href="/demo" data-link>Book a demo &#8599;</a></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     BLOG  (About Us menu) — published coverage of Biolyz, newest first.
+     ====================================================================== -->
+<div class="page" id="p-blog" data-title="Biolyz Blog" hidden>
+<section class="hero hero--photo hero--blog inv">
+  <img class="hero-bg" src="__IMG_bloghero__" width="2000" height="2000" alt="" aria-hidden="true">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Blog</span>
+      <h1 class="hero-title">Biolyz in the press.</h1>
+      <p class="hero-lead">What has been written about Biolyz, newest first.</p>
     </div>
   </div>
 </section>
 
 <section class="sec">
   <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Open roles</span>
-      <h2 class="h3">Where we are, and how to reach us.</h2>
+    <a class="bl-feat" href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/" target="_blank" rel="noopener">
+      <div class="bl-tile"><span class="bl-logo bl-logo--sportico" role="img" aria-label="Sportico">__SVG_sportico__</span></div>
+      <div class="bl-body"><span class="bl-meta">Sportico &middot; 2026 &middot; Featured</span><h2 class="h3">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</h2><p class="copy">How the Austrian company grew to 13 football clubs, opened a UK lab and is preparing for the US.</p><span class="bl-more">Read on Sportico &#8599;</span></div>
+    </a>
+    <div class="bl-grid">
+      <a class="bl-card" href="https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--boltwise" role="img" aria-label="IT BOLTWISE">IT BOLTWISE</span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">IT BOLTWISE &middot; 10 Aug 2026</span><h3>Biolyz setzt mit Speicheltests auf Leistungssport und plant Expansion in die USA</h3><p>A new UK laboratory, a $5.3 million round and a US market entry planned for 2027.</p>
+      </a>
+      <a class="bl-card" href="https://noe.orf.at/stories/3338121/" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--orf" role="img" aria-label="ORF Niederösterreich">ORF<small>Niederösterreich</small></span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">ORF Niederösterreich &middot; 19 Jan 2026</span><h3>Tullner Start-up „optimiert“ Fußballprofis</h3><p>Austrian public broadcaster on the Dortmund deal, with scientists weighing potential and limits.</p>
+      </a>
+      <a class="bl-card" href="https://www.oe24.at/oesterreich/chronik/niederoesterreich/noe-unternehmen-arbeitet-mit-deutschem-bundesligisten-bvb-zusammen/665952275" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--oe24" role="img" aria-label="oe24">oe24</span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">oe24 &middot; 19 Jan 2026</span><h3>NÖ Unternehmen arbeitet mit deutschem Bundesligisten BVB zusammen</h3><p>A Lower Austrian company and a three-year partnership with Borussia Dortmund.</p>
+      </a>
+      <a class="bl-card" href="https://brutkasten.com/artikel/biolyz-tullner-speicheltest-startup-holt-dreijahresvertrag-mit-borussia-dortmund" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--brut" role="img" aria-label="brutkasten">brutkasten</span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">brutkasten &middot; 12 Jan 2026</span><h3>Biolyz: Tullner Speicheltest-Startup holt Dreijahresvertrag mit Borussia Dortmund</h3><p>From the 2024/25 pilot to a three-year contract, and plans for English football.</p>
+      </a>
+      <a class="bl-card" href="https://accent.at/news/tullner-speicheltest-startup-biolyz-holt-dreijahresvertrag-mit-borussia-dortmund" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--accent" role="img" aria-label="accent">accent</span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">accent &middot; 12 Jan 2026</span><h3>Tullner Speicheltest-Startup Biolyz holt Dreijahresvertrag mit Borussia Dortmund</h3><p>The Dortmund agreement and the next step into England.</p>
+      </a>
+      <a class="bl-card" href="https://athletechnews.com/borussia-dortmund-saliva-biomarker-testing-biolyz/" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--athletech" role="img" aria-label="Athletech News">ATHLETECH<small>NEWS</small></span><span class="bl-lang">EN</span></div>
+        <span class="bl-meta">Athletech News &middot; 17 Dec 2025</span><h3>Top Soccer Team Using Biomarker Testing To Optimize Performance</h3><p>Borussia Dortmund turns to saliva biomarkers to track stress, recovery and injury risk.</p>
+      </a>
+      <a class="bl-card" href="https://playbook.beehiiv.com/p/volume-76-beyond-wearables" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--playbook" role="img" aria-label="Playbook">Playbook</span><span class="bl-lang">EN</span></div>
+        <span class="bl-meta">Playbook &middot; 17 Dec 2025</span><h3>Volume 76 | Beyond Wearables</h3><p>Why internal load from saliva goes a step beyond GPS and wearables.</p>
+      </a>
+      <a class="bl-card" href="https://insider.fitt.co/press-release/biolyz-partners-with-borussia-dortmund-to-bring-high-frequency-saliva-biomarker-testing-to-elite-football/" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--fitt" role="img" aria-label="Fitt Insider">FITT INSIDER</span><span class="bl-lang">EN</span></div>
+        <span class="bl-meta">Fitt Insider &middot; 15 Dec 2025</span><h3>Biolyz partners with Borussia Dortmund to bring high-frequency saliva biomarker testing to elite football</h3><p>The press release announcing the three-year partnership.</p>
+      </a>
+      <a class="bl-card" href="https://www.nytimes.com/athletic/6858367/2025/12/05/soccer-saliva-marginal-gains/" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--athletic" role="img" aria-label="The Athletic">__SVG_nyt__<small>The Athletic</small></span><span class="bl-lang">EN</span></div>
+        <span class="bl-meta">The Athletic &middot; 5 Dec 2025</span><h3>Saliva testing and marginal gains in elite football</h3><p>The New York Times&rsquo; sports desk on saliva testing in football.</p>
+      </a>
+      <a class="bl-card" href="https://www.kicker.de/bvb-setzt-auf-speicheltests-1174045/artikel" target="_blank" rel="noopener">
+        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--kicker" role="img" aria-label="kicker">__SVG_kicker__</span><span class="bl-lang">DE</span></div>
+        <span class="bl-meta">kicker</span><h3>BVB setzt auf Speicheltests</h3><p>Germany&rsquo;s football magazine on Dortmund&rsquo;s saliva testing.</p>
+      </a>
     </div>
-    <div class="prose">
-      <dl>
-        <dt>Based in</dt><dd>Technopark 1, 3430 Tulln an der Donau, Austria &mdash; lab and
-          engineering in the same building.</dd>
-        <dt>Entity</dt><dd>BIOLYZ FlexCo</dd>
-        <dt>Speculative</dt><dd>If none of the roles fit but one of the four problems above
-          is yours, write anyway and say which one.</dd>
-      </dl>
-      <p class="stub"><b>Build note.</b> The live vacancy list was not on the public pages
-        this rebuild was drawn from, so no positions are invented here. The layout above
-        takes a real list of roles as soon as you have one.</p>
+  </div>
+</section>
+</div>
+
+<!-- ======================================================================
+     JOB PAGES  (Careers) — one page per open position; Apply opens the
+     application form on the job board.
+     ====================================================================== -->
+<div class="page" id="p-job-lab" data-title="Laboratory Technician (CTA/MTA/BTA) · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="/careers" data-link>&larr; All positions</a>
+    <span class="eyebrow">Careers &middot; Open position</span>
+    <h1 class="h1 jd-title">Laboratory Technician (CTA/MTA/BTA)</h1>
+    <dl class="jd-facts"><div><dt>Location</dt><dd>Dortmund, Germany (on-site)</dd></div><div><dt>Team</dt><dd>LC&ndash;MS/MS lab</dd></div><div><dt>Language</dt><dd>German and English</dd></div></dl>
+    <a class="btn" href="https://jobs.needle.so/biolyz/d84c2da8-a6e7-4db1-b7f9-928cee23ace6" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="jd">
+      <div class="jd-body">
+        <section class="jd-sec"><h2 class="h4">About the role</h2><p>As a Laboratory Technician (CTA/MTA/BTA) at our Dortmund site, you&rsquo;ll be at the operational core of our LC-MS/MS team in Europe. This isn&rsquo;t a routine lab role: you&rsquo;ll own the sample workflow from receipt to measurement, keeping our processes clean, documented, and continuously improving. Your work directly enables the biomarker insights we deliver to professional sports clubs and high-performance organizations across Europe.</p><p>You&rsquo;ll work independently on day-to-day lab operations while staying closely connected to our scientists and lab leadership, solving technical challenges in real time, maintaining instruments, and contributing to the quality standards that define Biolyz&rsquo;s output.</p></section>
+        <section class="jd-sec"><h2 class="h4">What you&rsquo;ll do</h2><ul><li>Receive, prepare, and process samples following SOPs (aliquoting, dilution, extraction, filtration) using automated liquid handler workflows</li><li>Perform routine maintenance, calibration, and functional checks on liquid handlers and lab equipment</li><li>Document all lab activity accurately: measurement logs, maintenance records, deviations, and CAPA actions in line with internal quality standards</li><li>Contribute to SOP development, process improvements, and lab organization (reagent management, inventory, housekeeping)</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">What we&rsquo;re looking for</h2><ul><li>Completed qualification as CTA, BTA, MTA, or equivalent</li><li>2–5+ years of hands-on experience in routine lab operations (sample workflow, measurement, QC)</li><li>Solid practical skills in sample preparation and contamination-aware working (carryover and contamination management)</li><li>Experience in quality-regulated lab environments with clean SOP documentation</li><li>Ability to work independently, troubleshoot routine issues, and escalate appropriately</li><li>Strong attention to detail, structured work style, and reliable documentation habits</li><li>Good communication skills in German and English</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Nice to have</h2><ul><li>Hands-on experience with LC-MS/MS instruments, particularly SCIEX QTRAP systems</li><li>Experience operating or programming automated liquid handlers</li><li>Familiarity with LIMS platforms</li><li>Understanding of ISO 15189, GMP, or other quality management standards</li><li>Interest in sports science, performance diagnostics, or health technology</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Location and compensation</h2><ul><li>Dortmund, Germany (on-site)</li><li>Competitive fixed salary based on experience and scope of responsibility</li><li>Team performance bonus of up to ~20% of gross salary</li><li>Long-term equity participation: share in Biolyz&rsquo;s success</li></ul></section>
+        <section class="jd-sec jd-about"><h2 class="h4">About Biolyz</h2><p>Biolyz is a full-stack saliva-based biomarker testing company on a mission to accelerate access to biomarker analytics for all humans, globally. Athletes and coaches collect saliva with a simple swab, and we analyze it via mass spectrometry within 48 hours across 60+ biomarkers covering stress, recovery, metabolism, and inflammation. Having tested over 2.5 million biomarkers across teams in the Champions League, Bundesliga, Premier League, Ligue 1 and other sports, Biolyz has powered the best athletes in their field.</p></section>
+      </div>
+      <aside class="jd-card">
+        <span class="eyebrow">Laboratory Technician (CTA/MTA/BTA)</span>
+        <dl class="jd-facts jd-facts--col"><div><dt>Location</dt><dd>Dortmund, Germany (on-site)</dd></div><div><dt>Team</dt><dd>LC&ndash;MS/MS lab</dd></div><div><dt>Language</dt><dd>German and English</dd></div></dl>
+        <a class="btn" href="https://jobs.needle.so/biolyz/d84c2da8-a6e7-4db1-b7f9-928cee23ace6" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+        <a class="inline-link" href="/careers" data-link>See all open positions</a>
+      </aside>
     </div>
-    <div class="btn-row" style="margin-top:var(--sp-xl)">
-      <a class="btn" href="/contact" data-link>Write to us &#8599;</a>
-      <a class="btn btn--ghost" href="/about" data-link>Read the manifesto first &#8594;</a>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-job-bizmed" data-title="Business &amp; Medical Development Intern · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="/careers" data-link>&larr; All positions</a>
+    <span class="eyebrow">Careers &middot; Open position</span>
+    <h1 class="h1 jd-title">Business &amp; Medical Development Intern</h1>
+    <dl class="jd-facts"><div><dt>Location</dt><dd>Hamburg, 80% in person</dd></div><div><dt>Duration</dt><dd>5&ndash;6 months</dd></div><div><dt>Start</dt><dd>October</dd></div></dl>
+    <a class="btn" href="https://jobs.needle.so/biolyz/2d7781eb-3ec7-4586-a773-da54d1391f60" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="jd">
+      <div class="jd-body">
+        <section class="jd-sec"><h2 class="h4">About the role</h2><p>This internship sits at the intersection of science and commercial strategy. As a Business &amp; Medical Development Intern, you&rsquo;ll work alongside the founding team to help Biolyz expand into new sports clubs, leagues, clinical networks, and institutional partnerships. You&rsquo;ll contribute to both the commercial side (business development, outreach, partnerships) and the medical and scientific side (supporting relationships with sports medicine professionals, research collaborators, and health institutions).</p><p>This is a generalist, high-impact role for someone curious, driven, and excited about the future of precision health in sports. You&rsquo;ll gain a rare front-row seat to how a science-driven startup builds its market.</p></section>
+        <section class="jd-sec"><h2 class="h4">What you&rsquo;ll do</h2><ul><li>Identify and research potential clients, partners, and distribution channels across professional sports, sports medicine, and clinical diagnostics</li><li>Support outreach and relationship management with sports clubs, performance institutes, sports medicine practitioners, and academic and research institutions</li><li>Prepare pitch materials, partnership proposals, and presentations for prospective clients and investors</li><li>Assist in the development of medical and scientific communication materials (white papers, case studies, product summaries)</li><li>Track and report on business development pipeline, outreach metrics, and market intelligence</li><li>Coordinate with the scientific and lab teams to ensure accurate representation of Biolyz&rsquo;s technology and capabilities</li><li>Support ad-hoc projects across strategy, marketing, and operations as the company scales</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">What we&rsquo;re looking for</h2><ul><li>Currently studying (or recently graduated from) a degree in life sciences, medicine, sports science, business, or a related field</li><li>Strong interest in both the commercial and scientific sides of healthcare and sports technology</li><li>Excellent communication and writing skills in English; German or other languages are a bonus</li><li>Proactive, self-starter mindset: comfortable with ambiguity and eager to take ownership</li><li>Strong research and analytical skills; ability to synthesize complex information clearly</li><li>Proficiency in standard productivity tools (Google Workspace, PowerPoint or Keynote)</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Nice to have</h2><ul><li>Prior internship experience in a startup, life sciences company, sports organization, or consulting firm</li><li>Understanding of sports performance, injury prevention, or biomarker science</li><li>Existing network in professional sports, sports medicine, or health tech</li><li>Experience with CRM tools or business development workflows</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Location and details</h2><ul><li>80% in person (with remote parts) from our office in Hamburg</li><li>Duration: 5–6 months</li><li>Start date: October</li><li>Stipend: competitive internship compensation</li></ul></section>
+        <section class="jd-sec jd-about"><h2 class="h4">About Biolyz</h2><p>Biolyz is a full-stack saliva-based biomarker testing company on a mission to accelerate access to biomarker analytics for all humans, globally. Athletes and coaches collect saliva with a simple swab, and we analyze it via mass spectrometry within 48 hours across 60+ biomarkers covering stress, recovery, metabolism, and inflammation. Having tested over 2.5 million biomarkers across teams in the Champions League, Bundesliga, Premier League, Ligue 1 and other sports, Biolyz has powered the best athletes in their field.</p></section>
+      </div>
+      <aside class="jd-card">
+        <span class="eyebrow">Business &amp; Medical Development Intern</span>
+        <dl class="jd-facts jd-facts--col"><div><dt>Location</dt><dd>Hamburg, 80% in person</dd></div><div><dt>Duration</dt><dd>5&ndash;6 months</dd></div><div><dt>Start</dt><dd>October</dd></div></dl>
+        <a class="btn" href="https://jobs.needle.so/biolyz/2d7781eb-3ec7-4586-a773-da54d1391f60" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+        <a class="inline-link" href="/careers" data-link>See all open positions</a>
+      </aside>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-job-mkt" data-title="Marketing (Content &amp; Social Media) Intern · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="/careers" data-link>&larr; All positions</a>
+    <span class="eyebrow">Careers &middot; Open position</span>
+    <h1 class="h1 jd-title">Marketing (Content &amp; Social Media) Intern</h1>
+    <dl class="jd-facts"><div><dt>Location</dt><dd>Hamburg or remote</dd></div><div><dt>Type</dt><dd>Full time</dd></div><div><dt>Start</dt><dd>As soon as possible</dd></div></dl>
+    <a class="btn" href="https://jobs.needle.so/biolyz/4c4b1876-b919-4393-87c6-7c68248368a9" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="jd">
+      <div class="jd-body">
+        <section class="jd-sec"><h2 class="h4">About the role</h2><p>We&rsquo;re looking for a Content &amp; Social Media Intern who wants to help tell the Biolyz story everywhere it happens, not just on a feed. You&rsquo;ll create the content that carries our brand across social media, partner activations, and the events and trade fairs where we meet clubs, coaches, and athletes face to face.</p><p>This isn&rsquo;t a "write captions and schedule posts" role. You&rsquo;ll travel with the team, go behind the scenes at elite sports clubs, and take ownership of our presence at industry events and fairs: defining, planning, and running them, not just capturing content there. You&rsquo;ll capture real moments with your phone or a camera, craft assets with AI tools, and turn cutting-edge science into content that feels human, exciting, and shareable.</p></section>
+        <section class="jd-sec"><h2 class="h4">What you&rsquo;ll do</h2><ul><li>Own Biolyz&rsquo;s content across channels (primarily Instagram, plus partnership and event materials) end to end: strategy, creation, publishing, and community engagement</li><li>Support partnerships with content and collateral for partner clubs, co-marketing, and brand collaborations</li><li>Define, plan, and manage Biolyz&rsquo;s presence at events, conferences, and trade fairs, and represent Biolyz on-site</li><li>Travel with the team to experience elite sports environments, training sessions, and club partnerships firsthand</li><li>Shoot and produce original photo and video content in labs, on pitches, at competitions and at events</li><li>Design high-quality creatives and visual assets for social media, campaigns, partnership materials, and event collateral</li><li>Use AI tools (Midjourney, Runway, CapCut AI, Adobe Firefly and others) to ideate faster and produce at a high standard</li><li>Track performance metrics and use insights to evolve content strategy</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">What we&rsquo;re looking for</h2><ul><li>You&rsquo;re a natural on social media (Instagram in particular) and understand what works, what doesn&rsquo;t, and why</li><li>You shoot confidently with a phone and/or camera and have a genuine creative eye</li><li>You&rsquo;ve used AI tools for creative work</li><li>You&rsquo;re self-directed and comfortable owning something from brief to published, including on-site at an event or fair</li><li>A small but solid portfolio of creatives and assets you&rsquo;ve produced</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Nice to have</h2><ul><li>Interest or experience in partnerships, sponsorships, or event and fair coordination</li><li>Experience with motion graphics or short-form video editing (Reels, TikToks)</li><li>Familiarity with design tools like Figma, Canva Pro, or Adobe Creative Suite</li><li>Interest in sports science, health, or performance; curiosity is enough</li><li>Experience managing a brand or personal account with real traction</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">What you&rsquo;ll get</h2><ul><li>Real ownership of Biolyz&rsquo;s content across social, partnerships, and events from day one</li><li>Travel to elite sports venues, training facilities, club partnerships, and trade fairs across Europe</li><li>Up-close access to world-class athletes, coaches, partners, and performance science in action</li><li>A front-row seat at a fast-growing biotech company that&rsquo;s changing how sport is played</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">How to apply</h2><ul><li>Show us something you&rsquo;ve made. A small portfolio of creatives or assets you&rsquo;re proud of is all we ask for; it doesn&rsquo;t need to be polished, just real.</li></ul></section>
+        <section class="jd-sec jd-about"><h2 class="h4">About Biolyz</h2><p>Biolyz is a full-stack saliva-based biomarker testing company on a mission to accelerate access to biomarker analytics for all humans, globally. Athletes and coaches collect saliva with a simple swab, and we analyze it via mass spectrometry within 48 hours across 60+ biomarkers covering stress, recovery, metabolism, and inflammation. Having tested over 2.5 million biomarkers across teams in the Champions League, Bundesliga, Premier League, Ligue 1 and other sports, Biolyz has powered the best athletes in their field.</p></section>
+      </div>
+      <aside class="jd-card">
+        <span class="eyebrow">Marketing (Content &amp; Social Media) Intern</span>
+        <dl class="jd-facts jd-facts--col"><div><dt>Location</dt><dd>Hamburg or remote</dd></div><div><dt>Type</dt><dd>Full time</dd></div><div><dt>Start</dt><dd>As soon as possible</dd></div></dl>
+        <a class="btn" href="https://jobs.needle.so/biolyz/4c4b1876-b919-4393-87c6-7c68248368a9" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+        <a class="inline-link" href="/careers" data-link>See all open positions</a>
+      </aside>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="p-job-fa" data-title="Founder&rsquo;s Associate · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="/careers" data-link>&larr; All positions</a>
+    <span class="eyebrow">Careers &middot; Open position</span>
+    <h1 class="h1 jd-title">Founder&rsquo;s Associate</h1>
+    <dl class="jd-facts"><div><dt>Reports to</dt><dd>CEO</dd></div><div><dt>Experience</dt><dd>2&ndash;3 years</dd></div><div><dt>Background</dt><dd>Banking, consulting or startup</dd></div></dl>
+    <a class="btn" href="https://jobs.needle.so/biolyz/8aa7f56b-fa23-4389-8b63-3b11e2bc799d" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="jd">
+      <div class="jd-body">
+        <section class="jd-sec"><h2 class="h4">About the role</h2><p>We&rsquo;re looking for a Founder&rsquo;s Associate to work directly alongside our CEO and help drive the most critical initiatives across the business. This isn&rsquo;t a traditional chief-of-staff role: it&rsquo;s a high-impact, high-ownership position for someone who thrives in ambiguity, moves fast, and gets things done. You&rsquo;ll be in the room (and on the calls) where it matters most: strategy sessions, key partnerships, investor conversations, and operational problem-solving.</p><p>You&rsquo;ll act as a force multiplier for the CEO, tracking priorities, connecting dots across teams, and making sure nothing falls through the cracks. Expect a steep learning curve, long hours, and the kind of exposure that would take years to get anywhere else.</p></section>
+        <section class="jd-sec"><h2 class="h4">What you&rsquo;ll do</h2><ul><li>Work side-by-side with the CEO on the company&rsquo;s most important strategic and operational priorities</li><li>Own and track critical action items across all functions, ensuring nothing is dropped or delayed</li><li>Prepare materials for board meetings, investor updates, key client presentations, and internal reviews</li><li>Conduct research and build business cases to support strategic decisions (new markets, partnerships, product direction)</li><li>Identify bottlenecks and inefficiencies across the business and drive solutions proactively</li><li>Represent the CEO in internal meetings and with external stakeholders when needed</li><li>Act as a trusted thought partner: challenging assumptions, stress-testing plans, and asking the right questions</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">What we&rsquo;re looking for</h2><ul><li>2–3 years of experience in investment banking, management consulting, or a high-growth startup</li><li>Exceptional business acumen: you understand strategy, finance, and operations, and you connect them naturally</li><li>An extreme sense of urgency</li><li>Highly organized and structured, with the ability to manage multiple complex workstreams simultaneously</li><li>Strong written and verbal communication skills: crisp, clear, and confident with executives and external partners</li><li>Comfortable with long hours and high pressure</li><li>Proactive and self-directed</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Nice to have</h2><ul><li>Experience in sports, sports science, elite athletics, or working with sports organizations</li><li>Background in laboratory operations, biotech, life sciences, or diagnostics</li><li>Familiarity with data, analytics, or BI tools (SQL, Looker, Tableau or similar)</li><li>Prior exposure to B2B SaaS, healthtech, or fast-scaling hardware and software businesses</li></ul></section>
+        <section class="jd-sec"><h2 class="h4">Why Biolyz</h2><ul><li>Direct access to the CEO from day one: real ownership, not busy work</li><li>A front-row seat to building a category-defining company in biomarker analytics</li><li>Tight-knit team with deep expertise in sports science, lab tech, and data</li><li>The chance to work with elite sports teams and world-class athletes</li><li>Fast progression for the right person: this role is a launchpad, not a landing spot</li></ul></section>
+        <section class="jd-sec jd-about"><h2 class="h4">About Biolyz</h2><p>Biolyz is a full-stack saliva-based biomarker testing company on a mission to accelerate access to biomarker analytics for all humans, globally. Athletes and coaches collect saliva with a simple swab, and we analyze it via mass spectrometry within 48 hours across 60+ biomarkers covering stress, recovery, metabolism, and inflammation. Having tested over 2.5 million biomarkers across teams in the Champions League, Bundesliga, Premier League, Ligue 1 and other sports, Biolyz has powered the best athletes in their field.</p></section>
+      </div>
+      <aside class="jd-card">
+        <span class="eyebrow">Founder&rsquo;s Associate</span>
+        <dl class="jd-facts jd-facts--col"><div><dt>Reports to</dt><dd>CEO</dd></div><div><dt>Experience</dt><dd>2&ndash;3 years</dd></div><div><dt>Background</dt><dd>Banking, consulting or startup</dd></div></dl>
+        <a class="btn" href="https://jobs.needle.so/biolyz/8aa7f56b-fa23-4389-8b63-3b11e2bc799d" target="_blank" rel="noopener">Apply for this role &#8599;</a>
+        <a class="inline-link" href="/careers" data-link>See all open positions</a>
+      </aside>
     </div>
   </div>
 </section>
@@ -6135,14 +6668,19 @@ markers: 60+
      PRESS KIT
      ====================================================================== -->
 <div class="page" id="p-press" data-title="Biolyz Press Kit" hidden>
-<header class="pagehead">
-  <div class="wrap inner">
-    <span class="eyebrow">Press</span>
-    <h1 class="h1">Press kit.</h1>
-    <p class="lead">The marks, the facts, and the sentence we would like quoted. Biolyz has
-      been covered by The New York Times, kicker and Sportico.</p>
+<!-- Header: the brand banner, Biolyz blue with the tagline set on the right. -->
+<section class="pk-hero band-blue">
+  <div class="wrap pk-hero-in">
+    <div class="pk-hero-copy">
+      <span class="eyebrow">Press</span>
+      <h1 class="hero-title pk-hero-t">Press kit.</h1>
+      <p class="pk-hero-lead">The marks, the facts, and the sentence we would like quoted. Biolyz has
+        been covered by The New York Times, kicker and Sportico.</p>
+      <a class="btn btn--ink" href="/blog" data-link>Read the coverage &#8594;</a>
+    </div>
+    <p class="pk-tagline" aria-label="Sample. Signal. Decision.">Sample.<br>Signal.<br>Decision.</p>
   </div>
-</header>
+</section>
 
 <section class="sec">
   <div class="wrap">
@@ -6153,23 +6691,19 @@ markers: 60+
         off-white ground use ink; on the blue-black ground use off-white. Do not recolour
         them to the brand blue, and do not add a shadow.</p>
     </div>
-    <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-      <div class="card" style="gap:var(--sp-lg)">
-        <span class="n">Signet</span>
-        <div style="color:var(--c-off-black); width:76px">__SVG_signet__</div>
-        <span class="d">Favicons, app icons, anywhere under 40&nbsp;px.</span>
-      </div>
-      <div class="card" style="gap:var(--sp-lg)">
-        <span class="n">Horizontal lockup</span>
-        <div style="color:var(--c-off-black); max-width:230px">__SVG_horizontal__</div>
-        <span class="d">The default. Headers, documents, partner walls.</span>
-      </div>
-      <div class="card inv" style="gap:var(--sp-lg); background:var(--c-black-blue)">
-        <span class="n" style="color:var(--o-white-40)">On the inverted ground</span>
-        <div style="color:var(--c-off-white); max-width:230px">__SVG_horizontal2__</div>
-        <span class="d" style="color:var(--o-white-60)">Same file. It inherits the colour of
-          whatever it sits in.</span>
-      </div>
+    <div class="pk-grid">
+      <figure class="pk-mark">
+        <div class="pk-tile"><div class="pk-logo pk-logo--signet">__SVG_signet__</div></div>
+        <figcaption><b>Signet</b><span>Favicons, app icons, anywhere under 40&nbsp;px.</span></figcaption>
+      </figure>
+      <figure class="pk-mark">
+        <div class="pk-tile"><div class="pk-logo">__SVG_horizontal__</div></div>
+        <figcaption><b>Horizontal lockup</b><span>The default. Headers, documents, partner walls.</span></figcaption>
+      </figure>
+      <figure class="pk-mark">
+        <div class="pk-tile pk-tile--inv"><div class="pk-logo">__SVG_horizontal2__</div></div>
+        <figcaption><b>On the inverted ground</b><span>Same file. It inherits the colour of whatever it sits in.</span></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -6180,30 +6714,18 @@ markers: 60+
       <span class="eyebrow">Boilerplate</span>
       <h2 class="h3">The facts, checkable.</h2>
     </div>
-    <div class="tbl">
-      <table>
-        <tbody>
-          <tr><th scope="row">What it is</th><td class="us">The first saliva based,
-            non-invasive biomarker platform for elite teams.</td></tr>
-          <tr><th scope="row">Panel</th><td class="us">60+ biomarkers from a single swab,
-            48&nbsp;h turnaround, zero needles.</td></tr>
-          <tr><th scope="row">Method</th><td class="us">LC&ndash;MS/MS on 1&nbsp;ml of
-            saliva, targeted quantification.</td></tr>
-          <tr><th scope="row">Scale</th><td class="us">11,000+ active sessions &middot;
-            25,000+ samples in the last 12 months &middot; 2.5M+ analysed biomarkers.</td></tr>
-          <tr><th scope="row">Named clubs</th><td class="us">Bayer 04 Leverkusen, Borussia
-            Dortmund.</td></tr>
-          <tr><th scope="row">Founded</th><td class="us">2021, by Marlon Millard, who is
-            chief executive.</td></tr>
-          <tr><th scope="row">Entity</th><td class="us">BIOLYZ FlexCo, Technopark 1, 3430
-            Tulln an der Donau, Austria.</td></tr>
-          <tr><th scope="row">Certification</th><td class="us">ISO 27001.</td></tr>
-          <tr><th scope="row">Taglines</th><td class="us">&ldquo;Know more. Hurt
-            less.&rdquo; &middot; &ldquo;Sample. Signal. Decision.&rdquo;</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="stub" style="margin-top:var(--sp-2xl)"><b>Build note.</b> In a published
+    <dl class="pk-facts">
+      <div class="pk-row"><dt>What it is</dt><dd>The first saliva based, non-invasive biomarker platform for elite teams.</dd></div>
+      <div class="pk-row"><dt>Panel</dt><dd>60+ biomarkers from a single swab, 48&nbsp;h turnaround, zero needles.</dd></div>
+      <div class="pk-row"><dt>Method</dt><dd>LC&ndash;MS/MS on 1&nbsp;ml of saliva, targeted quantification.</dd></div>
+      <div class="pk-row"><dt>Scale</dt><dd>11,000+ active sessions &middot; 25,000+ samples in the last 12 months &middot; 2.5M+ analysed biomarkers.</dd></div>
+      <div class="pk-row"><dt>Named clubs</dt><dd>Bayer 04 Leverkusen, Borussia Dortmund.</dd></div>
+      <div class="pk-row"><dt>Founded</dt><dd>2021, by Marlon Millard, who is chief executive.</dd></div>
+      <div class="pk-row"><dt>Entity</dt><dd>BIOLYZ FlexCo, Technopark 1, 3430 Tulln an der Donau, Austria.</dd></div>
+      <div class="pk-row"><dt>Certification</dt><dd>ISO 27001.</dd></div>
+      <div class="pk-row"><dt>Taglines</dt><dd>&ldquo;Know more. Hurt less.&rdquo; &middot; &ldquo;Sample. Signal. Decision.&rdquo;</dd></div>
+    </dl>
+    <p class="stub stub--blue" style="margin-top:var(--sp-xl)"><b>Build note.</b> In a published
       artifact the browser sandbox blocks downloads, so the marks above are shown rather
       than offered as files. On the real host, wire each one to the actual asset.</p>
   </div>
@@ -6213,7 +6735,7 @@ markers: 60+
 <!-- ======================================================================
      LEGAL AND FUNDING
      ====================================================================== -->
-<div class="page" id="p-privacy" data-title="Biolyz Privacy Policy" hidden>
+<div class="page legal-page" id="p-privacy" data-title="Biolyz Privacy Policy" hidden>
 <header class="pagehead">
   <div class="wrap inner">
     <span class="eyebrow">Legal</span>
@@ -6266,7 +6788,7 @@ markers: 60+
 </section>
 </div>
 
-<div class="page" id="p-data-security" data-title="Biolyz Data Security" hidden>
+<div class="page legal-page" id="p-data-security" data-title="Biolyz Data Security" hidden>
 <header class="pagehead">
   <div class="wrap inner">
     <span class="eyebrow">Trust</span>
@@ -6309,7 +6831,7 @@ markers: 60+
 </section>
 </div>
 
-<div class="page" id="p-impressum" data-title="Biolyz Impressum" hidden>
+<div class="page legal-page" id="p-impressum" data-title="Biolyz Impressum" hidden>
 <header class="pagehead">
   <div class="wrap inner">
     <span class="eyebrow">Legal</span>
@@ -6356,40 +6878,56 @@ markers: 60+
 <div class="page" id="p-erdf" data-title="Biolyz ERDF Funding" hidden>
 <header class="pagehead">
   <div class="wrap inner">
-    <span class="eyebrow">Funding</span>
-    <h1 class="h1">ERDF.</h1>
-    <p class="lead">Biolyz research and development has been co-financed with public funds.
-      This page carries the disclosure that comes with them.</p>
+    <span class="eyebrow">Funding &middot; ERDF / REACT-EU</span>
+    <h1 class="h1 erdf-title">Mass spectrometer for high-throughput proteomics.</h1>
+    <p class="lead">Biolyz is thrilled to announce the successful acquisition of funding from the
+      European Regional Development Fund (EFRE) via the REACT-EU program.</p>
   </div>
 </header>
 <section class="sec">
   <div class="wrap">
-    <div class="prose">
-      <p class="stub"><b>Build note.</b> European Regional Development Fund publicity has
-        prescribed wording, a prescribed emblem and a prescribed statement of co-financing,
-        and getting any of it wrong is a compliance problem rather than a copy problem. So
-        nothing is drafted here. The live page is at
-        <a href="https://www.biolyz.com/fund">biolyz.com/fund</a>, and its exact text and
-        emblem should be transferred verbatim.</p>
-      <h2>What this page must carry</h2>
-      <ul>
-        <li>The EU emblem with the prescribed &ldquo;Co-funded by the European Union&rdquo;
-          statement, at the prescribed minimum size.</li>
-        <li>The programme name and the funding body.</li>
-        <li>The project title, its objective, and the total and EU-funded amounts.</li>
-        <li>The project period.</li>
-      </ul>
-      <h2>Entity</h2>
-      <dl>
-        <dt>Beneficiary</dt><dd>BIOLYZ FlexCo, Technopark 1, 3430 Tulln an der Donau,
-          Austria</dd>
-      </dl>
+    <div class="erdf">
+      <div class="erdf-body">
+        <p>This financial support has facilitated the procurement and installation of a
+          state-of-the-art, high-throughput Proteomics Mass Spectrometry infrastructure,
+          extending our capabilities and enabling us to serve the scientific community with
+          even greater precision and efficiency.</p>
+        <h2 class="erdf-h">Available for contract research</h2>
+        <p>The high-throughput Proteomics Mass Spectrometry infrastructure is now available for
+          contract research. With our advanced technology and experienced team, we can offer
+          comprehensive protein analysis services tailored to your specific project needs.
+          Whether you are in the pharmaceutical industry, academia, or clinical diagnostics, we
+          can provide valuable data to help advance your research. We&rsquo;re excited about the
+          potential collaborations that can stem from this opportunity.</p>
+        <p>For more information or to discuss a potential project, please reach out to us.
+          We&rsquo;re eager to hear about your research and discuss how we can contribute to its
+          success. Don&rsquo;t hesitate to contact us today &ndash; let&rsquo;s innovate
+          together!</p>
+        <a class="btn" href="/contact" data-link>Discuss a project &#8599;</a>
+      </div>
+      <aside class="erdf-card">
+        <span class="eyebrow">Co-financed by</span>
+        <div class="erdf-logos">
+          <img src="https://www.biolyz.com/assets/img/efre.webp" alt="EFRE logo" width="751" height="187" loading="lazy">
+          <img src="https://www.biolyz.com/assets/img/react.webp" alt="React-EU logo" width="500" height="104" loading="lazy">
+        </div>
+        <dl class="jd-facts jd-facts--col">
+          <div><dt>Programme</dt><dd>European Regional Development Fund (EFRE), REACT-EU</dd></div>
+          <div><dt>Beneficiary</dt><dd>BIOLYZ FlexCo, Technopark 1, 3430 Tulln an der Donau, Austria</dd></div>
+        </dl>
+        <p class="erdf-more">For more information regarding the European Regional Development Fund
+          visit <a class="inline-link" href="https://www.efre.gv.at" target="_blank" rel="noopener">www.efre.gv.at</a></p>
+      </aside>
     </div>
+    <p class="stub stub--blue" style="margin-top:var(--sp-xl)"><b>Build note.</b> Text and logos are
+      taken word for word from <a href="https://www.biolyz.com/fund">biolyz.com/fund</a>. EU
+      publicity rules prescribe the emblem, its minimum size and the co-financing statement, so
+      check this page against them before it goes live.</p>
   </div>
 </section>
 </div>
 
-<div class="page" id="p-cookies" data-title="Biolyz Cookie Settings" hidden>
+<div class="page legal-page" id="p-cookies" data-title="Biolyz Cookie Settings" hidden>
 <header class="pagehead">
   <div class="wrap inner">
     <span class="eyebrow">Cookie settings</span>
@@ -7415,8 +7953,8 @@ markers: 60+
 /* Blood labs comparison: same header as Point of Care. The photo is already
    black and white with only the blood vial left in colour (web/bloodhero.jpg),
    so no grayscale filter here, which would drain the red as well. */
-.hero--blood{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
-.hero--blood .hero-bg{object-position:55% 22%}
+.hero--blood{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
+.hero--blood .hero-bg{object-position:55% 24%}
 .hero--blood .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.88), rgba(3,7,18,.5) 60%, rgba(3,7,18,.5))}
 /* Research (Herzrasen): black-and-white runners, same hero treatment. */
 .hero--research{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
@@ -8122,8 +8660,8 @@ method:  LC-MS/MS
         <a href="/science" data-link>Science</a>
         <a href="/biomarkers" data-link>Biomarkers</a>
         <a href="/research" data-link>Research</a>
-        <a href="/compare/point-of-care" data-link>Biolyz vs point of care</a>
-        <a href="/compare/blood-labs" data-link>Biolyz vs blood labs</a>
+        <a href="/compare/point-of-care" data-link>Comparison: vs point of care</a>
+        <a href="/compare/blood-labs" data-link>Comparison: vs blood labs</a>
         <a href="/literature" data-link>Literature</a>
         <a href="/so-what" data-link>So What?</a>
         <a href="/use-cases" data-link>Use case library</a>
@@ -8132,6 +8670,9 @@ method:  LC-MS/MS
       <nav class="fcol" aria-label="Company">
         <span class="ft">Company</span>
         <a href="/about" data-link>About Us</a>
+        <a href="/team" data-link>Team</a>
+        <a href="/customers" data-link>Customer Stories</a>
+        <a href="/blog" data-link>Blog</a>
         <a href="/contact" data-link>Contact</a>
         <a href="/demo" data-link>Book a demo</a>
         <a href="/waitlist" data-link>Waitlist</a>
@@ -8172,6 +8713,9 @@ method:  LC-MS/MS
     '/science': 'p-science',
     '/biomarkers': 'p-biomarkers',
     '/about': 'p-about',
+    '/team': 'p-team',
+    '/customers': 'p-customers',
+    '/blog': 'p-blog',
     <!--US:ROUTES-->
     '/so-what': 'p-sowhat',
     '/use-cases': 'p-usecases',
@@ -8185,6 +8729,10 @@ method:  LC-MS/MS
     '/demo': 'p-demo',
     '/waitlist': 'p-waitlist',
     '/careers': 'p-careers',
+    '/careers/lab-technician': 'p-job-lab',
+    '/careers/business-medical-intern': 'p-job-bizmed',
+    '/careers/marketing-intern': 'p-job-mkt',
+    '/careers/founders-associate': 'p-job-fa',
     '/contact': 'p-contact',
     '/press': 'p-press',
     '/privacy': 'p-privacy',
@@ -8197,8 +8745,8 @@ method:  LC-MS/MS
   var NAV_OF = {
     '/use-cases': '/so-what', '/use-cases/alpha-actin': '/so-what',
     '/science': 'science', '/biomarkers': 'science', '/research': 'science',
-    '/compare/point-of-care': 'science', '/compare/blood-labs': 'science',
-    '/literature': 'science'
+    '/literature': 'science',
+    '/about': 'about', '/team': 'about', '/customers': 'about', '/blog': 'about', '/careers': 'about', '/careers/lab-technician': 'about', '/careers/business-medical-intern': 'about', '/careers/marketing-intern': 'about', '/careers/founders-associate': 'about'
   };
   /* Routes that always open a page at a particular section — none currently.
      A single link can ask for one instead, with data-anchor, which is the
@@ -8701,6 +9249,56 @@ method:  LC-MS/MS
       p.hidden = p.dataset.panel !== id;
     });
   }
+
+  /* About Us menu pages: the switching word in the Team headline, the team
+     filter, and the news pill in the menu bar. */
+  function cycle(items, ms, onShow) {
+    if (items.length < 2 || reduce) return;
+    var i = 0;
+    setInterval(function () {
+      items[i].classList.remove('is-on');
+      i = (i + 1) % items.length;
+      items[i].classList.add('is-on');
+      if (onShow) onShow(items[i]);
+    }, ms);
+  }
+  [].forEach.call(document.querySelectorAll('[data-roll]'), function (r) {
+    var track = r.querySelector('.tm-track'), n = track.children.length - 1, i = 0;
+    if (reduce || n < 1) return;
+    setInterval(function () {
+      i += 1;
+      track.style.transition = '';
+      track.style.transform = 'translateY(' + (-i * 100 / (n + 1)) + '%)';
+      if (i === n) setTimeout(function () {   /* last item repeats the first: snap back */
+        track.style.transition = 'none'; track.style.transform = 'translateY(0)'; i = 0;
+      }, 550);
+    }, 1300);
+  });
+  var news = document.querySelector('[data-news]');
+  if (news) {
+    var nt = [].slice.call(news.querySelectorAll('.nav-news-t'));
+    /* The pill takes the width of the message it is showing, and glides to
+       the next one's width as the text changes. */
+    var fit = function (t) {
+      var cs = getComputedStyle(news);
+      var pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+      if (t.scrollWidth) news.style.width = Math.ceil(t.scrollWidth + pad) + 'px';
+    };
+    if (nt.length) { nt[0].classList.add('is-on'); news.setAttribute('href', nt[0].dataset.href); fit(nt[0]); }
+    window.addEventListener('resize', function () { var on = news.querySelector('.is-on'); if (on) fit(on); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { var on = news.querySelector('.is-on'); if (on) fit(on); });
+    cycle(nt, 4500, function (t) { news.setAttribute('href', t.dataset.href); fit(t); });
+  }
+  [].forEach.call(document.querySelectorAll('.tm-filter'), function (bar) {
+    var grid = bar.parentNode.querySelector('.tm-grid');
+    bar.addEventListener('click', function (e) {
+      var b = e.target.closest('.tm-f'); if (!b) return;
+      [].forEach.call(bar.querySelectorAll('.tm-f'), function (x) { x.classList.toggle('is-on', x === b); });
+      [].forEach.call(grid.querySelectorAll('.tm-card'), function (c) {
+        c.hidden = b.dataset.f !== 'all' && c.dataset.group !== b.dataset.f;
+      });
+    });
+  });
   var stepFlowRegistry = {};
   [].forEach.call(document.querySelectorAll('[data-tabs]'), function (list) {
     var scope = list.closest('section') || document;
