@@ -1,0 +1,63 @@
+# Once a day, look for new press articles about Biolyz and propose them for
+# /blog as a pull request. Nothing is published until that pull request is
+# merged. See tools/press_check.py for how articles are found and matched.
+#
+# Which branch gets the suggestions: the repository variable BLOG_BRANCH if set
+# (Settings → Secrets and variables → Actions → Variables), otherwise the
+# default branch. GitHub only runs scheduled workflows from the default branch,
+# so this file has to be on main for the daily run to start.
+name: Press check
+
+on:
+  schedule:
+    - cron: "0 6 * * *"   # 06:00 UTC, every day
+  workflow_dispatch:       # "Run workflow" button on the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: press-check
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      BASE: ${{ vars.BLOG_BRANCH || github.event.repository.default_branch }}
+      HEAD: press-check/new-articles
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.BLOG_BRANCH || github.event.repository.default_branch }}
+          fetch-depth: 0
+
+      # While a suggestion pull request is open, add to it rather than replace
+      # it, so blurbs or "hidden" flags written in the review are kept.
+      - name: Continue the open pull request, if there is one
+        id: open
+        run: |
+          n=$(gh pr list --head "$HEAD" --base "$BASE" --state open --json number --jq 'length')
+          echo "open=$n" >> "$GITHUB_OUTPUT"
+          if [ "$n" != "0" ]; then git checkout -B "$HEAD" "origin/$HEAD"; fi
+
+      - name: Search for new articles
+        id: search
+        run: python3 tools/press_check.py --summary "$RUNNER_TEMP/pr.md"
+
+      - name: Open or update the pull request
+        if: steps.search.outputs.new != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "${{ steps.open.outputs.open }}" = "0" ]; then git checkout -B "$HEAD"; fi
+          git add content/blog.json
+          git commit -m "Blog: ${{ steps.search.outputs.new }} new press article(s) to review"
+          if [ "${{ steps.open.outputs.open }}" = "0" ]; then
+            git push --force origin "$HEAD"
+            gh pr create --base "$BASE" --head "$HEAD" \
+              --title "New press articles for the blog" --body-file "$RUNNER_TEMP/pr.md"
+          else
+            git push origin "$HEAD"
+            gh pr comment "$HEAD" --body-file "$RUNNER_TEMP/pr.md"
+          fi

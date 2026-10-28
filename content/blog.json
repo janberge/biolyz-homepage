@@ -1,0 +1,106 @@
+{
+  "_how": "Articles on the /blog page, newest first by date. The daily press check (tools/press_check.py) adds new ones in a pull request; set \"hidden\": true on any you do not want shown. Merge the pull request to publish.",
+  "articles": [
+    {
+      "url": "https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html",
+      "outlet": "IT BOLTWISE",
+      "date": "2026-08-10",
+      "lang": "DE",
+      "title": "Biolyz setzt mit Speicheltests auf Leistungssport und plant Expansion in die USA",
+      "blurb": "A new UK laboratory, a $5.3 million round and a US market entry planned for 2027.",
+      "logo_class": "boltwise",
+      "logo_html": "IT BOLTWISE"
+    },
+    {
+      "url": "https://noe.orf.at/stories/3338121/",
+      "outlet": "ORF Niederösterreich",
+      "date": "2026-01-19",
+      "lang": "DE",
+      "title": "Tullner Start-up „optimiert“ Fußballprofis",
+      "blurb": "Austrian public broadcaster on the Dortmund deal, with scientists weighing potential and limits.",
+      "logo_class": "orf",
+      "logo_html": "ORF<small>Niederösterreich</small>"
+    },
+    {
+      "url": "https://www.oe24.at/oesterreich/chronik/niederoesterreich/noe-unternehmen-arbeitet-mit-deutschem-bundesligisten-bvb-zusammen/665952275",
+      "outlet": "oe24",
+      "date": "2026-01-19",
+      "lang": "DE",
+      "title": "NÖ Unternehmen arbeitet mit deutschem Bundesligisten BVB zusammen",
+      "blurb": "A Lower Austrian company and a three-year partnership with Borussia Dortmund.",
+      "logo_class": "oe24",
+      "logo_html": "oe24"
+    },
+    {
+      "url": "https://brutkasten.com/artikel/biolyz-tullner-speicheltest-startup-holt-dreijahresvertrag-mit-borussia-dortmund",
+      "outlet": "brutkasten",
+      "date": "2026-01-12",
+      "lang": "DE",
+      "title": "Biolyz: Tullner Speicheltest-Startup holt Dreijahresvertrag mit Borussia Dortmund",
+      "blurb": "From the 2024/25 pilot to a three-year contract, and plans for English football.",
+      "logo_class": "brut",
+      "logo_html": "brutkasten"
+    },
+    {
+      "url": "https://accent.at/news/tullner-speicheltest-startup-biolyz-holt-dreijahresvertrag-mit-borussia-dortmund",
+      "outlet": "accent",
+      "date": "2026-01-12",
+      "lang": "DE",
+      "title": "Tullner Speicheltest-Startup Biolyz holt Dreijahresvertrag mit Borussia Dortmund",
+      "blurb": "The Dortmund agreement and the next step into England.",
+      "logo_class": "accent",
+      "logo_html": "accent"
+    },
+    {
+      "url": "https://athletechnews.com/borussia-dortmund-saliva-biomarker-testing-biolyz/",
+      "outlet": "Athletech News",
+      "date": "2025-12-17",
+      "lang": "EN",
+      "title": "Top Soccer Team Using Biomarker Testing To Optimize Performance",
+      "blurb": "Borussia Dortmund turns to saliva biomarkers to track stress, recovery and injury risk.",
+      "logo_class": "athletech",
+      "logo_html": "ATHLETECH<small>NEWS</small>"
+    },
+    {
+      "url": "https://playbook.beehiiv.com/p/volume-76-beyond-wearables",
+      "outlet": "Playbook",
+      "date": "2025-12-17",
+      "lang": "EN",
+      "title": "Volume 76 | Beyond Wearables",
+      "blurb": "Why internal load from saliva goes a step beyond GPS and wearables.",
+      "logo_class": "playbook",
+      "logo_html": "Playbook"
+    },
+    {
+      "url": "https://insider.fitt.co/press-release/biolyz-partners-with-borussia-dortmund-to-bring-high-frequency-saliva-biomarker-testing-to-elite-football/",
+      "outlet": "Fitt Insider",
+      "date": "2025-12-15",
+      "lang": "EN",
+      "title": "Biolyz partners with Borussia Dortmund to bring high-frequency saliva biomarker testing to elite football",
+      "blurb": "The press release announcing the three-year partnership.",
+      "logo_class": "fitt",
+      "logo_html": "FITT INSIDER"
+    },
+    {
+      "url": "https://www.nytimes.com/athletic/6858367/2025/12/05/soccer-saliva-marginal-gains/",
+      "outlet": "The Athletic",
+      "date": "2025-12-05",
+      "lang": "EN",
+      "title": "Saliva testing and marginal gains in elite football",
+      "blurb": "The New York Times’ sports desk on saliva testing in football.",
+      "logo_class": "athletic",
+      "logo_html": "__SVG_nyt__<small>The Athletic</small>"
+    },
+    {
+      "url": "https://www.kicker.de/bvb-setzt-auf-speicheltests-1174045/artikel",
+      "outlet": "kicker",
+      "date": "",
+      "lang": "DE",
+      "title": "BVB setzt auf Speicheltests",
+      "blurb": "Germany’s football magazine on Dortmund’s saliva testing.",
+      "logo_class": "kicker",
+      "logo_html": "__SVG_kicker__"
+    }
+  ],
+  "seen": []
+}

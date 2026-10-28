@@ -1921,6 +1921,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .tm-f.is-on{background:var(--c-blue); border-color:var(--c-blue); color:#fff}
 .tm-f:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
 .tm-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(15.5rem,100%),1fr)); gap:var(--sp-xl) var(--sp-lg)}
+.tm-group{margin:var(--sp-3xl) 0 var(--sp-lg); padding-top:var(--sp-md); border-top:1px solid rgba(10,20,40,.12); font-size:.75rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue)}
 .tm-card{display:flex; flex-direction:column; gap:var(--sp-md)}
 .tm-card[hidden]{display:none}
 .tm-photo{aspect-ratio:4/5; border-radius:16px; overflow:hidden; background:#eef0f4}
@@ -1971,6 +1972,8 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .bl-logo--fitt{letter-spacing:.12em; font-size:1.5rem !important}
 .bl-tile:has(.bl-logo--athletic){background:#fff; color:#181818; border:1px solid var(--c-grey-200)}
 .bl-tile:has(.bl-logo--kicker){background:#fff; border:1px solid var(--c-grey-200)}
+.bl-tile:has(.bl-logo--new){background:#eef0f4; color:#181818}
+.bl-logo--new{font-size:1.5rem !important; padding:0 1rem}
 .bl-lang{z-index:1}
 .bl-card:hover .bl-logo, .bl-feat:hover .bl-logo{transform:scale(1.04)}
 .bl-logo{transition:transform .6s var(--ease)}
@@ -3722,6 +3725,7 @@ markers: 60+
      ====================================================================== -->
 <div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
 <section class="hero hero--photo hero--bm hero--portrait inv">
+  <img class="hero-bg hero-bg--2" src="__IMG_biomarkershero2__" width="1080" height="1616" alt="" aria-hidden="true">
   <img class="hero-bg" src="__IMG_biomarkershero__" width="1080" height="1616" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
@@ -6298,89 +6302,72 @@ markers: 60+
 <section class="sec">
   <div class="wrap">
     <div class="tm-grid">
-        <article class="tm-card" data-group="lead">
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teammarlon__" alt="Marlon Millard" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Chemistry</span><h3>Marlon Millard</h3><span class="tm-role">CEO &middot; Founder</span><p>Drug synthesis and cheminformatics, analytical chemistry and data science. M.Sc. Chemistry, M.Sc. Drug Discovery.</p></div>
+          <div class="tm-meta"><h3>Marlon Millard</h3><span class="tm-role">CEO &middot; Founder</span><p>Drug synthesis and cheminformatics, analytical chemistry and data science. M.Sc. Chemistry, M.Sc. Drug Discovery.</p></div>
         </article>
-        <article class="tm-card" data-group="lead">
+    </div>
+    <h2 class="tm-group">Business Development</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamjan__" alt="Jan Berssenbrügge" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Go-to-market</span><h3>Jan Berssenbrügge</h3><span class="tm-role">CCO</span><p>10+ years in VC-backed companies. Co-founder and COO of Lhotse, VP Business Development at Clark. M.Sc. Management, LBS.</p></div>
+          <div class="tm-meta"><h3>Jan Berssenbrügge</h3><span class="tm-role">Chief Commercial Officer (CCO)</span><p>10+ years in VC-backed companies. Co-founder and COO of Lhotse, VP Business Development at Clark. M.Sc. Management, LBS.</p></div>
         </article>
-        <article class="tm-card" data-group="lead">
-          <div class="tm-photo"><img src="__IMG_teamphilipp__" alt="Prof. Dr. Dr. Philipp Zimmer" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Sports medicine</span><h3>Prof. Dr. Dr. Philipp Zimmer</h3><span class="tm-role">CSO</span><p>Chair of Sports Medicine, TU Dortmund. Exercise immunology, sport and cancer. Previously DSHS Cologne and DKFZ Heidelberg.</p></div>
-        </article>
-        <article class="tm-card" data-group="lead">
-          <div class="tm-photo"><img src="__IMG_teamdiarmuid__" alt="Dr. Diarmuid Daniels" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Sport science</span><h3>Dr. Diarmuid Daniels</h3><span class="tm-role">Head of Sport Science</span><p>Performance scientist and researcher with a PhD in biomarker monitoring. Previously Newcastle United, Orreco and the Insight Centre for Data Analytics.</p></div>
-        </article>
-        <article class="tm-card" data-group="lead">
-          <div class="tm-photo"><img src="__IMG_teampaul__" alt="Paul Symmers" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Engineering</span><h3>Paul Symmers</h3><span class="tm-role">Director of Engineering</span><p>Data scientist and chemist. Building Atlas, Datavant, Sky. PhD in Supramolecular Chemistry.</p></div>
-        </article>
-        <article class="tm-card" data-group="lead">
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamfelix__" alt="Felix Lorenzen" loading="lazy"></div>
-          <div class="tm-meta"><span class="tm-tag">Product</span><h3>Felix Lorenzen</h3><span class="tm-role">Product Lead</span><p>Product manager and founder of Autonome. Previously CHAPTR and Razor Group. M.Sc. Management, ESCP.</p></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamalexschaffgotsch__" alt="Alex Schaffgotsch" loading="lazy"></div>
-          <div class="tm-meta"><h3>Alex Schaffgotsch</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamdanielheffermann__" alt="Daniel Heffernan" loading="lazy"></div>
-          <div class="tm-meta"><h3>Daniel Heffernan</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamferdinandzoratti__" alt="Ferdinand Zoratti" loading="lazy"></div>
-          <div class="tm-meta"><h3>Ferdinand Zoratti</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamjuanmarin__" alt="Juan Marin" loading="lazy"></div>
-          <div class="tm-meta"><h3>Juan Marin</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamjuliaruminska__" alt="Julia Ruminska" loading="lazy"></div>
-          <div class="tm-meta"><h3>Julia Ruminska</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkarinkipper__" alt="Karin Kipper" loading="lazy"></div>
-          <div class="tm-meta"><h3>Karin Kipper</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkatjaparapatics__" alt="Katja Parapatics" loading="lazy"></div>
-          <div class="tm-meta"><h3>Katja Parapatics</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkirabrandt__" alt="Kira Brandt" loading="lazy"></div>
-          <div class="tm-meta"><h3>Kira Brandt</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamlukasfischer__" alt="Lukas Fischer" loading="lazy"></div>
-          <div class="tm-meta"><h3>Lukas Fischer</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teammanfredtaschner__" alt="Manfred Taschner" loading="lazy"></div>
-          <div class="tm-meta"><h3>Manfred Taschner</h3></div>
+          <div class="tm-meta"><h3>Felix Lorenzen</h3><span class="tm-role">Product Lead</span><p>Product manager and founder of Autonome. Previously CHAPTR and Razor Group. M.Sc. Management, ESCP.</p></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamnadinekrause__" alt="Nadine Krause" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nadine Krause</h3><span class="tm-role">Business Development</span></div>
+          <div class="tm-meta"><h3>Nadine Krause</h3><span class="tm-role">Business Development and Medical Doctor</span><p>Global Venture Development at Rocket Internet SE. B.Sc. BWL, Universit&auml;t Mannheim.</p></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Sports Science</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamphilipp__" alt="Prof. Dr. Dr. Philipp Zimmer" loading="lazy"></div>
+          <div class="tm-meta"><h3>Prof. Dr. Dr. Philipp Zimmer</h3><span class="tm-role">Chief Scientific Officer (CSO)</span><p>Chair of Sports Medicine, TU Dortmund. Exercise immunology, sport and cancer. Previously DSHS Cologne and DKFZ Heidelberg.</p></div>
         </article>
         <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamnicoleang__" alt="Nicole Ang" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nicole Ang</h3></div>
+          <div class="tm-photo"><img src="__IMG_teamdiarmuid__" alt="Dr. Diarmuid Daniels" loading="lazy"></div>
+          <div class="tm-meta"><h3>Dr. Diarmuid Daniels</h3><span class="tm-role">Head of Sport Science</span><p>Performance scientist and researcher with a PhD in biomarker monitoring. Previously Newcastle United, Orreco and the Insight Centre for Data Analytics.</p></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Finance</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamalexschaffgotsch__" alt="Alex Schaffgotsch" loading="lazy"></div>
+          <div class="tm-meta"><h3>Alex Schaffgotsch</h3><span class="tm-role">Chief Financial Officer (CFO)</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamthomasverst__" alt="Thomas Verst" loading="lazy"></div>
+          <div class="tm-meta"><h3>Thomas Verst</h3><span class="tm-role">Head of Finance</span></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Information Technology</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamferdinandzoratti__" alt="Ferdinand Zoratti" loading="lazy"></div>
+          <div class="tm-meta"><h3>Ferdinand Zoratti</h3><span class="tm-role">Chief Information Officer (CIO)</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamstephanzoratti__" alt="Stephan Zoratti" loading="lazy"></div>
+          <div class="tm-meta"><h3>Stephan Zoratti</h3><span class="tm-role">Senior IT Manager</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampanoskatranitsiotis__" alt="Panagiotis Katranitsiotis" loading="lazy"></div>
+          <div class="tm-meta"><h3>Panagiotis Katranitsiotis</h3><span class="tm-role">Data Scientist</span></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Laboratory</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamkarinkipper__" alt="Karin Kipper" loading="lazy"></div>
+          <div class="tm-meta"><h3>Karin Kipper</h3><span class="tm-role">Laboratory Manager</span></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamninaince__" alt="Nina Ince" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nina Ince</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teampanoskatranitsiotis__" alt="Panos Katranitsiotis" loading="lazy"></div>
-          <div class="tm-meta"><h3>Panos Katranitsiotis</h3></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teampeteroettl__" alt="Peter Oettl" loading="lazy"></div>
-          <div class="tm-meta"><h3>Peter Oettl</h3><span class="tm-role">Application Engineer</span></div>
+          <div class="tm-meta"><h3>Nina Ince</h3><span class="tm-role">Laboratory Manager London</span></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamrikakrueger__" alt="Rika Krüger" loading="lazy"></div>
@@ -6388,19 +6375,56 @@ markers: 60+
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamsachinmoodley__" alt="Sachin Moodley" loading="lazy"></div>
-          <div class="tm-meta"><h3>Sachin Moodley</h3><span class="tm-role">Laboratory Technician</span></div>
+          <div class="tm-meta"><h3>Sachin Moodley</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
         </article>
         <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamstephanzoratti__" alt="Stephan Zoratti" loading="lazy"></div>
-          <div class="tm-meta"><h3>Stephan Zoratti</h3></div>
+          <div class="tm-photo"><img src="__IMG_teamlukasfischer__" alt="Lukas Fischer" loading="lazy"></div>
+          <div class="tm-meta"><h3>Lukas Fischer</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
         </article>
         <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamthomasverst__" alt="Thomas Verst" loading="lazy"></div>
-          <div class="tm-meta"><h3>Thomas Verst</h3><span class="tm-role">Finance Captain</span></div>
+          <div class="tm-photo"><img src="__IMG_teamkirabrandt__" alt="Kira Brandt" loading="lazy"></div>
+          <div class="tm-meta"><h3>Kira Brandt</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamdanielheffermann__" alt="Daniel Heffernan" loading="lazy"></div>
+          <div class="tm-meta"><h3>Daniel Heffernan</h3><span class="tm-role">Laboratory Technician London</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamjuliaruminska__" alt="Julia Ruminska" loading="lazy"></div>
+          <div class="tm-meta"><h3>Julia Ruminska</h3><span class="tm-role">Laboratory Technician London</span></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamtiborczabany__" alt="Tibor Czabany" loading="lazy"></div>
-          <div class="tm-meta"><h3>Tibor Czabany</h3></div>
+          <div class="tm-meta"><h3>Tibor Czabany</h3><span class="tm-role">Laboratory Technician Tulln</span></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamkatjaparapatics__" alt="Katja Parapatics" loading="lazy"></div>
+          <div class="tm-meta"><h3>Katja Parapatics</h3><span class="tm-role">Laboratory Technician Tulln</span></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Engineering</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampaul__" alt="Paul Symmers" loading="lazy"></div>
+          <div class="tm-meta"><h3>Paul Symmers</h3><span class="tm-role">Director of Engineering</span><p>Data scientist and chemist. Building Atlas, Datavant, Sky. PhD in Supramolecular Chemistry.</p></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampeteroettl__" alt="Peter Oettl" loading="lazy"></div>
+          <div class="tm-meta"><h3>Peter Oettl</h3><span class="tm-role">Application Engineer</span></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Brand Management</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamstellaberger__" alt="Stella Berger" loading="lazy"></div>
+          <div class="tm-meta"><h3>Stella Berger</h3><span class="tm-role">Brand Management</span></div>
+        </article>
+    </div>
+    <h2 class="tm-group">Operations</h2>
+    <div class="tm-grid">
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamnicoleang__" alt="Nicole Ang" loading="lazy"></div>
+          <div class="tm-meta"><h3>Nicole Ang</h3><span class="tm-role">Office Assistant</span></div>
         </article>
     </div>
   </div>
@@ -6502,46 +6526,7 @@ markers: 60+
       <div class="bl-body"><span class="bl-meta">Sportico &middot; 2026 &middot; Featured</span><h2 class="h3">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</h2><p class="copy">How the Austrian company grew to 13 football clubs, opened a UK lab and is preparing for the US.</p><span class="bl-more">Read on Sportico &#8599;</span></div>
     </a>
     <div class="bl-grid">
-      <a class="bl-card" href="https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--boltwise" role="img" aria-label="IT BOLTWISE">IT BOLTWISE</span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">IT BOLTWISE &middot; 10 Aug 2026</span><h3>Biolyz setzt mit Speicheltests auf Leistungssport und plant Expansion in die USA</h3><p>A new UK laboratory, a $5.3 million round and a US market entry planned for 2027.</p>
-      </a>
-      <a class="bl-card" href="https://noe.orf.at/stories/3338121/" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--orf" role="img" aria-label="ORF Niederösterreich">ORF<small>Niederösterreich</small></span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">ORF Niederösterreich &middot; 19 Jan 2026</span><h3>Tullner Start-up „optimiert“ Fußballprofis</h3><p>Austrian public broadcaster on the Dortmund deal, with scientists weighing potential and limits.</p>
-      </a>
-      <a class="bl-card" href="https://www.oe24.at/oesterreich/chronik/niederoesterreich/noe-unternehmen-arbeitet-mit-deutschem-bundesligisten-bvb-zusammen/665952275" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--oe24" role="img" aria-label="oe24">oe24</span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">oe24 &middot; 19 Jan 2026</span><h3>NÖ Unternehmen arbeitet mit deutschem Bundesligisten BVB zusammen</h3><p>A Lower Austrian company and a three-year partnership with Borussia Dortmund.</p>
-      </a>
-      <a class="bl-card" href="https://brutkasten.com/artikel/biolyz-tullner-speicheltest-startup-holt-dreijahresvertrag-mit-borussia-dortmund" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--brut" role="img" aria-label="brutkasten">brutkasten</span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">brutkasten &middot; 12 Jan 2026</span><h3>Biolyz: Tullner Speicheltest-Startup holt Dreijahresvertrag mit Borussia Dortmund</h3><p>From the 2024/25 pilot to a three-year contract, and plans for English football.</p>
-      </a>
-      <a class="bl-card" href="https://accent.at/news/tullner-speicheltest-startup-biolyz-holt-dreijahresvertrag-mit-borussia-dortmund" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--accent" role="img" aria-label="accent">accent</span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">accent &middot; 12 Jan 2026</span><h3>Tullner Speicheltest-Startup Biolyz holt Dreijahresvertrag mit Borussia Dortmund</h3><p>The Dortmund agreement and the next step into England.</p>
-      </a>
-      <a class="bl-card" href="https://athletechnews.com/borussia-dortmund-saliva-biomarker-testing-biolyz/" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--athletech" role="img" aria-label="Athletech News">ATHLETECH<small>NEWS</small></span><span class="bl-lang">EN</span></div>
-        <span class="bl-meta">Athletech News &middot; 17 Dec 2025</span><h3>Top Soccer Team Using Biomarker Testing To Optimize Performance</h3><p>Borussia Dortmund turns to saliva biomarkers to track stress, recovery and injury risk.</p>
-      </a>
-      <a class="bl-card" href="https://playbook.beehiiv.com/p/volume-76-beyond-wearables" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--playbook" role="img" aria-label="Playbook">Playbook</span><span class="bl-lang">EN</span></div>
-        <span class="bl-meta">Playbook &middot; 17 Dec 2025</span><h3>Volume 76 | Beyond Wearables</h3><p>Why internal load from saliva goes a step beyond GPS and wearables.</p>
-      </a>
-      <a class="bl-card" href="https://insider.fitt.co/press-release/biolyz-partners-with-borussia-dortmund-to-bring-high-frequency-saliva-biomarker-testing-to-elite-football/" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--fitt" role="img" aria-label="Fitt Insider">FITT INSIDER</span><span class="bl-lang">EN</span></div>
-        <span class="bl-meta">Fitt Insider &middot; 15 Dec 2025</span><h3>Biolyz partners with Borussia Dortmund to bring high-frequency saliva biomarker testing to elite football</h3><p>The press release announcing the three-year partnership.</p>
-      </a>
-      <a class="bl-card" href="https://www.nytimes.com/athletic/6858367/2025/12/05/soccer-saliva-marginal-gains/" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--athletic" role="img" aria-label="The Athletic">__SVG_nyt__<small>The Athletic</small></span><span class="bl-lang">EN</span></div>
-        <span class="bl-meta">The Athletic &middot; 5 Dec 2025</span><h3>Saliva testing and marginal gains in elite football</h3><p>The New York Times&rsquo; sports desk on saliva testing in football.</p>
-      </a>
-      <a class="bl-card" href="https://www.kicker.de/bvb-setzt-auf-speicheltests-1174045/artikel" target="_blank" rel="noopener">
-        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--kicker" role="img" aria-label="kicker">__SVG_kicker__</span><span class="bl-lang">DE</span></div>
-        <span class="bl-meta">kicker</span><h3>BVB setzt auf Speicheltests</h3><p>Germany&rsquo;s football magazine on Dortmund&rsquo;s saliva testing.</p>
-      </a>
+<!--BLOG_CARDS-->
     </div>
   </div>
 </section>
@@ -8047,6 +8032,7 @@ markers: 60+
 .hero--bm{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
 .hero--bm .hero-bg{filter:grayscale(1); object-position:center 28%}
 .hero--bm .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
+.hero--bm .hero-bg--2{display:none}
 .hero--bm .hero-title{font-size:var(--h1)}
 /* Portrait photos (Herzrasen, Biomarkers): full-bleed on a wide screen they
    would be cropped to a zoomed slice, so from tablet width up the whole
@@ -8055,7 +8041,12 @@ markers: 60+
   .hero--portrait .hero-bg{left:auto; right:0; width:min(46%,38rem); object-position:center 40%;
     -webkit-mask-image:linear-gradient(to right, transparent 0, #000 35%); mask-image:linear-gradient(to right, transparent 0, #000 35%)}
   .hero--portrait .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.75), rgba(3,7,18,.25) 55%, rgba(3,7,18,.2))}
-  .hero--bm.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 12%}
+  .hero--bm.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 30%;
+    width:44%; -webkit-mask-image:linear-gradient(to right, transparent 0, #000 30%); mask-image:linear-gradient(to right, transparent 0, #000 30%)}
+  /* Second photo (the cap) fills the left so the header is not half black;
+     each fades out towards the other over the same band, so no seam shows. */
+  .hero--bm.hero--portrait .hero-bg--2{display:block; left:0; right:auto; width:68%; object-position:center 30%;
+    -webkit-mask-image:linear-gradient(to left, transparent 0, #000 30%); mask-image:linear-gradient(to left, transparent 0, #000 30%)}
 }
 
 /* About: black-and-white cyclists, same hero treatment. */

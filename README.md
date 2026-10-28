@@ -285,6 +285,23 @@ Items still to be confirmed with the business are visible `.ph` markers on
 the page, not invented answers. The hero is a still photo (`web/horsehero.jpg`)
 until horse footage exists.
 
+### Blog (`/blog`) and the daily press check
+
+The press articles on `/blog` live in `content/blog.json`; `build.py` renders
+them newest first (the featured Sportico piece stays in `site.html`).
+`.github/workflows/press-check.yml` runs `tools/press_check.py` every morning:
+it searches Google News (EN and DE) for "Biolyz", resolves each result to the
+publisher's URL and, for anything from the last 60 days not already on the blog,
+opens a pull request against `BLOG_BRANCH` (repository variable; default branch
+if unset). **Merging publishes**; `"hidden": true` on an entry keeps it off the
+page for good. Closing the pull request instead means the articles are found again
+the next day. Run `python3 tools/press_check.py --dry-run` to see what it
+would suggest now.
+
+Two repository settings are needed: the workflow file on the default branch
+(GitHub only schedules from there), and *Settings → Actions → General →
+Allow GitHub Actions to create and approve pull requests*.
+
 ### Page weight
 
 There are **two outputs and they are not the same shape**:

@@ -16,6 +16,36 @@ import base64,hashlib,hmac,json,os,re,struct,sys,subprocess
 sp=os.path.abspath(sys.argv[1] if len(sys.argv)>1 else os.path.dirname(__file__) or ".")
 BRAND=os.path.join(sp,"brand")
 src=open(os.path.join(sp,"site.html"),encoding="utf-8").read()
+
+# ---- blog cards ---------------------------------------------------------
+# The press articles on /blog live in content/blog.json, not in site.html, so
+# the daily press check (tools/press_check.py, .github/workflows) can propose
+# new ones as a pull request without touching the page markup. Newest first;
+# an article without a date sorts last; "hidden": true keeps it off the page.
+def _blog_cards():
+    import datetime, html as _h
+    arts = json.load(open(os.path.join(sp, "content", "blog.json"), encoding="utf-8"))["articles"]
+    arts = sorted((a for a in arts if not a.get("hidden")),
+                  key=lambda a: a.get("date") or "0000", reverse=True)
+    out = []
+    for a in arts:
+        e = lambda k: _h.escape(a.get(k) or "", quote=True)
+        cls = a.get("logo_class") or "new"
+        logo = a.get("logo_html") or e("outlet")
+        meta = e("outlet")
+        if a.get("date"):
+            d = datetime.date.fromisoformat(a["date"])
+            meta += " &middot; %d %s" % (d.day, d.strftime("%b %Y"))
+        blurb = "<p>%s</p>" % e("blurb") if a.get("blurb") else ""
+        out.append(
+            '      <a class="bl-card" href="%s" target="_blank" rel="noopener">\n'
+            '        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--%s" role="img" aria-label="%s">%s</span>'
+            '<span class="bl-lang">%s</span></div>\n'
+            '        <span class="bl-meta">%s</span><h3>%s</h3>%s\n'
+            '      </a>' % (e("url"), cls, e("outlet"), logo, e("lang"), meta, e("title"), blurb))
+    return "\n".join(out)
+assert src.count("<!--BLOG_CARDS-->") == 1
+src = src.replace("<!--BLOG_CARDS-->", _blog_cards())
 # Screenshots are shared across pages — the biomarker overview alone appears
 # four times. Inlining the data URI at each use embedded the same megabyte
 # repeatedly, so each one ships ONCE in a map and the images take their src
