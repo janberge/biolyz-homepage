@@ -1942,7 +1942,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .hero--cust .hero-bg, .hero--blog .hero-bg, .hero--careers .hero-bg{filter:grayscale(1)}
 .hero--cust .hero-bg{object-position:center 70%}
 .hero--blog .hero-bg{object-position:center 80%}
-.hero--careers .hero-bg{object-position:center 50%}
+.hero--careers .hero-bg{object-position:center 22%}
 .hero--cust .hero-scrim, .hero--blog .hero-scrim, .hero--careers .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
 .hero--cust .hero-title, .hero--blog .hero-title, .hero--careers .hero-title{font-size:var(--h1)}
 .hero--cust .hero-lead, .hero--blog .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(46ch,100%)}
@@ -3724,9 +3724,8 @@ markers: 60+
      BIOMARKERS
      ====================================================================== -->
 <div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
-<section class="hero hero--photo hero--bm hero--portrait inv">
-  <img class="hero-bg hero-bg--2" src="__IMG_biomarkershero2__" width="1080" height="1616" alt="" aria-hidden="true">
-  <img class="hero-bg" src="__IMG_biomarkershero__" width="1080" height="1616" alt="" aria-hidden="true">
+<section class="hero hero--photo hero--bm hero--cyc inv">
+  <img class="hero-bg" src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -4651,8 +4650,9 @@ markers: 60+
      ====================================================================== -->
 <div class="page" id="p-about" data-title="Biolyz Manifesto" hidden>
 
-<section class="hero hero--photo hero--about inv">
-  <img class="hero-bg" src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true">
+<section class="hero hero--photo hero--about hero--duo hero--portrait inv">
+  <img class="hero-bg hero-bg--2" src="__IMG_biomarkershero2__" width="1080" height="1616" alt="" aria-hidden="true">
+  <img class="hero-bg" src="__IMG_biomarkershero__" width="1080" height="1616" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -6249,7 +6249,7 @@ markers: 60+
      ====================================================================== -->
 <div class="page" id="p-careers" data-title="Biolyz Careers" hidden>
 <section class="hero hero--photo hero--careers inv">
-  <img class="hero-bg" src="__IMG_careershero__" width="2000" height="1333" alt="" aria-hidden="true">
+  <img class="hero-bg" src="__IMG_careershero__" width="2000" height="1125" alt="" aria-hidden="true">
   <div class="hero-scrim" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero-copy">
@@ -8030,30 +8030,30 @@ markers: 60+
 .hero--research .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(52ch,100%)}
 .hero--research .hero-title{font-size:var(--h1)}
 .hero--bm{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
-.hero--bm .hero-bg{filter:grayscale(1); object-position:center 28%}
-.hero--bm .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
-.hero--bm .hero-bg--2{display:none}
+.hero--duo .hero-bg{filter:grayscale(1); object-position:center 28%}
+.hero--duo .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.5) 60%, rgba(3,7,18,.35))}
+.hero--duo .hero-bg--2{display:none}
 .hero--bm .hero-title{font-size:var(--h1)}
-/* Portrait photos (Herzrasen, Biomarkers): full-bleed on a wide screen they
+/* Portrait photos (Herzrasen, About): full-bleed on a wide screen they
    would be cropped to a zoomed slice, so from tablet width up the whole
    picture sits in the right part of the header and fades into the dark. */
 @media (min-width:821px){
   .hero--portrait .hero-bg{left:auto; right:0; width:min(46%,38rem); object-position:center 40%;
     -webkit-mask-image:linear-gradient(to right, transparent 0, #000 35%); mask-image:linear-gradient(to right, transparent 0, #000 35%)}
   .hero--portrait .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.75), rgba(3,7,18,.25) 55%, rgba(3,7,18,.2))}
-  .hero--bm.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 30%;
+  .hero--duo.hero--portrait .hero-bg{top:var(--navh); height:calc(100% - var(--navh)); object-position:center 30%;
     width:44%; -webkit-mask-image:linear-gradient(to right, transparent 0, #000 30%); mask-image:linear-gradient(to right, transparent 0, #000 30%)}
   /* Second photo (the cap) fills the left so the header is not half black;
      each fades out towards the other over the same band, so no seam shows. */
-  .hero--bm.hero--portrait .hero-bg--2{display:block; left:0; right:auto; width:68%; object-position:center 30%;
+  .hero--duo.hero--portrait .hero-bg--2{display:block; left:0; right:auto; width:68%; object-position:center 30%;
     -webkit-mask-image:linear-gradient(to left, transparent 0, #000 30%); mask-image:linear-gradient(to left, transparent 0, #000 30%)}
 }
 
-/* About: black-and-white cyclists, same hero treatment. */
+/* Black-and-white cyclists (Biomarkers), same hero treatment. */
 .hero--about{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
-.hero--about .hero-bg{filter:grayscale(1); object-position:center 45%}
+.hero--cyc .hero-bg{filter:grayscale(1); object-position:center 45%}
 
-.hero--about .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
+.hero--cyc .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
 .hero--about .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(44ch,100%)}
 /* So What?: the black-and-white pitch from above, same hero treatment. */
 .hero--sowhat{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
