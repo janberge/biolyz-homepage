@@ -1920,12 +1920,17 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .tm-f:hover{border-color:var(--c-blue); color:var(--c-blue)}
 .tm-f.is-on{background:var(--c-blue); border-color:var(--c-blue); color:#fff}
 .tm-f:focus-visible{outline:2px solid var(--focus); outline-offset:2px}
-.tm-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(15.5rem,100%),1fr)); gap:var(--sp-xl) var(--sp-lg)}
-.tm-group{margin:var(--sp-3xl) 0 var(--sp-lg); padding-top:var(--sp-md); border-top:1px solid rgba(10,20,40,.12); font-size:.75rem; font-weight:500; letter-spacing:.08em; text-transform:uppercase; color:var(--c-blue)}
+.tm-grid{display:grid; grid-template-columns:repeat(5,1fr); gap:var(--sp-xl) var(--sp-md)}
+@media (max-width:900px){.tm-grid{grid-template-columns:repeat(3,1fr)}}
 .tm-card{display:flex; flex-direction:column; gap:var(--sp-md)}
 .tm-card[hidden]{display:none}
 .tm-photo{aspect-ratio:4/5; border-radius:16px; overflow:hidden; background:#eef0f4}
 .tm-photo img{width:100%; height:100%; object-fit:cover; filter:grayscale(1); transition:filter .5s var(--ease), transform .8s var(--ease)}
+.tm-photo{position:relative}
+.tm-in{position:absolute; right:.6rem; bottom:.6rem; z-index:1; display:grid; place-items:center; width:2rem; height:2rem;
+  border-radius:8px; background:rgba(255,255,255,.92); color:#0a66c2; opacity:.9; transition:opacity .2s, transform .2s}
+.tm-in:hover{opacity:1; transform:scale(1.06)}
+.tm-in svg{width:1rem; height:1rem; fill:currentColor}
 .tm-card:hover .tm-photo img{filter:none; transform:scale(1.03)}
 .tm-meta{display:flex; flex-direction:column; gap:.3rem}
 .tm-meta h3{margin:0; font-size:var(--t-large); font-weight:400; letter-spacing:-.02em}
@@ -6301,140 +6306,109 @@ markers: 60+
 
 <section class="sec">
   <div class="wrap">
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teammarlon__" alt="Marlon Millard" loading="lazy"></div>
-          <div class="tm-meta"><h3>Marlon Millard</h3><span class="tm-role">CEO &middot; Founder</span><p>Drug synthesis and cheminformatics, analytical chemistry and data science. M.Sc. Chemistry, M.Sc. Drug Discovery.</p></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Business Development</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamjan__" alt="Jan Berssenbrügge" loading="lazy"></div>
-          <div class="tm-meta"><h3>Jan Berssenbrügge</h3><span class="tm-role">Chief Commercial Officer (CCO)</span><p>10+ years in VC-backed companies. Co-founder and COO of Lhotse, VP Business Development at Clark. M.Sc. Management, LBS.</p></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamfelix__" alt="Felix Lorenzen" loading="lazy"></div>
-          <div class="tm-meta"><h3>Felix Lorenzen</h3><span class="tm-role">Product Lead</span><p>Product manager and founder of Autonome. Previously CHAPTR and Razor Group. M.Sc. Management, ESCP.</p></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamnadinekrause__" alt="Nadine Krause" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nadine Krause</h3><span class="tm-role">Business Development and Medical Doctor</span><p>Global Venture Development at Rocket Internet SE. B.Sc. BWL, Universit&auml;t Mannheim.</p></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Sports Science</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamphilipp__" alt="Prof. Dr. Dr. Philipp Zimmer" loading="lazy"></div>
-          <div class="tm-meta"><h3>Prof. Dr. Dr. Philipp Zimmer</h3><span class="tm-role">Chief Scientific Officer (CSO)</span><p>Chair of Sports Medicine, TU Dortmund. Exercise immunology, sport and cancer. Previously DSHS Cologne and DKFZ Heidelberg.</p></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamdiarmuid__" alt="Dr. Diarmuid Daniels" loading="lazy"></div>
-          <div class="tm-meta"><h3>Dr. Diarmuid Daniels</h3><span class="tm-role">Head of Sport Science</span><p>Performance scientist and researcher with a PhD in biomarker monitoring. Previously Newcastle United, Orreco and the Insight Centre for Data Analytics.</p></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Finance</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamalexschaffgotsch__" alt="Alex Schaffgotsch" loading="lazy"></div>
-          <div class="tm-meta"><h3>Alex Schaffgotsch</h3><span class="tm-role">Chief Financial Officer (CFO)</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamthomasverst__" alt="Thomas Verst" loading="lazy"></div>
-          <div class="tm-meta"><h3>Thomas Verst</h3><span class="tm-role">Head of Finance</span></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Information Technology</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamferdinandzoratti__" alt="Ferdinand Zoratti" loading="lazy"></div>
-          <div class="tm-meta"><h3>Ferdinand Zoratti</h3><span class="tm-role">Chief Information Officer (CIO)</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamstephanzoratti__" alt="Stephan Zoratti" loading="lazy"></div>
-          <div class="tm-meta"><h3>Stephan Zoratti</h3><span class="tm-role">Senior IT Manager</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teampanoskatranitsiotis__" alt="Panagiotis Katranitsiotis" loading="lazy"></div>
-          <div class="tm-meta"><h3>Panagiotis Katranitsiotis</h3><span class="tm-role">Data Scientist</span></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Laboratory</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkarinkipper__" alt="Karin Kipper" loading="lazy"></div>
-          <div class="tm-meta"><h3>Karin Kipper</h3><span class="tm-role">Laboratory Manager</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamninaince__" alt="Nina Ince" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nina Ince</h3><span class="tm-role">Laboratory Manager London</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamrikakrueger__" alt="Rika Krüger" loading="lazy"></div>
-          <div class="tm-meta"><h3>Rika Kr&uuml;ger</h3><span class="tm-role">Laboratory Manager Dortmund</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamsachinmoodley__" alt="Sachin Moodley" loading="lazy"></div>
-          <div class="tm-meta"><h3>Sachin Moodley</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamlukasfischer__" alt="Lukas Fischer" loading="lazy"></div>
-          <div class="tm-meta"><h3>Lukas Fischer</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkirabrandt__" alt="Kira Brandt" loading="lazy"></div>
-          <div class="tm-meta"><h3>Kira Brandt</h3><span class="tm-role">Laboratory Technician Dortmund</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamdanielheffermann__" alt="Daniel Heffernan" loading="lazy"></div>
-          <div class="tm-meta"><h3>Daniel Heffernan</h3><span class="tm-role">Laboratory Technician London</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamjuliaruminska__" alt="Julia Ruminska" loading="lazy"></div>
-          <div class="tm-meta"><h3>Julia Ruminska</h3><span class="tm-role">Laboratory Technician London</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamtiborczabany__" alt="Tibor Czabany" loading="lazy"></div>
-          <div class="tm-meta"><h3>Tibor Czabany</h3><span class="tm-role">Laboratory Technician Tulln</span></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamkatjaparapatics__" alt="Katja Parapatics" loading="lazy"></div>
-          <div class="tm-meta"><h3>Katja Parapatics</h3><span class="tm-role">Laboratory Technician Tulln</span></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Engineering</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teampaul__" alt="Paul Symmers" loading="lazy"></div>
-          <div class="tm-meta"><h3>Paul Symmers</h3><span class="tm-role">Director of Engineering</span><p>Data scientist and chemist. Building Atlas, Datavant, Sky. PhD in Supramolecular Chemistry.</p></div>
-        </article>
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teampeteroettl__" alt="Peter Oettl" loading="lazy"></div>
-          <div class="tm-meta"><h3>Peter Oettl</h3><span class="tm-role">Application Engineer</span></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Marketing</h2>
-    <div class="tm-grid">
-        <article class="tm-card">
-          <div class="tm-photo"><img src="__IMG_teamstellaberger__" alt="Stella Berger" loading="lazy"></div>
-          <div class="tm-meta"><h3>Stella Berger</h3><span class="tm-role">Brand Management</span></div>
-        </article>
-    </div>
-    <h2 class="tm-group">Operations</h2>
+    <!-- Everyone side by side, first names only, mixed on purpose: a team, not an org chart. -->
     <div class="tm-grid">
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamnicoleang__" alt="Nicole Ang" loading="lazy"></div>
-          <div class="tm-meta"><h3>Nicole Ang</h3><span class="tm-role">Office Assistant</span></div>
+          <div class="tm-meta"><h3>Nicole</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampaul__" alt="Paul Symmers" loading="lazy"></div>
+          <div class="tm-meta"><h3>Paul</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamkirabrandt__" alt="Kira Brandt" loading="lazy"></div>
+          <div class="tm-meta"><h3>Kira</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamjan__" alt="Jan Berssenbrügge" loading="lazy"></div>
+          <div class="tm-meta"><h3>Jan</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamtiborczabany__" alt="Tibor Czabany" loading="lazy"></div>
+          <div class="tm-meta"><h3>Tibor</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamnadinekrause__" alt="Nadine Krause" loading="lazy"></div>
+          <div class="tm-meta"><h3>Nadine</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamsachinmoodley__" alt="Sachin Moodley" loading="lazy"></div>
+          <div class="tm-meta"><h3>Sachin</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamphilipp__" alt="Prof. Dr. Dr. Philipp Zimmer" loading="lazy"></div>
+          <div class="tm-meta"><h3>Philipp</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamjuliaruminska__" alt="Julia Ruminska" loading="lazy"></div>
+          <div class="tm-meta"><h3>Julia</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamferdinandzoratti__" alt="Ferdinand Zoratti" loading="lazy"></div>
+          <div class="tm-meta"><h3>Ferdinand</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamrikakrueger__" alt="Rika Krüger" loading="lazy"></div>
+          <div class="tm-meta"><h3>Rika</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamfelix__" alt="Felix Lorenzen" loading="lazy"></div>
+          <div class="tm-meta"><h3>Felix</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamlukasfischer__" alt="Lukas Fischer" loading="lazy"></div>
+          <div class="tm-meta"><h3>Lukas</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamthomasverst__" alt="Thomas Verst" loading="lazy"></div>
+          <div class="tm-meta"><h3>Thomas</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamkatjaparapatics__" alt="Katja Parapatics" loading="lazy"></div>
+          <div class="tm-meta"><h3>Katja</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teammarlon__" alt="Marlon Millard" loading="lazy"></div>
+          <div class="tm-meta"><h3>Marlon</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamninaince__" alt="Nina Ince" loading="lazy"></div>
+          <div class="tm-meta"><h3>Nina</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampanoskatranitsiotis__" alt="Panagiotis Katranitsiotis" loading="lazy"></div>
+          <div class="tm-meta"><h3>Panagiotis</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamdiarmuid__" alt="Dr. Diarmuid Daniels" loading="lazy"></div>
+          <div class="tm-meta"><h3>Diarmuid</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamkarinkipper__" alt="Karin Kipper" loading="lazy"></div>
+          <div class="tm-meta"><h3>Karin</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamdanielheffermann__" alt="Daniel Heffernan" loading="lazy"></div>
+          <div class="tm-meta"><h3>Daniel</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamalexschaffgotsch__" alt="Alex Schaffgotsch" loading="lazy"></div>
+          <div class="tm-meta"><h3>Alex</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamstellaberger__" alt="Stella Berger" loading="lazy"></div>
+          <div class="tm-meta"><h3>Stella</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teamstephanzoratti__" alt="Stephan Zoratti" loading="lazy"></div>
+          <div class="tm-meta"><h3>Stephan</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo"><img src="__IMG_teampeteroettl__" alt="Peter Oettl" loading="lazy"></div>
+          <div class="tm-meta"><h3>Peter</h3></div>
         </article>
     </div>
-  </div>
-</section>
-
-<section class="sec--xl band-blue">
-  <div class="wrap close-cta">
-    <span class="eyebrow">Join us</span>
-    <h2 class="h2">Missionaries, not mercenaries.</h2>
-    <a class="btn btn--ink" href="/careers" data-link>See open roles &#8594;</a>
   </div>
 </section>
 </div>
