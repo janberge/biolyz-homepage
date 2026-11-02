@@ -1946,60 +1946,43 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 @media (max-width:600px){.tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-lg) var(--sp-sm)} .tm-meta h3{font-size:var(--t-regular)}}
 .tm-card--adv .tm-photo{aspect-ratio:1; max-width:9rem; border-radius:50%}
-/* Team wall: everyone pinned up like photos on a fridge. Each card leans a
-   little and every other column sits lower; on hover a card straightens,
-   lifts, turns to colour and says hi. Rotation and offset use the separate
-   rotate/translate properties so they add to the scroll reveal's transform
-   instead of fighting it. */
-.tm-wall{background:var(--c-grey-100)}
-.tm-wall-top{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--sp-md); margin-bottom:var(--sp-2xl)}
-.tm-wall-hi{margin:0; font-size:var(--h5); letter-spacing:-.02em}
-.tm-shuffle{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.1rem;
-  border-radius:999px; background:var(--c-blue); color:#fff; font-size:var(--t-small); transition:transform .3s var(--ease)}
-.tm-shuffle svg{width:1rem; height:1rem}
-.tm-shuffle:hover{transform:scale(1.05)}
-.tm-shuffle:active{transform:scale(.97)}
-.tm-shuffle:focus-visible{outline:2px solid var(--focus); outline-offset:3px}
-.tm-wall .tm-grid{gap:var(--sp-2xl) var(--sp-lg); padding-bottom:3rem}
-.tm-wall .tm-card{--r:0deg; --y:0px; position:relative; gap:var(--sp-sm); padding:.7rem .7rem 1rem; background:#fff;
-  border-radius:6px; box-shadow:0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.07);
-  rotate:var(--r); translate:0 var(--y);
-  transition:rotate .45s var(--ease), translate .45s var(--ease), scale .45s var(--ease), box-shadow .45s var(--ease),
-    opacity .8s var(--ease), transform .8s var(--ease)}
-/* a strip of tape holding each photo up */
-.tm-wall .tm-card::before{content:""; position:absolute; z-index:2; top:-.7rem; left:50%; width:4.2rem; height:1.4rem;
-  margin-left:-2.1rem; background:rgba(0,19,233,.14); rotate:calc(var(--r) * -2 + 2deg)}
-.tm-wall .tm-card:nth-child(7n+1){--r:-2.5deg}
-.tm-wall .tm-card:nth-child(7n+2){--r:1.8deg}
-.tm-wall .tm-card:nth-child(7n+3){--r:-1deg}
-.tm-wall .tm-card:nth-child(7n+4){--r:2.6deg}
-.tm-wall .tm-card:nth-child(7n+5){--r:-1.8deg}
-.tm-wall .tm-card:nth-child(7n+6){--r:1deg}
-.tm-wall .tm-card:nth-child(7n){--r:-3deg}
-.tm-wall .tm-card:nth-child(5n+2), .tm-wall .tm-card:nth-child(5n+4){--y:2.5rem}
-.tm-wall .tm-card:hover{rotate:0deg; scale:1.06; z-index:3; box-shadow:0 2px 4px rgba(0,0,0,.08), 0 22px 44px rgba(0,19,233,.18)}
-.tm-wall .tm-photo{border-radius:3px}
-.tm-wall .tm-meta h3{text-align:center; transition:color .3s var(--ease)}
-.tm-wall .tm-meta h3::before{content:"Hi, I\2019m "; display:inline-block; max-width:0; overflow:hidden; vertical-align:bottom;
-  white-space:pre; transition:max-width .45s var(--ease)}
-.tm-wall .tm-meta h3::after{content:"\1F44B"; display:inline-block; width:0; opacity:0; transform-origin:70% 80%}
-.tm-wall .tm-card:hover h3{color:var(--c-blue)}
-.tm-wall .tm-card:hover h3::before{max-width:5em}
-.tm-wall .tm-card:hover h3::after{width:auto; margin-left:.3em; opacity:1; animation:tm-wave .9s var(--ease) 2}
-@keyframes tm-wave{0%,100%{rotate:0deg} 20%{rotate:18deg} 40%{rotate:-10deg} 60%{rotate:14deg} 80%{rotate:-4deg}}
-.tm-grid.is-shuffling .tm-card{opacity:0; scale:.9; transition:opacity .2s, scale .2s}
+/* Team people: square black-and-white portraits in a staggered grid, every
+   other column set lower. Each first name sits on its photo in a small
+   frosted pill. Hovering a portrait fills it with colour from the bottom
+   up and turns the pill blue. */
+.tm-people-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--sp-lg); margin-bottom:var(--sp-2xl)}
+.tm-people-head .hd{display:flex; flex-direction:column; gap:var(--sp-md)}
+.tm-people-head .h2{margin:0; max-width:18ch}
+.tm-people-note{margin:0; max-width:38ch; color:var(--text-2)}
+.tm-people-sec .tm-grid{grid-template-columns:repeat(4,1fr); gap:var(--sp-lg); padding-bottom:5rem}
+.tm-people-sec .tm-card{position:relative; gap:0}
+.tm-people-sec .tm-card:nth-child(4n+2), .tm-people-sec .tm-card:nth-child(4n+4){translate:0 5rem}
+.tm-people-sec .tm-photo{aspect-ratio:4/5; border-radius:14px; transition:box-shadow .6s var(--ease)}
+.tm-people-sec .tm-card:hover .tm-photo{box-shadow:0 30px 60px -28px rgba(10,14,24,.45)}
+.tm-people-sec .tm-photo img{object-position:50% 25%; transition:transform 1.2s var(--ease)}
+.tm-people-sec .tm-card:hover .tm-photo img{filter:grayscale(1); transform:scale(1.06)}
+.tm-people-sec .tm-photo .tm-colour{position:absolute; inset:0; filter:none !important;
+  clip-path:inset(100% 0 0 0); transition:clip-path .8s var(--ease), transform 1.2s var(--ease)}
+.tm-people-sec .tm-card:hover .tm-colour{clip-path:inset(0 0 0 0)}
+.tm-people-sec .tm-meta{position:absolute; left:.75rem; bottom:.75rem; z-index:2; flex-direction:row; align-items:center;
+  padding:.45rem .9rem; border-radius:999px; background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(12px) saturate(1.4); backdrop-filter:blur(12px) saturate(1.4);
+  transition:background .4s var(--ease), transform .5s var(--ease)}
+.tm-people-sec .tm-meta h3{font-size:var(--t-regular); line-height:1.2; transition:color .4s var(--ease)}
+.tm-people-sec .tm-card:hover .tm-meta{background:var(--c-blue); transform:translateY(-4px)}
+.tm-people-sec .tm-card:hover .tm-meta h3{color:#fff}
 @media (max-width:900px){
-  .tm-wall .tm-card:nth-child(n){--y:0px}
-  .tm-wall .tm-card:nth-child(3n+2){--y:2rem}
+  .tm-people-sec .tm-grid{grid-template-columns:repeat(3,1fr)}
+  .tm-people-sec .tm-card:nth-child(n){translate:none}
+  .tm-people-sec .tm-card:nth-child(3n+2){translate:0 4rem}
 }
 @media (max-width:600px){
-  .tm-wall .tm-grid{gap:var(--sp-xl) var(--sp-md)}
-  .tm-wall .tm-card{padding:.45rem .45rem .7rem}
-  .tm-wall .tm-card:nth-child(n){--y:0px}
-  .tm-wall .tm-card:nth-child(2n){--y:1.5rem}
-  .tm-wall .tm-meta h3::before{content:none}
+  .tm-people-sec .tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-sm); padding-bottom:3rem}
+  .tm-people-sec .tm-card:nth-child(n){translate:none}
+  .tm-people-sec .tm-card:nth-child(2n){translate:0 3rem}
+  .tm-people-sec .tm-meta{left:.5rem; bottom:.5rem; padding:.35rem .7rem}
 }
-@media (prefers-reduced-motion:reduce){ .tm-wall .tm-card:hover h3::after{animation:none} }
+@media (prefers-reduced-motion:reduce){ .tm-people-sec .tm-colour{transition:none} }
 
 /* Photo headers for Customer Stories, Blog and Careers (same treatment as
    the other photo headers: black and white under a dark fade). */
@@ -6364,16 +6347,15 @@ markers: 60+
   </div>
 </header>
 
-<section class="sec tm-wall">
+<section class="sec tm-people-sec">
   <div class="wrap">
-    <!-- Everyone side by side, first names only, mixed on purpose: a team, not an org chart.
-         Pinned up like photos on a fridge; "Shuffle" mixes the wall again. -->
-    <div class="tm-wall-top">
-      <p class="tm-wall-hi">Say hi to the people behind Biolyz.</p>
-      <button type="button" class="tm-shuffle" data-tm-shuffle>
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h2.5c2 0 3 1 4 3.5S10.5 12 12.5 12H14M2 12h2.5c1.2 0 2-.4 2.7-1.2M9 4.8C9.7 4.2 10.6 4 12.5 4H14M12 2l2 2-2 2M12 10l2 2-2 2"/></svg>
-        Shuffle the team
-      </button>
+    <!-- Everyone side by side, mixed on purpose: a team, not an org chart. -->
+    <div class="tm-people-head">
+      <div class="hd">
+        <span class="eyebrow">The people</span>
+        <h2 class="h2">Scientists, business development, athletes. One team.</h2>
+      </div>
+      <p class="tm-people-note">Chemists, engineers and sports scientists, in Dortmund and London.</p>
     </div>
     <div class="tm-grid">
         <article class="tm-card">
@@ -9916,23 +9898,14 @@ method:  LC-MS/MS
 </script>
 
 <script>
-/* Team wall: "Shuffle the team" fades the cards out, mixes their order and
-   fades them back in, so everyone gets a new spot and a new lean. */
+/* Team colour reveal (see the .tm-people CSS). Lays a colour copy over each
+   portrait for the hover fill. Runs before the lazy image loader, which fills the copies too. */
 (function () {
   'use strict';
-  [].forEach.call(document.querySelectorAll('[data-tm-shuffle]'), function (btn) {
-    var grid = btn.closest('.wrap').querySelector('.tm-grid');
-    btn.addEventListener('click', function () {
-      grid.classList.add('is-shuffling');
-      setTimeout(function () {
-        var cards = [].slice.call(grid.children);
-        for (var i = cards.length - 1; i > 0; i--) {
-          var j = Math.floor(Math.random() * (i + 1)), t = cards[i]; cards[i] = cards[j]; cards[j] = t;
-        }
-        cards.forEach(function (c) { grid.appendChild(c); });
-        grid.classList.remove('is-shuffling');
-      }, 220);
-    });
+  [].forEach.call(document.querySelectorAll('.tm-people-sec .tm-photo'), function (p) {
+    var im = p.querySelector('img'); if (!im) return;
+    var c = im.cloneNode(true); c.className = 'tm-colour'; c.alt = ''; c.setAttribute('aria-hidden', 'true');
+    p.appendChild(c);
   });
 })();
 </script>
