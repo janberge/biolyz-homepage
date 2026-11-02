@@ -1856,6 +1856,12 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
   *{transition-duration:.01ms !important; animation-duration:.01ms !important}
   html{scroll-behavior:auto}
 }
+/* Scroll reveal: blocks below the hero fade and rise into place as they come
+   on screen. The script adds .rv only when it can also take it away again,
+   so without it (or with reduced motion) everything is simply there. */
+.rv{opacity:0; transform:translateY(28px);
+  transition:opacity .8s var(--ease), transform .8s var(--ease)}
+.rv.rv-in{opacity:1; transform:none}
 </style>
 
 <style>
@@ -1940,6 +1946,60 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 @media (max-width:600px){.tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-lg) var(--sp-sm)} .tm-meta h3{font-size:var(--t-regular)}}
 .tm-card--adv .tm-photo{aspect-ratio:1; max-width:9rem; border-radius:50%}
+/* Team wall: everyone pinned up like photos on a fridge. Each card leans a
+   little and every other column sits lower; on hover a card straightens,
+   lifts, turns to colour and says hi. Rotation and offset use the separate
+   rotate/translate properties so they add to the scroll reveal's transform
+   instead of fighting it. */
+.tm-wall{background:var(--c-grey-100)}
+.tm-wall-top{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--sp-md); margin-bottom:var(--sp-2xl)}
+.tm-wall-hi{margin:0; font-size:var(--h5); letter-spacing:-.02em}
+.tm-shuffle{all:unset; cursor:pointer; display:inline-flex; align-items:center; gap:.5rem; padding:.6rem 1.1rem;
+  border-radius:999px; background:var(--c-blue); color:#fff; font-size:var(--t-small); transition:transform .3s var(--ease)}
+.tm-shuffle svg{width:1rem; height:1rem}
+.tm-shuffle:hover{transform:scale(1.05)}
+.tm-shuffle:active{transform:scale(.97)}
+.tm-shuffle:focus-visible{outline:2px solid var(--focus); outline-offset:3px}
+.tm-wall .tm-grid{gap:var(--sp-2xl) var(--sp-lg); padding-bottom:3rem}
+.tm-wall .tm-card{--r:0deg; --y:0px; position:relative; gap:var(--sp-sm); padding:.7rem .7rem 1rem; background:#fff;
+  border-radius:6px; box-shadow:0 1px 2px rgba(0,0,0,.06), 0 8px 24px rgba(0,0,0,.07);
+  rotate:var(--r); translate:0 var(--y);
+  transition:rotate .45s var(--ease), translate .45s var(--ease), scale .45s var(--ease), box-shadow .45s var(--ease),
+    opacity .8s var(--ease), transform .8s var(--ease)}
+/* a strip of tape holding each photo up */
+.tm-wall .tm-card::before{content:""; position:absolute; z-index:2; top:-.7rem; left:50%; width:4.2rem; height:1.4rem;
+  margin-left:-2.1rem; background:rgba(0,19,233,.14); rotate:calc(var(--r) * -2 + 2deg)}
+.tm-wall .tm-card:nth-child(7n+1){--r:-2.5deg}
+.tm-wall .tm-card:nth-child(7n+2){--r:1.8deg}
+.tm-wall .tm-card:nth-child(7n+3){--r:-1deg}
+.tm-wall .tm-card:nth-child(7n+4){--r:2.6deg}
+.tm-wall .tm-card:nth-child(7n+5){--r:-1.8deg}
+.tm-wall .tm-card:nth-child(7n+6){--r:1deg}
+.tm-wall .tm-card:nth-child(7n){--r:-3deg}
+.tm-wall .tm-card:nth-child(5n+2), .tm-wall .tm-card:nth-child(5n+4){--y:2.5rem}
+.tm-wall .tm-card:hover{rotate:0deg; scale:1.06; z-index:3; box-shadow:0 2px 4px rgba(0,0,0,.08), 0 22px 44px rgba(0,19,233,.18)}
+.tm-wall .tm-photo{border-radius:3px}
+.tm-wall .tm-meta h3{text-align:center; transition:color .3s var(--ease)}
+.tm-wall .tm-meta h3::before{content:"Hi, I\2019m "; display:inline-block; max-width:0; overflow:hidden; vertical-align:bottom;
+  white-space:pre; transition:max-width .45s var(--ease)}
+.tm-wall .tm-meta h3::after{content:"\1F44B"; display:inline-block; width:0; opacity:0; transform-origin:70% 80%}
+.tm-wall .tm-card:hover h3{color:var(--c-blue)}
+.tm-wall .tm-card:hover h3::before{max-width:5em}
+.tm-wall .tm-card:hover h3::after{width:auto; margin-left:.3em; opacity:1; animation:tm-wave .9s var(--ease) 2}
+@keyframes tm-wave{0%,100%{rotate:0deg} 20%{rotate:18deg} 40%{rotate:-10deg} 60%{rotate:14deg} 80%{rotate:-4deg}}
+.tm-grid.is-shuffling .tm-card{opacity:0; scale:.9; transition:opacity .2s, scale .2s}
+@media (max-width:900px){
+  .tm-wall .tm-card:nth-child(n){--y:0px}
+  .tm-wall .tm-card:nth-child(3n+2){--y:2rem}
+}
+@media (max-width:600px){
+  .tm-wall .tm-grid{gap:var(--sp-xl) var(--sp-md)}
+  .tm-wall .tm-card{padding:.45rem .45rem .7rem}
+  .tm-wall .tm-card:nth-child(n){--y:0px}
+  .tm-wall .tm-card:nth-child(2n){--y:1.5rem}
+  .tm-wall .tm-meta h3::before{content:none}
+}
+@media (prefers-reduced-motion:reduce){ .tm-wall .tm-card:hover h3::after{animation:none} }
 
 /* Photo headers for Customer Stories, Blog and Careers (same treatment as
    the other photo headers: black and white under a dark fade). */
@@ -6304,9 +6364,17 @@ markers: 60+
   </div>
 </header>
 
-<section class="sec">
+<section class="sec tm-wall">
   <div class="wrap">
-    <!-- Everyone side by side, first names only, mixed on purpose: a team, not an org chart. -->
+    <!-- Everyone side by side, first names only, mixed on purpose: a team, not an org chart.
+         Pinned up like photos on a fridge; "Shuffle" mixes the wall again. -->
+    <div class="tm-wall-top">
+      <p class="tm-wall-hi">Say hi to the people behind Biolyz.</p>
+      <button type="button" class="tm-shuffle" data-tm-shuffle>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4h2.5c2 0 3 1 4 3.5S10.5 12 12.5 12H14M2 12h2.5c1.2 0 2-.4 2.7-1.2M9 4.8C9.7 4.2 10.6 4 12.5 4H14M12 2l2 2-2 2M12 10l2 2-2 2"/></svg>
+        Shuffle the team
+      </button>
+    </div>
     <div class="tm-grid">
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamnicoleang__" alt="Nicole Ang" loading="lazy"></div>
@@ -9844,5 +9912,68 @@ method:  LC-MS/MS
   }
 
   route();
+})();
+</script>
+
+<script>
+/* Team wall: "Shuffle the team" fades the cards out, mixes their order and
+   fades them back in, so everyone gets a new spot and a new lean. */
+(function () {
+  'use strict';
+  [].forEach.call(document.querySelectorAll('[data-tm-shuffle]'), function (btn) {
+    var grid = btn.closest('.wrap').querySelector('.tm-grid');
+    btn.addEventListener('click', function () {
+      grid.classList.add('is-shuffling');
+      setTimeout(function () {
+        var cards = [].slice.call(grid.children);
+        for (var i = cards.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1)), t = cards[i]; cards[i] = cards[j]; cards[j] = t;
+        }
+        cards.forEach(function (c) { grid.appendChild(c); });
+        grid.classList.remove('is-shuffling');
+      }, 220);
+    });
+  });
+})();
+</script>
+<script>
+/* Scroll reveal. Each block inside a section (and each card in the larger
+   grids) starts faded and lowered, then settles as it scrolls into view;
+   blocks that arrive together follow each other by 90ms. Heroes are left
+   alone so a page never opens empty. Once a block is in, its classes are
+   removed, so no transform lingers on anything with fixed or sticky parts. */
+(function () {
+  'use strict';
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var GRIDS = '.tm-grid, .bl-grid, .uc-grid, .trust-grid, .sol-grid, .ab-grid, .pk-grid, .pw-grid, .proc-grid';
+  var els = [];
+  [].forEach.call(document.querySelectorAll('.page section:not(.hero), .page .pagehead ~ *'), function (sec) {
+    var inner = sec.querySelector(':scope > .wrap') || sec;
+    [].forEach.call(inner.children, function (el) {
+      if (el.matches('script, style, template') || el.closest('.hero')) return;
+      var grid = el.matches(GRIDS) ? el : null;
+      if (grid) [].push.apply(els, grid.children);
+      else els.push(el);
+    });
+  });
+  els = els.filter(function (el, i) { return els.indexOf(el) === i; });
+
+  var io = new IntersectionObserver(function (entries) {
+    var k = 0;
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      var el = e.target;
+      io.unobserve(el);
+      el.style.transitionDelay = Math.min(k++, 6) * 90 + 'ms';
+      el.classList.add('rv-in');
+      setTimeout(function () {
+        el.classList.remove('rv', 'rv-in');
+        el.style.transitionDelay = '';
+      }, 1500);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+
+  els.forEach(function (el) { el.classList.add('rv'); io.observe(el); });
 })();
 </script>
