@@ -515,6 +515,21 @@ img{max-width:100%; display:block}
 #p-demo > .pagehead + .sec{padding-top:var(--sp-md); padding-bottom:var(--sp-2xl)}
 #p-demo .field > label{color:var(--c-blue)}
 #p-demo .cards .card .t{color:var(--c-blue)}
+/* Book a demo in the ElevenLabs-style layout: headline stays, the form sits
+   in one large rounded white card with a soft shadow, fields are rounded
+   grey wells, the submit is a pill, and the "what to expect" steps and the
+   data note are rounded grey cards. */
+#p-demo .split{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:var(--sp-3xl)}
+#p-demo form{max-width:none; padding:var(--sp-2xl); border-radius:28px; background:var(--c-white);
+  border:var(--stroke) solid var(--border); box-shadow:0 30px 80px -40px rgba(3,7,18,.25)}
+#p-demo input:not([type="checkbox"]), #p-demo select, #p-demo textarea{border-radius:14px; background:var(--c-grey-100); border-color:transparent}
+#p-demo input:not([type="checkbox"]):hover, #p-demo select:hover, #p-demo textarea:hover{background:var(--c-grey-200)}
+#p-demo .btn{border-radius:var(--r-round)}
+#p-demo form .btn{width:100%; justify-content:center}
+#p-demo .cards{gap:var(--sp-sm)}
+#p-demo .card{border-radius:24px; padding:var(--sp-xl); background:var(--c-grey-100)}
+#p-demo .assure{border-top:0; padding:var(--sp-xl); border-radius:24px; background:var(--c-grey-100)}
+@media (max-width:900px){ #p-demo .split{grid-template-columns:1fr} #p-demo form{padding:var(--sp-lg); border-radius:24px} }
 /* Athlete waitlist: tight rhythm, blue titles and form labels. */
 #p-waitlist > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-waitlist > .pagehead + .sec{padding-top:var(--sp-md)}
@@ -522,6 +537,26 @@ img{max-width:100%; display:block}
 #p-waitlist #wl-form{padding-top:var(--sp-xl)}
 #p-waitlist .wl-cols h3{color:var(--c-blue)}
 #p-waitlist .field > label{color:var(--c-blue)}
+/* Athlete waitlist in the ElevenLabs-style layout: headlines stay, the
+   mock gets a large radius, the three promises and the fine print become
+   rounded grey cards, the grey form band is a rounded panel inset from the
+   page edge, and the form sits in a rounded white card with grey wells and
+   a full-width pill button, like Book a demo. */
+#p-waitlist .btn{border-radius:var(--r-round)}
+#p-waitlist #wl-view .mock{border-radius:28px}
+#p-waitlist .wl-cols{gap:var(--sp-sm)}
+#p-waitlist .wl-cols .col{border-top:0; padding:var(--sp-xl); border-radius:24px; background:var(--c-grey-100)}
+#p-waitlist #wl-form{margin-inline:var(--sp-lg); border-radius:32px; padding-block:var(--sp-3xl); margin-bottom:var(--sp-lg)}
+#p-waitlist #wl-form .wl-cols .col{background:var(--c-white)}
+#p-waitlist #wl-form .wl-cols[style]{gap:var(--sp-sm) !important}
+#p-waitlist .split{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:var(--sp-3xl)}
+#p-waitlist form{max-width:none; padding:var(--sp-2xl); border-radius:28px; background:var(--c-white);
+  border:var(--stroke) solid var(--border); box-shadow:0 30px 80px -40px rgba(3,7,18,.25)}
+#p-waitlist input:not([type="checkbox"]), #p-waitlist select{border-radius:14px; background:var(--c-grey-100); border-color:transparent}
+#p-waitlist input:not([type="checkbox"]):hover, #p-waitlist select:hover{background:var(--c-grey-200)}
+#p-waitlist form .btn{width:100%; justify-content:center}
+@media (max-width:900px){ #p-waitlist .split{grid-template-columns:1fr} #p-waitlist form{padding:var(--sp-lg); border-radius:24px} }
+@media (max-width:820px){ #p-waitlist #wl-form{margin-inline:var(--sp-sm); border-radius:24px; padding-block:var(--sp-2xl)} }
 #p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
 /* Science page: the tight rhythm used across the site, no rule under the
    research heading, and the sample-quality view as a light split
@@ -554,6 +589,57 @@ img{max-width:100%; display:block}
 #p-biomarkers #precision{padding-bottom:var(--sp-md)}
 #p-biomarkers #bm-analytes{padding-block:var(--sp-md)}
 #p-biomarkers #bm-dashboard{padding-top:var(--sp-md)}
+/* ElevenLabs-style layout for the biomarker page: large rounded cards and
+   pill-shaped controls (segmented tabs, filters, search), with a light hero
+   and the photo in a rounded card. Headlines, eyebrows and the text under
+   them keep the site's own style. */
+.bm-hero{padding:calc(var(--navh) + var(--section-lg)) 0 var(--sp-2xl)}
+.bm-hero .wrap{display:flex; flex-direction:column; gap:var(--sp-3xl)}
+.bm-hero-copy{display:flex; flex-direction:column; gap:var(--sp-lg)}
+.bm-hero-title{margin:0; font-size:var(--h1); line-height:1.05; letter-spacing:-.03em}
+.bm-hero-lead{margin:0; color:var(--text-2); max-width:min(64ch,100%)}
+.bm-hero .btn-row{margin-top:var(--sp-xs)}
+.bm-hero-media{margin:0; width:100%; aspect-ratio:21/9; border-radius:28px; overflow:hidden; background:var(--c-grey-100)}
+.bm-hero-media img{width:100%; height:100%; object-fit:cover; object-position:center 45%; filter:grayscale(1)}
+#p-biomarkers .btn{border-radius:var(--r-round)}
+#p-biomarkers .ap-figs{border-top:0; gap:var(--sp-sm)}
+#p-biomarkers .ap-figs .sp-fig{border:0; padding:var(--sp-xl) var(--sp-lg); background:var(--c-grey-100); border-radius:24px}
+#p-biomarkers .ap{padding:var(--sp-2xl); border:var(--stroke) solid var(--border); border-radius:28px; background:var(--bg)}
+#p-biomarkers .ap .tabs{display:inline-flex; gap:2px; padding:4px; border-radius:var(--r-round); background:var(--c-grey-100)}
+#p-biomarkers .ap .tabs .tab{border-radius:var(--r-round); background:transparent}
+#p-biomarkers .ap-card, #p-biomarkers .ap-note, #p-biomarkers .ap-method > div, #p-biomarkers .bm-card{border-radius:20px}
+#p-biomarkers .bm-search{max-width:28rem; margin:var(--sp-lg) 0}
+#p-biomarkers #analyte-search{border-radius:var(--r-round); padding-inline:1.25rem; background:var(--c-grey-100); border-color:transparent}
+#p-biomarkers .uc-filter{margin-bottom:var(--sp-2xl)}
+#p-biomarkers .uc-filter button{border-radius:var(--r-round)}
+#p-biomarkers .agroups{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-md); align-items:start}
+#p-biomarkers .agroup{padding:var(--sp-lg) var(--sp-xl) var(--sp-md); border-radius:24px; background:var(--c-grey-100)}
+#p-biomarkers .agroup-h{border-bottom-color:var(--c-grey-200)}
+#p-biomarkers .analytes li:last-child .analyte{border-bottom:0}
+#p-biomarkers .callout{border-left:0; padding:var(--sp-lg) var(--sp-xl); border-radius:20px; background:var(--c-grey-100)}
+#p-biomarkers #bm-dashboard .mock{border-radius:28px}
+@media (max-width:1100px){ #p-biomarkers .ap{padding:var(--sp-lg)} }
+@media (max-width:820px){
+  #p-biomarkers .agroups{grid-template-columns:1fr}
+  #p-biomarkers .agroup{padding-inline:var(--sp-lg)}
+  .bm-hero-media{aspect-ratio:4/3; border-radius:20px}
+}
+/* Herzrasen in the same ElevenLabs-style layout (the photo hero stays): rounded figure cards, the
+   explorer as one large rounded grey card inset from the page edge, white
+   rounded chart panels and pill controls. Headlines keep the site style. */
+#p-research .btn{border-radius:var(--r-round)}
+#p-research .cnt{border-top:0; gap:var(--sp-sm)}
+#p-research .cnt .sp-fig{border:0; padding:var(--sp-xl) var(--sp-lg); background:var(--c-grey-100); border-radius:24px}
+#p-research #hz{margin-inline:var(--sp-lg); border-radius:32px}
+#p-research .hz-main{border-top:0; padding-top:0}
+#p-research .hz-panel{border-radius:24px}
+#p-research .hz-gate{border-radius:24px}
+#p-research .hz .tabs{display:inline-flex; gap:2px; padding:4px; border-radius:var(--r-round); background:var(--c-white)}
+#p-research .hz .tabs .tab{border-radius:var(--r-round); background:transparent}
+#p-research .hz .tabs .tab[aria-selected="true"]{background:var(--c-blue); color:var(--c-white)}
+@media (max-width:820px){
+  #p-research #hz{margin-inline:var(--sp-sm); border-radius:24px}
+}
 /* About, redesigned for clarity: a big statement hero, each idea as a short
    titled card instead of a wall of paragraphs, the manifesto as three steps
    and a pull quote on blue, the plan as a numbered timeline, values as cards.
@@ -617,6 +703,24 @@ img{max-width:100%; display:block}
   .ab-tech{gap:var(--sp-xl)}
   .ab-card, .ab-tier{padding:var(--sp-lg)}
   .ab-tier + .ab-tier::before{display:none}
+}
+/* About in the same ElevenLabs-style layout: photo hero and headlines stay,
+   cards get large radii, the manifesto (blue) and values (grey) bands become
+   rounded panels inset from the page edge, manifesto steps sit in soft
+   translucent cards, buttons are pills. */
+#p-about .btn{border-radius:var(--r-round)}
+#p-about .ab-grid, #p-about .ab-plan{gap:var(--sp-sm)}
+#p-about .ab-card, #p-about .ab-tier{border-radius:24px}
+#p-about .ab-tier + .ab-tier::before{left:calc(-1 * var(--sp-sm) / 2 - .55rem)}
+#p-about #about-manifesto, #p-about .ab-sec.band-grey{margin-inline:var(--sp-lg); border-radius:32px; padding-block:var(--sp-3xl)}
+#p-about .ab-sec.band-grey{margin-top:var(--sp-lg)}
+#p-about .ab-sec.band-grey .ab-card{background:var(--c-white)}
+#p-about .ab-sec.band-grey .ab-card:hover{background:var(--c-blue)}
+#p-about .ab-mani{gap:var(--sp-sm)}
+#p-about .ab-mani-step{border-top:0; padding:var(--sp-xl); border-radius:24px; background:rgba(255,255,255,.08); border:var(--stroke) solid rgba(255,255,255,.18)}
+@media (max-width:820px){
+  #p-about #about-manifesto, #p-about .ab-sec.band-grey{margin-inline:var(--sp-sm); border-radius:24px; padding-block:var(--sp-2xl)}
+  #p-about .ab-mani-step{padding:var(--sp-lg)}
 }
 .bm-more{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-xs); margin-top:var(--sp-2xl)}
 .bm-card{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-xl);
@@ -3818,16 +3922,22 @@ markers: 60+
      BIOMARKERS
      ====================================================================== -->
 <div class="page" id="p-biomarkers" data-title="Biolyz Biomarker Panel" hidden>
-<section class="hero hero--photo hero--bm hero--cyc inv">
-  <img class="hero-bg" src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true">
-  <div class="hero-scrim" aria-hidden="true"></div>
+<!-- Light hero in the manner of elevenlabs.io: headline, one line, two
+     buttons, then the photo in a rounded card below. -->
+<header class="bm-hero">
   <div class="wrap">
-    <div class="hero-copy">
-      <span class="eyebrow">Full Panel</span>
-      <h1 class="hero-title">60+ Biomarkers</h1>
+    <div class="bm-hero-copy">
+      <span class="eyebrow">Full panel</span>
+      <h1 class="bm-hero-title">60+ Biomarkers</h1>
+      <p class="bm-hero-lead">Quantified from one saliva sample by mass spectrometry, in our own labs.</p>
+      <div class="btn-row">
+        <a class="btn" href="/demo" data-link>Book a demo &#8599;</a>
+        <a class="btn btn--ghost" href="/contact" data-link>Contact us</a>
+      </div>
     </div>
+    <figure class="bm-hero-media"><img src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true"></figure>
   </div>
-</section>
+</header>
 
 <style>
 /* ==========================================================================
@@ -3974,7 +4084,7 @@ markers: 60+
 <section class="sec" id="precision">
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Analytical performance &middot; release 1.2.1</span>
+      <span class="eyebrow">Analytical performance</span>
       <h2 class="h2">Consistent by design.</h2>
       <p class="copy">A number you can&rsquo;t repeat is a number you can&rsquo;t trust. We
         tested how reproducible the panel measures one sample within a run, between
@@ -4363,7 +4473,7 @@ markers: 60+
       <span class="eyebrow">Quantified analytes</span>
       <span class="mono xs faint" id="analyte-count">62 published &middot; 10 groups</span>
     </div>
-    <div class="field" style="max-width:24rem; margin:var(--sp-lg) 0">
+    <div class="field bm-search">
       <input type="search" id="analyte-search" placeholder="Search biomarkers&hellip;"
         aria-label="Search biomarkers" autocomplete="off">
     </div>
@@ -7264,6 +7374,19 @@ markers: 60+
   top:.55rem; width:9px; height:9px; border-radius:var(--r-round);
   background:var(--c-grey-300)}
 .fw-step--now::before{background:var(--c-blue)}
+/* Scroll progress on the timeline: a blue dot rides the line at the middle
+   of the screen as the page scrolls, the line fills blue down to it, and
+   the step dot it passes grows. */
+.fw-cursor{position:absolute; left:-6px; top:0; width:11px; height:11px; border-radius:var(--r-round);
+  background:var(--c-blue); box-shadow:0 0 0 6px rgba(0,19,233,.15); pointer-events:none; z-index:1;
+  transform:translateY(calc(var(--fw-y, 0px) - 50%)); opacity:0;
+  transition:opacity var(--dur-short) var(--ease)}
+.fw-fill{position:absolute; left:-1px; top:0; width:1px; height:var(--fw-y, 0px); background:var(--c-blue);
+  pointer-events:none; opacity:0; transition:opacity var(--dur-short) var(--ease)}
+.fw.is-tracking .fw-cursor, .fw.is-tracking .fw-fill{opacity:1}
+.fw-step::before{transition:transform var(--dur-short) var(--ease)}
+.fw-step.is-near::before{transform:scale(1.6)}
+@media (prefers-reduced-motion:reduce){ .fw-cursor, .fw-fill{display:none} }
 .fw-badge{align-self:flex-start; display:inline-flex; align-items:baseline; gap:var(--sp-sm);
   background:var(--fill); border-radius:var(--r-sm); padding:var(--sp-2xs) var(--sp-md);
   letter-spacing:.09em; text-transform:uppercase; font-size:.6875rem; color:var(--text-2)}
@@ -7405,6 +7528,25 @@ markers: 60+
 .sowhat p{font-size:var(--t-regular); max-width:min(62ch,100%)}
 .sowhat .btn{background:var(--c-white); color:var(--c-black-blue)}
 .sowhat .btn:hover{background:var(--c-off-white)}
+
+/* So What? in the ElevenLabs-style layout: photo hero and headlines stay,
+   the grey bands (indicators, use cases) become rounded panels inset from
+   the page edge, cards and diagram nodes get large radii, and every
+   control (tabs, filters, badges, buttons, rail arrows) is a pill. */
+#p-sowhat .btn{border-radius:var(--r-round)}
+#p-sowhat .fw-badge{justify-self:start; border-radius:var(--r-round); padding:var(--sp-xs) var(--sp-md)}
+#p-sowhat .tree-n{border-radius:16px}
+#p-sowhat .mq-card{border-radius:12px}
+#p-sowhat .band-grey{margin-inline:var(--sp-lg); border-radius:32px; padding-block:var(--sp-3xl)}
+#p-sowhat .band-grey + .band-grey{margin-top:var(--sp-lg)}
+#p-sowhat .ix-tab{border-radius:var(--r-round)}
+#p-sowhat .ix-panel{border-radius:24px}
+#p-sowhat .uc-filter button, #p-sowhat .cc-nav button{border-radius:var(--r-round)}
+#p-sowhat .cc-card{border-radius:24px; border-color:transparent}
+#p-sowhat .sowhat{border-radius:24px}
+@media (max-width:820px){
+  #p-sowhat .band-grey{margin-inline:var(--sp-sm); border-radius:24px; padding-block:var(--sp-2xl)}
+}
 
 </style>
 
@@ -9978,6 +10120,36 @@ method:  LC-MS/MS
   new IntersectionObserver(function(es, io){
     es.forEach(function(e){ if (e.isIntersecting) { sec.classList.add('on'); io.disconnect(); } });
   }, {threshold:.3}).observe(sec);
+})();
+</script>
+<script>
+/* Timeline progress (So What?): as the page scrolls, a dot rides the line at
+   the middle of the screen and the line fills blue behind it. */
+(function(){
+  var fw = document.querySelector('#p-sowhat .fw');
+  if (!fw) return;
+  var steps = [].slice.call(fw.querySelectorAll('.fw-step'));
+  var dot = document.createElement('span'); dot.className = 'fw-cursor'; dot.setAttribute('aria-hidden','true');
+  var fill = document.createElement('span'); fill.className = 'fw-fill'; fill.setAttribute('aria-hidden','true');
+  fw.appendChild(fill); fw.appendChild(dot);
+  var ticking = false;
+  function update(){
+    ticking = false;
+    var r = fw.getBoundingClientRect();
+    if (!r.height) return;
+    var mid = window.innerHeight / 2;
+    var y = Math.max(0, Math.min(r.height, mid - r.top));
+    fw.style.setProperty('--fw-y', y + 'px');
+    fw.classList.toggle('is-tracking', r.top < mid && r.bottom > mid);
+    steps.forEach(function(st){
+      var d = st.getBoundingClientRect().top + 13 - mid;
+      st.classList.toggle('is-near', Math.abs(d) < 40);
+    });
+  }
+  function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 </script>
 <script>
