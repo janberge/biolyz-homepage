@@ -1946,43 +1946,41 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 @media (max-width:600px){.tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-lg) var(--sp-sm)} .tm-meta h3{font-size:var(--t-regular)}}
 .tm-card--adv .tm-photo{aspect-ratio:1; max-width:9rem; border-radius:50%}
-/* Team people: square black-and-white portraits in a staggered grid, every
-   other column set lower. Each first name sits on its photo in a small
-   frosted pill. Hovering a portrait fills it with colour from the bottom
-   up and turns the pill blue. */
-.tm-people-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--sp-lg); margin-bottom:var(--sp-2xl)}
-.tm-people-head .hd{display:flex; flex-direction:column; gap:var(--sp-md)}
-.tm-people-head .h2{margin:0; max-width:18ch}
-.tm-people-note{margin:0; max-width:38ch; color:var(--text-2)}
-.tm-people-sec .tm-grid{grid-template-columns:repeat(4,1fr); gap:var(--sp-lg); padding-bottom:5rem}
-.tm-people-sec .tm-card{position:relative; gap:0}
-.tm-people-sec .tm-card:nth-child(4n+2), .tm-people-sec .tm-card:nth-child(4n+4){translate:0 5rem}
-.tm-people-sec .tm-photo{aspect-ratio:4/5; border-radius:14px; transition:box-shadow .6s var(--ease)}
-.tm-people-sec .tm-card:hover .tm-photo{box-shadow:0 30px 60px -28px rgba(10,14,24,.45)}
-.tm-people-sec .tm-photo img{object-position:50% 25%; transition:transform 1.2s var(--ease)}
-.tm-people-sec .tm-card:hover .tm-photo img{filter:grayscale(1); transform:scale(1.06)}
-.tm-people-sec .tm-photo .tm-colour{position:absolute; inset:0; filter:none !important;
-  clip-path:inset(100% 0 0 0); transition:clip-path .8s var(--ease), transform 1.2s var(--ease)}
-.tm-people-sec .tm-card:hover .tm-colour{clip-path:inset(0 0 0 0)}
-.tm-people-sec .tm-meta{position:absolute; left:.75rem; bottom:.75rem; z-index:2; flex-direction:row; align-items:center;
-  padding:.45rem .9rem; border-radius:999px; background:rgba(255,255,255,.72);
-  -webkit-backdrop-filter:blur(12px) saturate(1.4); backdrop-filter:blur(12px) saturate(1.4);
-  transition:background .4s var(--ease), transform .5s var(--ease)}
-.tm-people-sec .tm-meta h3{font-size:var(--t-regular); line-height:1.2; transition:color .4s var(--ease)}
-.tm-people-sec .tm-card:hover .tm-meta{background:var(--c-blue); transform:translateY(-4px)}
-.tm-people-sec .tm-card:hover .tm-meta h3{color:#fff}
-@media (max-width:900px){
-  .tm-people-sec .tm-grid{grid-template-columns:repeat(3,1fr)}
-  .tm-people-sec .tm-card:nth-child(n){translate:none}
-  .tm-people-sec .tm-card:nth-child(3n+2){translate:0 4rem}
-}
+/* Team rows: the script deals the grid into three rows of portraits that
+   drift slowly in alternating directions, each row twice over so the loop
+   has no seam. Hovering a row stops it; the portrait under the cursor
+   turns to colour at once and lifts. Names sit on the photos. Without the script, or with reduced
+   motion, the rows simply scroll sideways by hand. */
+.tm-rows-sec{overflow:hidden}
+.tm-rows-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:var(--sp-lg); margin-bottom:var(--sp-2xl)}
+.tm-rows-head .hd{display:flex; flex-direction:column; gap:var(--sp-md)}
+.tm-rows-head .h2{margin:0; max-width:18ch}
+.tm-rows-note{margin:0; max-width:34ch; color:var(--text-2)}
+.tm-rows{display:flex; flex-direction:column; gap:var(--sp-lg); margin-inline:calc(var(--gutter) * -1);
+  -webkit-mask:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent)}
+.tm-row{overflow:hidden}
+.tm-row-track{display:flex; gap:var(--sp-md); width:max-content; animation:tm-drift var(--t, 90s) linear infinite}
+.tm-row:nth-child(2) .tm-row-track{animation-direction:reverse}
+.tm-row:hover .tm-row-track{animation-play-state:paused}
+@keyframes tm-drift{to{transform:translateX(calc(-50% - var(--sp-md) / 2))}}
+.tm-rows .tm-card{position:relative; flex:none; width:clamp(150px,15vw,220px); gap:0; transition:transform .45s var(--ease)}
+.tm-rows .tm-photo{border-radius:16px}
+.tm-rows .tm-photo::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(10,14,24,.55), transparent 40%)}
+.tm-rows .tm-meta{position:absolute; left:.9rem; bottom:.75rem; z-index:1}
+.tm-rows .tm-photo img{transition:transform .8s var(--ease)}
+.tm-rows .tm-card:hover{transform:translateY(-6px)}
+.tm-rows .tm-card:hover .tm-photo img{filter:none; transform:scale(1.04)}
+.tm-rows .tm-meta h3{font-size:var(--t-large); color:#fff}
 @media (max-width:600px){
-  .tm-people-sec .tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-sm); padding-bottom:3rem}
-  .tm-people-sec .tm-card:nth-child(n){translate:none}
-  .tm-people-sec .tm-card:nth-child(2n){translate:0 3rem}
-  .tm-people-sec .tm-meta{left:.5rem; bottom:.5rem; padding:.35rem .7rem}
+  .tm-rows{gap:var(--sp-md)}
+  .tm-rows .tm-card{width:140px}
+  .tm-rows .tm-meta h3{font-size:var(--t-regular)}
 }
-@media (prefers-reduced-motion:reduce){ .tm-people-sec .tm-colour{transition:none} }
+@media (prefers-reduced-motion:reduce){
+  .tm-row{overflow-x:auto}
+  .tm-row-track{animation:none}
+}
 
 /* Photo headers for Customer Stories, Blog and Careers (same treatment as
    the other photo headers: black and white under a dark fade). */
@@ -6347,15 +6345,16 @@ markers: 60+
   </div>
 </header>
 
-<section class="sec tm-people-sec">
+<section class="sec tm-rows-sec">
   <div class="wrap">
-    <!-- Everyone side by side, mixed on purpose: a team, not an org chart. -->
-    <div class="tm-people-head">
+    <!-- Everyone side by side, first names only, mixed on purpose: a team, not an org chart.
+         The script turns this grid into three drifting rows (see .tm-rows). -->
+    <div class="tm-rows-head">
       <div class="hd">
         <span class="eyebrow">The people</span>
         <h2 class="h2">Scientists, business development, athletes. One team.</h2>
       </div>
-      <p class="tm-people-note">Chemists, engineers and sports scientists, in Dortmund and London.</p>
+      <p class="tm-rows-note">Hover a row to stop it and say hi.</p>
     </div>
     <div class="tm-grid">
         <article class="tm-card">
@@ -9898,15 +9897,34 @@ method:  LC-MS/MS
 </script>
 
 <script>
-/* Team colour reveal (see the .tm-people CSS). Lays a colour copy over each
-   portrait for the hover fill. Runs before the lazy image loader, which fills the copies too. */
+/* Team rows (see the .tm-rows CSS). Deals the cards round-robin into three
+   rows and appends a hidden copy of each row so the drift loops without a
+   seam. The copies are decoration, hidden from screen readers and keyboard.
+   This runs before the lazy image loader, which picks the copies up too. */
 (function () {
   'use strict';
-  [].forEach.call(document.querySelectorAll('.tm-people-sec .tm-photo'), function (p) {
-    var im = p.querySelector('img'); if (!im) return;
-    var c = im.cloneNode(true); c.className = 'tm-colour'; c.alt = ''; c.setAttribute('aria-hidden', 'true');
-    p.appendChild(c);
+  var grid = document.querySelector('.tm-rows-sec .tm-grid');
+  if (!grid) return;
+  var cards = [].slice.call(grid.querySelectorAll('.tm-card'));
+  var wrap = document.createElement('div'); wrap.className = 'tm-rows';
+  var rows = [0, 1, 2].map(function (i) {
+    var row = document.createElement('div'); row.className = 'tm-row';
+    var track = document.createElement('div'); track.className = 'tm-row-track';
+    track.style.setProperty('--t', [95, 80, 110][i] + 's');
+    row.appendChild(track); wrap.appendChild(row);
+    return track;
   });
+  cards.forEach(function (c, i) { rows[i % 3].appendChild(c); });
+  rows.forEach(function (track) {
+    [].slice.call(track.children).forEach(function (c) {
+      var copy = c.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      [].forEach.call(copy.querySelectorAll('img'), function (im) { im.alt = ''; });
+      [].forEach.call(copy.querySelectorAll('a'), function (a) { a.tabIndex = -1; });
+      track.appendChild(copy);
+    });
+  });
+  grid.parentNode.replaceChild(wrap, grid);
 })();
 </script>
 <script>
