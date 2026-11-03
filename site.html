@@ -842,8 +842,8 @@ img{max-width:100%; display:block}
    than --navh because the links wrap. */
 .steplabel{margin-bottom:var(--sp-md); pointer-events:none}
 /* Once a section's own label has scrolled under the nav, one fixed label
-   takes over in the same spot and cross-fades from step to step (01 Collect
-   into 02 Analyze ...) instead of each label scrolling away. Two stacked
+   takes over in the same spot and cross-fades from step to step (01 Sampling
+   into 02 Biomarkers and Indicators ...) instead of each label scrolling away. Two stacked
    layers: the incoming one fades in as the outgoing one fades out. */
 .step-now{position:fixed; z-index:20; top:calc(var(--nav-real, var(--navh)) + var(--sp-sm));
   pointer-events:none; opacity:0; transition:opacity var(--dur-short) var(--ease)}
@@ -1519,7 +1519,7 @@ textarea{min-height:7rem; resize:vertical}
 
 /* Detail shots: a cropped part of a dashboard screen in a white frame with
    a fine border and soft shadow, shown at its own size rather than stretched
-   (same look as the Personalize views on Solution). */
+   (same look as the Insights views on Solution). */
 .shot.shot--detail{background:#fff; border:var(--stroke) solid var(--c-grey-200); border-radius:var(--r-sm);
   box-shadow:0 14px 40px rgba(3,7,18,.07); overflow:hidden; aspect-ratio:auto; width:fit-content; max-width:100%}
 .shot.shot--detail img{display:block; width:auto; max-width:100%; height:auto}
@@ -3043,8 +3043,8 @@ a.club{text-decoration:none}
     <h2 class="h2">From swab to decision, in five steps.</h2>
   </div>
   <div class="sol-grid">
-    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 175.0 416 175.0"/><circle cx="416" cy="175.0" r="3"/><path d="M584 175.0 C600.0 175.0 600.0 140.0 616 140.0"/><circle cx="616" cy="140.0" r="3"/><path d="M784 140.0 C800.0 140.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
-    <a class="sol-col" href="#sol-collect" data-sw-jump="sol-collect" aria-label="Go to Collect">
+    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 140.0 416 140.0"/><circle cx="416" cy="140.0" r="3"/><path d="M584 140.0 C600.0 140.0 600.0 175.0 616 175.0"/><circle cx="616" cy="175.0" r="3"/><path d="M784 175.0 C800.0 175.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
+    <a class="sol-col" href="#sol-collect" data-sw-jump="sol-collect" aria-label="Go to Sampling">
       <div class="sol-stage"><div class="sol-win" style="top:70px">
           <div class="sw-bar"><i></i><i></i><i></i></div>
           <div class="sw-line sw-line--w"></div>
@@ -3054,9 +3054,9 @@ a.club{text-decoration:none}
           </ul>
           <div class="sw-cta">Scan tube</div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">01</span>Collect</h3><p>A one-minute saliva swab, taken by the athlete, scanned and shipped to our lab.</p></div>
+      <div class="sol-text"><h3><span class="n">01</span>Sampling</h3><p>A one-minute saliva swab, taken by the athlete, scanned and shipped to our lab.</p></div>
     </a>
-    <a class="sol-col" href="#indicators" data-sw-jump="indicators" aria-label="Go to Analyze">
+    <a class="sol-col" href="#indicators" data-sw-jump="indicators" aria-label="Go to Biomarkers and Indicators">
       <div class="sol-stage"><div class="sol-win" style="top:40px">
           <div class="sw-line sw-line--w"></div>
           <pre class="sw-code">sample:  S-0247
@@ -3065,9 +3065,17 @@ markers: 60+
 &#8594; indicators: 7</pre>
           <div class="sw-rows"><i></i><i></i><i></i></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">02</span>Analyze</h3><p>Mass spectrometry reads 60+ biomarkers and groups them into clear indicators.</p></div>
+      <div class="sol-text"><h3><span class="n">02</span>Biomarkers and Indicators</h3><p>Mass spectrometry reads 60+ biomarkers and groups them into clear indicators.</p></div>
     </a>
-    <a class="sol-col" href="#sol-personalize" data-sw-jump="sol-personalize" aria-label="Go to Personalize">
+    <a class="sol-col" href="#integrations" data-sw-jump="integrations" aria-label="Go to Context">
+      <div class="sol-stage"><div class="sol-win" style="top:55px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-tiles"><span>GPS</span><span>Heart rate</span><span>Force plates</span><span>Wellness</span></div>
+          <div class="sw-cta">Your data</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">03</span>Context</h3><p>Load, GPS, heart rate and wellness, next to the biomarkers on one platform.</p></div>
+    </a>
+    <a class="sol-col" href="#sol-personalize" data-sw-jump="sol-personalize" aria-label="Go to Insights">
       <div class="sol-stage"><div class="sol-win" style="top:90px">
           <div class="sw-top"><div class="sw-line"></div><span class="sw-tag">&#9632; Live</span></div>
           <ul class="sw-menu">
@@ -3076,30 +3084,22 @@ markers: 60+
           </ul>
           <div class="sw-dots"><i></i><i class="is-on"></i><i></i></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">03</span>Personalize</h3><p>Every result read against the athlete&rsquo;s own baseline, from squad to single player.</p></div>
+      <div class="sol-text"><h3><span class="n">04</span>Insights</h3><p>Every result read against the athlete&rsquo;s own baseline, from squad to single player.</p></div>
     </a>
-    <a class="sol-col" href="#integrations" data-sw-jump="integrations" aria-label="Go to Context">
-      <div class="sol-stage"><div class="sol-win" style="top:55px">
-          <div class="sw-bar"><i></i><i></i><i></i></div>
-          <div class="sw-tiles"><span>GPS</span><span>Heart rate</span><span>Force plates</span><span>Wellness</span></div>
-          <div class="sw-cta">Your data</div>
-      </div></div>
-      <div class="sol-text"><h3><span class="n">04</span>Context</h3><p>Load, GPS, heart rate and wellness, next to the biomarkers on one platform.</p></div>
-    </a>
-    <a class="sol-col" href="#recommendations" data-sw-jump="recommendations" aria-label="Go to Act">
+    <a class="sol-col" href="#recommendations" data-sw-jump="recommendations" aria-label="Go to Action">
       <div class="sol-stage"><div class="sol-win" style="top:80px">
           <div class="sw-bar"><i></i><i></i><i></i></div>
           <div class="sw-row"><span>Flag raised</span><em>Ready</em></div>
           <div class="sw-row is-on"><span>Recommendation</span><em>Now</em></div>
           <div class="sw-row sw-row--caps"><span>Decision stays with staff</span><em>&mdash;</em></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">05</span>Act</h3><p>A recommendation for every flag. The decision stays with your staff.</p></div>
+      <div class="sol-text"><h3><span class="n">05</span>Action</h3><p>A recommendation for every flag. The decision stays with your staff.</p></div>
     </a>
   </div>
 </section>
 
 <section class="sec" id="sol-collect">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Sampling</span></div></div>
   <div class="wrap">
     <div class="hd">
       <h2 class="h2">Sample taking, transport and analysis.</h2>
@@ -3162,7 +3162,7 @@ markers: 60+
 </section>
 
 <section class="sec band-grey" id="indicators">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Analyze</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Biomarkers and Indicators</span></div></div>
   <div class="wrap">
     <div class="hd">
       <h2 class="h2">From single biomarkers to clear indicators.</h2>
@@ -3251,8 +3251,49 @@ markers: 60+
   </div>
 </section>
 
-<section class="sec" id="sol-personalize">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
+<!-- ======================================================================
+     INTEGRATIONS — an infinite horizontal strip of partner/device cards.
+     Two identical sets of cards sit back to back in one track (the second
+     copy is aria-hidden, a visual repeat rather than new content) and the
+     track animates exactly half its own width, so the loop never shows a
+     seam. Cards are plain text placeholders today — swap a name for an
+     <img> per card once real logos exist, no other markup changes needed.
+     ====================================================================== -->
+<section class="sec" id="integrations">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Context</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <h2 class="h2">Every data source, one platform.</h2>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="mq-card">__SVG_catapult__<span class="sr-only">Catapult</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_statsports__" alt="STATSports"></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_kinexon__" alt="Kinexon"></div>
+      <div class="mq-card">__SVG_trainingpeaks__<span class="sr-only">TrainingPeaks</span></div>
+      <div class="mq-card">__SVG_garmin__<span class="sr-only">Garmin</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_wahoo__" alt="Wahoo"></div>
+      <div class="mq-card"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_oura__" alt="Oura"></div>
+      <div class="mq-card">__SVG_whoop__<span class="sr-only">WHOOP</span></div>
+      <div class="mq-card"><span class="mq-card-name">+ more</span></div>
+      <div class="mq-card" aria-hidden="true">__SVG_catapult__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_statsports__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_kinexon__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_trainingpeaks__</div>
+      <div class="mq-card" aria-hidden="true">__SVG_garmin__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_wahoo__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_oura__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_whoop__</div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">+ more</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey" id="sol-personalize">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Insights</span></div></div>
   <div class="wrap">
     <div class="hd">
       <h2 class="h2">Five views, from squad to single athlete.</h2>
@@ -3336,51 +3377,10 @@ markers: 60+
   </div>
 </section>
 
-<!-- ======================================================================
-     INTEGRATIONS — an infinite horizontal strip of partner/device cards.
-     Two identical sets of cards sit back to back in one track (the second
-     copy is aria-hidden, a visual repeat rather than new content) and the
-     track animates exactly half its own width, so the loop never shows a
-     seam. Cards are plain text placeholders today — swap a name for an
-     <img> per card once real logos exist, no other markup changes needed.
-     ====================================================================== -->
-<section class="sec band-grey" id="integrations">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
-  <div class="wrap">
-    <div class="hd">
-      <h2 class="h2">Every data source, one platform.</h2>
-    </div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="mq-card">__SVG_catapult__<span class="sr-only">Catapult</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_statsports__" alt="STATSports"></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_kinexon__" alt="Kinexon"></div>
-      <div class="mq-card">__SVG_trainingpeaks__<span class="sr-only">TrainingPeaks</span></div>
-      <div class="mq-card">__SVG_garmin__<span class="sr-only">Garmin</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_wahoo__" alt="Wahoo"></div>
-      <div class="mq-card"><span class="mq-card-name">CSV &amp; API</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_oura__" alt="Oura"></div>
-      <div class="mq-card">__SVG_whoop__<span class="sr-only">WHOOP</span></div>
-      <div class="mq-card"><span class="mq-card-name">+ more</span></div>
-      <div class="mq-card" aria-hidden="true">__SVG_catapult__</div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_statsports__" alt=""></div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_kinexon__" alt=""></div>
-      <div class="mq-card" aria-hidden="true">__SVG_trainingpeaks__</div>
-      <div class="mq-card" aria-hidden="true">__SVG_garmin__</div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_wahoo__" alt=""></div>
-      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">CSV &amp; API</span></div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_oura__" alt=""></div>
-      <div class="mq-card" aria-hidden="true">__SVG_whoop__</div>
-      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">+ more</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- Personalised recommendations: the two kinds, then the note that Biolyz
      sits alongside a club's existing systems. -->
 <section class="sec" id="recommendations">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Action</span></div></div>
   <div class="wrap">
     <div class="hd">
       <h2 class="h2">The right intervention, at the right time.</h2>
@@ -7698,14 +7698,14 @@ markers: 60+
 
     <ol class="fw">
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>01</b> Sample</span>
+        <span class="fw-badge"><b>01</b> Sampling</span>
         <h3 class="h3">A swab in under a minute.</h3>
         <p class="copy">The athlete takes the sample themselves, in the changing room, with no
           needle and no medical staff present. The tube is scanned to the athlete, then
           shipped to our laboratory.</p>
         <div class="fw-dia">
           <div class="tree">
-            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Collect</span>A swab in under a minute, taken by the athlete</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">Sampling</span>A swab in under a minute, taken by the athlete</div></div>
             <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Scan</span>The tube is bound to the athlete before it leaves the room</div></div>
             <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Ship</span>Sent to our own laboratory</div></div>
           </div>
@@ -7713,7 +7713,7 @@ markers: 60+
       </li>
 
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>02</b> Analyze</span>
+        <span class="fw-badge"><b>02</b> Biomarkers and Indicators</span>
         <h3 class="h3">Biomarkers become one indicator.</h3>
         <p class="copy">We measure more than 60 biomarkers by mass spectrometry. Related
           markers that move together are aggregated into a single indicator, so staff read
@@ -7729,22 +7729,7 @@ markers: 60+
       </li>
 
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>03</b> Personalize</span>
-        <h3 class="h3">Every athlete is their own baseline.</h3>
-        <p class="copy">A value means little against a population average. Each indicator is
-          read against that athlete&rsquo;s own range, built from their previous samples, so a
-          flag means this athlete has moved away from their normal.</p>
-        <div class="fw-dia">
-          <div class="tree">
-            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">History</span>Every previous sample from this athlete</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Own range</span>An individual baseline per indicator</div></div>
-            <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Flag</span>Raised when the athlete leaves their own normal</div></div>
-          </div>
-        </div>
-      </li>
-
-      <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>04</b> Context</span>
+        <span class="fw-badge"><b>03</b> Context</span>
         <h3 class="h3">The stressor behind the signal.</h3>
         <p class="copy">An indicator on its own says something changed, not why. So we bring
           the context in alongside it: what the athlete reports and what staff observe, and
@@ -7777,7 +7762,22 @@ markers: 60+
       </li>
 
       <li class="fw-step fw-step--now">
-        <span class="fw-badge"><b>05</b> Act</span>
+        <span class="fw-badge"><b>04</b> Insights</span>
+        <h3 class="h3">Every athlete is their own baseline.</h3>
+        <p class="copy">A value means little against a population average. Each indicator is
+          read against that athlete&rsquo;s own range, built from their previous samples, so a
+          flag means this athlete has moved away from their normal.</p>
+        <div class="fw-dia">
+          <div class="tree">
+            <div class="tree-row"><div class="tree-n tree-n--r"><span class="k">History</span>Every previous sample from this athlete</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--l"><span class="k">Own range</span>An individual baseline per indicator</div></div>
+            <div class="tree-row"><div class="tree-n tree-n--r tree-n--us"><span class="k">Flag</span>Raised when the athlete leaves their own normal</div></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="fw-step fw-step--now">
+        <span class="fw-badge"><b>05</b> Action</span>
         <h3 class="h3">A next step, and proof it worked.</h3>
         <p class="copy">Each flag carries a recommendation, drawn from peer reviewed research
           and assembled by our multi agent AI against the indicator, its context and the
@@ -8683,8 +8683,8 @@ markers: 60+
     </div>
     <div class="sol-map sol-map--inline">
     <div class="sol-grid">
-    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 175.0 416 175.0"/><circle cx="416" cy="175.0" r="3"/><path d="M584 175.0 C600.0 175.0 600.0 140.0 616 140.0"/><circle cx="616" cy="140.0" r="3"/><path d="M784 140.0 C800.0 140.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
-    <a class="sol-col" href="#hz-collect" data-sw-jump="hz-collect" aria-label="Go to Collect">
+    <svg class="sol-wires" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true"><path d="M184 155.0 C200.0 155.0 200.0 125.0 216 125.0"/><circle cx="216" cy="125.0" r="3"/><path d="M384 125.0 C400.0 125.0 400.0 140.0 416 140.0"/><circle cx="416" cy="140.0" r="3"/><path d="M584 140.0 C600.0 140.0 600.0 175.0 616 175.0"/><circle cx="616" cy="175.0" r="3"/><path d="M784 175.0 C800.0 175.0 800.0 165.0 816 165.0"/><circle cx="816" cy="165.0" r="3"/></svg>
+    <a class="sol-col" href="#hz-collect" data-sw-jump="hz-collect" aria-label="Go to Sampling">
       <div class="sol-stage"><div class="sol-win" style="top:70px">
           <div class="sw-bar"><i></i><i></i><i></i></div>
           <div class="sw-line sw-line--w"></div>
@@ -8694,9 +8694,9 @@ markers: 60+
           </ul>
           <div class="sw-cta">Ship to lab</div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">01</span>Collect</h3><p>A two-minute saliva swab in the stable, sent to our lab.</p></div>
+      <div class="sol-text"><h3><span class="n">01</span>Sampling</h3><p>A two-minute saliva swab in the stable, sent to our lab.</p></div>
     </a>
-    <a class="sol-col" href="#hz-questions" data-sw-jump="hz-questions" aria-label="Go to Analyze">
+    <a class="sol-col" href="#hz-questions" data-sw-jump="hz-questions" aria-label="Go to Biomarkers and Indicators">
       <div class="sol-stage"><div class="sol-win" style="top:40px">
           <div class="sw-line sw-line--w"></div>
           <pre class="sw-code">sample:  H-0112
@@ -8704,9 +8704,17 @@ method:  LC-MS/MS
 &#8594; indicators: 4</pre>
           <div class="sw-rows"><i></i><i></i><i></i></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">02</span>Analyze</h3><p>The full biomarker panel, turned into clear indicators.</p></div>
+      <div class="sol-text"><h3><span class="n">02</span>Biomarkers and Indicators</h3><p>The full biomarker panel, turned into clear indicators.</p></div>
     </a>
-    <a class="sol-col" href="#hz-personalize" data-sw-jump="hz-personalize" aria-label="Go to Personalize">
+    <a class="sol-col" href="#hz-context" data-sw-jump="hz-context" aria-label="Go to Context">
+      <div class="sol-stage"><div class="sol-win" style="top:55px">
+          <div class="sw-bar"><i></i><i></i><i></i></div>
+          <div class="sw-tiles"><span>Training</span><span>Heart rate</span><span>Feeding</span><span>Vet notes</span></div>
+          <div class="sw-cta">Your data</div>
+      </div></div>
+      <div class="sol-text"><h3><span class="n">03</span>Context</h3><p>Your stable&rsquo;s own data, alongside the biomarkers.</p></div>
+    </a>
+    <a class="sol-col" href="#hz-personalize" data-sw-jump="hz-personalize" aria-label="Go to Insights">
       <div class="sol-stage"><div class="sol-win" style="top:90px">
           <div class="sw-top"><div class="sw-line"></div><span class="sw-tag">&#9632; Live</span></div>
           <ul class="sw-menu">
@@ -8715,24 +8723,16 @@ method:  LC-MS/MS
           </ul>
           <div class="sw-dots"><i></i><i class="is-on"></i><i></i></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">03</span>Personalize</h3><p>Every value read against your horse&rsquo;s own baseline.</p></div>
+      <div class="sol-text"><h3><span class="n">04</span>Insights</h3><p>Every value read against your horse&rsquo;s own baseline.</p></div>
     </a>
-    <a class="sol-col" href="#hz-context" data-sw-jump="hz-context" aria-label="Go to Context">
-      <div class="sol-stage"><div class="sol-win" style="top:55px">
-          <div class="sw-bar"><i></i><i></i><i></i></div>
-          <div class="sw-tiles"><span>Training</span><span>Heart rate</span><span>Feeding</span><span>Vet notes</span></div>
-          <div class="sw-cta">Your data</div>
-      </div></div>
-      <div class="sol-text"><h3><span class="n">04</span>Context</h3><p>Your stable&rsquo;s own data, alongside the biomarkers.</p></div>
-    </a>
-    <a class="sol-col" href="#hz-act" data-sw-jump="hz-act" aria-label="Go to Act">
+    <a class="sol-col" href="#hz-act" data-sw-jump="hz-act" aria-label="Go to Action">
       <div class="sol-stage"><div class="sol-win" style="top:80px">
           <div class="sw-bar"><i></i><i></i><i></i></div>
           <div class="sw-row"><span>Flag raised</span><em>Ready</em></div>
           <div class="sw-row is-on"><span>Recommendation</span><em>Now</em></div>
           <div class="sw-row sw-row--caps"><span>Decision stays with you</span><em>&mdash;</em></div>
       </div></div>
-      <div class="sol-text"><h3><span class="n">05</span>Act</h3><p>Recommendations for training, care and breeding.</p></div>
+      <div class="sol-text"><h3><span class="n">05</span>Action</h3><p>Recommendations for training, care and breeding.</p></div>
     </a>
     </div>
     </div>
@@ -8740,7 +8740,7 @@ method:  LC-MS/MS
 </section>
 
 <section class="sec" id="hz-collect">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Collect</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Sampling</span></div></div>
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">The swab</span>
@@ -8769,7 +8769,7 @@ method:  LC-MS/MS
 </section>
 
 <section class="sec band-grey" id="hz-questions">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Analyze</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">02</span>Biomarkers and Indicators</span></div></div>
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">The Indicators</span>
@@ -8823,8 +8823,42 @@ method:  LC-MS/MS
   </div>
 </section>
 
-<section class="sec" id="hz-personalize">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Personalize</span></div></div>
+<section class="sec" id="hz-context">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Context</span></div></div>
+  <div class="wrap">
+    <div class="hd">
+      <span class="eyebrow">The context for your internal data</span>
+      <h2 class="h2">Every data source, one platform.</h2>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="mq-card">__SVG_catapult__<span class="sr-only">Catapult</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_statsports__" alt="STATSports"></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_kinexon__" alt="Kinexon"></div>
+      <div class="mq-card">__SVG_trainingpeaks__<span class="sr-only">TrainingPeaks</span></div>
+      <div class="mq-card">__SVG_garmin__<span class="sr-only">Garmin</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_wahoo__" alt="Wahoo"></div>
+      <div class="mq-card"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card"><img class="mq-card-img" src="__IMG_oura__" alt="Oura"></div>
+      <div class="mq-card">__SVG_whoop__<span class="sr-only">WHOOP</span></div>
+      <div class="mq-card"><span class="mq-card-name">+ more</span></div>
+      <div class="mq-card" aria-hidden="true">__SVG_catapult__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_statsports__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_kinexon__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_trainingpeaks__</div>
+      <div class="mq-card" aria-hidden="true">__SVG_garmin__</div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_wahoo__" alt=""></div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">CSV &amp; API</span></div>
+      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_oura__" alt=""></div>
+      <div class="mq-card" aria-hidden="true">__SVG_whoop__</div>
+      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">+ more</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec band-grey" id="hz-personalize">
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Insights</span></div></div>
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">The dashboard</span>
@@ -8903,42 +8937,8 @@ method:  LC-MS/MS
   </div>
 </section>
 
-<section class="sec band-grey" id="hz-context">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Context</span></div></div>
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The context for your internal data</span>
-      <h2 class="h2">Every data source, one platform.</h2>
-    </div>
-  </div>
-  <div class="marquee">
-    <div class="marquee-track">
-      <div class="mq-card">__SVG_catapult__<span class="sr-only">Catapult</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_statsports__" alt="STATSports"></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_kinexon__" alt="Kinexon"></div>
-      <div class="mq-card">__SVG_trainingpeaks__<span class="sr-only">TrainingPeaks</span></div>
-      <div class="mq-card">__SVG_garmin__<span class="sr-only">Garmin</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_wahoo__" alt="Wahoo"></div>
-      <div class="mq-card"><span class="mq-card-name">CSV &amp; API</span></div>
-      <div class="mq-card"><img class="mq-card-img" src="__IMG_oura__" alt="Oura"></div>
-      <div class="mq-card">__SVG_whoop__<span class="sr-only">WHOOP</span></div>
-      <div class="mq-card"><span class="mq-card-name">+ more</span></div>
-      <div class="mq-card" aria-hidden="true">__SVG_catapult__</div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_statsports__" alt=""></div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_kinexon__" alt=""></div>
-      <div class="mq-card" aria-hidden="true">__SVG_trainingpeaks__</div>
-      <div class="mq-card" aria-hidden="true">__SVG_garmin__</div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_wahoo__" alt=""></div>
-      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">CSV &amp; API</span></div>
-      <div class="mq-card" aria-hidden="true"><img class="mq-card-img" src="__IMG_oura__" alt=""></div>
-      <div class="mq-card" aria-hidden="true">__SVG_whoop__</div>
-      <div class="mq-card" aria-hidden="true"><span class="mq-card-name">+ more</span></div>
-    </div>
-  </div>
-</section>
-
 <section class="sec" id="hz-act">
-  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Act</span></div></div>
+  <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Action</span></div></div>
   <div class="wrap">
     <div class="hd">
       <span class="eyebrow">Personalised recommendations</span>
