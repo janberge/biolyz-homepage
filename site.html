@@ -900,6 +900,8 @@ img{max-width:100%; display:block}
 .az-rows li{display:grid; grid-template-columns:minmax(0,1fr) 40%; align-items:center; gap:.8rem; font-size:.8125rem}
 .az-rows i{display:block; height:6px; border-radius:3px; background:linear-gradient(90deg,#0013e9 var(--w),#e6e8f5 var(--w))}
 .az-q{margin:.35rem 0 0; padding-top:.65rem; border-top:1px solid #ececec; font-size:.8125rem; color:#646464}
+.az-cases{align-self:flex-start; font-size:.8125rem; color:var(--c-blue); text-decoration:none}
+.az-cases:hover{text-decoration:underline}
 @media (max-width:900px){
   .az{grid-template-columns:1fr; gap:var(--sp-lg)}
   .az-stage{min-height:26rem}
@@ -3180,6 +3182,7 @@ markers: 60+
             <b class="az-name">Inflammation</b>
             <ul class="vx"><li><span>PGF2α</span><b>+4%</b></li><li><span>Neopterin</span><b>+9%</b></li><li class="is-out"><span>Kynurenine</span><b>+27% &uarr;</b></li><li><span>Tryptophan</span><b>-6%</b></li><li><span>Phe/Tyr</span><b>+3%</b></li><li class="is-out"><span>Kyn/Trp</span><b>+22% &uarr;</b></li></ul>
             <p class="az-q">Is there a concern about inflammatory / immune activation?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="1">See 2 cases &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az1" id="panel-az1" role="tabpanel" aria-labelledby="tab-az1" hidden>
@@ -3188,6 +3191,7 @@ markers: 60+
             <b class="az-name">Metabolic stress</b>
             <ul class="vx"><li class="is-out"><span>Hypoxanthine</span><b>+24% &uarr;</b></li><li><span>Xanthine</span><b>+7%</b></li><li><span>Xanthine/Hypoxanthine</span><b>-4%</b></li><li><span>Uric acid</span><b>+2%</b></li></ul>
             <p class="az-q">Is there a concern about elevated purine / metabolic turnover?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="2">See 2 cases &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az2" id="panel-az2" role="tabpanel" aria-labelledby="tab-az2" hidden>
@@ -3196,6 +3200,7 @@ markers: 60+
             <b class="az-name">Muscle damage</b>
             <ul class="vx"><li class="is-out"><span>LDHA</span><b>+31% &uarr;</b></li><li><span>HSPB1</span><b>+12%</b></li><li><span>ACTA1</span><b>+5%</b></li></ul>
             <p class="az-q">Is there a concern about muscle fibre disruption?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="3">See the case &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az3" id="panel-az3" role="tabpanel" aria-labelledby="tab-az3" hidden>
@@ -3204,6 +3209,7 @@ markers: 60+
             <b class="az-name">Hormonal status</b>
             <ul class="vx"><li class="is-out"><span>Cortisol</span><b>+21% &uarr;</b></li><li><span>Testosterone</span><b>-8%</b></li><li class="is-out"><span>Testosterone:Cortisol ratio</span><b>-26% &darr;</b></li></ul>
             <p class="az-q">Is there a concern about anabolic&ndash;catabolic balance?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="4">See 2 cases &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az4" id="panel-az4" role="tabpanel" aria-labelledby="tab-az4" hidden>
@@ -3212,6 +3218,7 @@ markers: 60+
             <b class="az-name">Psychological stress</b>
             <ul class="vx"><li><span>Cortisol AM</span><b>+6%</b></li><li><span>DHEAS</span><b>-3%</b></li><li class="is-out"><span>Alpha-amylase</span><b>+23% &uarr;</b></li></ul>
             <p class="az-q">Is there a concern about stress-response activation?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="5">See 2 cases &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az5" id="panel-az5" role="tabpanel" aria-labelledby="tab-az5" hidden>
@@ -3220,6 +3227,7 @@ markers: 60+
             <b class="az-name">Sleep</b>
             <ul class="vx"><li class="is-out"><span>Melatonin</span><b>-24% &darr;</b></li><li><span>Trigonelline</span><b>+4%</b></li></ul>
             <p class="az-q">Is there a concern about circadian / sleep disruption?</p>
+            <a class="az-cases" href="/use-cases" data-link data-uc-pre="6">See the case &#8594;</a>
           </div>
         </div>
         <div class="az-panel" data-panel="az6" id="panel-az6" role="tabpanel" aria-labelledby="tab-az6" hidden>
@@ -3228,6 +3236,7 @@ markers: 60+
             <b class="az-name">Hydration</b>
             <ul class="vx"><li><span>Salivary creatinine</span><b>+3%</b></li><li><span>Protein concentration</span><b>-2%</b></li></ul>
             <p class="az-q">Is there a concern about fluid balance / hydration status?</p>
+            <a class="az-cases" href="/use-cases" data-link>No case published yet &middot; all cases &#8594;</a>
           </div>
         </div>
       </div>
@@ -10323,6 +10332,19 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     mark();
   });
 })();
+</script>
+<script>
+/* Solution indicators: "See N cases" opens the use case library already
+   filtered to that indicator. */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest ? e.target.closest('a[data-uc-pre]') : null;
+  if (!a) return;
+  var want = a.getAttribute('data-uc-pre');
+  setTimeout(function () {
+    var b = document.querySelector('[data-uc-lib] [data-uc="' + want + '"]');
+    if (b) b.click();
+  }, 0);
+});
 </script>
 <script>
 /* Scroll reveal. Each block inside a section (and each card in the larger
