@@ -1,0 +1,47 @@
+# Once a day, copy the open jobs from Needle into content/jobs.json and push
+# the change, so a job added, edited or closed in Needle reaches /careers
+# with the next deploy. See tools/jobs_sync.py for what is copied.
+#
+# Unlike the press check this commits directly: the jobs are already reviewed
+# in Needle before they are published there.
+#
+# Which branch: the repository variable BLOG_BRANCH if set (the same one the
+# press check uses), otherwise the default branch. GitHub only runs scheduled
+# workflows from the default branch, so this file has to be on main for the
+# daily run to start.
+name: Jobs sync
+
+on:
+  schedule:
+    - cron: "0 5 * * *"   # 05:00 UTC, every day
+  workflow_dispatch:       # "Run workflow" button on the Actions tab
+
+permissions:
+  contents: write
+
+concurrency: jobs-sync
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ vars.BLOG_BRANCH || github.event.repository.default_branch }}
+
+      - name: Copy jobs from Needle
+        id: sync
+        run: python3 tools/jobs_sync.py
+
+      - name: Check that the site still builds
+        if: steps.sync.outputs.changed == 'true'
+        run: python3 build.py
+
+      - name: Commit and push
+        if: steps.sync.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/jobs.json
+          git commit -m "Careers: sync open jobs from Needle"
+          git push

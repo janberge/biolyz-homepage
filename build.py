@@ -46,6 +46,170 @@ def _blog_cards():
     return "\n".join(out)
 assert src.count("<!--BLOG_CARDS-->") == 1
 src = src.replace("<!--BLOG_CARDS-->", _blog_cards())
+# ---- jobs ---------------------------------------------------------------
+# Open roles come from Needle via content/jobs.json, which the daily jobs sync
+# (tools/jobs_sync.py, .github/workflows/jobs-sync.yml) keeps current. Each job
+# gets a page at /careers/<slug> with Needle's text, and an apply page at
+# /careers/<slug>/apply whose form sends straight back to Needle.
+JOB_PAGE = """<div class="page" id="%(pid)s" data-title="%(t)s · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="/careers" data-link>&larr; All positions</a>
+    <span class="eyebrow">Careers &middot; Open position</span>
+    <h1 class="h1 jd-title">%(t)s</h1>
+    %(facts)s
+    %(apply)s
+  </div>
+</header>
+<section class="sec">
+  <div class="wrap">
+    <div class="jd">
+      <div class="jd-body">
+%(body)s
+      </div>
+      <aside class="jd-card">
+        <span class="eyebrow">%(t)s</span>
+        %(facts2)s
+        %(apply)s
+        <a class="inline-link" href="/careers" data-link>See all open positions</a>
+      </aside>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" id="%(pid)s-apply" data-title="Apply: %(t)s · Biolyz Careers" hidden>
+<header class="pagehead jd-head">
+  <div class="wrap inner">
+    <a class="jd-back" href="%(url)s" data-link>&larr; Back to the role</a>
+    <span class="eyebrow">Careers &middot; Apply</span>
+    <h1 class="h1 jd-title">%(t)s</h1>
+  </div>
+</header>
+<section class="sec jd-apply">
+  <div class="wrap">
+    <form class="jd-apply-form" data-apply="%(uuid)s" novalidate>
+%(fields)s        <div class="checks">
+          <label class="check"><input type="checkbox" name="consent" required>
+            <span>I agree that Biolyz may process my application, on the terms in the
+              privacy policy.</span></label>
+        </div>
+        <div class="btn-row"><button class="btn" type="submit">Send application &#8599;</button></div>
+        <p class="formnote" data-apply-msg role="status" hidden></p>
+    </form>
+  </div>
+</section>
+</div>
+"""
+
+def _jobs():
+    import html as _h
+    from html.parser import HTMLParser
+    jobs = json.load(open(os.path.join(sp, "content", "jobs.json"), encoding="utf-8"))["jobs"]
+    e = lambda t: _h.escape(t or "", quote=True)
+
+    class Clean(HTMLParser):
+        """Needle's description with only plain tags kept."""
+        KEEP = {"p", "ul", "ol", "li", "strong", "em", "b", "i", "br", "a", "h3"}
+        def __init__(self):
+            super().__init__(convert_charrefs=False); self.out = []
+        def handle_starttag(self, t, a):
+            if t not in self.KEEP: return
+            if t == "a":
+                href = dict(a).get("href") or ""
+                self.out.append('<a href="%s" target="_blank" rel="noopener">' % e(href)
+                                if re.match(r"^(https?:|mailto:)", href) else "<a>")
+            else:
+                self.out.append("<%s>" % t)
+        def handle_endtag(self, t):
+            if t in self.KEEP and t != "br": self.out.append("</%s>" % t)
+        def handle_data(self, d): self.out.append(d)
+        def handle_entityref(self, n): self.out.append("&%s;" % n)
+        def handle_charref(self, n): self.out.append("&#%s;" % n)
+
+    def body(desc):
+        # Cut to the English half of a bilingual post, and leave out "About
+        # Biolyz": the rest of the site covers that.
+        c = Clean(); c.feed(desc); h = "".join(c.out)
+        parts = re.split(r"<h3>(.*?)</h3>", h)
+        heads = [re.sub(r"<[^>]+>", "", x).strip() for x in parts[1::2]]
+        texts = parts[2::2]
+        if "English" in heads:
+            i = heads.index("English"); heads, texts = heads[i + 1:], texts[i + 1:]
+        secs = []
+        for head, content in zip(heads, texts):
+            content = re.sub(r"<p>\s*</p>", "", content).strip()
+            if not content or re.sub(r"[^a-zäöü]", "", head.lower()) in ("aboutbiolyz", "überbiolyz"):
+                continue
+            secs.append('        <section class="jd-sec"><h2 class="h4">%s</h2>%s</section>' % (head, content))
+        return "\n".join(secs)
+
+    def facts(j, cls):
+        f = [(k, j[v]) for k, v in (("Location", "location"), ("Type", "employment_type"),
+                                    ("Start", "start_date")) if j.get(v)]
+        return '<dl class="%s">%s</dl>' % (cls, "".join(
+            "<div><dt>%s</dt><dd>%s</dd></div>" % (k, e(v)) for k, v in f)) if f else ""
+
+    # Needle's standard fields, in the site's wording; anything else keeps
+    # Needle's label. data-label carries Needle's label back with the answer.
+    NICE = {"fullName": ("Your name", "Your name"), "email": ("Email", "you@email.com"),
+            "linkedin": ("LinkedIn profile", "https://linkedin.com/in/…"), "resume": ("CV", ""),
+            "coverLetter": ("Cover letter", None)}
+    def field(j, f):
+        fid, typ, req = f["id"], f.get("type") or "text", bool(f.get("required"))
+        if not req and (f.get("label") or "").strip().lower() == "new field":
+            return ""                                # an unfinished field in Needle
+        label, ph = NICE.get(fid, (f.get("label") or fid, None))
+        if ph is None:
+            if typ == "textarea": ph = "Why this role, and why you." if req else "Optional"
+            elif typ == "url": ph = "https://…"
+            else: ph = "" if req else "Optional"
+        idattr = "ap-%s-%s" % (j["slug"], re.sub(r"[^a-z0-9]+", "-", fid.lower()))
+        common = 'id="%s" name="%s" data-label="%s"%s' % (
+            idattr, e(fid), e(f.get("label") or fid), " required" if req else "")
+        if typ == "file":
+            ctl = ('<input %s type="file" accept="application/pdf,.pdf">\n'
+                   '          <span class="hint">PDF, up to 10 MB.</span>' % common)
+        elif typ == "textarea":
+            ctl = '<textarea %s placeholder="%s"></textarea>' % (common, e(ph))
+        elif typ == "select" and f.get("options"):
+            ctl = '<select %s><option value="">Select&hellip;</option>%s</select>' % (
+                common, "".join("<option>%s</option>" % e(str(o)) for o in f["options"]))
+        else:
+            t = typ if typ in ("text", "email", "url", "tel", "number", "date") else "text"
+            ac = {"fullName": ' autocomplete="name"', "email": ' autocomplete="email"'}.get(fid, "")
+            ctl = '<input %s type="%s"%s placeholder="%s">' % (common, t, ac, e(ph))
+        return ('        <div class="field">\n          <label for="%s">%s</label>\n'
+                '          %s\n        </div>\n' % (idattr, e(label), ctl))
+
+    items, pages, routes = [], [], []
+    for n, j in enumerate(jobs):
+        pid, url, t = "p-job-%d" % n, "/careers/%s" % j["slug"], e(j["title"])
+        meta = " &middot; ".join(x for x in (
+            e(j.get("employment_type")), e(j.get("location")),
+            "Start " + e(j["start_date"]) if j.get("start_date") else "") if x) or "Open position"
+        items.append('      <a class="job" href="%s" data-link><span class="job-t">%s</span>'
+                     '<span class="job-m">%s</span><span class="job-a">View role &rarr;</span></a>'
+                     % (url, t, meta))
+        pages.append(JOB_PAGE % {
+            "pid": pid, "t": t, "url": url, "uuid": e(j["uuid"]),
+            "apply": '<a class="btn" href="%s/apply" data-link>Apply for this role &#8599;</a>' % url,
+            "facts": facts(j, "jd-facts"), "facts2": facts(j, "jd-facts jd-facts--col"),
+            "body": body(j.get("description_html") or ""),
+            "fields": "".join(field(j, f) for f in j.get("fields") or [])})
+        routes.append("    '%s': '%s',\n    '%s/apply': '%s-apply'," % (url, pid, url, pid))
+    k = len(jobs)
+    hiring = ('<span class="nav-news-t" data-href="/careers">We&rsquo;re hiring: %d open role%s</span>'
+              % (k, "" if k == 1 else "s")) if k else ""
+    return {"<!--JOBS_LIST-->": "\n".join(items) or '      <p class="copy">No open positions right now.</p>',
+            "<!--JOBS_PAGES-->": "\n".join(pages),
+            "/*JOBS_ROUTES*/": "\n".join(routes).lstrip(),
+            "<!--JOBS_HIRING-->": hiring,
+            "<!--JOBS_COUNT-->": str(k)}
+for _k, _v in _jobs().items():
+    assert src.count(_k) == 1, _k
+    src = src.replace(_k, _v)
+
 # Screenshots are shared across pages — the biomarker overview alone appears
 # four times. Inlining the data URI at each use embedded the same megabyte
 # repeatedly, so each one ships ONCE in a map and the images take their src
