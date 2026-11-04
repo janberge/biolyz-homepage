@@ -315,7 +315,9 @@ print("assets: %d files, %.2f MB" % (len(IMG_SRC) + len(VID_SRC), _bytes / 10485
 # Host rewrite rules so a deep path serves the app instead of a 404. Netlify,
 # Cloudflare Pages and friends all read this file; other hosts need the
 # equivalent rule, which the README spells out.
+# Moved pages first (the app also forwards them, for hosts without this file).
 open(os.path.join(sp, "serve", "_redirects"), "w", encoding="utf-8").write(
+    "/demo    /contact   301\n"
     "/*    /index.html   200\n")
 
 # A preview deploy must not be indexed. This build still carries visible
