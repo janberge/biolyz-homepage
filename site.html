@@ -6347,7 +6347,7 @@ markers: 60+
 
 <section class="sec">
   <div class="wrap">
-    <div class="split">
+    <div class="dm-only">
       <!-- Two ways in: book a slot straight away, or ask for material first. -->
       <div class="dm-switch">
         <div class="tabs dm-tabs" role="tablist" aria-label="How would you like to start?" data-tabs="demo">
@@ -6373,10 +6373,6 @@ markers: 60+
             <div class="field">
               <label for="i-name">Your name</label>
               <input id="i-name" name="name" type="text" required autocomplete="name" placeholder="Alex Berger">
-            </div>
-            <div class="field">
-              <label for="i-org">Club, team or federation</label>
-              <input id="i-org" name="org" type="text" required placeholder="e.g. a Bundesliga first team">
             </div>
             <div class="field">
               <label for="i-email">Work email</label>
@@ -6413,31 +6409,6 @@ markers: 60+
         </div>
       </div>
 
-      <div>
-        <div class="hd">
-          <h2 class="h4">What to expect</h2>
-        </div>
-        <ol class="cards" style="grid-template-columns:1fr">
-          <li class="card"><span class="n">01</span><span class="t">Your data, loaded</span>
-            <span class="d">We import two weeks of your load and wellness exports before we
-              speak, so the first thing you see is your own squad.</span></li>
-          <li class="card"><span class="n">02</span><span class="t">The five-minute read</span>
-            <span class="d">We walk the Brief view the way your staff would on an MD&#8722;1,
-              and open whichever athlete you point at.</span></li>
-          <li class="card"><span class="n">03</span><span class="t">The awkward questions</span>
-            <span class="d">Coverage, turnaround, what the assay does not measure, what the
-              data protection arrangement looks like. We would rather have that
-              conversation early.</span></li>
-        </ol>
-        <div class="assure" style="margin-top:var(--sp-2xl)">
-          <p class="sm muted" style="max-width:min(40ch,100%)">Athlete data is medical data. Nothing
-            is loaded without a signed arrangement.</p>
-          <div class="tags">
-            <a class="tag" href="/data-security" data-link>ISO 27001</a>
-            <a class="tag" href="/privacy" data-link>GDPR</a>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -9156,8 +9127,8 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
 .dm-topics legend{padding:0; margin-bottom:var(--sp-md); font-size:.8125rem; letter-spacing:.09em;
   text-transform:uppercase; color:var(--c-blue)}
 .dm-topics .check{font-size:var(--t-regular); color:var(--text)}
-/* Waitlist form on its own, without the side column. */
-.wl-form-only{max-width:40rem; margin-inline:auto}
+/* Book a demo and waitlist: the form on its own, without a side column. */
+.wl-form-only, .dm-only{max-width:40rem; margin-inline:auto}
 
 /* Every form sits in a rounded white card with a full-width pill submit,
    as on Book a demo and the waitlist. */
@@ -9969,7 +9940,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
   });
   var SENT = {
     demo: 'Thanks — a demo request from %s at %s would land with the team here.',
-    info: 'Thanks — %s at %s would get the material by email.',
+    info: 'Thanks — %s would get the material by email.',
     waitlist: 'Thanks — %s would be on the athlete waitlist, and we would come to you in country order.',
     contact: 'Thanks — your message from %s would be on its way.'
   };
