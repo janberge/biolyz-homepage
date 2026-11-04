@@ -2272,6 +2272,19 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .stub--blue{border-left-color:var(--c-blue)}
 @media (max-width:700px){ .cl-row{grid-template-columns:1fr; gap:.6rem} .cl-when{flex-direction:row; align-items:center} }
 
+/* Social media page: one rounded grey card per platform, like the press kit tiles */
+.sec.soc-sec{padding-top:0}
+.soc-grid{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(min(17rem,100%),1fr)); gap:var(--sp-lg)}
+.soc-card{position:relative; display:flex; flex-direction:column; gap:.35rem; min-height:12rem; padding:var(--sp-lg);
+  border-radius:24px; background:#eef0f4; color:var(--c-off-black); text-decoration:none;
+  transition:background-color var(--dur-micro) var(--ease), color var(--dur-micro) var(--ease)}
+.soc-card:hover, .soc-card:focus-visible{background:var(--c-blue); color:var(--c-white)}
+.soc-icon{width:2rem; height:2rem; margin-bottom:auto; color:var(--c-blue); transition:color var(--dur-micro) var(--ease)}
+.soc-card:hover .soc-icon, .soc-card:focus-visible .soc-icon{color:var(--c-white)}
+.soc-name{font-size:var(--t-large); letter-spacing:-.02em}
+.soc-handle{font-size:var(--t-small); opacity:.7}
+.soc-go{position:absolute; top:var(--sp-lg); right:var(--sp-lg); font-size:1.25rem}
+
 /* ERDF page */
 .erdf{display:grid; grid-template-columns:minmax(0,1fr) minmax(16rem,24rem); gap:var(--sp-2xl); align-items:start}
 .erdf-body{display:flex; flex-direction:column; gap:var(--sp-md); max-width:46rem; align-items:flex-start}
@@ -4315,9 +4328,10 @@ markers: 60+
     document.addEventListener('DOMContentLoaded', check);
     check();
   })();
-  /* Personalize views (Solution): resting the cursor on a column opens it;
-     click, tap or Enter does the same. */
-  [].forEach.call(document.querySelectorAll('[data-pz]'), function (pz) {
+  /* Personalize views (Solution and Horses): resting the cursor on a column
+     opens it; click, tap or Enter does the same. Runs once the whole page is
+     parsed, since the Horses copy sits further down than this script. */
+  function initPz() { [].forEach.call(document.querySelectorAll('[data-pz]'), function (pz) {
     var items = [].slice.call(pz.querySelectorAll('.pz-item'));
     function open(it) {
       items.forEach(function (o) {
@@ -4333,7 +4347,9 @@ markers: 60+
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(it); }
       });
     });
-  });
+  }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPz);
+  else initPz();
 })();
 (function () {
   'use strict';
@@ -7222,6 +7238,40 @@ markers: 60+
 </section>
 </div>
 
+<!-- ======================================================================
+     SOCIAL MEDIA (linked from the footer only)
+     ====================================================================== -->
+<div class="page" id="p-social" data-title="Biolyz on Social Media" hidden>
+<header class="bm-hero">
+  <div class="wrap">
+    <div class="bm-hero-copy">
+      <span class="eyebrow">Social media</span>
+      <h1 class="bm-hero-title">Follow Biolyz.</h1>
+    </div>
+  </div>
+</header>
+<section class="sec soc-sec">
+  <div class="wrap">
+    <!-- One card per platform. Add a platform by copying a card; only real
+         profile URLs go here. -->
+    <ul class="soc-grid">
+      <li><a class="soc-card" href="https://www.linkedin.com/company/biolyz/posts/?feedView=all" target="_blank" rel="noopener">
+        <svg class="soc-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        <span class="soc-name">LinkedIn</span>
+        <span class="soc-handle">linkedin.com/company/biolyz</span>
+        <span class="soc-go" aria-hidden="true">&#8599;</span>
+      </a></li>
+      <li><a class="soc-card" href="https://www.instagram.com/biolyz/" target="_blank" rel="noopener">
+        <svg class="soc-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+        <span class="soc-name">Instagram</span>
+        <span class="soc-handle">instagram.com/biolyz</span>
+        <span class="soc-go" aria-hidden="true">&#8599;</span>
+      </a></li>
+    </ul>
+  </div>
+</section>
+</div>
+
 <div class="page" id="p-erdf" data-title="Biolyz ERDF Funding" hidden>
 <section class="hero hero--photo hero--legal hero--erdfhero inv">
   <img class="hero-bg" src="__IMG_erdfhero__" width="2000" height="1333" alt="" aria-hidden="true">
@@ -8441,31 +8491,12 @@ markers: 60+
 .hz-flow .d{font-size:var(--t-small); color:var(--text-2)}
 @media (max-width:1100px){ .hz-flow{grid-template-columns:repeat(3,1fr)} }
 @media (max-width:620px){ .hz-flow{grid-template-columns:1fr} }
-.hz-steps.hz-steps--2{grid-template-columns:1fr 1fr}
-/* 01 Collect: hovering a card shows its photo over the other card. The
-   cards are taller so the photos have room; phones skip the photos. */
-.hz-collect{position:relative}
-.hz-collect .card{min-height:20rem; cursor:default}
-.hz-collect .card[data-hz="swab"]{grid-column:1; grid-row:1}
-.hz-collect .card[data-hz="ship"]{grid-column:2; grid-row:1}
-.hz-collect-pic{position:relative; grid-row:1; z-index:1; border-radius:var(--r-sm); overflow:hidden; opacity:0;
-  pointer-events:none; transform:scale(.98);
-  transition:opacity var(--dur-short) var(--ease), transform var(--dur-short) var(--ease)}
-.hz-collect-pic img{position:absolute; inset:0; display:block; width:100%; height:100%; object-fit:cover}
-.hz-collect-pic--swab{grid-column:2}
-.hz-collect-pic--ship{grid-column:1}
-.hz-collect:has(.card[data-hz="swab"]:hover, .card[data-hz="swab"]:focus-visible) .hz-collect-pic--swab,
-.hz-collect:has(.card[data-hz="ship"]:hover, .card[data-hz="ship"]:focus-visible) .hz-collect-pic--ship{
-  opacity:1; transform:none}
-.hz-collect:has(.card[data-hz="swab"]:hover, .card[data-hz="swab"]:focus-visible) .card[data-hz="swab"],
-.hz-collect:has(.card[data-hz="ship"]:hover, .card[data-hz="ship"]:focus-visible) .card[data-hz="ship"]{
-  box-shadow:inset 3px 0 0 var(--c-blue)}
-@media (max-width:620px){
-  .hz-steps.hz-steps--2{grid-template-columns:1fr}
-  .hz-collect .card{grid-column:auto; grid-row:auto; min-height:0}
-  .hz-collect .card[data-hz]{grid-column:auto; grid-row:auto}
-  .hz-collect-pic{display:none}
-}
+/* Horses Sampling: Solution's step grid with three steps. The swab fills
+   the left column, logistics and the lab split the right one. */
+.proc-grid--hz .proc-step[data-step="01"]{grid-row:1 / 7}
+.proc-grid--hz .proc-step[data-step="02"]{grid-row:1 / 4}
+.proc-grid--hz .proc-step[data-step="03"]{grid-row:4 / 7}
+@media (max-width:820px){ .proc-grid--hz .proc-step[data-step]{grid-row:auto} }
 /* 02 Analyze: the lab, in one line under the answers. */
 .hz-lab{margin-top:var(--section-sm); padding-top:var(--sp-lg); border-top:var(--stroke) solid var(--border);
   display:flex; flex-direction:column; gap:var(--sp-sm)}
@@ -8481,14 +8512,6 @@ markers: 60+
   .hz-split{grid-template-columns:1fr}
   .hz-split > .hd{position:static}
 }
-/* The four steps: the number as a blue circle, like the icons above. */
-.hz-steps .card{padding:var(--sp-xl); gap:var(--sp-sm)}
-.sec:not(.band-grey) .hz-steps .card{background:var(--c-grey-100)}
-.hz-steps .n{display:inline-flex; align-items:center; justify-content:center; width:3rem;
-  height:3rem; border-radius:50%; background:var(--c-blue); color:var(--c-white);
-  font-variant-numeric:tabular-nums; margin-bottom:var(--sp-md)}
-.hz-steps .t{font-size:var(--t-large)}
-.hz-steps .d{font-size:var(--t-regular)}
 /* Who are we: the company figures in one light panel, a short label and
    description on top, three figures side by side split by hairlines. */
 .hz-stats{margin-top:var(--section-sm); padding:var(--sp-xl); border-radius:var(--r-sm);
@@ -8530,13 +8553,6 @@ markers: 60+
 /* "Most relevant for", under the biomarker tags in each question card. */
 .hz-for{font-size:var(--t-small); color:var(--text-2)}
 .hz-for b{font-weight:400; color:var(--text)}
-
-/* The four steps sit on a grey band, where the default card fill vanishes,
-   and four cards on auto-fit wrap 3 + 1 at tablet widths. Four, two, one. */
-.hz-steps{grid-template-columns:repeat(4,1fr)}
-.hz-steps .card{background:var(--c-white)}
-@media (max-width:1100px){ .hz-steps{grid-template-columns:1fr 1fr} }
-@media (max-width:620px){ .hz-steps{grid-template-columns:1fr} }
 </style>
 
 <section class="hero hero--horses inv">
@@ -8748,27 +8764,47 @@ method:  LC-MS/MS
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">01</span>Sampling</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The swab</span>
       <h2 class="h2">Swab, seal, send.</h2>
     </div>
-    <!-- Hovering a card shows its photo over the other card: the horse being
-         swabbed over "Logistics", the cooling box over "Swab". -->
-    <div class="cards hz-steps hz-steps--2 hz-collect">
-      <div class="card" data-hz="swab" tabindex="0">
-        <span class="n">01</span><span class="t">Swab</span>
-        <span class="d">A cotton swab is held in the side of the horse&rsquo;s mouth with swab
-          forceps for about two to three minutes, until roughly 2&nbsp;ml of saliva has been
-          collected.</span>
+
+    <div class="proc">
+      <!-- Same step grid as Solution, with the horse's three steps: the swab
+           in the stable on the left, logistics and the lab on the right.
+           Each side's steps fill the picture over the other column. -->
+      <div class="proc-grid proc-grid--hz">
+        <button type="button" class="card proc-step" data-step="01" data-side="room" data-img-key="horseswab">
+          <span class="n">01</span><span class="t">Swab</span>
+          <span class="d">A cotton swab is held in the side of the horse&rsquo;s mouth with swab
+            forceps for about two to three minutes, until roughly 2&nbsp;ml of saliva has been
+            collected.</span></button>
+        <button type="button" class="card proc-step" data-step="02" data-side="lab" data-img-key="logistics">
+          <span class="n">02</span><span class="t">Logistics supported and
+          handled by Biolyz</span>
+          <span class="d">Consumables out, samples back &mdash; collection and cooling are
+            part of the platform.</span></button>
+        <button type="button" class="card proc-step" data-step="03" data-side="lab" data-img-key="lcms">
+          <span class="n">03</span><span class="t">Proprietary lab process
+          based on LC&ndash;MS</span>
+          <span class="d">Saliva is ionised and sorted by mass-to-charge ratio into a
+            spectral fingerprint.</span></button>
+        <div class="proc-pic" data-pic="room">
+          <img class="proc-pic-img" src="__IMG_logistics__" alt="" hidden><div class="proc-float proc-float--tl"><span class="wsc-float-k">Cold chain</span><span class="wsc-float-row"><b>&minus;18&nbsp;&deg;C</b><em>Pickup booked &#10003;</em></span><span class="wsc-float-sub">Handled by Biolyz</span></div>
+          <img class="proc-pic-img" src="__IMG_lcms__" alt="" hidden><div class="proc-float proc-float--tl proc-float--wide"><span class="wsc-float-k">LC&ndash;MS run</span><svg viewBox="0 0 200 54" aria-hidden="true"><path d="M0 52 H200" stroke="#e3e3e3"/><g stroke="#0013e9" stroke-width="2.4" stroke-linecap="round"><path d="M14 52V40M28 52V22M40 52V44M55 52V12M68 52V36M82 52V28M96 52V46M108 52V6M122 52V30M136 52V42M150 52V18M164 52V38M178 52V26M190 52V44"/></g></svg><span class="wsc-float-sub">Spectral fingerprint</span></div>
+          <div class="proc-pic-placeholder">
+            <span class="proc-pic-n"></span>
+            <span class="proc-pic-t"></span>
+            <span class="proc-pic-ph">Placeholder image</span>
+          </div>
+        </div>
+        <div class="proc-pic" data-pic="lab">
+          <img class="proc-pic-img" src="__IMG_horseswab__" alt="" hidden><div class="proc-float"><span class="wsc-float-k">Saliva swab</span><span class="wsc-float-row"><b>2&ndash;3 min</b><em>No needle &#10003;</em></span><span class="proc-bar"><i></i></span></div>
+          <div class="proc-pic-placeholder">
+            <span class="proc-pic-n"></span>
+            <span class="proc-pic-t"></span>
+            <span class="proc-pic-ph">Placeholder image</span>
+          </div>
+        </div>
       </div>
-      <div class="card" data-hz="ship" tabindex="0">
-        <span class="n">02</span><span class="t">Logistics supported and handled by Biolyz</span>
-        <span class="d">Consumables out, samples back - collection and cooling are part of
-          the platform.</span>
-      </div>
-      <div class="hz-collect-pic hz-collect-pic--swab" aria-hidden="true">
-        <img src="__IMG_horseswab__" width="1543" height="1019" alt=""></div>
-      <div class="hz-collect-pic hz-collect-pic--ship" aria-hidden="true">
-        <img src="__IMG_logistics__" width="1254" height="1254" alt=""></div>
     </div>
   </div>
 </section>
@@ -8832,7 +8868,6 @@ method:  LC-MS/MS
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">03</span>Context</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The context for your internal data</span>
       <h2 class="h2">Every data source, one platform.</h2>
     </div>
   </div>
@@ -8866,20 +8901,14 @@ method:  LC-MS/MS
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">04</span>Insights</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">The dashboard</span>
       <h2 class="h2">What has changed for this horse, not just high or low.</h2>
       <p class="copy">Results arrive 24 hours after the sample reaches the lab, each value
         compared with your horse&rsquo;s own baseline presented in one dashboard.</p>
     </div>
-    <div class="tabs" role="tablist" aria-label="Dashboard views" data-tabs="hz-dash">
-      <button class="tab" role="tab" aria-selected="true"  data-tab="hzd1">Stable Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="hzd2">Biomarker Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="hzd3">Horse Overview</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="hzd4">Individual Indicator</button>
-      <button class="tab" role="tab" aria-selected="false" data-tab="hzd5">Individual Biomarker</button>
-    </div>
-
-    <div data-panel="hzd1">
+    <div class="pz" data-pz>
+      <div class="pz-item is-open" tabindex="0" role="button" aria-expanded="true">
+        <div class="pz-head"><span class="pz-n">01</span><h3>Stable Overview</h3></div>
+        <div class="pz-body">
       <figure class="mock" style="--pad:62.5%" role="img" aria-label="Team Overview: squad-wide counts of players needing attention, a seven-day load and fixture strip, and the indicators currently outside range across the squad."><div class="mk-stage">
 <div class="mk-stack">
   <div class="mk-card mk-back" style="--x:18%;--y:-12%"><div class="mk-head"><b>Omega 6</b><span class="mk-pill ">Nutrition</span></div><div class="mk-big-row"><svg class="mk-ring" viewBox="0 0 40 40" style="width:3.4em;height:3.4em"><circle cx="20" cy="20" r="16" fill="none" stroke="#e6e6e6" stroke-width="3.2"/><circle cx="20" cy="20" r="16" fill="none" stroke="#d92d20" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="24.1 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24.5" text-anchor="middle" font-size="12" fill="#181818">24</text></svg></div></div>
@@ -8887,20 +8916,26 @@ method:  LC-MS/MS
     <div class="mk-head"><b>Creatine consumption</b><span class="mk-pill ">Nutrition</span></div>
     <div class="mk-big-row"><svg class="mk-ring" viewBox="0 0 40 40" style="width:4.2em;height:4.2em"><circle cx="20" cy="20" r="16" fill="none" stroke="#e6e6e6" stroke-width="3.2"/><circle cx="20" cy="20" r="16" fill="none" stroke="#181818" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="62.3 100.5" transform="rotate(-90 20 20)"/><text x="20" y="24.5" text-anchor="middle" font-size="12" fill="#181818">62</text></svg><div><div class="mk-xl">62%</div><div class="mk-sub">21 of 34 players in their own range</div></div></div>
     <div class="mk-cap">Outside their range</div><div class="mk-row"><span class="mk-av ">JD</span><span>Janiel Danssen</span><span class="mk-pill bad">0%</span></div><div class="mk-row"><span class="mk-av ">AR</span><span>Ansmus Radersen</span><span class="mk-pill bad">0%</span></div><div class="mk-row"><span class="mk-av ">KN</span><span>Kokolas Niwalski</span><span class="mk-pill bad">0%</span></div>
-  </div></div>
+      </div></div>
 </div></figure>
-    </div>
-    <div data-panel="hzd2" hidden>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">02</span><h3>Biomarker Overview</h3></div>
+        <div class="pz-body">
       <p class="copy">One marker across the whole stable, with trends and outliers measured against each horse&rsquo;s own history.</p>
       <figure class="mock" style="--pad:62.5%" role="img" aria-label="Team Biomarker Overview: the most recent cortisol reading for every player with seven-day change, trend, outlier flag and sampling recency, plus the squad median and spread."><div class="mk-stage">
 <div class="mk-card" style="width:84%">
   <div class="mk-head"><b class="mk-l">Cortisol <small>ng/mL</small></b><span class="mk-tools"><span class="mk-pill on">Outliers</span><span class="mk-pill on">Match</span><span class="mk-pill ">Season</span></span></div>
-  <svg class="mk-chart" viewBox="0 0 400 190"><line x1="20" y1="170" x2="380" y2="170" stroke="#e6e6e6"/><line x1="20" y1="96" x2="380" y2="96" stroke="#f3f4f6"/><polyline points="20.0,108.5 65.0,101.4 110.0,98.3 155.0,89.5 200.0,101.5 245.0,90.7 290.0,143.6 335.0,117.8 380.0,89.5" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,106.9 65.0,92.0 110.0,41.7 155.0,117.6 200.0,130.7 245.0,113.1 290.0,111.4 335.0,144.6 380.0,132.5" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,128.8 65.0,91.1 110.0,100.0 155.0,135.9 200.0,98.1 245.0,137.1 290.0,108.8 335.0,137.8 380.0,145.2" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,93.7 65.0,132.9 110.0,132.6 155.0,87.2 200.0,93.7 245.0,128.2 290.0,88.4 335.0,113.4 380.0,105.2" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,133.2 65.0,89.6 110.0,104.4 155.0,88.1 200.0,31.9 245.0,127.6 290.0,124.0 335.0,135.5 380.0,136.7" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,141.5 65.0,127.5 110.0,109.6 155.0,145.1 200.0,105.2 245.0,125.3 290.0,127.0 335.0,96.9 380.0,116.9" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,126.6 65.0,116.8 110.0,103.6 155.0,142.0 200.0,87.6 245.0,144.0 290.0,100.9 335.0,49.1 380.0,144.3" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,98.7 65.0,123.7 110.0,111.1 155.0,144.8 200.0,142.6 245.0,134.6 290.0,88.8 335.0,133.7 380.0,100.6" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><circle cx="110.0" cy="41.7" r="9" fill="#d92d20" opacity=".15"/><circle cx="110.0" cy="41.7" r="4.8" fill="#d92d20"/><circle cx="200.0" cy="31.9" r="9" fill="#d92d20" opacity=".15"/><circle cx="200.0" cy="31.9" r="4.8" fill="#d92d20"/><circle cx="335.0" cy="49.1" r="9" fill="#d92d20" opacity=".15"/><circle cx="335.0" cy="49.1" r="4.8" fill="#d92d20"/></svg>
+      <svg class="mk-chart" viewBox="0 0 400 190"><line x1="20" y1="170" x2="380" y2="170" stroke="#e6e6e6"/><line x1="20" y1="96" x2="380" y2="96" stroke="#f3f4f6"/><polyline points="20.0,108.5 65.0,101.4 110.0,98.3 155.0,89.5 200.0,101.5 245.0,90.7 290.0,143.6 335.0,117.8 380.0,89.5" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,106.9 65.0,92.0 110.0,41.7 155.0,117.6 200.0,130.7 245.0,113.1 290.0,111.4 335.0,144.6 380.0,132.5" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,128.8 65.0,91.1 110.0,100.0 155.0,135.9 200.0,98.1 245.0,137.1 290.0,108.8 335.0,137.8 380.0,145.2" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,93.7 65.0,132.9 110.0,132.6 155.0,87.2 200.0,93.7 245.0,128.2 290.0,88.4 335.0,113.4 380.0,105.2" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,133.2 65.0,89.6 110.0,104.4 155.0,88.1 200.0,31.9 245.0,127.6 290.0,124.0 335.0,135.5 380.0,136.7" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,141.5 65.0,127.5 110.0,109.6 155.0,145.1 200.0,105.2 245.0,125.3 290.0,127.0 335.0,96.9 380.0,116.9" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><polyline points="20.0,126.6 65.0,116.8 110.0,103.6 155.0,142.0 200.0,87.6 245.0,144.0 290.0,100.9 335.0,49.1 380.0,144.3" fill="none" stroke="#9aa0aa" stroke-width="1.8"/><polyline points="20.0,98.7 65.0,123.7 110.0,111.1 155.0,144.8 200.0,142.6 245.0,134.6 290.0,88.8 335.0,133.7 380.0,100.6" fill="none" stroke="#d3d6dc" stroke-width="1.3"/><circle cx="110.0" cy="41.7" r="9" fill="#d92d20" opacity=".15"/><circle cx="110.0" cy="41.7" r="4.8" fill="#d92d20"/><circle cx="200.0" cy="31.9" r="9" fill="#d92d20" opacity=".15"/><circle cx="200.0" cy="31.9" r="4.8" fill="#d92d20"/><circle cx="335.0" cy="49.1" r="9" fill="#d92d20" opacity=".15"/><circle cx="335.0" cy="49.1" r="4.8" fill="#d92d20"/></svg>
   <div class="mk-legend"><span><i style="background:#d3d6dc"></i>36 players</span><span><i style="background:#d92d20"></i>3 outside their own band</span></div>
 </div>
 </div></figure>
-    </div>
-    <div data-panel="hzd3" hidden>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">03</span><h3>Horse Overview</h3></div>
+        <div class="pz-body">
       <p class="copy">Everything about one horse on one page: what changed since you last looked, and what it is likely to mean.</p>
       <figure class="mock" style="--pad:62.5%" role="img" aria-label="Player Overview: one athlete's share of markers inside his own range, an at-a-glance indicator grid, and his indicator tiles grouped by department."><div class="mk-stage">
 <div class="mk-card" style="width:86%">
@@ -8909,31 +8944,39 @@ method:  LC-MS/MS
   <div class="mk-cap mk-mt">At a glance</div><div class="mk-chips"><div class="mk-chip"><span class="v" style="color:#d92d20">0</span><span class="l">Omega 6<i style="width:6%;background:#d92d20"></i></span></div><div class="mk-chip"><span class="v" style="color:#d92d20">33</span><span class="l">Hormonal status<i style="width:33%;background:#d92d20"></i></span></div><div class="mk-chip"><span class="v" style="color:#181818">50</span><span class="l">Hydration<i style="width:50%;background:#181818"></i></span></div><div class="mk-chip"><span class="v" style="color:#181818">50</span><span class="l">Omega 3<i style="width:50%;background:#181818"></i></span></div><div class="mk-chip"><span class="v" style="color:#16a34a">100</span><span class="l">Melatonin<i style="width:100%;background:#16a34a"></i></span></div><div class="mk-chip"><span class="v" style="color:#16a34a">100</span><span class="l">Muscle damage<i style="width:100%;background:#16a34a"></i></span></div></div>
 </div>
 </div></figure>
-    </div>
-    <div data-panel="hzd4" hidden>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">04</span><h3>Individual Indicator</h3></div>
+        <div class="pz-body">
       <p class="copy">Each indicator shows how many of its biomarkers sit inside the horse&rsquo;s own range, and you can always open it to see which ones.</p>
       <figure class="mock" style="--pad:62.5%" role="img" aria-label="Player Indicator view: the athlete's indicator scores over time, each expressed as the share of that indicator's biomarkers sitting inside the player's own range, so higher is better."><div class="mk-stage">
 <div class="mk-card" style="width:84%">
   <div class="mk-head"><b class="mk-l">Metabolic stress</b><span class="mk-tools"><span class="mk-pill ">Performance</span><span class="mk-pill bad">&#9679; 0% in range</span></span></div>
-  <svg class="mk-chart" viewBox="0 0 400 190"><rect x="24" y="34" width="352" height="126" fill="#f3f4f6"/><line x1="24" y1="34" x2="376" y2="34" stroke="#a0a0a0" stroke-dasharray="3 3"/>
+      <svg class="mk-chart" viewBox="0 0 400 190"><rect x="24" y="34" width="352" height="126" fill="#f3f4f6"/><line x1="24" y1="34" x2="376" y2="34" stroke="#a0a0a0" stroke-dasharray="3 3"/>
    <polyline points="24.0,41.2 59.2,160.0 94.4,41.2 129.6,160.0 164.8,41.2 200.0,41.2 235.2,160.0 270.4,41.2 305.6,41.2 340.8,41.2 376.0,160.0" fill="none" stroke="#181818" stroke-width="1.6"/><polyline points="24.0,80.8 59.2,88.0 94.4,95.2 129.6,91.6 164.8,88.0 200.0,77.2 235.2,70.0 270.4,52.0 305.6,62.8 340.8,73.6 376.0,91.6" fill="none" stroke="#0013e9" stroke-width="2.4"/><rect x="20.5" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="55.7" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="90.9" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="126.1" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="161.3" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="196.5" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="231.7" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="266.9" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="302.1" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="337.3" y="37.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="372.5" y="156.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/></svg>
   <div class="mk-legend"><span><i style="background:#181818"></i>Metabolic stress</span><span><i style="background:#0013e9"></i>Trend</span><span><i style="background:#e6e6e6"></i>Own range</span></div>
 </div>
 </div></figure>
-    </div>
-    <div data-panel="hzd5" hidden>
+        </div>
+      </div>
+      <div class="pz-item" tabindex="0" role="button" aria-expanded="false">
+        <div class="pz-head"><span class="pz-n">05</span><h3>Individual Biomarker</h3></div>
+        <div class="pz-body">
       <p class="copy">Marker by marker, day by day, against the horse&rsquo;s own range rather than a textbook one.</p>
       <figure class="mock" style="--pad:62.5%" role="img" aria-label="Player Biomarker view: one athlete's biomarker series over time against their own p10 to p90 band and personal median."><div class="mk-stage">
 <div class="mk-stack">
   <div class="mk-card" style="width:84%">
   <div class="mk-head"><b class="mk-l">3-Hydroxyglutaric acid</b><span class="mk-pill ">11 readings</span></div>
-  <svg class="mk-chart" viewBox="0 0 400 190"><rect x="24" y="66" width="352" height="74" fill="rgba(0,19,233,.07)"/><line x1="24" y1="48" x2="376" y2="48" stroke="#a0a0a0" stroke-dasharray="3 3"/>
+      <svg class="mk-chart" viewBox="0 0 400 190"><rect x="24" y="66" width="352" height="74" fill="rgba(0,19,233,.07)"/><line x1="24" y1="48" x2="376" y2="48" stroke="#a0a0a0" stroke-dasharray="3 3"/>
    <polyline points="24.0,128.0 59.2,96.0 94.4,108.0 129.6,106.0 164.8,116.0 200.0,48.0 235.2,120.0 270.4,80.0 305.6,163.2 340.8,164.0 376.0,92.0" fill="none" stroke="#181818" stroke-width="1.6"/><rect x="20.5" y="124.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="55.7" y="92.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="90.9" y="104.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="126.1" y="102.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="161.3" y="112.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="196.5" y="44.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="231.7" y="116.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="266.9" y="76.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="302.1" y="159.7" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="337.3" y="160.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="372.5" y="88.5" width="7" height="7" fill="#fff" stroke="#181818" stroke-width="1.4"/><rect x="195.0" y="43.0" width="10" height="10" fill="#d92d20"/></svg>
   <div class="mk-legend"><span><i style="background:#181818"></i>Britz Moandt</span><span><i style="background:rgba(0,19,233,.2)"></i>Own range &middot; 28 days</span><span><i style="background:#d92d20"></i>Excursion</span></div>
-  </div>
+      </div>
   <div class="mk-card mk-tip" style="--x:57%;--y:30%"><div class="mk-cap">19 Aug</div><div class="mk-tip-v"><i></i>Above own range</div><div class="mk-sub">Highest reading this season</div></div>
 </div>
 </div></figure>
+        </div>
+      </div>
     </div>
 
     <p class="hz-note">Shown with data from professional football; the stable view works the same way.</p>
@@ -8946,8 +8989,10 @@ method:  LC-MS/MS
   <div class="steplabel"><div class="wrap"><span class="steplabel-tag"><span class="n">05</span>Action</span></div></div>
   <div class="wrap">
     <div class="hd">
-      <span class="eyebrow">Personalised recommendations</span>
       <h2 class="h2">The right intervention, at the right time.</h2>
+      <p class="copy">Each horse&rsquo;s indicators, read together with the context you and your
+        vet add, become personalised recommendations: whether to step in at all, when the timing
+        is right, and what an intervention could look like.</p>
     </div>
     <div class="rx">
       <div class="rx-side">
@@ -8975,6 +9020,15 @@ method:  LC-MS/MS
           </div>
         </div>
       </figure>
+    </div>
+    <div class="assure" style="margin-top:var(--section-md)">
+      <p class="sm muted" style="max-width:min(52ch,100%)">Your training records and your
+        vet&rsquo;s notes stay exactly where they are. Biolyz adds the internal layer underneath
+        them.</p>
+      <div class="tags">
+        <a class="tag" href="/data-security" data-link>ISO 27001</a>
+        <a class="tag" href="/privacy" data-link>GDPR</a>
+      </div>
     </div>
   </div>
 </section>
@@ -9052,6 +9106,7 @@ method:  LC-MS/MS
         <a href="/careers" data-link>Careers</a>
         <a href="/erdf" data-link>ERDF</a>
         <a href="/press" data-link>Download Press Kit</a>
+        <a href="/social" data-link>Social Media</a>
         <!--US:FOOTER-->
       </nav>
       <nav class="fcol" aria-label="Legal">
@@ -9158,6 +9213,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     '/data-security': 'p-data-security',
     '/impressum': 'p-impressum',
     '/erdf': 'p-erdf',
+    '/social': 'p-social',
     '/cookies': 'p-cookies'
   };
   /* Which nav pill or menu entry lights up for a given route. */
@@ -9448,11 +9504,12 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
   function showProcPic(btn) {
     var side = btn.dataset.side, target = procTargetFor(btn);
     if (procHideTimers[target]) { clearTimeout(procHideTimers[target]); procHideTimers[target] = null; }
-    [].forEach.call(document.querySelectorAll('.proc-step[data-side="' + side + '"]'), function (b) {
+    var grid = btn.closest('.proc-grid');
+    [].forEach.call(grid.querySelectorAll('.proc-step[data-side="' + side + '"]'), function (b) {
       b.classList.toggle('is-active', b === btn);
     });
     if (!target) return;
-    var pic = document.querySelector('.proc-pic[data-pic="' + target + '"]');
+    var pic = grid.querySelector('.proc-pic[data-pic="' + target + '"]');
     if (!pic) return;
     // A side's overlay can carry more than one real photo now (one per step
     // that has one) — find the one matching THIS button, if any, and hide
@@ -9480,7 +9537,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     btn.classList.remove('is-active');
     if (!target) return;
     procHideTimers[target] = setTimeout(function () {
-      var pic = document.querySelector('.proc-pic[data-pic="' + target + '"]');
+      var pic = btn.closest('.proc-grid').querySelector('.proc-pic[data-pic="' + target + '"]');
       if (pic) pic.classList.remove('is-active');
       procHideTimers[target] = null;
     }, 80);
