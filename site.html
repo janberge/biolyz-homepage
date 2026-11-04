@@ -538,7 +538,7 @@ img{max-width:100%; display:block}
 #p-waitlist .wl-cols h3{color:var(--c-blue)}
 #p-waitlist .field > label{color:var(--c-blue)}
 /* Athlete waitlist in the ElevenLabs-style layout: headlines stay, the
-   mock gets a large radius, the three promises and the fine print become
+   mock gets a large radius, the three promises become
    rounded grey cards, the grey form band is a rounded panel inset from the
    page edge, and the form sits in a rounded white card with grey wells and
    a full-width pill button, like Book a demo. */
@@ -6348,59 +6348,70 @@ markers: 60+
 <section class="sec">
   <div class="wrap">
     <div class="split">
-      <form data-form="demo" novalidate>
-        <div class="field">
-          <label for="d-name">Your name</label>
-          <input id="d-name" name="name" type="text" required autocomplete="name" placeholder="Alex Berger">
+      <!-- Two ways in: book a slot straight away, or ask for material first. -->
+      <div class="dm-switch">
+        <div class="tabs dm-tabs" role="tablist" aria-label="How would you like to start?" data-tabs="demo">
+          <button class="tab" type="button" role="tab" aria-selected="true" data-tab="dm-book">Book a demo</button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="dm-info">Request more info</button>
         </div>
-        <div class="field">
-          <label for="d-role">Role</label>
-          <select id="d-role" name="role" required>
-            <option value="">Select&hellip;</option>
-            <option>Head of performance</option>
-            <option>Team doctor</option>
-            <option>Sport scientist</option>
-            <option>Nutritionist</option>
-            <option>Sporting director</option>
-            <option>Other</option>
-          </select>
+
+        <div data-panel="dm-book">
+          <!-- Calendly: put the booking link in data-calendly (e.g.
+               https://calendly.com/biolyz/demo). Until then the panel shows
+               a placeholder. -->
+          <div class="dm-cal" data-calendly="">
+            <iframe class="dm-cal-frame" title="Book a demo with Biolyz" loading="lazy" hidden></iframe>
+            <div class="dm-cal-empty">
+              <span class="eyebrow">Calendly</span>
+              <p>Booking calendar goes here once the Calendly link is added.</p>
+            </div>
+          </div>
         </div>
-        <div class="field">
-          <label for="d-org">Club, team or federation</label>
-          <input id="d-org" name="org" type="text" required placeholder="e.g. a Bundesliga first team">
+
+        <div data-panel="dm-info" hidden>
+          <form data-form="info" novalidate>
+            <div class="field">
+              <label for="i-name">Your name</label>
+              <input id="i-name" name="name" type="text" required autocomplete="name" placeholder="Alex Berger">
+            </div>
+            <div class="field">
+              <label for="i-org">Club, team or federation</label>
+              <input id="i-org" name="org" type="text" required placeholder="e.g. a Bundesliga first team">
+            </div>
+            <div class="field">
+              <label for="i-email">Work email</label>
+              <input id="i-email" name="email" type="email" required autocomplete="email" placeholder="you@club.com">
+            </div>
+            <fieldset class="field dm-topics">
+              <legend>What would you like to receive?</legend>
+              <div class="checks">
+                <label class="check"><input type="checkbox" name="topic" value="science">
+                  <span>The science behind Biolyz</span></label>
+                <label class="check"><input type="checkbox" name="topic" value="process">
+                  <span>Our process, from swab to decision, and what makes it different</span></label>
+                <label class="check"><input type="checkbox" name="topic" value="biomarkers">
+                  <span>The biomarkers and indicators we measure</span></label>
+                <label class="check"><input type="checkbox" name="topic" value="compare">
+                  <span>How Biolyz compares with the alternatives</span></label>
+                <label class="check"><input type="checkbox" name="topic" value="roi">
+                  <span>An ROI calculation for your club</span></label>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="i-msg">Anything else?</label>
+              <textarea id="i-msg" name="message" placeholder="Optional"></textarea>
+            </div>
+            <div class="checks">
+              <label class="check"><input type="checkbox" name="consent" required>
+                <span>I agree that Biolyz may contact me about this request, on the terms in the
+                  privacy policy.</span></label>
+            </div>
+            <div class="btn-row">
+              <button class="btn" type="submit">Send me the info &#8599;</button>
+            </div>
+          </form>
         </div>
-        <div class="field">
-          <label for="d-email">Work email</label>
-          <input id="d-email" name="email" type="email" required autocomplete="email" placeholder="you@club.com">
-        </div>
-        <div class="field">
-          <label for="d-squad">Squad size</label>
-          <select id="d-squad" name="squad">
-            <option value="">Select&hellip;</option>
-            <option>Under 20</option><option>20&ndash;35</option>
-            <option>35&ndash;60</option><option>60+</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="d-stack">What you already run</label>
-          <input id="d-stack" name="stack" type="text" placeholder="Catapult, Kitman Labs, &hellip;">
-          <span class="hint">So we can show your load data next to the panel, not beside it.</span>
-        </div>
-        <div class="field">
-          <label for="d-msg">The question your staff keeps asking</label>
-          <textarea id="d-msg" name="message" placeholder="Optional, but it makes the call sharper."></textarea>
-        </div>
-        <div class="checks">
-          <label class="check"><input type="checkbox" name="consent" required>
-            <span>I agree that Biolyz may contact me about this request, on the terms in the
-              privacy policy.</span></label>
-        </div>
-        <div class="btn-row">
-          <button class="btn" type="submit">Request the demo &#8599;</button>
-        </div>
-        <p class="formnote">No change to your existing GPS or load setup is needed to run
-          the session.</p>
-      </form>
+      </div>
 
       <div>
         <div class="hd">
@@ -6480,7 +6491,7 @@ markers: 60+
 
 <section class="sec band-grey" id="wl-form">
   <div class="wrap">
-    <div class="split">
+    <div class="wl-form-only">
       <form data-form="waitlist" novalidate>
         <div class="field">
           <label for="w-name">Your name</label>
@@ -6521,26 +6532,6 @@ markers: 60+
         <div class="btn-row"><button class="btn" type="submit">Join the waitlist &#8599;</button></div>
         <p class="formnote">Your data is safe with us.</p>
       </form>
-      <div>
-        <div class="hd">
-          <span class="eyebrow">Honest expectations</span>
-          <h2 class="h4">The fine print, upfront.</h2>
-        </div>
-        <div class="cols wl-cols" style="grid-template-columns:1fr; gap:var(--sp-lg)">
-          <div class="col"><h3>It is not a queue for a product you can buy today</h3>
-            <p>Individual access comes after teams, by design &mdash; that is tier two of a
-              three-tier plan, and we would rather say so than take a pre-order.</p></div>
-          <div class="col"><h3>It is not medical advice</h3>
-            <p>Biolyz measures and contextualises biomarkers. It does not diagnose, and it
-              does not replace your doctor.</p></div>
-          <div class="col"><h3>It is a real signal to us</h3>
-            <p>Sport and country decide which market opens next. That is the main thing the
-              list is for.</p></div>
-        </div>
-        <div class="btn-row" style="margin-top:var(--sp-xl)">
-          <a class="btn btn--ghost" href="/about" data-link>Read the three-tier plan &#8594;</a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -9153,6 +9144,21 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
 .feat, .trust-card{border-top:0; padding:var(--sp-xl); border-radius:24px; background:var(--c-grey-100)}
 .band-grey .cnt .sp-fig, .band-grey .saliva-proof .sp-fig, .band-grey .feat, .band-grey .trust-card{background:var(--c-white)}
 
+/* Book a demo switcher: pill tabs over either the Calendly calendar or the
+   info form; both sit in the same rounded white card. */
+.dm-tabs{margin-bottom:var(--sp-lg)}
+.dm-cal{border-radius:28px; background:var(--c-white); border:var(--stroke) solid var(--border);
+  box-shadow:0 30px 80px -40px rgba(3,7,18,.25); overflow:hidden}
+.dm-cal-frame{display:block; width:100%; height:700px; border:0}
+.dm-cal-empty{display:flex; flex-direction:column; gap:var(--sp-sm); padding:var(--sp-2xl); min-height:22rem; justify-content:center}
+.dm-cal-empty p{margin:0; color:var(--text-2)}
+.dm-topics{border:0; padding:0; margin:0}
+.dm-topics legend{padding:0; margin-bottom:var(--sp-md); font-size:.8125rem; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--c-blue)}
+.dm-topics .check{font-size:var(--t-regular); color:var(--text)}
+/* Waitlist form on its own, without the side column. */
+.wl-form-only{max-width:40rem; margin-inline:auto}
+
 /* Every form sits in a rounded white card with a full-width pill submit,
    as on Book a demo and the waitlist. */
 .page form[data-form]{padding:var(--sp-2xl); border-radius:28px; background:var(--c-white);
@@ -9951,8 +9957,19 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
      Nothing here posts anywhere: this is a design build, and a form that
      silently swallows a health enquiry would be worse than one that says so.
      ===================================================================== */
+  /* Book a demo: load the Calendly booking page into its panel once a link
+     is set on data-calendly. */
+  [].forEach.call(document.querySelectorAll('[data-calendly]'), function (box) {
+    var url = box.dataset.calendly;
+    if (!url) return;
+    var f = box.querySelector('iframe');
+    f.src = url + (url.indexOf('?') < 0 ? '?' : '&') + 'hide_gdpr_banner=1&embed_type=Inline';
+    f.hidden = false;
+    box.querySelector('.dm-cal-empty').hidden = true;
+  });
   var SENT = {
     demo: 'Thanks — a demo request from %s at %s would land with the team here.',
+    info: 'Thanks — %s at %s would get the material by email.',
     waitlist: 'Thanks — %s would be on the athlete waitlist, and we would come to you in country order.',
     contact: 'Thanks — your message from %s would be on its way.'
   };
