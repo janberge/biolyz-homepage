@@ -491,10 +491,19 @@ open(os.path.join(sp, "serve", "_redirects"), "w", encoding="utf-8").write(
 open(os.path.join(sp, "serve", "robots.txt"), "w", encoding="utf-8").write(
     "# Preview build. Delete this file when the site goes live.\n"
     "User-agent: *\nDisallow: /\n")
+# Client pages (/c/<slug>): one password-protected page per prospective
+# customer, sealed from the gitignored clients/ folder. See tools/clients.py.
+sys.path.insert(0, os.path.join(sp, "tools"))
+import clients as _clients
+_clients.build(sp, svg(os.path.join(BRAND, "biolyz", "biolyz-horizontal.svg"), "mark"))
 _withloader = src + "\n" + file_loader
 i=_withloader.rindex("<script>"); j=_withloader.rindex("</script>")
 open(sp+"/check.js","w",encoding="utf-8").write(_withloader[i+8:j])
-r=subprocess.run(["node","--check",sp+"/check.js"],capture_output=True,text=True)
+import shutil as _sh
+if _sh.which("node"):
+    r=subprocess.run(["node","--check",sp+"/check.js"],capture_output=True,text=True)
+else:   # no node on this machine: report it instead of failing the whole build
+    r=subprocess.CompletedProcess([], "skipped", "", "node not installed")
 _page = len((head + base_js + src + file_loader).encode())
 print("page %.0f KB  |  artifact %.2f MB  |  node --check: %s %s"
       % (_page / 1024,

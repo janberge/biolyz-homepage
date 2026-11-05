@@ -14,3 +14,6 @@ us/
 
 # Machine-specific dev server paths.
 .claude/
+
+# Client pages: source and passwords. Only the sealed client-pages/ is committed.
+clients/

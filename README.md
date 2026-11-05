@@ -545,3 +545,24 @@ Carried over from the build, unresolved, and all content rather than code:
   **not** reproduce this — it ignored `width=device-width`. Only a real
   browser, checking `document.documentElement.scrollWidth` at 375px, showed
   the truth.
+
+### Client pages (`/c/<slug>`)
+
+One password-protected page per prospective customer: use cases, stakeholders,
+integrations, a pricing calculator against the squad's estimated salaries,
+data protection, a comparison, the trial plan, printable PDFs and an FAQ.
+First one: `/c/schalke04`.
+
+- **Source** lives in `clients/<slug>/` (gitignored, the repo is public):
+  `page.html` (the page, starts with a `<title>`), `data.json` (packages,
+  squad, salary presets for the calculator) and `pass.txt` (12+ characters).
+- **`python3 build.py`** seals each client into `client-pages/<slug>.html`,
+  which is committed (ciphertext only), and copies it to
+  `serve/c/<slug>/index.html`. Unchanged input gives a byte-identical file.
+- **The shell** (design, gate, calculator, PDF export) is
+  `tools/client_shell.html`; the sealing is `tools/clients.py`. Same
+  construction and caveats as the /us gate: anyone with the password can read
+  and forward the page.
+- **New client:** copy `clients/schalke04/` to `clients/<slug>/`, then rewrite
+  `page.html` and `data.json` from the call recording and CRM notes. Every
+  client-specific fact gets a source in the comment at the end of `page.html`.
