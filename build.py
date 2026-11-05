@@ -199,12 +199,9 @@ def _jobs():
             "fields": "".join(field(j, f) for f in j.get("fields") or [])})
         routes.append("    '%s': '%s',\n    '%s/apply': '%s-apply'," % (url, pid, url, pid))
     k = len(jobs)
-    hiring = ('<span class="nav-news-t" data-href="/careers">We&rsquo;re hiring: %d open role%s</span>'
-              % (k, "" if k == 1 else "s")) if k else ""
     return {"<!--JOBS_LIST-->": "\n".join(items) or '      <p class="copy">No open positions right now.</p>',
             "<!--JOBS_PAGES-->": "\n".join(pages),
             "/*JOBS_ROUTES*/": "\n".join(routes).lstrip(),
-            "<!--JOBS_HIRING-->": hiring,
             "<!--JOBS_COUNT-->": str(k)}
 for _k, _v in _jobs().items():
     assert src.count(_k) == 1, _k
