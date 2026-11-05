@@ -97,6 +97,8 @@ button,input,select{font:inherit; color:inherit}
 .bar-logo svg{height:1.15rem; width:auto; display:block}
 .bar-x{color:var(--text-3); font-size:var(--t-small)}
 .bar-client{font-size:var(--t-small); white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.bar-crest{height:2rem; width:auto; display:block; flex:none; opacity:0; transition:opacity .3s var(--ease)}
+.bar-crest.in{opacity:1}
 .bar .btn{margin-left:auto; padding:.5rem 1rem; font-size:var(--t-small)}
 .snav{display:flex; gap:.25rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.6rem; -webkit-overflow-scrolling:touch}
 .snav::-webkit-scrollbar{display:none}
@@ -258,10 +260,12 @@ input[type=range]{width:100%; accent-color:var(--c-blue); height:1.75rem}
 .out-row{display:flex; justify-content:space-between; gap:1rem; padding:.75rem 0; border-top:1px solid var(--border);
   font-size:var(--t-small); color:var(--text-2)}
 .out-row b{font-weight:400; color:var(--text); text-align:right}
-.meter{height:.5rem; border-radius:var(--r-round); background:var(--fill-hi); overflow:hidden; margin:.75rem 0 .5rem}
-.meter i{display:block; height:100%; background:var(--c-white); border-radius:inherit; transition:width .3s var(--ease)}
-.punch{margin-top:1.25rem; padding:1.25rem; border-radius:20px; background:var(--c-white); color:var(--c-blue);
-  font-size:var(--t-medium); line-height:1.35}
+.out .inv{background:var(--c-blue)}
+.big-sub{font-size:var(--t-medium); color:var(--text-2); margin:.4rem 0 1.5rem}
+.out-total{display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-top:.5rem; padding:1.25rem;
+  border-radius:20px; background:var(--c-white); color:var(--c-blue)}
+.out-total span{font-size:var(--t-small)}
+.out-total b{font-weight:400; font-size:var(--h4); letter-spacing:-.03em}
 .fine{font-size:var(--t-tiny); color:var(--text-3); margin-top:1rem; line-height:1.5}
 
 /* comparison */
@@ -275,6 +279,61 @@ table.cmp{border-collapse:collapse; width:100%; min-width:30rem; font-size:var(-
 .cmp thead .us{background:var(--c-blue); color:var(--c-white)}
 .cmp thead .us .small{color:var(--o-white-80)}
 .cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+
+/* "How it works" film: five scenes on a timer, like a short video */
+.film{position:relative; border-radius:28px; overflow:hidden; background:var(--c-blue); color:var(--c-white);
+  aspect-ratio:16/9; min-height:26rem; display:flex; flex-direction:column}
+.film-stage{position:relative; flex:1}
+.fs{position:absolute; inset:0; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:2rem;
+  padding:clamp(1.5rem,4vw,3.5rem); opacity:0; transition:opacity .6s var(--ease); pointer-events:none}
+.fs.on{opacity:1}
+.fs .fn{font-size:var(--t-small); color:var(--o-white-80)}
+.fs h3{font-size:clamp(2rem,5vw,3.5rem); letter-spacing:-.04em; margin:.35rem 0 .75rem}
+.fs p{color:var(--o-white-80); max-width:28ch}
+.fs .txt > *{transform:translateY(12px); opacity:0; transition:transform .7s var(--ease), opacity .7s var(--ease)}
+.fs.on .txt > *{transform:none; opacity:1}
+.fs.on .txt > :nth-child(2){transition-delay:.12s}
+.fs.on .txt > :nth-child(3){transition-delay:.24s}
+.fv{justify-self:center; width:100%; max-width:22rem}
+.fv svg{width:100%; height:auto; display:block; overflow:visible}
+.fs.on .ring{animation:ring 4.5s linear forwards}
+@keyframes ring{from{stroke-dashoffset:302}to{stroke-dashoffset:0}}
+.fs .bar-g rect{transform-box:fill-box; transform-origin:bottom; transform:scaleY(0)}
+.fs.on .bar-g rect{animation:grow .9s var(--ease) forwards}
+@keyframes grow{to{transform:scaleY(1)}}
+.fs .draw{stroke-dasharray:420; stroke-dashoffset:420}
+.fs.on .draw{animation:draw 2.6s var(--ease) .3s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.fv-chips{display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center}
+.fv-chips span{padding:.5rem 1rem; border-radius:var(--r-round); background:var(--o-white-15); font-size:var(--t-small);
+  opacity:0; transform:translateY(10px); transition:opacity .5s var(--ease), transform .5s var(--ease)}
+.fv-chips span.us{background:var(--c-white); color:var(--c-blue)}
+.fs.on .fv-chips span{opacity:1; transform:none}
+.fv-card{background:var(--c-white); color:var(--c-off-black); border-radius:20px; padding:1.25rem; font-size:var(--t-small);
+  transform:translateY(24px) scale(.96); opacity:0; transition:transform .8s var(--ease) .2s, opacity .8s var(--ease) .2s;
+  box-shadow:0 30px 60px -30px rgba(3,7,18,.6)}
+.fs.on .fv-card{transform:none; opacity:1}
+.fv-card .k{font-size:var(--t-tiny); color:var(--text-3); text-transform:uppercase; letter-spacing:.08em}
+.fv-card b{display:block; font-weight:400; font-size:var(--t-large); margin:.3rem 0 .6rem}
+.fv-card li{margin:.25rem 0 0 1rem; color:var(--o-black-80)}
+.fv-card li::marker{color:var(--c-blue)}
+.film-bar{display:flex; align-items:center; gap:1rem; padding:0 clamp(1rem,3vw,2rem) clamp(1rem,2.5vw,1.5rem)}
+.film-play{flex:none; width:2.5rem; height:2.5rem; border-radius:50%; border:0; background:var(--c-white); color:var(--c-blue);
+  cursor:pointer; display:grid; place-items:center; font-size:.85rem}
+.film-play::before{content:"\25B6"; margin-left:.15em}
+.film.playing .film-play::before{content:"\2759\2759"; margin-left:0; letter-spacing:-.1em; font-size:.75rem}
+.film-caps{flex:1; display:grid; grid-template-columns:repeat(5,1fr); gap:.5rem}
+.fc{border:0; background:none; color:var(--o-white-80); text-align:left; padding:0; cursor:pointer; font-size:var(--t-tiny)}
+.fc .tr{display:block; height:3px; border-radius:3px; background:var(--o-white-40); overflow:hidden; margin-bottom:.45rem}
+.fc .tr i{display:block; height:100%; width:0; background:var(--c-white)}
+.fc.on, .fc.done{color:var(--c-white)}
+@media (max-width:760px){
+  .film{aspect-ratio:auto; min-height:34rem}
+  .fs{grid-template-columns:1fr; align-content:center; gap:1.5rem}
+  .fv{max-width:15rem; justify-self:start}
+  .fc .lb{display:none}
+}
+@media (prefers-reduced-motion:reduce){ .fs, .fs .txt > *, .fv-chips span, .fv-card{transition:none} }
 
 /* steps */
 .steps{display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; counter-reset:s}
@@ -439,7 +498,7 @@ table.cmp{border-collapse:collapse; width:100%; min-width:30rem; font-size:var(-
     app.innerHTML = page.html.split('__' + 'LOGO__').join(LOGO);   // split so build.py's replace skips it
     document.getElementById('gate').hidden = true;
     app.hidden = false;
-    nav(); reveal(); calc(page.data); docs(); files(page.files || {});
+    nav(); reveal(); calc(page.data); film(); docs(); files(page.files || {});
     var lock = document.getElementById('lock');
     if (lock) lock.addEventListener('click', function(){ try { sessionStorage.removeItem(KEY); } catch (e) {} location.reload(); });
     if (location.hash){ var t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
@@ -478,11 +537,13 @@ table.cmp{border-collapse:collapse; width:100%; min-width:30rem; font-size:var(-
   var pct = function(n){ return new Intl.NumberFormat('en-GB', {maximumFractionDigits:n < 1 ? 2 : 1}).format(n) + '%'; };
   var STATE = {};
 
+  // Pricing only: the package price per player and week leads, the season
+  // total follows. Term and salary are fixed per client in data.json
+  // ("weeks", "salary"); nothing here is a return-on-investment estimate.
   function calc(D){
     var root = document.getElementById('calc');
     if (!root || !D) return;
-    var st = STATE = {pkg:D.packages[D.defaultPackage || 0], weeks:D.weeks, salary:D.salaries[0].value, out:D.outWeeks || 3,
-                      on:{}};
+    var st = STATE = {pkg:D.packages[D.defaultPackage || 0], on:{}};
     D.squad.forEach(function(p){ st.on[p.no + p.name] = true; });
 
     var pk = root.querySelector('[data-pkgs]');
@@ -499,55 +560,59 @@ table.cmp{border-collapse:collapse; width:100%; min-width:30rem; font-size:var(-
           '<span class="no">' + p.no + '</span>' + p.name + '</button>';
       }).join('') + '</div></div>';
     }).join('');
-    var sal = root.querySelector('[data-sal]');
-    sal.innerHTML = D.salaries.map(function(s, i){
-      return '<button type="button" data-i="' + i + '">' + s.label + '</button>';
-    }).join('');
 
-    function $(s){ return root.querySelector(s); }
+    function put(sel, v){ root.querySelectorAll(sel).forEach(function(el){ el.textContent = v; }); }
     function render(){
       var n = D.squad.filter(function(p){ return st.on[p.no + p.name]; }).length;
-      var week = n * st.pkg.price, season = week * st.weeks;
-      var wkSalary = st.salary / 52;
-      var squadCost = st.salary * D.squad.length;
+      var week = n * st.pkg.price, season = week * D.weeks, pp = st.pkg.price * D.weeks;
       [].forEach.call(pk.children, function(b){ b.setAttribute('aria-pressed', D.packages[b.dataset.i] === st.pkg); });
       [].forEach.call(sq.querySelectorAll('.pl-chip'), function(b){ b.setAttribute('aria-pressed', !!st.on[b.dataset.k]); });
-      [].forEach.call(sal.children, function(b){ b.setAttribute('aria-pressed', D.salaries[b.dataset.i].value === st.salary); });
-      $('[data-n]').textContent = n + ' of ' + D.squad.length;
-      $('[data-weeks-out]').textContent = st.weeks + ' weeks';
-      $('[data-salary-out]').textContent = mio(st.salary) + ' a year';
-      $('[data-out-out]').textContent = st.out + (st.out === 1 ? ' week' : ' weeks');
-      $('[data-weeks]').value = st.weeks; $('[data-salary]').value = st.salary / 1e5; $('[data-outw]').value = st.out;
-      $('[data-season]').textContent = eur(season);
-      $('[data-week]').textContent = eur(week);
-      $('[data-pp]').textContent = n ? eur(season / n) : '–';
-      var share = squadCost ? season / squadCost * 100 : 0;
-      $('[data-share]').textContent = pct(share);
-      $('[data-meter]').style.width = Math.max(1.5, Math.min(100, share * 10)) + '%';
-      $('[data-squadcost]').textContent = mio(squadCost);
-      var lost = wkSalary * st.out;
-      $('[data-lost]').textContent = eur(lost);
-      var be = wkSalary ? season / wkSalary : 0;
-      $('[data-be]').textContent = one.format(be);
-      $('[data-pkgname]').textContent = st.pkg.name;
-      // values the management summary prints
-      document.querySelectorAll('[data-sum]').forEach(function(el){
-        var k = el.dataset.sum;
-        el.textContent = {pkg:st.pkg.name + ' (' + eur(st.pkg.price) + ' per player per week)', n:n + ' players',
-          weeks:st.weeks + ' weeks', season:eur(season), share:pct(share) + ' of estimated squad salaries',
-          be:one.format(be) + ' player weeks'}[k] || '';
-      });
+      put('[data-n]', n + ' of ' + D.squad.length);
+      put('[data-pkgname]', st.pkg.name);
+      put('[data-price]', eur(st.pkg.price));
+      put('[data-players]', n + (n === 1 ? ' player' : ' players'));
+      put('[data-week]', eur(week));
+      put('[data-term]', D.weeks + ' weeks');
+      put('[data-pp]', eur(pp));
+      put('[data-salary]', mio(D.salary));
+      put('[data-share]', D.salary ? pct(pp / D.salary * 100) : '–');
+      put('[data-season]', eur(season));
     }
     pk.addEventListener('click', function(e){ var b = e.target.closest('.pkg'); if (b){ st.pkg = D.packages[b.dataset.i]; render(); } });
     sq.addEventListener('click', function(e){ var b = e.target.closest('.pl-chip'); if (b){ st.on[b.dataset.k] = !st.on[b.dataset.k]; render(); } });
-    sal.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b){ st.salary = D.salaries[b.dataset.i].value; render(); } });
     root.querySelector('[data-all]').addEventListener('click', function(){ D.squad.forEach(function(p){ st.on[p.no + p.name] = true; }); render(); });
     root.querySelector('[data-none]').addEventListener('click', function(){ D.squad.forEach(function(p){ st.on[p.no + p.name] = false; }); render(); });
     root.querySelector('[data-nogk]').addEventListener('click', function(){ D.squad.forEach(function(p){ st.on[p.no + p.name] = p.pos !== D.squad[0].pos; }); render(); });
-    $('[data-weeks]').addEventListener('input', function(e){ st.weeks = +e.target.value; render(); });
-    $('[data-salary]').addEventListener('input', function(e){ st.salary = +e.target.value * 1e5; render(); });
-    $('[data-outw]').addEventListener('input', function(e){ st.out = +e.target.value; render(); });
     render();
+  }
+
+  // ---- "How it works" film: scenes on a timer, with chapters and pause ---------
+  function film(){
+    var f = document.querySelector('[data-film]');
+    if (!f) return;
+    var scenes = [].slice.call(f.querySelectorAll('.fs')), caps = [].slice.call(f.querySelectorAll('.fc'));
+    var btn = f.querySelector('[data-film-play]'), SEG = 5000, i = 0, t = 0, last = null, playing = false, seen = false;
+    var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function show(k){
+      i = k; t = 0;
+      scenes.forEach(function(s, j){ s.classList.toggle('on', j === i); });
+      caps.forEach(function(c, j){ c.classList.toggle('done', j < i); c.classList.toggle('on', j === i); c.querySelector('i').style.width = j < i ? '100%' : '0%'; });
+    }
+    function set(p){ playing = p; f.classList.toggle('playing', p); btn.setAttribute('aria-label', p ? 'Pause' : 'Play'); }
+    function frame(ts){
+      var dt = last === null ? 0 : ts - last; last = ts;
+      if (playing && seen){
+        t += dt;
+        caps[i].querySelector('i').style.width = Math.min(100, t / SEG * 100) + '%';
+        if (t >= SEG){ if (i === scenes.length - 1){ set(false); } else show(i + 1); }
+      }
+      requestAnimationFrame(frame);
+    }
+    caps.forEach(function(c, j){ c.addEventListener('click', function(){ show(j); set(true); }); });
+    btn.addEventListener('click', function(){ if (!playing && i === scenes.length - 1 && t >= SEG) show(0); set(!playing); });
+    new IntersectionObserver(function(es){ seen = es[0].isIntersecting; }, {threshold:.4}).observe(f);
+    show(0); set(!still);
+    requestAnimationFrame(frame);
   }
 
   // ---- sealed downloads: files/<name>.json next to the page, same key ----------

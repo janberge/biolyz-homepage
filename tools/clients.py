@@ -94,7 +94,8 @@ def build(root, logo_svg):
                               open(os.path.join(sealed_dir, opaque), "w"))
                     ext = fn.lower().rsplit(".", 1)[-1]
                     files[fn] = {"path": opaque, "type": {"pdf": "application/pdf", "jpg": "image/jpeg",
-                                 "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp"}.get(
+                                 "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp",
+                                 "svg": "image/svg+xml"}.get(
                                  ext, "application/octet-stream")}
                     assert ('data-file="%s"' % fn) in page or ('data-img="%s"' % fn) in page, \
                         "client %s: files/%s is not used in page.html" % (slug, fn)
