@@ -67,7 +67,10 @@ def build(root, logo_svg):
             assert re.fullmatch(r"[a-z0-9-]+", slug), "client folder names are URL slugs: %s" % slug
             pw = os.environ.get("BIOLYZ_CLIENT_PASS_" + slug.upper().replace("-", "_")) or \
                 open(os.path.join(d, "pass.txt"), encoding="utf-8").read().strip()
-            assert len(pw) >= 12, "client %s: use a password of 12+ characters" % slug
+            # A short password can be guessed offline against the public file.
+            # Allowed only where someone decided so: clients/<slug>/weak-password-ok
+            assert len(pw) >= 12 or os.path.exists(os.path.join(d, "weak-password-ok")), \
+                "client %s: use a password of 12+ characters" % slug
             page = open(os.path.join(d, "page.html"), encoding="utf-8").read()
             title = re.search(r"<title>(.*?)</title>", page, re.S).group(1).strip()
             page = re.sub(r"<title>.*?</title>\s*", "", page, count=1, flags=re.S)
