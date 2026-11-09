@@ -160,6 +160,14 @@ img{max-width:100%; display:block}
   padding-right:var(--sp-md); color:var(--c-off-black);
 }
 .brand .logo-svg{height:1.25rem; width:auto; display:block}
+/* Co-brand after the wordmark, as on the client pages ("Biolyz × Horses"):
+   shown only on the page named in data-co. */
+.brand-co{display:none; align-items:center; gap:var(--sp-sm); margin:0 var(--sp-md) 0 calc(var(--sp-md) * -.5);
+  font-size:var(--t-small); font-weight:500; color:var(--c-off-black); white-space:nowrap}
+.brand-co .x{color:var(--o-black-60); font-weight:400}
+.brand-co.on{display:inline-flex}
+.sitenav.on-dark .brand-co{color:var(--c-white)}
+.sitenav.on-dark .brand-co .x{color:var(--o-white-80)}
 .brand--foot{padding-right:0}
 .brand--foot .logo-svg{height:1.6rem}
 .brand:focus-visible{outline:2px solid var(--focus); outline-offset:4px; border-radius:var(--r-sm)}
@@ -2455,6 +2463,7 @@ a.club{text-decoration:none}
 <nav class="sitenav" id="nav" aria-label="Primary">
   <div class="wrap row">
     <span class="brand" aria-label="Biolyz">__SVG_biolyz__</span>
+    <span class="brand-co" data-co="p-horses"><span class="x" aria-hidden="true">&times;</span>Horses</span>
     <a class="np" href="/" data-link>Home</a>
     <a class="np" href="/product" data-link>Solution</a>
     <div class="menu" data-menu>
@@ -8741,6 +8750,9 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     /* The nav resolves against the route group, not the literal href, so
        Biomarkers lights up "Science" rather than nothing. */
     var group = NAV_OF[p] || p;
+    [].forEach.call(nav.querySelectorAll('[data-co]'), function (el) {
+      el.classList.toggle('on', el.dataset.co === id);
+    });
     [].forEach.call(nav.querySelectorAll('[data-link]'), function (a) {
       var t = routeOf(a);
       if (t === p || t === group) a.setAttribute('aria-current', 'page');
