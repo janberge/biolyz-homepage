@@ -535,35 +535,36 @@ img{max-width:100%; display:block}
 #p-demo .assure{border-top:0; padding:var(--sp-xl); border-radius:24px; background:var(--c-grey-100)}
 @media (max-width:900px){ #p-demo .split{grid-template-columns:1fr} #p-demo form{padding:var(--sp-lg); border-radius:24px} }
 /* Athlete waitlist: tight rhythm, blue titles and form labels. */
-#p-waitlist > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
-#p-waitlist > .pagehead + .sec{padding-top:var(--sp-md)}
+:is(#p-waitlist, #p-newsletter) > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
+:is(#p-waitlist, #p-newsletter) > .pagehead + .sec{padding-top:var(--sp-md)}
 #p-waitlist #wl-view{padding-bottom:var(--sp-xl)}
 #p-waitlist .wl-cols h3{color:var(--c-blue)}
-#p-waitlist .field > label{color:var(--c-blue)}
+:is(#p-waitlist, #p-newsletter) .field > label{color:var(--c-blue)}
 /* Athlete waitlist in the ElevenLabs-style layout: headlines stay, the
    mock gets a large radius, the three promises become
    rounded grey cards, the grey form band is a rounded panel inset from the
    page edge, and the form sits in a rounded white card with grey wells and
    a full-width pill button, like Book a demo. */
-#p-waitlist .btn{border-radius:var(--r-round)}
+:is(#p-waitlist, #p-newsletter) .btn{border-radius:var(--r-round)}
 #p-waitlist #wl-view .mock{border-radius:28px}
 #p-waitlist .wl-cols{gap:var(--sp-sm)}
 #p-waitlist .wl-cols .col{border-top:0; padding:var(--sp-xl); border-radius:24px; background:var(--c-grey-100)}
 /* Email only, right under the headline: the one thing to do on this page. */
-#p-waitlist form.wl-quick{display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:var(--sp-xs); max-width:36rem;
-  margin-top:var(--sp-lg); padding:var(--sp-xs); border-radius:var(--r-round); box-shadow:none}
-#p-waitlist .wl-quick input{flex:1 1 14rem; min-width:0; border-radius:var(--r-round); padding-inline:1.25rem}
-#p-waitlist form.wl-quick .btn[type="submit"]{width:auto; flex:none}
-#p-waitlist .wl-quick .formnote{flex-basis:100%; margin:0; padding:var(--sp-2xs) 1.25rem 0}
-#p-waitlist .split{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:var(--sp-3xl)}
-#p-waitlist form{max-width:none; padding:var(--sp-2xl); border-radius:28px; background:var(--c-white);
+/* A rounded box, not a pill: the field and button sit fully inside its edge. */
+:is(#p-waitlist, #p-newsletter) form.wl-quick{display:flex; flex-direction:row; flex-wrap:wrap; align-items:center; gap:var(--sp-xs); max-width:36rem;
+  margin-top:var(--sp-lg); padding:var(--sp-sm); border-radius:28px; box-shadow:none}
+:is(#p-waitlist, #p-newsletter) form.wl-quick input{flex:1 1 14rem; min-width:0; border-radius:14px; padding-inline:1.25rem}
+:is(#p-waitlist, #p-newsletter) form.wl-quick .btn[type="submit"]{width:auto; flex:none}
+:is(#p-waitlist, #p-newsletter) .wl-quick .formnote{flex-basis:100%; margin:0; padding:var(--sp-2xs) 1.25rem var(--sp-2xs)}
+:is(#p-waitlist, #p-newsletter) .split{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:var(--sp-3xl)}
+:is(#p-waitlist, #p-newsletter) form{max-width:none; padding:var(--sp-2xl); border-radius:28px; background:var(--c-white);
   border:var(--stroke) solid var(--border); box-shadow:0 30px 80px -40px rgba(3,7,18,.25)}
-#p-waitlist input:not([type="checkbox"]), #p-waitlist select{border-radius:14px; background:var(--c-grey-100); border-color:transparent}
-#p-waitlist input:not([type="checkbox"]):hover, #p-waitlist select:hover{background:var(--c-grey-200)}
-#p-waitlist form .btn{width:100%; justify-content:center}
+#p-waitlist input:not([type="checkbox"]), #p-waitlist select, #p-newsletter input{border-radius:14px; background:var(--c-grey-100); border-color:transparent}
+#p-waitlist input:not([type="checkbox"]):hover, #p-waitlist select:hover, #p-newsletter input:hover{background:var(--c-grey-200)}
+:is(#p-waitlist, #p-newsletter) form .btn{width:100%; justify-content:center}
 @media (max-width:900px){ #p-waitlist .split{grid-template-columns:1fr} #p-waitlist form{padding:var(--sp-lg); border-radius:24px} }
 @media (max-width:560px){ #p-waitlist form.wl-quick{border-radius:24px; padding:var(--sp-sm)}
-  #p-waitlist form.wl-quick .btn[type="submit"]{width:100%; justify-content:center} }
+  :is(#p-waitlist, #p-newsletter) form.wl-quick .btn[type="submit"]{width:100%; justify-content:center} }
 #p-literature .list-toolbar .eyebrow{color:var(--c-blue)}
 /* Home in the ElevenLabs-style layout: video hero and headlines stay, the
    grey bands become rounded panels inset from the page edge, figures,
@@ -2305,6 +2306,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .soc-card:hover .soc-icon, .soc-card:focus-visible .soc-icon{color:var(--c-white)}
 /* Instagram keeps its own colours. */
 .soc-icon--ig{width:2.1rem; height:2.1rem}
+.soc-icon--signet svg{height:100%; width:auto; display:block}
 .soc-name{font-size:var(--t-large); letter-spacing:-.02em}
 .soc-handle{font-size:var(--t-small); opacity:.7}
 .soc-go{position:absolute; top:var(--sp-lg); right:var(--sp-lg); font-size:1.25rem}
@@ -6357,6 +6359,26 @@ markers: 60+
 </div>
 
 <!-- ======================================================================
+     NEWSLETTER  ·  /newsletter, linked from Social Media. The waitlist's
+     email-only form, without the athlete view below it.
+     ====================================================================== -->
+<div class="page" id="p-newsletter" data-title="Biolyz Newsletter" hidden>
+<header class="pagehead">
+  <div class="wrap inner">
+    <span class="eyebrow">Newsletter</span>
+    <h1 class="h1">Sign up for the newsletter.</h1>
+    <form class="wl-quick" data-form="newsletter" novalidate>
+      <label class="sr-only" for="n-email">Email</label>
+      <input id="n-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
+      <button class="btn" type="submit">Sign up &#8599;</button>
+      <p class="formnote">We only email you the Biolyz newsletter. See the
+        <a href="/privacy" data-link>privacy policy</a>.</p>
+    </form>
+  </div>
+</header>
+</div>
+
+<!-- ======================================================================
      CAREERS
      ====================================================================== -->
 <div class="page" id="p-careers" data-title="Biolyz Careers" hidden>
@@ -6881,6 +6903,12 @@ markers: 60+
         <span class="soc-name">Instagram</span>
         <span class="soc-handle">instagram.com/biolyz</span>
         <span class="soc-go" aria-hidden="true">&#8599;</span>
+      </a></li>
+      <li><a class="soc-card" href="/newsletter" data-link>
+        <span class="soc-icon soc-icon--signet" aria-hidden="true">__SVG_signet__</span>
+        <span class="soc-name">Newsletter</span>
+        <span class="soc-handle">Sign up by email</span>
+        <span class="soc-go" aria-hidden="true">&#8594;</span>
       </a></li>
     </ul>
   </div>
@@ -8517,6 +8545,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     '/impressum': 'p-impressum',
     '/erdf': 'p-erdf',
     '/social': 'p-social',
+    '/newsletter': 'p-newsletter',
     '/cookies': 'p-cookies'
   };
   /* Which nav pill or menu entry lights up for a given route. */
@@ -8524,7 +8553,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     '/use-cases': '/so-what', '/use-cases/alpha-actin': '/so-what',
     '/science': 'science', '/biomarkers': 'science',
     '/literature': 'science',
-    '/about': 'about', '/team': 'about', '/customers': 'about', '/blog': 'about', '/social': 'about'
+    '/about': 'about', '/team': 'about', '/customers': 'about', '/blog': 'about', '/social': 'about', '/newsletter': 'about'
   };
   /* Routes that always open a page at a particular section — none currently.
      A single link can ask for one instead, with data-anchor, which is the
@@ -9278,7 +9307,8 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
   });
   var SENT = {
     info: 'Thanks — %s would get the material by email.',
-    waitlist: 'Thanks — %s would be on the athlete waitlist, and we would email you when it is your turn.'
+    waitlist: 'Thanks — %s would be on the athlete waitlist, and we would email you when it is your turn.',
+    newsletter: 'Thanks — %s would be signed up for the Biolyz newsletter.'
   };
   [].forEach.call(document.querySelectorAll('form[data-form]'), function (form) {
     var kind = form.dataset.form;
