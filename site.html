@@ -67,7 +67,7 @@
 }
 
 *,*::before,*::after{box-sizing:border-box}
-html{font-size:clamp(13px,13px + 0.2081vw,16px); scroll-behavior:smooth}
+html{font-variant-emoji:text; font-size:clamp(13px,13px + 0.2081vw,16px); scroll-behavior:smooth}
 body{
   margin:0; background:var(--c-off-white); color:var(--c-off-black);
   font-family:var(--sans); font-weight:400; font-size:var(--t-medium);
@@ -2039,6 +2039,33 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .sitenav{position:fixed; top:0; left:0; right:0}
 .pagehead{padding-top:calc(var(--navh) + var(--section-md))}
 .sitenav.on-dark{background:transparent; border-bottom-color:transparent}
+/* Phones and narrow tablets: the links fold behind three lines in the
+   corner. Open, they stack in one column on the light bar, with the
+   Science and About Us entries listed under their heading. */
+.nav-burger{display:none; margin-left:auto; width:2.75rem; height:2.75rem; padding:0; border:0; border-radius:var(--r-sm);
+  background:transparent; color:var(--c-off-black); cursor:pointer;
+  flex-direction:column; align-items:center; justify-content:center; gap:5px}
+.nav-burger i{display:block; width:22px; height:2px; border-radius:2px; background:currentColor;
+  transition:transform var(--dur-micro) var(--ease), opacity var(--dur-micro) var(--ease)}
+.sitenav.on-dark .nav-burger{color:var(--c-white)}
+.sitenav.nav-open .nav-burger i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.sitenav.nav-open .nav-burger i:nth-child(2){opacity:0}
+.sitenav.nav-open .nav-burger i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+@media (max-width:900px){
+  .nav-burger{display:inline-flex}
+  .sitenav .row > .np, .sitenav .row > .menu, .sitenav .row > .spacer{display:none}
+  .sitenav.nav-open{max-height:100vh; max-height:100dvh; overflow-y:auto}
+  .sitenav.nav-open .row{padding-bottom:var(--sp-lg)}
+  .sitenav.nav-open .row > .np, .sitenav.nav-open .row > .menu{display:flex; flex-basis:100%; order:1}
+  .sitenav.nav-open .row > .np{font-size:var(--t-regular); padding:var(--sp-sm) var(--sp-md)}
+  .sitenav.nav-open .row > .np--cta, .sitenav.nav-open .row > .np--solid{justify-content:center; margin-top:var(--sp-xs); border-radius:var(--r-round)}
+  .sitenav.nav-open .row > .np--cta{margin-top:var(--sp-md)}
+  .sitenav.nav-open .menu{flex-direction:column}
+  .sitenav.nav-open .menu > .np{pointer-events:none; font-size:.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--c-blue); background:none; padding-top:var(--sp-md)}
+  .sitenav.nav-open .menu > .np .chev{display:none}
+  .sitenav.nav-open .menu-panel{display:flex; position:static; min-width:0; padding:0; border:0; background:none; backdrop-filter:none; -webkit-backdrop-filter:none}
+  .sitenav.nav-open .menu-panel a{font-size:var(--t-regular)}
+}
 .sitenav.on-dark .brand{color:var(--c-white)}
 .sitenav.on-dark .np{
   background:var(--o-white-5); color:var(--o-white-80);
@@ -2466,7 +2493,8 @@ a.club{text-decoration:none}
     </div>
     <span class="spacer"></span>
     <a class="np np--cta" href="/waitlist" data-link>Join athlete waitlist</a>
-    <a class="np np--solid" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="np np--solid" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
+    <button class="nav-burger" type="button" aria-label="Menu" aria-expanded="false" data-burger><i></i><i></i><i></i></button>
   </div>
 </nav>
 
@@ -2485,7 +2513,7 @@ a.club{text-decoration:none}
       <h1 class="hero-title">Saliva based, non-invasive biomarker insights for athletic
         performance and recovery.</h1>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
         <a class="btn btn--glass" href="/waitlist" data-link>Join athlete waitlist</a>
       </div>
     </div>
@@ -2841,9 +2869,9 @@ a.club{text-decoration:none}
       <figure class="pw-card">
         <div class="pw-tile pw-tile--2" role="img" aria-label="Daily samples over the last 28 days">
           <div class="pw-float pw-float--wide">
-            <span class="wsc-float-row"><span class="wsc-float-k">Cortisol &middot; M. Keller</span><em>nmol/L</em></span>
-            <svg class="cx" viewBox="0 0 320 150" aria-hidden="true"><rect x="30" y="56.0" width="282" height="48.0" fill="#0013e9" opacity=".07"/><line x1="30" x2="312" y1="128.0" y2="128.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="98.0" y2="98.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="68.0" y2="68.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="38.0" y2="38.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="8.0" y2="8.0" stroke="#e6e6e6" stroke-width=".6"/><text x="25" y="131.0" font-size="8" fill="#8a8a8a" text-anchor="end">4</text><text x="25" y="71.0" font-size="8" fill="#8a8a8a" text-anchor="end">14</text><text x="25" y="11.0" font-size="8" fill="#8a8a8a" text-anchor="end">24</text><line x1="30" x2="312" y1="104.0" y2="104.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><line x1="30" x2="312" y1="56.0" y2="56.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><polyline points="30.0,84.8 43.4,77.6 56.9,87.2 70.3,73.4 83.7,80.0 97.1,83.0 110.6,66.8 124.0,71.6 137.4,79.4 150.9,86.6 164.3,81.2 177.7,39.8 191.1,35.6 204.6,61.4 218.0,72.8 231.4,76.4 244.9,80.6 258.3,75.2 271.7,89.6 285.1,111.2 298.6,94.4 312.0,81.8" fill="none" stroke="#181818" stroke-width="1.1" stroke-linejoin="round"/><circle cx="30.0" cy="84.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="43.4" cy="77.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="56.9" cy="87.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="70.3" cy="73.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="83.7" cy="80.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="97.1" cy="83.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="110.6" cy="66.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="124.0" cy="71.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="137.4" cy="79.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="150.9" cy="86.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="164.3" cy="81.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="177.7" cy="39.8" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="177.7" y="32.8" font-size="8.5" fill="#d92d20" text-anchor="middle">18.7</text><circle cx="191.1" cy="35.6" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="191.1" y="28.6" font-size="8.5" fill="#d92d20" text-anchor="middle">19.4</text><circle cx="204.6" cy="61.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="218.0" cy="72.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="231.4" cy="76.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="244.9" cy="80.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="258.3" cy="75.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="271.7" cy="89.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="285.1" cy="111.2" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="285.1" y="124.2" font-size="8.5" fill="#d92d20" text-anchor="middle">6.8</text><circle cx="298.6" cy="94.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="312.0" cy="81.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><text x="30.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="start">16 Sep</text><text x="177.7" y="144" font-size="8" fill="#8a8a8a" text-anchor="middle">29 Sep</text><text x="312.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="end">13 Oct</text></svg>
-            <span class="wsc-float-row"><span class="wsc-float-sub">28 days &middot; 22 samples &middot; personal range 8&ndash;16</span><span class="cx-out">3 outside</span></span>
+            <span class="wsc-float-row"><span class="wsc-float-k">Cortisol &middot; M. Keller</span><em>ng/mL</em></span>
+            <svg class="cx" viewBox="0 0 320 150" aria-hidden="true"><rect x="30" y="56.0" width="282" height="48.0" fill="#0013e9" opacity=".07"/><line x1="30" x2="312" y1="128.0" y2="128.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="98.0" y2="98.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="68.0" y2="68.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="38.0" y2="38.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="8.0" y2="8.0" stroke="#e6e6e6" stroke-width=".6"/><text x="25" y="131.0" font-size="8" fill="#8a8a8a" text-anchor="end">1.4</text><text x="25" y="71.0" font-size="8" fill="#8a8a8a" text-anchor="end">5.1</text><text x="25" y="11.0" font-size="8" fill="#8a8a8a" text-anchor="end">8.7</text><line x1="30" x2="312" y1="104.0" y2="104.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><line x1="30" x2="312" y1="56.0" y2="56.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><polyline points="30.0,84.8 43.4,77.6 56.9,87.2 70.3,73.4 83.7,80.0 97.1,83.0 110.6,66.8 124.0,71.6 137.4,79.4 150.9,86.6 164.3,81.2 177.7,39.8 191.1,35.6 204.6,61.4 218.0,72.8 231.4,76.4 244.9,80.6 258.3,75.2 271.7,89.6 285.1,111.2 298.6,94.4 312.0,81.8" fill="none" stroke="#181818" stroke-width="1.1" stroke-linejoin="round"/><circle cx="30.0" cy="84.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="43.4" cy="77.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="56.9" cy="87.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="70.3" cy="73.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="83.7" cy="80.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="97.1" cy="83.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="110.6" cy="66.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="124.0" cy="71.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="137.4" cy="79.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="150.9" cy="86.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="164.3" cy="81.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="177.7" cy="39.8" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="177.7" y="32.8" font-size="8.5" fill="#d92d20" text-anchor="middle">6.8</text><circle cx="191.1" cy="35.6" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="191.1" y="28.6" font-size="8.5" fill="#d92d20" text-anchor="middle">7.0</text><circle cx="204.6" cy="61.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="218.0" cy="72.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="231.4" cy="76.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="244.9" cy="80.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="258.3" cy="75.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="271.7" cy="89.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="285.1" cy="111.2" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="285.1" y="124.2" font-size="8.5" fill="#d92d20" text-anchor="middle">2.5</text><circle cx="298.6" cy="94.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="312.0" cy="81.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><text x="30.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="start">16 Sep</text><text x="177.7" y="144" font-size="8" fill="#8a8a8a" text-anchor="middle">29 Sep</text><text x="312.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="end">13 Oct</text></svg>
+            <span class="wsc-float-row"><span class="wsc-float-sub">28 days &middot; 22 samples &middot; personal range 2.9&ndash;5.8</span><span class="cx-out">3 outside</span></span>
           </div>
         </div>
         <figcaption><span class="wsc-n">02</span><span class="wsc-card-t">High frequency</span>
@@ -3064,7 +3092,7 @@ a.club{text-decoration:none}
   <div class="wrap close-cta">
     <span class="eyebrow">Get in touch</span>
     <h2 class="h2">Turn your team&rsquo;s saliva into a powerful advantage.</h2>
-    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -3082,7 +3110,7 @@ a.club{text-decoration:none}
       <h1 class="hero-title">Biolyz combines diagnostic analysis with smart data aggregation
         to support decision making.</h1>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
       </div>
     </div>
   </div>
@@ -3477,7 +3505,7 @@ markers: 60+
   <div class="wrap close-cta">
     <span class="eyebrow">Know more. Hurt less.</span>
     <h2 class="h2">See it running on your own squad.</h2>
-    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -3644,7 +3672,7 @@ markers: 60+
     <div class="hero-copy">
       <h1 class="hero-title">Science, not guesswork.</h1>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
       </div>
     </div>
   </div>
@@ -3749,7 +3777,7 @@ markers: 60+
         </div>
         <div data-panel="sf5" id="panel-sf5" role="tabpanel" aria-labelledby="tab-sf5" hidden>
           <div class="sp-panel">
-            <figure class="sf-tile sf-tile--g5" role="img" aria-label="A reading flagged against the athlete’s own baseline, with a suggested next step"><div class="sf-float sf-float--center"><span class="wsc-float-row"><span class="wsc-float-k">Cortisol &middot; M. Keller &middot; nmol/L</span><span class="cx-out">2 above range</span></span><svg class="cx" viewBox="0 0 320 150" aria-hidden="true"><rect x="30" y="56.0" width="282" height="48.0" fill="#0013e9" opacity=".07"/><line x1="30" x2="312" y1="128.0" y2="128.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="98.0" y2="98.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="68.0" y2="68.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="38.0" y2="38.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="8.0" y2="8.0" stroke="#e6e6e6" stroke-width=".6"/><text x="25" y="131.0" font-size="8" fill="#8a8a8a" text-anchor="end">4</text><text x="25" y="71.0" font-size="8" fill="#8a8a8a" text-anchor="end">14</text><text x="25" y="11.0" font-size="8" fill="#8a8a8a" text-anchor="end">24</text><line x1="30" x2="312" y1="104.0" y2="104.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><line x1="30" x2="312" y1="56.0" y2="56.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><polyline points="30.0,79.4 51.7,83.6 73.4,74.0 95.1,76.4 116.8,81.2 138.5,74.6 160.2,70.4 181.8,67.4 203.5,60.8 225.2,48.2 246.9,38.6 268.6,57.2 290.3,68.0 312.0,75.8" fill="none" stroke="#181818" stroke-width="1.1" stroke-linejoin="round"/><circle cx="30.0" cy="79.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="51.7" cy="83.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="73.4" cy="74.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="95.1" cy="76.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="116.8" cy="81.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="138.5" cy="74.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="160.2" cy="70.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="181.8" cy="67.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="203.5" cy="60.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="225.2" cy="48.2" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="225.2" y="41.2" font-size="8.5" fill="#d92d20" text-anchor="middle">17.3</text><circle cx="246.9" cy="38.6" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="246.9" y="31.6" font-size="8.5" fill="#d92d20" text-anchor="middle">18.9</text><circle cx="268.6" cy="57.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="290.3" cy="68.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="312.0" cy="75.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><text x="30.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="start">30 Sep</text><text x="312.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="end">13 Oct</text></svg><span class="sf-next"><span class="wsc-float-k">Suggested next step</span>Reduce high-intensity load for 48&nbsp;h, re-test Thursday</span></div></figure>
+            <figure class="sf-tile sf-tile--g5" role="img" aria-label="A reading flagged against the athlete’s own baseline, with a suggested next step"><div class="sf-float sf-float--center"><span class="wsc-float-row"><span class="wsc-float-k">Cortisol &middot; M. Keller &middot; ng/mL</span><span class="cx-out">2 above range</span></span><svg class="cx" viewBox="0 0 320 150" aria-hidden="true"><rect x="30" y="56.0" width="282" height="48.0" fill="#0013e9" opacity=".07"/><line x1="30" x2="312" y1="128.0" y2="128.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="98.0" y2="98.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="68.0" y2="68.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="38.0" y2="38.0" stroke="#e6e6e6" stroke-width=".6"/><line x1="30" x2="312" y1="8.0" y2="8.0" stroke="#e6e6e6" stroke-width=".6"/><text x="25" y="131.0" font-size="8" fill="#8a8a8a" text-anchor="end">1.4</text><text x="25" y="71.0" font-size="8" fill="#8a8a8a" text-anchor="end">5.1</text><text x="25" y="11.0" font-size="8" fill="#8a8a8a" text-anchor="end">8.7</text><line x1="30" x2="312" y1="104.0" y2="104.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><line x1="30" x2="312" y1="56.0" y2="56.0" stroke="#0013e9" stroke-width=".7" stroke-dasharray="3 3" opacity=".55"/><polyline points="30.0,79.4 51.7,83.6 73.4,74.0 95.1,76.4 116.8,81.2 138.5,74.6 160.2,70.4 181.8,67.4 203.5,60.8 225.2,48.2 246.9,38.6 268.6,57.2 290.3,68.0 312.0,75.8" fill="none" stroke="#181818" stroke-width="1.1" stroke-linejoin="round"/><circle cx="30.0" cy="79.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="51.7" cy="83.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="73.4" cy="74.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="95.1" cy="76.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="116.8" cy="81.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="138.5" cy="74.6" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="160.2" cy="70.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="181.8" cy="67.4" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="203.5" cy="60.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="225.2" cy="48.2" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="225.2" y="41.2" font-size="8.5" fill="#d92d20" text-anchor="middle">6.3</text><circle cx="246.9" cy="38.6" r="3.4" fill="#d92d20" stroke="#fff" stroke-width="1"/><text x="246.9" y="31.6" font-size="8.5" fill="#d92d20" text-anchor="middle">6.9</text><circle cx="268.6" cy="57.2" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="290.3" cy="68.0" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><circle cx="312.0" cy="75.8" r="2.2" fill="#181818" stroke="#fff" stroke-width="1"/><text x="30.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="start">30 Sep</text><text x="312.0" y="144" font-size="8" fill="#8a8a8a" text-anchor="end">13 Oct</text></svg><span class="sf-next"><span class="wsc-float-k">Suggested next step</span>Reduce high-intensity load for 48&nbsp;h, re-test Thursday</span></div></figure>
             <div class="sp-text">
               <span class="sp-n">05 / 05</span>
               <h3 class="h4">AI interpretation</h3>
@@ -4054,7 +4082,7 @@ markers: 60+
       <h1 class="bm-hero-title">60+ Biomarkers</h1>
       <p class="bm-hero-lead">Quantified from one saliva sample by mass spectrometry, in our own labs.</p>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
       </div>
     </div>
     <figure class="bm-hero-media"><img src="__IMG_abouthero__" width="2000" height="1333" alt="" aria-hidden="true"></figure>
@@ -4958,7 +4986,7 @@ markers: 60+
   <div class="wrap close-cta">
     <span class="eyebrow">Get in touch</span>
     <h2 class="h2">Let&rsquo;s build your panel together.</h2>
-    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -5332,7 +5360,7 @@ markers: 60+
   <div class="wrap close-cta">
     <span class="eyebrow">See it on your own squad</span>
     <h2 class="h2">The fastest way to judge this is your own data.</h2>
-    <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -5592,7 +5620,7 @@ markers: 60+
   <div class="wrap close-cta">
     <span class="eyebrow">See it on your own squad</span>
     <h2 class="h2">The fastest way to judge this is your own data.</h2>
-    <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+    <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -5619,539 +5647,539 @@ markers: 60+
         <span class="src">German Journal of Sports Medicine</span>
         <span><span class="ttl">High Frequency Saliva-Based Targeted Multi-Omics as Screening Tool in Professional Soccer — The Practitioner's Perspective</span>
           <span class="sub">Wenzel C, Kolodziej M, … Zimmer P. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://www.biolyz.com/research/high-frequency-saliva-multi-omics-soccer.pdf" target="_blank" rel="noopener">PDF ↗</a></span></span>
+          <span class="paper-links"><a href="https://www.biolyz.com/research/high-frequency-saliva-multi-omics-soccer.pdf" target="_blank" rel="noopener">PDF ↗︎</a></span></span>
         <span class="yr">2026</span>
       </article>
       <article class="paper" data-name="targeted saliva multi-omics is a reliable, non-invasive method to capture physiological stress and recovery wenzel c, kalaycik b, … zimmer p. tu dortmund university">
         <span class="src">TU Dortmund University</span>
         <span><span class="ttl">Targeted saliva multi-omics is a reliable, non-invasive method to capture physiological stress and recovery</span>
           <span class="sub">Wenzel C, Kalaycik B, … Zimmer P. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://www.biolyz.com/research/targeted-saliva-multi-omics-stress-recovery.pdf" target="_blank" rel="noopener">PDF ↗</a></span></span>
+          <span class="paper-links"><a href="https://www.biolyz.com/research/targeted-saliva-multi-omics-stress-recovery.pdf" target="_blank" rel="noopener">PDF ↗︎</a></span></span>
         <span class="yr">2026</span>
       </article>
       <article class="paper" data-name="salivary metabolite variation after high-intensity rowing training and potential biomarker screening for exercise-induced muscle damage yi y, ding j, wang b, et al. metabolites">
         <span class="src">Metabolites</span>
         <span><span class="ttl">Salivary Metabolite Variation After High-Intensity Rowing Training and Potential Biomarker Screening for Exercise-Induced Muscle Damage</span>
           <span class="sub">Yi Y, Ding J, Wang B, et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://doi.org/10.3390/metabo15060405" target="_blank" rel="noopener">DOI ↗</a><a href="https://www.biolyz.com/research/salivary-metabolite-variation-rowing-eimd.pdf" target="_blank" rel="noopener">PDF ↗</a></span></span>
+          <span class="paper-links"><a href="https://doi.org/10.3390/metabo15060405" target="_blank" rel="noopener">DOI ↗︎</a><a href="https://www.biolyz.com/research/salivary-metabolite-variation-rowing-eimd.pdf" target="_blank" rel="noopener">PDF ↗︎</a></span></span>
         <span class="yr">2025</span>
       </article>
       <article class="paper" data-name="endurance exercise training alters lipidomic profiles of plasma and eight tissues in rats: a motrpac study ortlund e, hou z, chen cy et al. research square (preprint)">
         <span class="src">Research Square (preprint)</span>
         <span><span class="ttl">Endurance exercise training alters lipidomic profiles of plasma and eight tissues in rats: a MoTrPAC study</span>
           <span class="sub">Ortlund E, Hou Z, Chen CY et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/39606465/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.21203/rs.3.rs-5263273/v1" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/39606465/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.21203/rs.3.rs-5263273/v1" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2024</span>
       </article>
       <article class="paper" data-name="estimating the effect of aerobic exercise training on novel lipid biomarkers: a systematic review and multivariate meta-analysis of randomised controlled trials wood g et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Estimating the effect of aerobic exercise training on novel lipid biomarkers: a systematic review and multivariate meta-analysis of randomised controlled trials</span>
           <span class="sub">Wood G et al. &middot; Meta-Analysis</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/36862340/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1007/s40279-023-01817-0" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/36862340/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1007/s40279-023-01817-0" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2023</span>
       </article>
       <article class="paper" data-name="exercise training modifies xenometabolites in gut and circulation of lean and obese adults kasperek mc et al. physiol rep">
         <span class="src">Physiol Rep</span>
         <span><span class="ttl">Exercise training modifies xenometabolites in gut and circulation of lean and obese adults</span>
           <span class="sub">Kasperek MC et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/36945966/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.14814/phy2.15638" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/36945966/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.14814/phy2.15638" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2023</span>
       </article>
       <article class="paper" data-name="an exercise-inducible metabolite that suppresses feeding and obesity li vl et al. nature">
         <span class="src">Nature</span>
         <span><span class="ttl">An exercise-inducible metabolite that suppresses feeding and obesity</span>
           <span class="sub">Li VL et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/35705806/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/35705806/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2022</span>
       </article>
       <article class="paper" data-name="effects of citrulline supplementation on exercise performance in humans: a review of the current literature gonzalez am, trexler et j strength cond res">
         <span class="src">J Strength Cond Res</span>
         <span><span class="ttl">Effects of citrulline supplementation on exercise performance in humans: A review of the current literature</span>
           <span class="sub">Gonzalez AM, Trexler ET &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/31977835/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/31977835/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2020</span>
       </article>
       <article class="paper" data-name="effects of oral contraceptives on exercise performance in women: a systematic review and meta-analysis elliott-sale kj et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Effects of oral contraceptives on exercise performance in women: a systematic review and meta-analysis</span>
           <span class="sub">Elliott-Sale KJ et al. &middot; Meta-Analysis</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32666247/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1007/s40279-020-01317-5" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32666247/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1007/s40279-020-01317-5" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2020</span>
       </article>
       <article class="paper" data-name="nicotinic acid improves endurance performance of mice subjected to treadmill exercise ringseis r, gessner dk, beer am et al. metabolites">
         <span class="src">Metabolites</span>
         <span><span class="ttl">Nicotinic acid improves endurance performance of mice subjected to treadmill exercise</span>
           <span class="sub">Ringseis R, Gessner DK, Beer AM et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32244770/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.3390/metabo10040138" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32244770/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.3390/metabo10040138" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2020</span>
       </article>
       <article class="paper" data-name="runners' metabolomic changes following marathon shi r, zhang j, fang b et al. nutr metab (lond)">
         <span class="src">Nutr Metab (Lond)</span>
         <span><span class="ttl">Runners' metabolomic changes following marathon</span>
           <span class="sub">Shi R, Zhang J, Fang B et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32190096/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1186/s12986-020-00436-0" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/32190096/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1186/s12986-020-00436-0" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2020</span>
       </article>
       <article class="paper" data-name="sleep and nutrition interactions: implications for athletes doherty r et al. nutrients">
         <span class="src">Nutrients</span>
         <span><span class="ttl">Sleep and nutrition interactions: implications for athletes</span>
           <span class="sub">Doherty R et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/30979048/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/30979048/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2019</span>
       </article>
       <article class="paper" data-name="ioc consensus statement on relative energy deficiency in sport (red-s): 2018 update mountjoy m et al. br j sports med">
         <span class="src">Br J Sports Med</span>
         <span><span class="ttl">IOC consensus statement on relative energy deficiency in sport (RED-S): 2018 update</span>
           <span class="sub">Mountjoy M et al. &middot; Position Statement</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/29773536/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/29773536/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2018</span>
       </article>
       <article class="paper" data-name="hormonal aspects of overtraining syndrome: a systematic review cadegiani fa, kater ce bmc sports sci med rehabil">
         <span class="src">BMC Sports Sci Med Rehabil</span>
         <span><span class="ttl">Hormonal aspects of overtraining syndrome: a systematic review</span>
           <span class="sub">Cadegiani FA, Kater CE &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28785411/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28785411/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2017</span>
       </article>
       <article class="paper" data-name="kynurenines: tryptophan's metabolites in exercise, inflammation, and mental health cervenka i et al. science">
         <span class="src">Science</span>
         <span><span class="ttl">Kynurenines: Tryptophan's metabolites in exercise, inflammation, and mental health</span>
           <span class="sub">Cervenka I et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28751584/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28751584/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2017</span>
       </article>
       <article class="paper" data-name="omega-3 fatty acids and inflammatory processes: from molecules to man calder pc biochem soc trans">
         <span class="src">Biochem Soc Trans</span>
         <span><span class="ttl">Omega-3 fatty acids and inflammatory processes: from molecules to man</span>
           <span class="sub">Calder PC &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28900017/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/28900017/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2017</span>
       </article>
       <article class="paper" data-name="dysregulated stress signal sensitivity and inflammatory disinhibition as a pathophysiological mechanism of stress-related chronic fatigue strahler j et al. neurosci biobehav rev">
         <span class="src">Neurosci Biobehav Rev</span>
         <span><span class="ttl">Dysregulated stress signal sensitivity and inflammatory disinhibition as a pathophysiological mechanism of stress-related chronic fatigue</span>
           <span class="sub">Strahler J et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/27208412/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1016/j.neubiorev.2016.05.018" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/27208412/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1016/j.neubiorev.2016.05.018" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2016</span>
       </article>
       <article class="paper" data-name="is this elderly patient dehydrated? diagnostic accuracy of hydration assessment using physical signs, urine, and saliva markers fortes mb et al. j am med dir assoc">
         <span class="src">J Am Med Dir Assoc</span>
         <span><span class="ttl">Is this elderly patient dehydrated? Diagnostic accuracy of hydration assessment using physical signs, urine, and saliva markers</span>
           <span class="sub">Fortes MB et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25444573/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25444573/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2015</span>
       </article>
       <article class="paper" data-name="the role of the endocannabinoid system in pain woodhams sg et al. handb exp pharmacol">
         <span class="src">Handb Exp Pharmacol</span>
         <span><span class="ttl">The role of the endocannabinoid system in pain</span>
           <span class="sub">Woodhams SG et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25846617/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25846617/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2015</span>
       </article>
       <article class="paper" data-name="relationship between midweek training measures of testosterone and cortisol concentrations and game outcome in professional rugby union matches gaviglio cm et al. j strength cond res">
         <span class="src">J Strength Cond Res</span>
         <span><span class="ttl">Relationship between midweek training measures of testosterone and cortisol concentrations and game outcome in professional rugby union matches</span>
           <span class="sub">Gaviglio CM et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24936894/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24936894/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2014</span>
       </article>
       <article class="paper" data-name="skeletal muscle pgc-1α1 modulates kynurenine metabolism and mediates resilience to stress-induced depression agudelo lz et al. cell">
         <span class="src">Cell</span>
         <span><span class="ttl">Skeletal muscle PGC-1α1 modulates kynurenine metabolism and mediates resilience to stress-induced depression</span>
           <span class="sub">Agudelo LZ et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25259918/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1016/j.cell.2014.07.051" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25259918/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1016/j.cell.2014.07.051" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2014</span>
       </article>
       <article class="paper" data-name="sleep in elite athletes and nutritional interventions to enhance sleep halson sl sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Sleep in elite athletes and nutritional interventions to enhance sleep</span>
           <span class="sub">Halson SL &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24791913/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24791913/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2014</span>
       </article>
       <article class="paper" data-name="bile acid metabolism and signaling chiang jyl compr physiol">
         <span class="src">Compr Physiol</span>
         <span><span class="ttl">Bile acid metabolism and signaling</span>
           <span class="sub">Chiang JYL &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/23897684/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/23897684/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2013</span>
       </article>
       <article class="paper" data-name="higher perceived stress but lower cortisol levels found among young greek adults living in a stressful social environment faresjo a et al. plos one">
         <span class="src">PLoS ONE</span>
         <span><span class="ttl">Higher perceived stress but lower cortisol levels found among young Greek adults living in a stressful social environment</span>
           <span class="sub">Faresjo A et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24066077/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/24066077/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2013</span>
       </article>
       <article class="paper" data-name="secretory immunity with special reference to the oral cavity brandtzaeg p j oral microbiol">
         <span class="src">J Oral Microbiol</span>
         <span><span class="ttl">Secretory immunity with special reference to the oral cavity</span>
           <span class="sub">Brandtzaeg P &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/23487566/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/23487566/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2013</span>
       </article>
       <article class="paper" data-name="the physiologic effects of pain on the endocrine system tennant f pain ther">
         <span class="src">Pain Ther</span>
         <span><span class="ttl">The physiologic effects of pain on the endocrine system</span>
           <span class="sub">Tennant F &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25135146/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/25135146/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2013</span>
       </article>
       <article class="paper" data-name="metabolic markers in sports medicine banfi g et al. adv clin chem">
         <span class="src">Adv Clin Chem</span>
         <span><span class="ttl">Metabolic markers in sports medicine</span>
           <span class="sub">Banfi G et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/22397027/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/22397027/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2012</span>
       </article>
       <article class="paper" data-name="wired to run: exercise-induced endocannabinoid signaling in humans and cursorial mammals with implications for the 'runner's high' raichlen da, foster ad, gerdeman gl, seillier a, giuffrida a j exp biol">
         <span class="src">J Exp Biol</span>
         <span><span class="ttl">Wired to run: exercise-induced endocannabinoid signaling in humans and cursorial mammals with implications for the 'runner's high'</span>
           <span class="sub">Raichlen DA, Foster AD, Gerdeman GL, Seillier A, Giuffrida A &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/22442371/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1242/jeb.063677" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/22442371/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1242/jeb.063677" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2012</span>
       </article>
       <article class="paper" data-name="prostaglandins and inflammation ricciotti e, fitzgerald ga arterioscler thromb vasc biol">
         <span class="src">Arterioscler Thromb Vasc Biol</span>
         <span><span class="ttl">Prostaglandins and inflammation</span>
           <span class="sub">Ricciotti E, FitzGerald GA &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/21508345/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/21508345/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2011</span>
       </article>
       <article class="paper" data-name="saliva as a tool for monitoring steroid, peptide and immune markers in sport and exercise science papacosta e, nassis gp j sci med sport">
         <span class="src">J Sci Med Sport</span>
         <span><span class="ttl">Saliva as a tool for monitoring steroid, peptide and immune markers in sport and exercise science</span>
           <span class="sub">Papacosta E, Nassis GP &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/21474377/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/21474377/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2011</span>
       </article>
       <article class="paper" data-name="high prevalence of subtle and severe menstrual disturbances in exercising women: confirmation using daily hormone measures de souza mj et al. hum reprod">
         <span class="src">Hum Reprod</span>
         <span><span class="ttl">High prevalence of subtle and severe menstrual disturbances in exercising women: confirmation using daily hormone measures</span>
           <span class="sub">De Souza MJ et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19945961/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19945961/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="insulin-like growth factor-i, physical activity, and control of cellular anabolism nindl bc et al. med sci sports exerc">
         <span class="src">Med Sci Sports Exerc</span>
         <span><span class="ttl">Insulin-like growth factor-I, physical activity, and control of cellular anabolism</span>
           <span class="sub">Nindl BC et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20010132/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20010132/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="mechanisms of aerobic performance impairment with heat stress and dehydration cheuvront sn et al. j appl physiol">
         <span class="src">J Appl Physiol</span>
         <span><span class="ttl">Mechanisms of aerobic performance impairment with heat stress and dehydration</span>
           <span class="sub">Cheuvront SN et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20689090/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20689090/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="medium chain acylcarnitines dominate the metabolite pattern in humans under moderate intensity exercise and support lipid oxidation lehmann r et al. plos one">
         <span class="src">PLoS One</span>
         <span><span class="ttl">Medium chain acylcarnitines dominate the metabolite pattern in humans under moderate intensity exercise and support lipid oxidation</span>
           <span class="sub">Lehmann R et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20634953/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1371/journal.pone.0011519" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20634953/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1371/journal.pone.0011519" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="salivary cortisone is a potential biomarker for serum free cortisol perogamvros i et al. j clin endocrinol metab">
         <span class="src">J Clin Endocrinol Metab</span>
         <span><span class="ttl">Salivary cortisone is a potential biomarker for serum free cortisol</span>
           <span class="sub">Perogamvros I et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20685855/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/20685855/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="skeletal muscle nampt is induced by exercise in humans costford sr, bajpeyi s, pasarica m et al. am j physiol endocrinol metab">
         <span class="src">Am J Physiol Endocrinol Metab</span>
         <span><span class="ttl">Skeletal muscle NAMPT is induced by exercise in humans</span>
           <span class="sub">Costford SR, Bajpeyi S, Pasarica M et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19887595/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1152/ajpendo.00318.2009" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19887595/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1152/ajpendo.00318.2009" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2010</span>
       </article>
       <article class="paper" data-name="8-hydroxy-2'-deoxyguanosine (8-ohdg): a critical biomarker of oxidative stress and carcinogenesis valavanidis a et al. j environ sci health c">
         <span class="src">J Environ Sci Health C</span>
         <span><span class="ttl">8-Hydroxy-2'-deoxyguanosine (8-OHdG): a critical biomarker of oxidative stress and carcinogenesis</span>
           <span class="sub">Valavanidis A et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19412858/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19412858/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="acute exercise and oxidative stress: a 30 year history fisher-wellman k, bloomer rj dyn med">
         <span class="src">Dyn Med</span>
         <span><span class="ttl">Acute exercise and oxidative stress: a 30 year history</span>
           <span class="sub">Fisher-Wellman K, Bloomer RJ &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19144121/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19144121/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="cytotoxic effects of oxysterols associated with human diseases: induction of cell death (apoptosis and/or oncosis), oxidative and inflammatory activities, and phospholipidosis vejux a, lizard g mol aspects med">
         <span class="src">Mol Aspects Med</span>
         <span><span class="ttl">Cytotoxic effects of oxysterols associated with human diseases: Induction of cell death (apoptosis and/or oncosis), oxidative and inflammatory activities, and phospholipidosis</span>
           <span class="sub">Vejux A, Lizard G &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19248805/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1016/j.mam.2009.02.006" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19248805/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1016/j.mam.2009.02.006" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="salivary alpha-amylase as a non-invasive biomarker for the sympathetic nervous system: current state of research nater um, rohleder n psychoneuroendocrinology">
         <span class="src">Psychoneuroendocrinology</span>
         <span><span class="ttl">Salivary alpha-amylase as a non-invasive biomarker for the sympathetic nervous system: current state of research</span>
           <span class="sub">Nater UM, Rohleder N &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19249160/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19249160/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="salivary cortisol as a biomarker in stress research hellhammer dh et al. psychoneuroendocrinology">
         <span class="src">Psychoneuroendocrinology</span>
         <span><span class="ttl">Salivary cortisol as a biomarker in stress research</span>
           <span class="sub">Hellhammer DH et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19095358/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19095358/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="the exercise-induced stress response of skeletal muscle, with specific emphasis on humans morton jp et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">The exercise-induced stress response of skeletal muscle, with specific emphasis on humans</span>
           <span class="sub">Morton JP et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19769414/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.2165/00007256-200939080-00003" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19769414/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.2165/00007256-200939080-00003" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2009</span>
       </article>
       <article class="paper" data-name="athletic induced iron deficiency: new insights into the role of inflammation, cytokines and hormones peeling p et al. eur j appl physiol">
         <span class="src">Eur J Appl Physiol</span>
         <span><span class="ttl">Athletic induced iron deficiency: new insights into the role of inflammation, cytokines and hormones</span>
           <span class="sub">Peeling P et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/18365240/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/18365240/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2008</span>
       </article>
       <article class="paper" data-name="current status of salivary hormone analysis groschl m clin chem">
         <span class="src">Clin Chem</span>
         <span><span class="ttl">Current status of salivary hormone analysis</span>
           <span class="sub">Groschl M &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/18757583/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1373/clinchem.2008.108910" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/18757583/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1373/clinchem.2008.108910" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2008</span>
       </article>
       <article class="paper" data-name="effects of endurance exercise on the reproductive system of men: the exercise-hypogonadal male condition hackney ac j endocrinol invest">
         <span class="src">J Endocrinol Invest</span>
         <span><span class="ttl">Effects of endurance exercise on the reproductive system of men: the exercise-hypogonadal male condition</span>
           <span class="sub">Hackney AC &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19092301/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/19092301/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2008</span>
       </article>
       <article class="paper" data-name="creatine kinase monitoring in sport medicine brancaccio p et al. br med bull">
         <span class="src">Br Med Bull</span>
         <span><span class="ttl">Creatine kinase monitoring in sport medicine</span>
           <span class="sub">Brancaccio P et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17569697/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17569697/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2007</span>
       </article>
       <article class="paper" data-name="histamine and histamine intolerance maintz l, novak n am j clin nutr">
         <span class="src">Am J Clin Nutr</span>
         <span><span class="ttl">Histamine and histamine intolerance</span>
           <span class="sub">Maintz L, Novak N &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17490952/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17490952/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2007</span>
       </article>
       <article class="paper" data-name="kynurenine pathway in major depression: evidence of impaired neuroprotection myint am et al. j affect disord">
         <span class="src">J Affect Disord</span>
         <span><span class="ttl">Kynurenine pathway in major depression: evidence of impaired neuroprotection</span>
           <span class="sub">Myint AM et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16952400/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16952400/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2007</span>
       </article>
       <article class="paper" data-name="central fatigue: the serotonin hypothesis and beyond meeusen r et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Central fatigue: the serotonin hypothesis and beyond</span>
           <span class="sub">Meeusen R et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17004850/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/17004850/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2006</span>
       </article>
       <article class="paper" data-name="extracellular matrix adaptation of tendon and skeletal muscle to exercise kjaer m, magnusson p, krogsgaard m et al. j anat">
         <span class="src">J Anat</span>
         <span><span class="ttl">Extracellular matrix adaptation of tendon and skeletal muscle to exercise</span>
           <span class="sub">Kjaer M, Magnusson P, Krogsgaard M et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16637870/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1111/j.1469-7580.2006.00549.x" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16637870/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1111/j.1469-7580.2006.00549.x" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2006</span>
       </article>
       <article class="paper" data-name="monitoring tryptophan metabolism in chronic immune activation schrocksnadel k et al. clin chim acta">
         <span class="src">Clin Chim Acta</span>
         <span><span class="ttl">Monitoring tryptophan metabolism in chronic immune activation</span>
           <span class="sub">Schrocksnadel K et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16139256/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16139256/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2006</span>
       </article>
       <article class="paper" data-name="oxidative stress: relationship with exercise and training finaud j et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Oxidative stress: relationship with exercise and training</span>
           <span class="sub">Finaud J et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16573358/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/16573358/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2006</span>
       </article>
       <article class="paper" data-name="hormonal responses and adaptations to resistance exercise and training kraemer wj, ratamess na sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Hormonal responses and adaptations to resistance exercise and training</span>
           <span class="sub">Kraemer WJ, Ratamess NA &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15831061/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15831061/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2005</span>
       </article>
       <article class="paper" data-name="11beta-hydroxysteroid dehydrogenase type 1: a tissue-specific regulator of glucocorticoid response tomlinson jw et al. endocr rev">
         <span class="src">Endocr Rev</span>
         <span><span class="ttl">11beta-hydroxysteroid dehydrogenase type 1: a tissue-specific regulator of glucocorticoid response</span>
           <span class="sub">Tomlinson JW et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15466942/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15466942/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2004</span>
       </article>
       <article class="paper" data-name="identification of human whole saliva protein components using proteomics vitorino r et al. proteomics">
         <span class="src">Proteomics</span>
         <span><span class="ttl">Identification of human whole saliva protein components using proteomics</span>
           <span class="sub">Vitorino R et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15048992/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15048992/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2004</span>
       </article>
       <article class="paper" data-name="neuroendocrine regulation of salivary iga synthesis and secretion: implications for oral health teeuw wj et al. biol chem">
         <span class="src">Biol Chem</span>
         <span><span class="ttl">Neuroendocrine regulation of salivary IgA synthesis and secretion: implications for oral health</span>
           <span class="sub">Teeuw WJ et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15653426/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1515/BC.2004.147" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/15653426/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1515/BC.2004.147" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">2004</span>
       </article>
       <article class="paper" data-name="saliva flow rate, total protein concentration and osmolality as potential markers of whole body hydration status during progressive acute dehydration in humans walsh np et al. arch oral biol">
         <span class="src">Arch Oral Biol</span>
         <span><span class="ttl">Saliva flow rate, total protein concentration and osmolality as potential markers of whole body hydration status during progressive acute dehydration in humans</span>
           <span class="sub">Walsh NP et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/14693209/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/14693209/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2004</span>
       </article>
       <article class="paper" data-name="saliva parameters as potential indices of hydration status during acute dehydration walsh np et al. medicine &amp; science in sports &amp; exercise">
         <span class="src">Medicine &amp; Science in Sports &amp; Exercise</span>
         <span><span class="ttl">Saliva Parameters as Potential Indices of Hydration Status during Acute Dehydration</span>
           <span class="sub">Walsh NP et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://doi.org/10.1249/01.MSS.0000139797.26760.06" target="_blank" rel="noopener">DOI ↗</a><a href="https://www.biolyz.com/research/saliva-parameters-hydration-dehydration.pdf" target="_blank" rel="noopener">PDF ↗</a></span></span>
+          <span class="paper-links"><a href="https://doi.org/10.1249/01.MSS.0000139797.26760.06" target="_blank" rel="noopener">DOI ↗︎</a><a href="https://www.biolyz.com/research/saliva-parameters-hydration-dehydration.pdf" target="_blank" rel="noopener">PDF ↗︎</a></span></span>
         <span class="yr">2004</span>
       </article>
       <article class="paper" data-name="serum cystatin c is superior to serum creatinine as a marker of kidney function: a meta-analysis dharnidharka vr et al. am j kidney dis">
         <span class="src">Am J Kidney Dis</span>
         <span><span class="ttl">Serum cystatin C is superior to serum creatinine as a marker of kidney function: a meta-analysis</span>
           <span class="sub">Dharnidharka VR et al. &middot; Meta-Analysis</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/12148093/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/12148093/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2002</span>
       </article>
       <article class="paper" data-name="creatine and creatinine metabolism wyss m, kaddurah-daouk r. physiol rev">
         <span class="src">Physiol Rev</span>
         <span><span class="ttl">Creatine and creatinine metabolism</span>
           <span class="sub">Wyss M, Kaddurah-Daouk R. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10893433/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10893433/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2000</span>
       </article>
       <article class="paper" data-name="cytokine hypothesis of overtraining: a physiological adaptation to excessive stress? smith ll med sci sports exerc">
         <span class="src">Med Sci Sports Exerc</span>
         <span><span class="ttl">Cytokine hypothesis of overtraining: a physiological adaptation to excessive stress?</span>
           <span class="sub">Smith LL &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10694113/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10694113/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">2000</span>
       </article>
       <article class="paper" data-name="a more accurate method to estimate glomerular filtration rate from serum creatinine: a new prediction equation levey as et al. ann intern med">
         <span class="src">Ann Intern Med</span>
         <span><span class="ttl">A more accurate method to estimate glomerular filtration rate from serum creatinine: a new prediction equation</span>
           <span class="sub">Levey AS et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10075613/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10075613/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1999</span>
       </article>
       <article class="paper" data-name="low level saliva cotinine determination and its application as a biomarker for environmental tobacco smoke exposure phillips k, bentley mc, abrar m, howard da, cook j hum exp toxicol">
         <span class="src">Hum Exp Toxicol</span>
         <span><span class="ttl">Low level saliva cotinine determination and its application as a biomarker for environmental tobacco smoke exposure</span>
           <span class="sub">Phillips K, Bentley MC, Abrar M, Howard DA, Cook J &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10333317/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1191/096032799678840066" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10333317/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1191/096032799678840066" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">1999</span>
       </article>
       <article class="paper" data-name="pro- and anti-inflammatory cytokine balance in strenuous exercise in humans ostrowski k, rohde t, asp s, schjerling p, pedersen bk j physiol">
         <span class="src">J Physiol</span>
         <span><span class="ttl">Pro- and anti-inflammatory cytokine balance in strenuous exercise in humans</span>
           <span class="sub">Ostrowski K, Rohde T, Asp S, Schjerling P, Pedersen BK &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9925898/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1111/j.1469-7793.1999.287ad.x" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9925898/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1111/j.1469-7793.1999.287ad.x" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">1999</span>
       </article>
       <article class="paper" data-name="salivary carbonic anhydrase isoenzyme vi kivela j et al. j physiol">
         <span class="src">J Physiol</span>
         <span><span class="ttl">Salivary carbonic anhydrase isoenzyme VI</span>
           <span class="sub">Kivela J et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10523402/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10523402/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1999</span>
       </article>
       <article class="paper" data-name="type i collagen synthesis and degradation in peritendinous tissue after exercise determined by microdialysis in humans langberg h et al. j physiol">
         <span class="src">J Physiol</span>
         <span><span class="ttl">Type I collagen synthesis and degradation in peritendinous tissue after exercise determined by microdialysis in humans</span>
           <span class="sub">Langberg H et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10562353/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1111/j.1469-7793.1999.00299.x" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10562353/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1111/j.1469-7793.1999.00299.x" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">1999</span>
       </article>
       <article class="paper" data-name="analytical methods for 3-nitrotyrosine as a marker of nitric oxide-derived oxidants herce-pagliai c et al. nitric oxide">
         <span class="src">Nitric Oxide</span>
         <span><span class="ttl">Analytical methods for 3-nitrotyrosine as a marker of nitric oxide-derived oxidants</span>
           <span class="sub">Herce-Pagliai C et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10100488/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/10100488/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1998</span>
       </article>
       <article class="paper" data-name="cystatin and cystatin-derived peptides have antibacterial activity against the pathogen porphyromonas gingivalis blankenvoorde mf et al. biol chem">
         <span class="src">Biol Chem</span>
         <span><span class="ttl">Cystatin and cystatin-derived peptides have antibacterial activity against the pathogen Porphyromonas gingivalis</span>
           <span class="sub">Blankenvoorde MF et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9865612/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9865612/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1998</span>
       </article>
       <article class="paper" data-name="low energy availability, not stress of exercise, alters lh pulsatility in exercising women loucks ab et al. j appl physiol">
         <span class="src">J Appl Physiol</span>
         <span><span class="ttl">Low energy availability, not stress of exercise, alters LH pulsatility in exercising women</span>
           <span class="sub">Loucks AB et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9451615/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9451615/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1998</span>
       </article>
       <article class="paper" data-name="saliva composition and exercise chicharro jl et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Saliva composition and exercise</span>
           <span class="sub">Chicharro JL et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9739538/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9739538/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1998</span>
       </article>
       <article class="paper" data-name="neurosteroids: of the nervous system, by the nervous system, for the nervous system baulieu ee recent prog horm res">
         <span class="src">Recent Prog Horm Res</span>
         <span><span class="ttl">Neurosteroids: of the nervous system, by the nervous system, for the nervous system</span>
           <span class="sub">Baulieu EE &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9238846/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9238846/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1997</span>
       </article>
       <article class="paper" data-name="salivary melatonin as a circadian phase marker: validation and comparison to plasma melatonin voultsios a et al. j biol rhythms">
         <span class="src">J Biol Rhythms</span>
         <span><span class="ttl">Salivary melatonin as a circadian phase marker: validation and comparison to plasma melatonin</span>
           <span class="sub">Voultsios A et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9376644/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/9376644/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1997</span>
       </article>
       <article class="paper" data-name="blood hormones as markers of training stress and overtraining urhausen a et al. sports med">
         <span class="src">Sports Med</span>
         <span><span class="ttl">Blood hormones as markers of training stress and overtraining</span>
           <span class="sub">Urhausen A et al. &middot; Review</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/8584849/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/8584849/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1995</span>
       </article>
       <article class="paper" data-name="exercise-induced oxidative stress: glutathione supplementation and deficiency sen ck, atalay m, hanninen o j appl physiol">
         <span class="src">J Appl Physiol</span>
         <span><span class="ttl">Exercise-induced oxidative stress: glutathione supplementation and deficiency</span>
           <span class="sub">Sen CK, Atalay M, Hanninen O &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/7868431/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1152/jappl.1994.77.5.2177" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/7868431/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1152/jappl.1994.77.5.2177" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">1994</span>
       </article>
       <article class="paper" data-name="administration of branched-chain amino acids during sustained exercise - effects on performance and on plasma concentration of some amino acids blomstrand e et al. eur j appl physiol occup physiol">
         <span class="src">Eur J Appl Physiol Occup Physiol</span>
         <span><span class="ttl">Administration of branched-chain amino acids during sustained exercise - effects on performance and on plasma concentration of some amino acids</span>
           <span class="sub">Blomstrand E et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/1748109/" target="_blank" rel="noopener">PubMed ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/1748109/" target="_blank" rel="noopener">PubMed ↗︎</a></span></span>
         <span class="yr">1991</span>
       </article>
       <article class="paper" data-name="amino acid metabolism in exercising man felig p, wahren j j clin invest">
         <span class="src">J Clin Invest</span>
         <span><span class="ttl">Amino acid metabolism in exercising man</span>
           <span class="sub">Felig P, Wahren J &middot; Original Research</span>
-          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/5129318/" target="_blank" rel="noopener">PubMed ↗</a><a href="https://doi.org/10.1172/JCI106691" target="_blank" rel="noopener">DOI ↗</a></span></span>
+          <span class="paper-links"><a href="https://pubmed.ncbi.nlm.nih.gov/5129318/" target="_blank" rel="noopener">PubMed ↗︎</a><a href="https://doi.org/10.1172/JCI106691" target="_blank" rel="noopener">DOI ↗︎</a></span></span>
         <span class="yr">1971</span>
       </article>
       <article class="paper" data-name="preliminary insights into salivary proteomic versus targeted biomarker profiles associated with acute physical fatigue lindsey b, bowden k, shaul y, et al. george mason university">
         <span class="src">George Mason University</span>
         <span><span class="ttl">Preliminary insights into salivary proteomic versus targeted biomarker profiles associated with acute physical fatigue</span>
           <span class="sub">Lindsey B, Bowden K, Shaul Y, et al. &middot; Original Research</span>
-          <span class="paper-links"><a href="https://www.biolyz.com/research/salivary-proteomics-acute-fatigue.pdf" target="_blank" rel="noopener">PDF ↗</a></span></span>
+          <span class="paper-links"><a href="https://www.biolyz.com/research/salivary-proteomics-acute-fatigue.pdf" target="_blank" rel="noopener">PDF ↗︎</a></span></span>
         <span class="yr">—</span>
       </article>
     </div>
@@ -6292,7 +6320,7 @@ markers: 60+
                 <span>Send me the Biolyz newsletter.</span></label>
             </div>
             <div class="btn-row">
-              <button class="btn" type="submit">Send me the info &#8599;</button>
+              <button class="btn" type="submit">Send me the info &#8599;&#xFE0E;</button>
             </div>
           </form>
         </div>
@@ -6316,7 +6344,7 @@ markers: 60+
     <form class="wl-quick" data-form="waitlist" novalidate>
       <label class="sr-only" for="w-email">Email</label>
       <input id="w-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
-      <button class="btn" type="submit">Join the waitlist &#8599;</button>
+      <button class="btn" type="submit">Join the waitlist &#8599;&#xFE0E;</button>
       <p class="formnote">We only email you about your place on the waitlist. See the
         <a href="/privacy" data-link>privacy policy</a>.</p>
     </form>
@@ -6370,7 +6398,7 @@ markers: 60+
     <form class="wl-quick" data-form="newsletter" novalidate>
       <label class="sr-only" for="n-email">Email</label>
       <input id="n-email" name="email" type="email" required autocomplete="email" placeholder="you@email.com">
-      <button class="btn" type="submit">Sign up &#8599;</button>
+      <button class="btn" type="submit">Sign up &#8599;&#xFE0E;</button>
       <p class="formnote">We only email you the Biolyz newsletter. See the
         <a href="/privacy" data-link>privacy policy</a>.</p>
     </form>
@@ -6599,7 +6627,7 @@ markers: 60+
     </div>
     <div class="cs-more">
       <div class="cs-club"><div class="cs-logo cs-logo--sm">__SVG_b04__</div><b>Bayer 04 Leverkusen</b><span>Bundesliga &middot; story coming soon</span></div>
-      <div class="cs-club cs-club--cta"><b>Your club here?</b><span>See what Biolyz would show on your own squad.</span><a class="btn" href="/contact" data-link>Contact us &#8599;</a></div>
+      <div class="cs-club cs-club--cta"><b>Your club here?</b><span>See what Biolyz would show on your own squad.</span><a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a></div>
     </div>
   </div>
 </section>
@@ -6625,7 +6653,7 @@ markers: 60+
   <div class="wrap">
     <a class="bl-feat" href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/" target="_blank" rel="noopener">
       <div class="bl-tile"><span class="bl-logo bl-logo--sportico" role="img" aria-label="Sportico">__SVG_sportico__</span></div>
-      <div class="bl-body"><span class="bl-meta">Sportico &middot; 2026 &middot; Featured</span><h2 class="h3">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</h2><p class="copy">How the Austrian company grew to 13 football clubs, opened a UK lab and is preparing for the US.</p><span class="bl-more">Read on Sportico &#8599;</span></div>
+      <div class="bl-body"><span class="bl-meta">Sportico &middot; 2026 &middot; Featured</span><h2 class="h3">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</h2><p class="copy">How the Austrian company grew to 13 football clubs, opened a UK lab and is preparing for the US.</p><span class="bl-more">Read on Sportico &#8599;&#xFE0E;</span></div>
     </a>
     <div class="bl-grid">
 <!--BLOG_CARDS-->
@@ -6896,13 +6924,13 @@ markers: 60+
         <svg class="soc-icon" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
         <span class="soc-name">LinkedIn</span>
         <span class="soc-handle">linkedin.com/company/biolyz</span>
-        <span class="soc-go" aria-hidden="true">&#8599;</span>
+        <span class="soc-go" aria-hidden="true">&#8599;&#xFE0E;</span>
       </a></li>
       <li><a class="soc-card" href="https://www.instagram.com/biolyz/" target="_blank" rel="noopener">
         <svg class="soc-icon soc-icon--ig" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-grad" cx="0.3" cy="1.07" r="1.3"><stop offset="0" stop-color="#fdf497"/><stop offset=".05" stop-color="#fdf497"/><stop offset=".45" stop-color="#fd5949"/><stop offset=".6" stop-color="#d6249f"/><stop offset=".9" stop-color="#285aeb"/></radialGradient></defs><path fill="url(#ig-grad)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
         <span class="soc-name">Instagram</span>
         <span class="soc-handle">instagram.com/biolyz</span>
-        <span class="soc-go" aria-hidden="true">&#8599;</span>
+        <span class="soc-go" aria-hidden="true">&#8599;&#xFE0E;</span>
       </a></li>
       <li><a class="soc-card" href="/newsletter" data-link>
         <span class="soc-icon soc-icon--signet" aria-hidden="true">__SVG_signet__</span>
@@ -6947,7 +6975,7 @@ markers: 60+
           We&rsquo;re eager to hear about your research and discuss how we can contribute to its
           success. Don&rsquo;t hesitate to contact us today &ndash; let&rsquo;s innovate
           together!</p>
-        <a class="btn" href="/contact" data-link>Discuss a project &#8599;</a>
+        <a class="btn" href="/contact" data-link>Discuss a project &#8599;&#xFE0E;</a>
       </div>
       <aside class="erdf-card">
         <span class="eyebrow">Co-financed by</span>
@@ -7380,7 +7408,7 @@ markers: 60+
       <p class="hero-lead">Regular saliva samples, more than 60 biomarkers measured by mass
         spectrometry, an individual baseline for every athlete.</p>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
       </div>
     </div>
   </div>
@@ -7634,7 +7662,7 @@ markers: 60+
     <span class="eyebrow">So what?</span>
     <h2 class="h2">Discover the trends before they become problems.</h2>
     <div class="btn-row">
-      <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;</a>
+      <a class="btn btn--ink" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a>
     </div>
   </div>
 </section>
@@ -7889,7 +7917,7 @@ markers: 60+
         breeders and horse owners.</h1>
       <p class="hero-lead">What your horse hides, its saliva shows.</p>
       <div class="btn-row">
-        <a class="btn" href="/contact" data-link>Talk to us &#8599;</a>
+        <a class="btn" href="/contact" data-link>Talk to us &#8599;&#xFE0E;</a>
         <a class="btn btn--glass" href="#hz-how" data-sw-jump="hz-how">The Process</a>
       </div>
     </div>
@@ -8382,7 +8410,7 @@ method:  LC-MS/MS
   <div class="wrap close-cta">
     <span class="eyebrow">Know more. Hurt less.</span>
     <h2 class="h2">See what your horse is not showing you.</h2>
-    <a class="btn btn--ink" href="/contact" data-link>Talk to us &#8599;</a>
+    <a class="btn btn--ink" href="/contact" data-link>Talk to us &#8599;&#xFE0E;</a>
   </div>
 </section>
 </div>
@@ -8792,7 +8820,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     var current = pages.filter(function (p) { return !p.hidden; })[0];
     var hero = current ? current.querySelector('.hero') : null;
     var past = hero ? window.scrollY > hero.offsetHeight - 120 : true;
-    nav.classList.toggle('on-dark', !!hero && !past);
+    nav.classList.toggle('on-dark', !!hero && !past && !nav.classList.contains('nav-open'));
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
@@ -8818,6 +8846,23 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     });
   }
   document.addEventListener('click', closeMenus);
+
+  /* Phone menu: the three lines open and close the stacked links; picking
+     a link (or Escape) closes it again. */
+  var burger = nav.querySelector('[data-burger]');
+  function setNav(open) {
+    nav.classList.toggle('nav-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    onScroll();
+  }
+  burger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    setNav(!nav.classList.contains('nav-open'));
+  });
+  [].forEach.call(nav.querySelectorAll('a'), function (a) {
+    a.addEventListener('click', function () { setNav(false); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setNav(false); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(); });
 
   // The process: hovering (or focusing, for keyboard users) a step fills the
