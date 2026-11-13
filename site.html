@@ -511,10 +511,6 @@ img{max-width:100%; display:block}
 /* Blue variant: the same open figures, with the numbers in brand blue. */
 .figs--blue .fig .v{color:var(--c-blue)}
 .figs--blue .fig{border-top:0; padding-top:0}
-/* Research page: the numbers sit close under the title, with no rule between. */
-#p-research > .hero + .sec--md{padding-block:var(--sp-2xl)}
-#p-research #hz{padding-top:var(--sp-2xl)}
-#p-research #hz .hd{margin-bottom:var(--sp-lg)}
 /* Literature: the list starts close under the title, no rule between. */
 #p-literature > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-literature > .pagehead + .sec{padding-top:var(--sp-md)}
@@ -670,22 +666,6 @@ img{max-width:100%; display:block}
   #p-biomarkers .agroup{padding-inline:var(--sp-lg)}
   .bm-hero-media{aspect-ratio:4/3; border-radius:20px}
 }
-/* Herzrasen in the same ElevenLabs-style layout (the photo hero stays): rounded figure cards, the
-   explorer as one large rounded grey card inset from the page edge, white
-   rounded chart panels and pill controls. Headlines keep the site style. */
-#p-research .btn{border-radius:var(--r-round)}
-#p-research .cnt{border-top:0; gap:var(--sp-sm)}
-#p-research .cnt .sp-fig{border:0; padding:var(--sp-xl) var(--sp-lg); background:var(--c-grey-100); border-radius:24px}
-#p-research #hz{margin-inline:var(--sp-lg); border-radius:32px}
-#p-research .hz-main{border-top:0; padding-top:0}
-#p-research .hz-panel{border-radius:24px}
-#p-research .hz-gate{border-radius:24px}
-#p-research .hz .tabs{display:inline-flex; gap:2px; padding:4px; border-radius:var(--r-round); background:var(--c-white)}
-#p-research .hz .tabs .tab{border-radius:var(--r-round); background:transparent}
-#p-research .hz .tabs .tab[aria-selected="true"]{background:var(--c-blue); color:var(--c-white)}
-@media (max-width:820px){
-  #p-research #hz{margin-inline:var(--sp-sm); border-radius:24px}
-}
 /* About, redesigned for clarity: a big statement hero, each idea as a short
    titled card instead of a wall of paragraphs, the manifesto as three steps
    and a pull quote on blue, the plan as a numbered timeline, values as cards.
@@ -811,8 +791,6 @@ img{max-width:100%; display:block}
 .ms-facts span{font-size:var(--t-small); color:var(--text-2)}
 @media (max-width:1100px){ .ms-stage{padding:var(--sp-lg)} .ms-facts{grid-template-columns:1fr} }
 @media (prefers-reduced-motion:reduce){ .ms-bars i{transform:none; transition:none} .ms-scan{display:none} }
-#p-research #hz{padding-bottom:var(--sp-2xl)}
-#p-research > .sec--xl{padding-block:var(--sp-2xl) var(--section-md)}
 @media (max-width:820px){
   .saliva-proof-figs{grid-template-columns:1fr; gap:var(--sp-lg)}
 }
@@ -2471,7 +2449,6 @@ a.club{text-decoration:none}
       <div class="menu-panel">
         <a href="/science" data-link>Science <span class="k">Method</span></a>
         <a href="/biomarkers" data-link>Biomarkers</a>
-        <a href="/research" data-link>Research</a>
         <a href="/literature" data-link>Literature</a>
       </div>
     </div>
@@ -4333,7 +4310,7 @@ markers: 60+
      numbers from zero the first time the block is on screen. */
   (function () {
     /* Looked up on every check, not once: this script runs before the later
-       pages in the file (Research, Horses, the use cases) have been parsed. */
+       pages in the file (Horses) have been parsed. */
     function groupsNow() { return [].slice.call(document.querySelectorAll('[data-count-group]')); }
     var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     function fmt(v, dec) {
@@ -5096,14 +5073,6 @@ markers: 60+
 <!-- ======================================================================
      LITERATURE
      ====================================================================== -->
-<!-- ======================================================================
-     RESEARCH — the Herzrasen kinetics explorer.
-     Three free markers, the rest behind a call. Blood and saliva are plotted
-     as percent change from each subject's own T0, which is what puts two
-     matrices with different units and different absolute ranges on one axis
-     — the deck has to draw them in separate panels for exactly that reason,
-     and separate panels are where the agreement stops being visible.
-     ====================================================================== -->
 <div class="page" id="p-vs-poc" data-title="Biolyz vs Point of Care" data-desc="Point of care gives one number in seconds; Biolyz reads 60+ biomarkers from a saliva swab in 24 to 48 hours. Panel size, needles, staff time and cost compared." hidden>
 
 <section class="hero hero--photo hero--poc inv">
@@ -5622,126 +5591,6 @@ markers: 60+
     <span class="eyebrow">See it on your own squad</span>
     <h2 class="h2">The fastest way to judge this is your own data.</h2>
     <a class="btn" href="/contact" data-link>Contact us &#8599;</a>
-  </div>
-</section>
-</div>
-
-<div class="page" id="p-research" data-title="Biolyz Research" hidden>
-
-<section class="hero hero--photo hero--research inv">
-  <img class="hero-bg" src="__IMG_researchhero__" width="1500" height="2000" alt="" aria-hidden="true">
-  <div class="hero-scrim" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="hero-copy">
-      <span class="eyebrow">Primary research</span>
-      <h1 class="hero-title">Herzrasen</h1>
-      <p class="hero-lead">A laboratory study with TU Dortmund: blood and saliva drawn from the
-        same people at the same moments, before load, immediately after, and an hour later,
-        run twice, once by day and once by night.</p>
-    </div>
-  </div>
-</section>
-
-<section class="sec--md">
-  <div class="wrap">
-    <div class="cnt" data-count-group style="--cols:4">
-      <div class="sp-fig"><span class="sp-i">01</span>
-        <span class="sp-v"><b data-count="3" data-dec="0">3</b></span>
-        <span class="sp-k">Timepoints</span>
-        <span class="sp-s">Rest &middot; post-load &middot; +1 h</span></div>
-      <div class="sp-fig"><span class="sp-i">02</span>
-        <span class="sp-v"><b data-count="2" data-dec="0">2</b></span>
-        <span class="sp-k">Matrices</span>
-        <span class="sp-s">Venous blood &amp; saliva, paired</span></div>
-      <div class="sp-fig"><span class="sp-i">03</span>
-        <span class="sp-v"><b data-count="2" data-dec="0">2</b></span>
-        <span class="sp-k">Arms</span>
-        <span class="sp-s">Daytime and night-time</span></div>
-      <div class="sp-fig"><span class="sp-i">04</span>
-        <span class="sp-v"><b data-count="77" data-dec="0">77</b></span>
-        <span class="sp-k">Markers</span>
-        <span class="sp-s">Across seven analyte families</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec band-grey" id="hz">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">The explorer</span>
-      <h2 class="h2">Follow each marker through exercise, in blood and saliva.</h2>
-      <p class="copy">Pick a marker and watch it move. Each line starts at the
-        athlete&rsquo;s own resting value, so blood and saliva share one scale. Three
-        markers are open to explore. Book a call to see the full panel.</p>
-    </div>
-
-
-    <div class="hz">
-      <!-- ---------- marker rail ---------- -->
-      <div class="hz-rail">
-        <div class="hz-railhead">
-          <span class="eyebrow">Pick a marker</span>
-        </div>
-        <ul class="hz-list" data-hz-list role="tablist" aria-label="Biomarkers"></ul>
-        <p class="hz-more" data-hz-more></p>
-      </div>
-
-      <!-- ---------- charts ---------- -->
-      <div class="hz-main">
-        <div class="hz-bar">
-          <div>
-            <h3 class="h4" data-hz-name>&nbsp;</h3>
-            <span class="hz-sub" data-hz-family>&nbsp;</span>
-          </div>
-          <div class="tabs" style="margin:0" role="tablist" aria-label="Condition">
-            <button class="tab" role="tab" aria-selected="true"  data-hz-cond="day">Day</button>
-            <button class="tab" role="tab" aria-selected="false" data-hz-cond="night">Night</button>
-          </div>
-        </div>
-
-        <div class="hz-panel">
-          <div class="hz-panelhead">
-            <span class="eyebrow">Kinetics</span>
-            <span class="hz-key">
-              <i class="hz-dot hz-dot--sal"></i>Saliva
-              <i class="hz-dot hz-dot--bld"></i>Blood
-            </span>
-          </div>
-          <figure class="hz-chart" data-hz-kin></figure>
-          <figcaption class="hz-note" data-hz-read></figcaption>
-        </div>
-
-        <div class="hz-panel">
-          <div class="hz-panelhead">
-            <span class="eyebrow">Blood against saliva</span>
-            <span class="hz-key hz-key--quiet">Pearson r, same subjects</span>
-          </div>
-          <figure class="hz-chart hz-chart--r" data-hz-cor></figure>
-        </div>
-
-        <!-- ---------- the gate ---------- -->
-        <div class="hz-gate" data-hz-gate hidden>
-          <span class="eyebrow eyebrow--blue">Locked</span>
-          <h3 class="h4" data-hz-gatename>&nbsp;</h3>
-          <p class="copy">The full panel runs to 77 markers across both arms, with the
-            agreement statistics and the recovery kinetics for each. We walk through it
-            on a call rather than posting it, because which markers matter depends
-            entirely on your sport and your question.</p>
-          <div class="btn-row">
-            <a class="btn" href="/contact" data-link>Book a call &#8599;</a>
-            <button class="btn btn--ghost" type="button" data-hz-back>Back to the open markers</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec--xl">
-  <div class="wrap close-cta">
-    <span class="eyebrow">Full Panel</span>
-    <h2 class="h3">Your heart&rsquo;s racing? Wait till you see all 77 Biomarkers.</h2>
-    <a class="btn" href="/contact" data-link>Book a call &#8599;</a>
   </div>
 </section>
 </div>
@@ -7846,12 +7695,6 @@ markers: 60+
 .hero--blood{min-height:82vh; min-height:82dvh; background:var(--c-off-black)}
 .hero--blood .hero-bg{object-position:55% 24%}
 .hero--blood .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.88), rgba(3,7,18,.5) 60%, rgba(3,7,18,.5))}
-/* Research (Herzrasen): black-and-white runners, same hero treatment. */
-.hero--research{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
-.hero--research .hero-bg{filter:grayscale(1); object-position:center 70%}
-.hero--research .hero-scrim{background:linear-gradient(to top, rgba(3,7,18,.9), rgba(3,7,18,.55) 60%, rgba(3,7,18,.45))}
-.hero--research .hero-lead{font-size:var(--t-large); color:var(--o-white-80); max-width:min(52ch,100%)}
-.hero--research .hero-title{font-size:var(--h1)}
 .hero--bm{min-height:72vh; min-height:72dvh; background:var(--c-off-black)}
 .hero--bm .hero-title{font-size:var(--h1)}
 /* Black-and-white cyclists (Biomarkers), same hero treatment. */
@@ -8539,7 +8382,6 @@ method:  LC-MS/MS
         <a href="/product" data-link>Solution</a>
         <a href="/science" data-link>Science</a>
         <a href="/biomarkers" data-link>Biomarkers</a>
-        <a href="/research" data-link>Research</a>
         <a href="/compare/point-of-care" data-link>Comparison: vs point of care</a>
         <a href="/compare/blood-labs" data-link>Comparison: vs blood labs</a>
         <a href="/literature" data-link>Literature</a>
@@ -8663,7 +8505,6 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
     '/horses': 'p-horses',       // unlisted: no nav or footer link, by design
     '/compare/point-of-care': 'p-vs-poc',
     '/compare/blood-labs': 'p-vs-bloodlab',
-    '/research': 'p-research',
     '/literature': 'p-literature',
     '/changelog': 'p-changelog',
     '/contact': 'p-demo',
@@ -8681,7 +8522,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
   /* Which nav pill or menu entry lights up for a given route. */
   var NAV_OF = {
     '/use-cases': '/so-what', '/use-cases/alpha-actin': '/so-what',
-    '/science': 'science', '/biomarkers': 'science', '/research': 'science',
+    '/science': 'science', '/biomarkers': 'science',
     '/literature': 'science',
     '/about': 'about', '/team': 'about', '/customers': 'about', '/blog': 'about', '/social': 'about'
   };
@@ -8737,7 +8578,7 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
   }
 
   /* Addresses that moved: old links land on the new one. */
-  var MOVED = { '/demo': '/contact' };
+  var MOVED = { '/demo': '/contact', '/research': '/science' };
 
   function show(p) {
     if (MOVED[p]) { navigate(MOVED[p], true); return; }
@@ -9554,253 +9395,6 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
       confirmSaved('Saved. Strictly necessary cookies only.');
     });
     paint();
-  }
-
-  /* =====================================================================
-     RESEARCH EXPLORER (Herzrasen)
-
-     Blood and saliva carry different units and wildly different absolute
-     ranges, which is why the source deck has to draw them in separate
-     panels — and separate panels are exactly where agreement stops being
-     visible. Everything here is plotted as percent change from the same
-     subject's own resting value, so one axis holds both fluids and the
-     shapes can be compared directly. Absolute means stay in the hover.
-
-     HZ.placeholder gates a banner and is the only thing to flip when the
-     study export arrives; the data shape below is what it has to match.
-     ===================================================================== */
-  var HZ = {
-    placeholder: true,
-    /* pct: percent change from T0 at [rest, post-load, +1h]; se in the same
-       units. r: Pearson r between the two fluids, null where the pair could
-       not be computed. */
-    markers: [
-      { id:'xanthine', name:'Xanthine', family:'Purine turnover', free:true,
-        read:'Rises sharply with load in both fluids and is most of the way back down an hour later — the clearest post-load signal in the panel.',
-        day:   { sal:{pct:[0,11.0,3.1], se:[1.4,1.6,1.5]}, bld:{pct:[0,9.8,2.4], se:[1.2,1.5,1.3]},
-                 r:{t0:0.33, post:0.41, h1:0.29, dPost:0.46, d1h:0.31} },
-        night: { sal:{pct:[0,6.2,-3.4], se:[1.7,1.9,1.8]}, bld:{pct:[0,5.1,-2.9], se:[1.5,1.7,1.6]},
-                 r:{t0:0.28, post:0.36, h1:0.22, dPost:0.39, d1h:0.25} } },
-
-      { id:'hypoxanthine', name:'Hypoxanthine', family:'Purine turnover', free:true,
-        read:'Tracks xanthine one step upstream. The rise is steeper and the return slower, which is what makes the pair useful together rather than singly.',
-        day:   { sal:{pct:[0,13.2,4.0], se:[1.3,1.5,1.4]}, bld:{pct:[0,11.4,3.2], se:[1.1,1.4,1.2]},
-                 r:{t0:0.10, post:0.34, h1:0.21, dPost:0.44, d1h:0.27} },
-        night: { sal:{pct:[0,7.4,-2.1], se:[1.6,1.8,1.7]}, bld:{pct:[0,6.0,-1.8], se:[1.4,1.6,1.5]},
-                 r:{t0:0.08, post:0.29, h1:0.18, dPost:0.37, d1h:0.20} } },
-
-      { id:'uric-acid', name:'Uric acid', family:'Purine turnover', free:true,
-        read:'Barely moves with a single bout — its value here is agreement, not kinetics. Saliva sits close to blood at rest, which is the harder thing to demonstrate.',
-        day:   { sal:{pct:[0,0.9,1.4], se:[0.6,0.7,0.7]}, bld:{pct:[0,0.6,1.1], se:[0.5,0.6,0.6]},
-                 r:{t0:0.79, post:0.76, h1:0.74, dPost:0.31, d1h:0.28} },
-        night: { sal:{pct:[0,1.1,0.4], se:[0.8,0.9,0.9]}, bld:{pct:[0,0.8,0.2], se:[0.7,0.8,0.8]},
-                 r:{t0:0.71, post:0.69, h1:0.66, dPost:0.24, d1h:0.19} } }
-    ],
-    /* Named so the rail shows what is behind the gate rather than a count. */
-    locked: ['Glucose','Pyruvate','Lactate','Succinate','Malate','α-Ketoglutarate',
-             'Urea','Nicotinic acid','NMN','NAD','NADP','cAMP','Adenosine',
-             'Alanine','Glutamine','Glutamic acid','Leucine','Phenylalanine','Proline',
-             'Taurine','Tryptophan','Tyrosine','Citrulline','Lac-Phe','Lac-Leu','Lac-Val',
-             'Melatonin','Cortisol'],
-    lockedTotal: 74,
-    T: ['Rest', 'Post-load', '+1 h']
-  };
-
-  var hzRoot = document.getElementById('p-research');
-  if (hzRoot) {
-    var hzList  = hzRoot.querySelector('[data-hz-list]');
-    var hzMore  = hzRoot.querySelector('[data-hz-more]');
-    var hzName  = hzRoot.querySelector('[data-hz-name]');
-    var hzFam   = hzRoot.querySelector('[data-hz-family]');
-    var hzKin   = hzRoot.querySelector('[data-hz-kin]');
-    var hzCor   = hzRoot.querySelector('[data-hz-cor]');
-    var hzRead  = hzRoot.querySelector('[data-hz-read]');
-    var hzGate  = hzRoot.querySelector('[data-hz-gate]');
-    var hzGateN = hzRoot.querySelector('[data-hz-gatename]');
-    var hzFlag  = hzRoot.querySelector('[data-hz-flag]');
-    var hzPanels = [].slice.call(hzRoot.querySelectorAll('.hz-panel'));
-    var hzCond = 'day';
-    var hzSel = HZ.markers[0];
-    var NS = 'http://www.w3.org/2000/svg';
-
-    if (hzFlag) hzFlag.hidden = !HZ.placeholder;
-
-    function el(tag, attrs, text) {
-      var n = document.createElementNS(NS, tag);
-      for (var k in attrs) n.setAttribute(k, attrs[k]);
-      if (text != null) n.textContent = text;
-      return n;
-    }
-
-    /* ---------- kinetics ---------- */
-    function drawKinetics() {
-      var d = hzSel[hzCond], W = 720, H = 300;
-      var L = 52, R = 18, T = 18, B = 42;
-      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
-        'aria-label': hzSel.name + ', percent change from rest, ' + hzCond });
-
-      var vals = [];
-      ['sal', 'bld'].forEach(function (k) {
-        d[k].pct.forEach(function (v, i) { vals.push(v + d[k].se[i], v - d[k].se[i]); });
-      });
-      var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
-      var pad = Math.max(1.5, (hi - lo) * 0.25);
-      lo = Math.min(lo - pad, -1); hi = hi + pad;
-      var x = function (i) { return L + i * (W - L - R) / 2; };
-      var y = function (v) { return T + (hi - v) * (H - T - B) / (hi - lo); };
-
-      /* gridlines on rounded steps, and the zero line named as rest */
-      var step = (hi - lo) / 4;
-      for (var g = 0; g <= 4; g++) {
-        var gv = lo + g * step, gy = y(gv);
-        svg.appendChild(el('line', { x1: L, x2: W - R, y1: gy, y2: gy, class: 'hzc-grid' }));
-        svg.appendChild(el('text', { x: L - 10, y: gy + 4, class: 'hzc-axis',
-          'text-anchor': 'end' }, (gv > 0 ? '+' : '') + gv.toFixed(0) + '%'));
-      }
-      svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(0), y2: y(0), class: 'hzc-zero' }));
-      HZ.T.forEach(function (t, i) {
-        svg.appendChild(el('text', { x: x(i), y: H - B + 24, class: 'hzc-tick',
-          'text-anchor': 'middle' }, t));
-      });
-
-      [['bld', 'bld'], ['sal', 'sal']].forEach(function (pair) {
-        var k = pair[0], s = d[k];
-        /* the SE band, drawn before the line so the line sits on top */
-        var up = s.pct.map(function (v, i) { return [x(i), y(v + s.se[i])]; });
-        var dn = s.pct.map(function (v, i) { return [x(i), y(v - s.se[i])]; }).reverse();
-        svg.appendChild(el('polygon', {
-          points: up.concat(dn).map(function (p) { return p.join(','); }).join(' '),
-          class: 'hzc-band--' + k }));
-        svg.appendChild(el('polyline', {
-          points: s.pct.map(function (v, i) { return x(i) + ',' + y(v); }).join(' '),
-          class: 'hzc-line hzc-line--' + k }));
-        s.pct.forEach(function (v, i) {
-          svg.appendChild(el('circle', { cx: x(i), cy: y(v), r: 5,
-            class: 'hzc-pt hzc-pt--' + k }));
-          /* a generous invisible target, with the value revealed beside it */
-          var lab = (v > 0 ? '+' : '') + v.toFixed(1) + '% ± ' + s.se[i].toFixed(1);
-          svg.appendChild(el('rect', { x: x(i) - 26, y: y(v) - 20, width: 52, height: 40,
-            class: 'hzc-hit' }));
-          svg.appendChild(el('text', {
-            x: x(i) + (i === 2 ? -10 : 10), y: y(v) - 12, class: 'hzc-val',
-            'text-anchor': i === 2 ? 'end' : 'start' }, lab));
-        });
-      });
-      hzKin.innerHTML = '';
-      hzKin.appendChild(svg);
-    }
-
-    /* ---------- agreement ---------- */
-    function drawCorrelation() {
-      var r = hzSel[hzCond].r;
-      var keys = [['t0', 'Rest'], ['post', 'Post-load'], ['h1', '+1 h'],
-                  ['dPost', 'Δ post'], ['d1h', 'Δ +1 h']];
-      var W = 720, H = 210, L = 52, R = 18, T = 16, B = 40;
-      var svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img',
-        'aria-label': 'Pearson r between blood and saliva for ' + hzSel.name });
-      var y = function (v) { return T + (1 - v) * (H - T - B) / 2; };
-      var x = function (i) { return L + (i + 0.5) * (W - L - R) / keys.length; };
-
-      [1, 0.5, 0, -0.5, -1].forEach(function (gv) {
-        svg.appendChild(el('line', { x1: L, x2: W - R, y1: y(gv), y2: y(gv),
-          class: gv === 0 ? 'hzc-zero' : 'hzc-grid' }));
-        svg.appendChild(el('text', { x: L - 10, y: y(gv) + 4, class: 'hzc-axis',
-          'text-anchor': 'end' }, gv.toFixed(1)));
-      });
-      keys.forEach(function (kv, i) {
-        var v = r[kv[0]];
-        svg.appendChild(el('text', { x: x(i), y: H - B + 22, class: 'hzc-tick',
-          'text-anchor': 'middle' }, kv[1]));
-        if (v == null) {
-          svg.appendChild(el('text', { x: x(i), y: y(0) - 8, class: 'hzc-na',
-            'text-anchor': 'middle' }, 'n/a'));
-          return;
-        }
-        svg.appendChild(el('line', { x1: x(i), x2: x(i), y1: y(0), y2: y(v), class: 'hzc-bar' }));
-        svg.appendChild(el('circle', { cx: x(i), cy: y(v), r: 7,
-          class: v >= 0 ? 'hzc-lolli--pos' : 'hzc-lolli--neg' }));
-        svg.appendChild(el('text', { x: x(i), y: y(v) + (v >= 0 ? -14 : 22),
-          class: 'hzc-val is-on', 'text-anchor': 'middle' }, v.toFixed(2)));
-      });
-      hzCor.innerHTML = '';
-      hzCor.appendChild(svg);
-    }
-
-    function showGate(name) {
-      // A locked marker shows no chart, so no marker stays highlighted.
-      [].forEach.call(hzList.querySelectorAll('.hz-item'), function (b) {
-        b.setAttribute('aria-selected', 'false');
-      });
-      hzGateN.textContent = name;
-      hzGate.hidden = false;
-      hzPanels.forEach(function (p) { p.hidden = true; });
-      hzName.textContent = name;
-      hzFam.textContent = 'Available on request';
-    }
-
-    function select(m) {
-      hzSel = m;
-      hzGate.hidden = true;
-      hzPanels.forEach(function (p) { p.hidden = false; });
-      hzName.textContent = m.name;
-      hzFam.textContent = m.family;
-      hzRead.textContent = m.read;
-      [].forEach.call(hzList.querySelectorAll('.hz-item'), function (b) {
-        b.setAttribute('aria-selected', b.dataset.hzId === m.id ? 'true' : 'false');
-      });
-      drawKinetics();
-      drawCorrelation();
-    }
-
-    /* ---------- the rail ---------- */
-    function buildRail() {
-      hzList.innerHTML = '';
-      HZ.markers.forEach(function (m) {
-        var li = document.createElement('li');
-        var b = document.createElement('button');
-        b.type = 'button'; b.className = 'hz-item'; b.setAttribute('role', 'tab');
-        b.dataset.hzId = m.id;
-        b.innerHTML = '<span class="n"></span>';
-        b.querySelector('.n').textContent = m.name;
-        b.addEventListener('click', function () { select(m); });
-        li.appendChild(b); hzList.appendChild(li);
-      });
-      var sep = document.createElement('li');
-      sep.className = 'hz-sep';
-      sep.innerHTML = '<span class="eyebrow">Available on request</span>';
-      hzList.appendChild(sep);
-      HZ.locked.forEach(function (name) {
-        var li = document.createElement('li');
-        var b = document.createElement('button');
-        b.type = 'button'; b.className = 'hz-item is-locked';
-        b.dataset.hzLocked = name;
-        b.innerHTML = '<span class="n"></span>' +
-          '<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
-          'stroke-width="2" aria-hidden="true"><rect x="4" y="11" width="16" height="9" rx="1.5"/>' +
-          '<path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
-        b.querySelector('.n').textContent = name;
-        b.addEventListener('click', function () { showGate(name); });
-        li.appendChild(b); hzList.appendChild(li);
-      });
-      hzMore.textContent = '+ ' + (HZ.lockedTotal - HZ.locked.length) +
-        ' more across seven analyte families';
-    }
-
-    [].forEach.call(hzRoot.querySelectorAll('[data-hz-cond]'), function (b) {
-      b.addEventListener('click', function () {
-        hzCond = b.dataset.hzCond;
-        [].forEach.call(hzRoot.querySelectorAll('[data-hz-cond]'), function (o) {
-          o.setAttribute('aria-selected', o === b ? 'true' : 'false');
-        });
-        if (hzGate.hidden) { drawKinetics(); drawCorrelation(); }
-      });
-    });
-    hzRoot.querySelector('[data-hz-back]').addEventListener('click', function () {
-      select(HZ.markers[0]);
-    });
-
-    buildRail();
-    select(HZ.markers[0]);
   }
 
   route();
