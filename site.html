@@ -606,28 +606,14 @@ img{max-width:100%; display:block}
 /* Biomarkers page: tight rhythm, blue accents, and the extra blocks redone. */
 #p-biomarkers > .pagehead{padding-bottom:var(--sp-md); border-bottom:0}
 #p-biomarkers > .sec{padding-block:var(--sp-2xl)}
-#p-biomarkers > .pagehead + style + #precision{padding-top:var(--sp-md)}
-/* Under the header photo the header's own bottom space is enough. */
-#p-biomarkers > .bm-hero + style + #precision{padding-top:0}
-#p-biomarkers #precision .hd{margin-bottom:var(--sp-xl)}
-#p-biomarkers .ap-figs{margin-bottom:var(--sp-xl)}
-#p-biomarkers .ap-figs .fig .v{color:var(--c-blue)}
-#p-biomarkers .ap-cap{margin-bottom:var(--sp-md)}
-#p-biomarkers .ap .tabs .tab[aria-selected="true"]{background:var(--c-blue); color:var(--c-white)}
-#p-biomarkers .ap .tabs .tab:hover{color:var(--c-blue)}
-#p-biomarkers .ap .tabs .tab[aria-selected="true"]:hover{color:var(--c-white)}
-#p-biomarkers .ap-note{background:var(--c-blue); color:var(--o-white-80)}
-#p-biomarkers .ap-method{border-top:0; padding-top:0; margin-top:var(--sp-2xl); gap:var(--sp-xs)}
-#p-biomarkers .ap-method > div{background:var(--c-grey-100); border-radius:var(--r-sm); padding:var(--sp-lg)}
-#p-biomarkers .ap-method h3{color:var(--c-blue)}
-#p-biomarkers .list-toolbar .eyebrow{color:var(--c-blue)}
 #p-biomarkers .uc-filter button[aria-pressed="true"]{background:var(--c-blue); color:var(--c-white)}
 #p-biomarkers .uc-filter button:hover{color:var(--c-blue)}
 #p-biomarkers .uc-filter button[aria-pressed="true"]:hover{color:var(--c-white)}
 #p-biomarkers .agroups{gap:var(--sp-lg)}
 #p-biomarkers .agroup-h .t{color:var(--c-blue)}
-#p-biomarkers #precision{padding-bottom:var(--sp-md)}
 #p-biomarkers #bm-analytes{padding-block:var(--sp-md)}
+/* The list follows the header photo directly; its bottom space is enough. */
+#p-biomarkers > .bm-hero ~ #bm-analytes{padding-top:0}
 #p-biomarkers #bm-dashboard{padding-top:var(--sp-md)}
 /* ElevenLabs-style layout for the biomarker page: large rounded cards and
    pill-shaped controls (segmented tabs, filters, search), with a light hero
@@ -645,17 +631,17 @@ img{max-width:100%; display:block}
    a stretch no other hero uses). */
 .bm-hero-media video{display:block; width:100%; height:100%; object-fit:cover}
 #p-biomarkers .btn{border-radius:var(--r-round)}
-#p-biomarkers .ap-figs{border-top:0; gap:var(--sp-sm)}
-#p-biomarkers .ap-figs .sp-fig{border:0; padding:var(--sp-xl) var(--sp-lg); background:var(--c-grey-100); border-radius:24px}
 #p-biomarkers .ap{padding:var(--sp-2xl); border:var(--stroke) solid var(--border); border-radius:28px; background:var(--bg)}
-#p-biomarkers .ap .tabs{display:inline-flex; gap:2px; padding:4px; border-radius:var(--r-round); background:var(--c-grey-100)}
-#p-biomarkers .ap .tabs .tab{border-radius:var(--r-round); background:transparent}
-#p-biomarkers .ap-card, #p-biomarkers .ap-note, #p-biomarkers .ap-method > div, #p-biomarkers .bm-card{border-radius:20px}
 #p-biomarkers .bm-search{max-width:28rem; margin:var(--sp-lg) 0}
 #p-biomarkers #analyte-search{border-radius:var(--r-round); padding-inline:1.25rem; background:var(--c-grey-100); border-color:transparent}
 #p-biomarkers .uc-filter{margin-bottom:var(--sp-2xl)}
 #p-biomarkers .uc-filter button{border-radius:var(--r-round)}
+/* Two independent columns (filled by the script, balanced by marker count),
+   so a short box sits right under the one above it instead of waiting for
+   the tallest box in its row. */
 #p-biomarkers .agroups{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-md); align-items:start}
+#p-biomarkers .agcol{display:flex; flex-direction:column; gap:var(--sp-md); min-width:0}
+#p-biomarkers .agcol:empty{display:none}
 #p-biomarkers .agroup{padding:var(--sp-lg) var(--sp-xl) var(--sp-md); border-radius:24px; background:var(--c-grey-100)}
 #p-biomarkers .agroup-h{border-bottom-color:var(--c-grey-200)}
 #p-biomarkers .analytes li:last-child .analyte{border-bottom:0}
@@ -4090,251 +4076,7 @@ markers: 60+
   </div>
 </header>
 
-<style>
-/* ==========================================================================
-   ANALYTICAL PERFORMANCE  ·  precision explorer, on the biomarker page
-   29 analytes, three measures, from the October 2026 precision study
-   (release 1.2.1). Rows are absolutely positioned so switching measure
-   re-sorts them in place rather than redrawing the chart — which marker
-   moves is the thing worth seeing, and a redraw hides it.
-   ========================================================================== */
-.ap-figs{margin-bottom:var(--sp-3xl)}
-.ap-figs .fig .v{font-size:var(--h3)}
-.ap-figs .fig .v .of{font-size:var(--h5); color:var(--text-3)}
-.ap-figs .fig .k{font-size:var(--t-regular); color:var(--text)}
-.ap-figs .fig .s{letter-spacing:.02em; text-transform:none; font-size:var(--t-small);
-  color:var(--text-2); max-width:min(34ch,100%)}
-
-.ap{display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
-  gap:var(--sp-4xl); align-items:start}
-.ap-chart{min-width:0}
-.ap .tabs{margin-bottom:var(--sp-md)}
-.ap-cap{font-size:var(--t-small); color:var(--text-2); max-width:min(62ch,100%);
-  margin-bottom:var(--sp-xl)}
-
-/* The axis sits above the rows and the limit rule runs the full height of
-   the plot behind them, so "under the limit" is one straight read down the
-   chart rather than 27 separate comparisons. */
-/* The axis and the rows share one track, so the three measurements that
-   define it are declared once on their common ancestor. Declaring them on
-   .ap-plot put them out of reach of .ap-axis, which is its sibling —
-   custom properties inherit down, never sideways. */
-.ap-chart{--ap-name:11rem; --ap-val:4.25rem; --ap-gap:var(--sp-md); --ap-row:1.6rem}
-/* The chart runs to about 740px, so the scale is pinned: scrolled into the
-   middle of 29 rows you would otherwise be reading bar lengths with the axis
-   two screens above. Static below 1100px, where the nav wraps to two rows and
-   its real height stops matching --navh. */
-.ap-axis{position:sticky; top:var(--navh); z-index:2;
-  height:2.25rem; padding-top:1rem; background:var(--bg);
-  margin-left:calc(var(--ap-name) + var(--ap-gap));
-  margin-right:calc(var(--ap-val) + var(--ap-gap));
-  border-bottom:var(--stroke) solid var(--c-grey-300)}
-.ap-axis span{position:absolute; bottom:var(--sp-2xs);
-  font-size:.6875rem; color:var(--text-3); white-space:nowrap}
-
-.ap-plot{position:relative; transition:height var(--dur-short) var(--ease)}
-.ap-limit{position:absolute; top:0; bottom:0; width:0;
-  border-left:var(--stroke) dashed var(--c-grey-300); pointer-events:none}
-/* At the head of the rule the label landed on top of the 15 % and 20 % axis
-   ticks. At its foot there is nothing to collide with, and the axis already
-   says 15 % directly above the line, so the label does not repeat it. */
-.ap-limit b{position:absolute; bottom:calc(-1 * var(--sp-lg)); left:var(--sp-sm);
-  font-weight:400; font-size:.6875rem; color:var(--text-3); white-space:nowrap}
-
-.ap-row{
-  position:absolute; left:0; right:0; top:0; height:var(--ap-row);
-  display:grid; grid-template-columns:var(--ap-name) minmax(0,1fr) var(--ap-val);
-  align-items:center; column-gap:var(--ap-gap);
-  background:none; border:0; padding:0; margin:0; font:inherit; text-align:left;
-  cursor:pointer; color:var(--text-2);
-  transition:transform var(--dur-short) var(--ease), color var(--dur-micro) var(--ease);
-}
-.ap-row .nm{font-size:.8125rem; line-height:1.2; white-space:nowrap;
-  overflow:hidden; text-overflow:ellipsis}
-.ap-row .tr{position:relative; height:6px; border-radius:1px; background:var(--o-black-5)}
-.ap-row .fi{position:absolute; left:0; top:0; bottom:0; border-radius:1px;
-  background:var(--o-black-40); width:0;
-  transition:width var(--dur-short) var(--ease), background-color var(--dur-micro) var(--ease)}
-.ap-row .vl{font-size:.8125rem; color:var(--text-3); text-align:right;
-  font-variant-numeric:tabular-nums}
-.ap-row:hover{color:var(--text)}
-.ap-row:hover .fi{background:var(--c-blue)}
-.ap-row:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:var(--r-sm)}
-.ap-row[aria-pressed="true"]{color:var(--text)}
-.ap-row[aria-pressed="true"] .fi{background:var(--c-blue)}
-.ap-row[aria-pressed="true"] .vl{color:var(--text)}
-/* The one marker over the ICH M10 limit, and the two not yet classified, are
-   marked in the chart itself. Leaving them to a footnote would mean the
-   picture and the caption disagreed. */
-.ap-row.is-over .fi{background:var(--c-off-black)}
-.ap-row.is-open .nm{color:var(--text-3)}
-.ap-row.is-open .fi{background:var(--o-black-20)}
-.ap-row .mk{color:var(--text-3)}
-
-@media (prefers-reduced-motion:reduce){
-  .ap-row, .ap-row .fi, .ap-plot{transition:none}
-}
-
-/* --- the side column ----------------------------------------------------- */
-.ap-side{display:flex; flex-direction:column; gap:var(--sp-xs);
-  position:sticky; top:calc(var(--navh) + var(--sp-xl))}
-.ap-card{background:var(--fill); border-radius:var(--r-sm); padding:var(--sp-lg);
-  display:flex; flex-direction:column; gap:var(--sp-md); min-height:10.5rem}
-.ap-card .hint{font-size:var(--t-small); color:var(--text-3); max-width:min(34ch,100%)}
-.ap-card h3{font-size:var(--h5); letter-spacing:-.03em; line-height:1.2}
-.ap-card dl{display:grid; grid-template-columns:1fr auto; gap:0;
-  border-top:var(--hairline) solid var(--border)}
-.ap-card dt, .ap-card dd{padding:var(--sp-sm) 0; font-size:var(--t-small);
-  border-bottom:var(--hairline) solid var(--border)}
-.ap-card dt{color:var(--text-2)}
-.ap-card dd{color:var(--text); text-align:right; font-variant-numeric:tabular-nums}
-.ap-card dd.is-over{color:var(--c-off-black)}
-.ap-card .nb{font-size:var(--t-small); color:var(--text-2); max-width:min(36ch,100%)}
-.ap-note{background:var(--c-black-blue); color:var(--o-white-80);
-  border-radius:var(--r-sm); padding:var(--sp-lg);
-  display:flex; flex-direction:column; gap:var(--sp-sm)}
-.ap-note b{font-weight:400; color:var(--c-white); font-size:var(--t-regular)}
-.ap-note p{font-size:var(--t-small); max-width:min(38ch,100%)}
-
-/* --- method, under the whole thing --------------------------------------- */
-.ap-method{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:var(--sp-xl); margin-top:var(--sp-4xl);
-  border-top:var(--stroke) solid var(--border); padding-top:var(--sp-xl)}
-.ap-method h3{font-size:var(--t-regular); letter-spacing:-.02em; margin-bottom:var(--sp-sm)}
-.ap-method p{font-size:var(--t-small); color:var(--text-2); max-width:min(44ch,100%)}
-.ap-method p + p{margin-top:var(--sp-sm)}
-
-@media (max-width:1100px){
-  .ap{grid-template-columns:1fr; gap:var(--sp-2xl)}
-  .ap-side{position:static}
-  .ap-axis{position:static}
-}
-/* On a phone the track is about 125px, and a name column wide enough for
-   "N-lactoyl-phenylalanine" leaves nothing for the bar — so the name moves
-   above its own bar and the bar takes the full width. Zeroing the three track
-   measurements is all that is needed: the axis margins and the limit rule are
-   both expressed in them, so they follow by themselves. */
-@media (max-width:1024px){
-  .ap-chart{--ap-name:0rem; --ap-val:0rem; --ap-gap:0rem; --ap-row:3.1rem}
-  .ap-row{grid-template-columns:minmax(0,1fr) auto;
-    grid-template-rows:auto auto; align-items:baseline; row-gap:var(--sp-sm);
-    padding-bottom:var(--sp-md)}
-  .ap-row .nm{grid-column:1; grid-row:1; font-size:.8125rem}
-  .ap-row .vl{grid-column:2; grid-row:1}
-  .ap-row .tr{grid-column:1 / -1; grid-row:2}
-  .ap-limit b{left:auto; right:var(--sp-sm)}
-}
-</style>
-
-<!-- ======================================================================
-     ANALYTICAL PERFORMANCE
-     Precision study, release 1.2.1, October 2026. Deliberately NOT called
-     accuracy: the study measures reproducibility, and agreement with an
-     external reference method was explicitly out of its scope.
-     ====================================================================== -->
-<section class="sec" id="precision">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Analytical performance</span>
-      <h2 class="h2">Consistent by design.</h2>
-      <p class="copy">A number you can&rsquo;t repeat is a number you can&rsquo;t trust. We
-        tested how reproducible the panel measures one sample within a run, between
-        independently prepared runs, and across a change of instrument, and assessed it
-        against ICH M10 (international guideline on bioanalytical method validation that
-        the EMA and FDA apply).</p>
-    </div>
-
-    <div class="cnt ap-figs" data-count-group style="--cols:4">
-      <div class="sp-fig"><span class="sp-i">01</span>
-        <span class="sp-v"><b data-count="26" data-dec="0">26</b><small>/ 27</small></span>
-        <span class="sp-k">meet the ICH M10 standard</span>
-        <span class="sp-s">At or under 15&#8201;% variation within and between runs. Two further markers are still in optimisation.</span></div>
-      <div class="sp-fig"><span class="sp-i">02</span>
-        <span class="sp-v"><b data-count="4.8" data-dec="1">4.8</b><small>%</small></span>
-        <span class="sp-k">typical variation</span>
-        <span class="sp-s">The median spread of a single result on any given day.</span></div>
-      <div class="sp-fig"><span class="sp-i">03</span>
-        <span class="sp-v"><b data-count="13" data-dec="0">13</b><small>%</small></span>
-        <span class="sp-k">smallest real change</span>
-        <span class="sp-s">A larger change between two samples is very unlikely to be measurement noise.</span></div>
-      <div class="sp-fig"><span class="sp-i">04</span>
-        <span class="sp-v"><b data-count="1000" data-dec="0">1,000</b><small>&times;</small></span>
-        <span class="sp-k">dynamic range</span>
-        <span class="sp-s">17 of 29 biomarkers quantified across three orders of magnitude.</span></div>
-    </div>
-
-    <div class="ap" data-ap>
-      <div class="ap-chart">
-        <div class="tabs" role="tablist" aria-label="Which measure to show">
-          <button class="tab" type="button" role="tab" id="ap-t-w" aria-controls="ap-panel"
-            data-ap-tab="w" aria-selected="true">Within a run</button>
-          <button class="tab" type="button" role="tab" id="ap-t-b" aria-controls="ap-panel"
-            data-ap-tab="b" aria-selected="false">Between runs</button>
-          <button class="tab" type="button" role="tab" id="ap-t-l" aria-controls="ap-panel"
-            data-ap-tab="l" aria-selected="false">Lowest level measured</button>
-        </div>
-        <div id="ap-panel" role="tabpanel" aria-labelledby="ap-t-w">
-          <p class="ap-cap" data-ap-cap></p>
-          <div class="ap-axis" data-ap-axis></div>
-          <div class="ap-plot" data-ap-plot></div>
-        </div>
-      </div>
-
-      <aside class="ap-side">
-        <div class="ap-card" data-ap-card></div>
-        <div class="ap-note">
-          <b>The benchmark: ICH M10</b>
-          <p>The International Council for Harmonisation&rsquo;s guideline on bioanalytical
-            method validation, applied by regulators including the EMA and the FDA. It asks
-            for variation at or under 15&#8201;% both within a run and between runs, and at or
-            under 20&#8201;% at the lowest measurable level.</p>
-        </div>
-      </aside>
-    </div>
-
-    <div class="ap-method">
-      <div>
-        <h3>How we tested</h3>
-        <p>Pooled human saliva, untreated and with added reference compounds. Five
-          independently calibrated runs on three days, from four independent preparations,
-          each sample measured five to eight times per run: 61 quality control injections,
-          each quantifying all 29 biomarkers.</p>
-        <p>Every biomarker is quantified against its own isotope labelled internal standard,
-          and the results were recalculated independently of the instrument software.</p>
-      </div>
-      <div>
-        <h3>What the charts show</h3>
-        <p>The final method configuration: the two most recent runs, after the hardware
-          change. Across all five runs the median variation between runs is 3.9&#8201;%, and
-          2.7&#8201;% in the final configuration. Prepared samples remeasured after 2.6 days
-          moved by 0.1&#8201;% at the median.</p>
-      </div>
-      <div>
-        <h3>What this study does not cover</h3>
-        <p>It measures precision &mdash; whether the same sample gives the same answer. It
-          does not measure agreement with an external reference method, which was not part
-          of its scope.</p>
-        <p>Method parameters are proprietary. Full validation data is available under NDA, and
-          every marker in the panel is listed on the <a class="inline-link" href="/biomarkers"
-          data-link>biomarker page</a>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <script>
-/* =======================================================================
-   ANALYTICAL PERFORMANCE EXPLORER
-   One row per analyte, three measures. Rows are absolutely positioned and
-   moved with a transform, so switching measure re-sorts the chart in place:
-   watching adenosine and kynurenine travel from the middle of the pack to
-   the bottom IS the finding, and a redraw would throw it away.
-
-   w = variation within a run, b = between runs (both CV %), l = lowest
-   level quantified (ng/mL). Two analytes carry no CV: they are still in
-   optimisation, so they are drawn as open rows rather than left out, which
-   would quietly turn 29 markers into 27.
-   ======================================================================= */
 (function () {
 
   /* Count-up figures (Home "Proven at scale"): reveal the columns and run the
@@ -4408,225 +4150,10 @@ markers: 60+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initPz);
   else initPz();
 })();
-(function () {
-  'use strict';
-  var root = document.querySelector('[data-ap]');
-  if (!root) return;
-  var ROWS = [{"n":"2'-deoxyguanosine","w":3.2,"b":2.9,"l":9.4,"ls":"9.4"},{"n":"3-hydroxyglutaric acid","w":null,"b":null,"l":10.0,"ls":"10"},{"n":"8-OHdG","w":5.4,"b":0.3,"l":1.0,"ls":"1"},{"n":"adenosine","w":3.2,"b":20.5,"l":10.0,"ls":"10"},{"n":"alanine","w":5.7,"b":3.1,"l":100.0,"ls":"100"},{"n":"cAMP","w":5.2,"b":1.1,"l":0.89,"ls":"0.89"},{"n":"citrulline","w":2.9,"b":1.7,"l":50.0,"ls":"50"},{"n":"creatine","w":6.8,"b":6.7,"l":17.6,"ls":"17.6"},{"n":"creatinine","w":3.5,"b":0.4,"l":10.0,"ls":"10"},{"n":"cytosine","w":1.8,"b":2.3,"l":10.0,"ls":"10"},{"n":"glutamic acid","w":2.8,"b":5.6,"l":100.0,"ls":"100"},{"n":"glutamine","w":2.5,"b":4.3,"l":50.0,"ls":"50"},{"n":"hypoxanthine","w":2.6,"b":1.1,"l":10.0,"ls":"10"},{"n":"kynurenic acid","w":3.3,"b":1.1,"l":0.1,"ls":"0.10"},{"n":"kynurenine","w":5.2,"b":12.8,"l":1.0,"ls":"1"},{"n":"leucine","w":6.2,"b":5.9,"l":50.0,"ls":"50"},{"n":"N-lactoyl-phenylalanine","w":3.1,"b":2.6,"l":0.2,"ls":"0.20"},{"n":"neopterin","w":3.4,"b":4.6,"l":1.0,"ls":"1"},{"n":"nicotinic acid","w":4.0,"b":0.4,"l":2.0,"ls":"2"},{"n":"nitrotyrosine","w":3.6,"b":1.8,"l":2.0,"ls":"2"},{"n":"phenylalanine","w":6.1,"b":3.9,"l":20.0,"ls":"20"},{"n":"proline","w":9.3,"b":7.0,"l":1000.0,"ls":"1,000"},{"n":"pyroglutamic acid","w":9.6,"b":1.5,"l":50.0,"ls":"50"},{"n":"taurine","w":3.9,"b":3.5,"l":15.0,"ls":"15"},{"n":"trigonelline","w":3.3,"b":1.7,"l":0.79,"ls":"0.79"},{"n":"tryptophan","w":6.8,"b":7.7,"l":4.0,"ls":"4"},{"n":"tyrosine","w":4.7,"b":0.7,"l":100.0,"ls":"100"},{"n":"uric acid","w":null,"b":null,"l":50.0,"ls":"50"},{"n":"xanthine","w":2.9,"b":2.7,"l":10.0,"ls":"10"}];
-  var LIMIT = 15;              // ICH M10, within and between runs
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  var VIEW = {
-    w: {
-      cap: 'Repeated measurements of one sample inside a single run. Every classified ' +
-           'marker sits well under the ICH M10 limit.',
-      max: 21, ticks: [0, 5, 10, 15, 20], unit: '\u2009%', limit: LIMIT, log: false
-    },
-    b: {
-      cap: 'The same sample measured across independently prepared runs \u2014 the harder ' +
-           'test, and the one that matters for comparing a sample with the one before it.',
-      max: 21, ticks: [0, 5, 10, 15, 20], unit: '\u2009%', limit: LIMIT, log: false
-    },
-    l: {
-      cap: 'The lowest concentration the method quantifies, in nanograms per millilitre. ' +
-           'The scale is logarithmic: the panel spans four orders of magnitude end to end.',
-      max: 1000, min: 0.1, ticks: [0.1, 1, 10, 100, 1000], unit: '', log: true
-    }
-  };
-
-  var plot = root.querySelector('[data-ap-plot]');
-  var axis = root.querySelector('[data-ap-axis]');
-  var cap = root.querySelector('[data-ap-cap]');
-  var card = root.querySelector('[data-ap-card]');
-  var tabs = [].slice.call(root.querySelectorAll('[data-ap-tab]'));
-  var panel = root.querySelector('#ap-panel');
-  var mode = 'w';
-  var picked = null;
-
-  /* LOQ carries its own display string: the study reports 0.10 and 0.20 to two
-     significant figures, and reformatting the number would silently drop one. */
-  function num(r, m) {
-    var v = r[m];
-    if (v === null) return '\u2014';
-    return m === 'l' ? r.ls : v.toFixed(1);
-  }
-  /* A bar's share of the track. On the log view a value is placed by its
-     exponent, which is the only way 0.10 and 1,000 fit on one axis. */
-  function frac(v, V) {
-    if (v === null) return 0;
-    if (!V.log) return Math.min(1, v / V.max);
-    var lo = Math.log(V.min), hi = Math.log(V.max);
-    return Math.min(1, Math.max(0, (Math.log(v) - lo) / (hi - lo)));
-  }
-
-  /* Build the rows once; only their order and their bars change after. */
-  var els = ROWS.map(function (r, i) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'ap-row';
-    b.setAttribute('aria-pressed', 'false');
-    b.dataset.i = i;
-    b.innerHTML = '<span class="nm"></span>' +
-                  '<span class="tr"><span class="fi"></span></span>' +
-                  '<span class="vl"></span>';
-    b.querySelector('.nm').textContent = r.n;
-    plot.appendChild(b);
-    return b;
-  });
-
-  var rule = document.createElement('div');
-  rule.className = 'ap-limit';
-  rule.innerHTML = '<b>ICH M10 limit</b>';
-  plot.appendChild(rule);
-
-  function rowH() {
-    return parseFloat(getComputedStyle(plot).getPropertyValue('--ap-row')) *
-      parseFloat(getComputedStyle(document.documentElement).fontSize);
-  }
-
-  function draw() {
-    var V = VIEW[mode];
-    cap.textContent = V.cap;
-
-    /* Unclassified markers have no CV, so they sort to the end of a CV view
-       rather than to the front as a zero would. */
-    var order = ROWS.map(function (r, i) { return i; }).sort(function (a, b) {
-      var x = ROWS[a][mode], y = ROWS[b][mode];
-      if (x === null) return 1;
-      if (y === null) return -1;
-      return x - y || ROWS[a].n.localeCompare(ROWS[b].n);
-    });
-
-    var h = rowH();
-    order.forEach(function (idx, pos) {
-      var r = ROWS[idx], el = els[idx], v = r[mode];
-      el.style.transform = 'translateY(' + (pos * h) + 'px)';
-      /* A floor on the bar, because the smallest value on a log axis lands at
-         exactly zero width — and a marker drawn as nothing reads as missing
-         data, which is the opposite of what the most sensitive assay in the
-         panel should look like. */
-      el.querySelector('.fi').style.width =
-        (v === null ? 0 : Math.max(frac(v, V), 0.009) * 100) + '%';
-      el.querySelector('.vl').textContent = num(r, mode) + (v === null ? '' : V.unit);
-      el.classList.toggle('is-over', V.limit != null && v !== null && v > V.limit);
-      el.classList.toggle('is-open', v === null);
-      el.setAttribute('aria-label', r.n + ', ' +
-        (v === null ? 'in optimisation, not yet classified'
-                    : num(r, mode) + (mode === 'l' ? ' nanograms per millilitre' : ' percent')));
-    });
-    plot.style.height = (order.length * h) + 'px';
-
-    axis.innerHTML = '';
-    V.ticks.forEach(function (t, k) {
-      var s = document.createElement('span');
-      s.style.left = (frac(t, V) * 100) + '%';
-      /* The end ticks are pulled inside the axis rather than centred on it,
-         or the first and last labels hang off both edges of the chart. */
-      s.style.transform = k === 0 ? 'none'
-        : k === V.ticks.length - 1 ? 'translateX(-100%)' : 'translateX(-50%)';
-      s.textContent = mode === 'l' ? (t >= 1000 ? '1,000' : String(t)) : t + '\u2009%';
-      axis.appendChild(s);
-    });
-
-    if (V.limit != null) {
-      rule.hidden = false;
-      rule.style.left = rulePos(V);
-    } else {
-      rule.hidden = true;
-    }
-    show(picked);
-  }
-
-  /* The limit rule has to land on the same x as a bar of that value, and the
-     track is the row minus two fixed columns — so it is positioned from the
-     same two custom properties the grid uses rather than from a measurement
-     that would go stale on resize. */
-  function rulePos(V) {
-    return 'calc(var(--ap-name) + var(--ap-gap) + ' +
-      (frac(V.limit, V)) + ' * (100% - var(--ap-name) - var(--ap-val) - 2 * var(--ap-gap)))';
-  }
-
-  var EMPTY = '<p class="hint">Pick any marker to see how it performs on all three ' +
-    'measures. 29 are in the panel; 27 are classified, and two are still in ' +
-    'optimisation.</p>';
-
-  function show(i) {
-    if (i === null || i === undefined) { card.innerHTML = EMPTY; return; }
-    var r = ROWS[i];
-    var open = r.w === null;
-    var over = r.b !== null && r.b > LIMIT;
-    var html = '<h3>' + esc(r.n) + '</h3><dl>' +
-      '<dt>Within a run</dt><dd>' + (open ? '\u2014' : r.w.toFixed(1) + '\u2009%') + '</dd>' +
-      '<dt>Between runs</dt><dd' + (over ? ' class="is-over"' : '') + '>' +
-        (open ? '\u2014' : r.b.toFixed(1) + '\u2009%') + '</dd>' +
-      '<dt>Lowest level measured</dt><dd>' + r.ls + ' ng/mL</dd></dl>';
-    if (open) {
-      html += '<p class="nb">In optimisation. It is quantified, but not yet classified ' +
-        'against ICH M10, so it carries no precision figure here.</p>';
-    } else if (over) {
-      html += '<p class="nb">Assessed in untreated saliva. It is the one classified marker ' +
-        'over the 15\u2009% limit between runs, and it is reported as such rather than ' +
-        'left out of the panel.</p>';
-    }
-    card.innerHTML = html;
-  }
-
-  function esc(s) {
-    return s.replace(/[&<>]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c];
-    });
-  }
-
-  plot.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('.ap-row');
-    if (!b) return;
-    var i = +b.dataset.i;
-    picked = picked === i ? null : i;
-    els.forEach(function (el, j) { el.setAttribute('aria-pressed', j === picked ? 'true' : 'false'); });
-    show(picked);
-  });
-  /* Hovering previews a marker without committing to it; leaving the chart
-     puts back whatever was actually selected. */
-  plot.addEventListener('mouseover', function (e) {
-    var b = e.target.closest && e.target.closest('.ap-row');
-    if (b) show(+b.dataset.i);
-  });
-  plot.addEventListener('mouseleave', function () { show(picked); });
-
-  function pickTab(t) {
-    if (mode === t.dataset.apTab) return;
-    mode = t.dataset.apTab;
-    tabs.forEach(function (o) { o.setAttribute('aria-selected', o === t ? 'true' : 'false'); });
-    panel.setAttribute('aria-labelledby', t.id);
-    draw();
-  }
-  /* On a mouse, resting on a measure switches to it; touch keeps tapping. */
-  var hoverable = window.matchMedia('(hover: hover)');
-  tabs.forEach(function (t) {
-    t.addEventListener('click', function () { pickTab(t); });
-    t.addEventListener('mouseenter', function () { if (hoverable.matches) pickTab(t); });
-  });
-
-  /* Row height is a rem, and the root font size is fluid, so every resize
-     changes where a row belongs. */
-  var t0;
-  window.addEventListener('resize', function () {
-    clearTimeout(t0);
-    t0 = setTimeout(draw, 120);
-  });
-
-  show(null);
-  draw();
-  if (reduce) plot.style.transition = 'none';
-})();
 </script>
 
 <section class="sec" id="bm-analytes">
   <div class="wrap">
-    <div class="list-toolbar">
-      <span class="eyebrow">Quantified analytes</span>
-      <span class="mono xs faint" id="analyte-count">62 published &middot; 10 groups</span>
-    </div>
     <div class="field bm-search">
       <input type="search" id="analyte-search" placeholder="Search biomarkers&hellip;"
         aria-label="Search biomarkers" autocomplete="off">
@@ -9211,7 +8738,31 @@ input[type="search"]{border-radius:var(--r-round); padding-inline:1.25rem}
         shown += hits;
       });
       if (analyteEmpty) analyteEmpty.hidden = shown !== 0;
+      layoutGroups();
     }
+
+    /* Two columns on a laptop: each group goes, in order, to the column with
+       fewer markers so far. Counted rather than measured, because the page
+       is often hidden when this runs, and so opening a marker never makes
+       the boxes jump between columns. One column, in order, below 1025px. */
+    var agList = document.getElementById('analyte-list');
+    var agCols = [0, 1].map(function () {
+      var c = document.createElement('div'); c.className = 'agcol'; agList.appendChild(c); return c;
+    });
+    var wide = window.matchMedia('(min-width:1025px)');
+    function layoutGroups() {
+      var load = [0, 0];
+      analyteGroups.forEach(function (g) {
+        var k = 0;
+        if (wide.matches && !g.hidden) {
+          k = load[1] < load[0] ? 1 : 0;
+          load[k] += 2 + g.querySelectorAll('li:not([hidden])').length;
+        }
+        agCols[k].appendChild(g);
+      });
+    }
+    layoutGroups();
+    if (wide.addEventListener) wide.addEventListener('change', layoutGroups);
 
     analyteSearch.addEventListener('input', applyAnalytes);
     if (grpBar) {
