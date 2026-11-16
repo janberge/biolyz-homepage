@@ -2157,6 +2157,9 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 
 @media (max-width:1024px){.tm-grid{grid-template-columns:1fr 1fr; gap:var(--sp-lg) var(--sp-sm)} .tm-meta h3{font-size:var(--t-regular)}}
 .tm-card--adv .tm-photo{aspect-ratio:1; max-width:9rem; border-radius:50%}
+/* A team member whose headshot has not arrived yet: a plain silhouette on the photo grey. */
+.tm-photo--ph{display:flex; align-items:flex-end; justify-content:center; background:#dfe3ea}
+.tm-photo--ph svg{width:70%; height:auto; fill:#b9c0cc}
 /* Team rows: the script deals the grid into three rows of portraits that
    drift slowly in alternating directions, each row twice over so the loop
    has no seam. Hovering a row stops it; the portrait under the cursor
@@ -6073,6 +6076,11 @@ markers: 60+
           <div class="tm-meta"><h3>Paul</h3></div>
         </article>
         <article class="tm-card">
+          <!-- Headshots to come (this card and the ones below): add web/team<name>.jpg, then replace the div with an img like the cards above. -->
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Iman Korchi, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Iman</h3></div>
+        </article>
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamkirabrandt__" alt="Kira Brandt" loading="lazy"></div>
           <div class="tm-meta"><h3>Kira</h3></div>
         </article>
@@ -6089,6 +6097,10 @@ markers: 60+
           <div class="tm-meta"><h3>Nadine</h3></div>
         </article>
         <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Faariah Masood, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Faariah</h3></div>
+        </article>
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamsachinmoodley__" alt="Sachin Moodley" loading="lazy"></div>
           <div class="tm-meta"><h3>Sachin</h3></div>
         </article>
@@ -6099,6 +6111,10 @@ markers: 60+
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamjuliaruminska__" alt="Julia Ruminska" loading="lazy"></div>
           <div class="tm-meta"><h3>Julia</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Buerkan Kalaycik, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Buerkan</h3></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamferdinandzoratti__" alt="Ferdinand Zoratti" loading="lazy"></div>
@@ -6117,6 +6133,10 @@ markers: 60+
           <div class="tm-meta"><h3>Lukas</h3></div>
         </article>
         <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Kevin Schmidt, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Kevin</h3></div>
+        </article>
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamthomasverst__" alt="Thomas Verst" loading="lazy"></div>
           <div class="tm-meta"><h3>Thomas</h3></div>
         </article>
@@ -6133,6 +6153,10 @@ markers: 60+
           <div class="tm-meta"><h3>Nina</h3></div>
         </article>
         <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Charlotte Wenzel, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Charlotte</h3></div>
+        </article>
+        <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teampanoskatranitsiotis__" alt="Panagiotis Katranitsiotis" loading="lazy"></div>
           <div class="tm-meta"><h3>Panagiotis</h3></div>
         </article>
@@ -6143,6 +6167,10 @@ markers: 60+
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamkarinkipper__" alt="Karin Kipper" loading="lazy"></div>
           <div class="tm-meta"><h3>Karin</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Walter Sobchak, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Walter</h3></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamdanielheffermann__" alt="Daniel Heffernan" loading="lazy"></div>
@@ -6159,6 +6187,10 @@ markers: 60+
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teamstephanzoratti__" alt="Stephan Zoratti" loading="lazy"></div>
           <div class="tm-meta"><h3>Stephan</h3></div>
+        </article>
+        <article class="tm-card">
+          <div class="tm-photo tm-photo--ph" role="img" aria-label="Juan Marin, photo to come"><svg viewBox="0 0 80 100" aria-hidden="true"><circle cx="40" cy="36" r="16"/><path d="M8 100c0-20 14-34 32-34s32 14 32 34z"/></svg></div>
+          <div class="tm-meta"><h3>Juan</h3></div>
         </article>
         <article class="tm-card">
           <div class="tm-photo"><img src="__IMG_teampeteroettl__" alt="Peter Oettl" loading="lazy"></div>
