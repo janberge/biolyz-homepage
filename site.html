@@ -632,15 +632,23 @@ img{max-width:100%; display:block}
 .pt-copy p.pt-note{font-size:var(--t-small); color:var(--text-2); padding-left:var(--sp-sm); border-left:2px solid var(--c-blue)}
 .pt-lock{position:relative; overflow:hidden; padding:var(--sp-lg); border-radius:20px; background:var(--c-white)}
 .pt-k{display:block; font-size:.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--text-3); margin-bottom:var(--sp-sm)}
+.pt-top{display:grid; grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr)); gap:var(--sp-sm)}
+.pt-bm{padding:var(--sp-md); border-radius:14px; background:var(--c-grey-100)}
+.pt-bm > b{display:block; font-weight:500; margin-bottom:var(--sp-xs)}
+.pt-bm dl{display:grid; grid-template-columns:1fr auto; gap:.25rem var(--sp-sm); margin:0; font-size:var(--t-small)}
+.pt-bm dt{color:var(--text-2)}
+.pt-bm dd{margin:0; color:var(--c-blue); font-variant-numeric:tabular-nums}
+.pt-lim{display:block; margin:var(--sp-xs) 0 var(--sp-md); font-size:.75rem; color:var(--text-3)}
+.pt-rest{position:relative; min-height:8.5rem}
 .pt-chart{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.55rem; filter:blur(3px)}
 .pt-chart li{display:grid; grid-template-columns:7rem 1fr; align-items:center; gap:var(--sp-sm)}
 .pt-nm{height:.6rem; border-radius:4px; background:var(--c-grey-200)}
 .pt-bar{height:.7rem; border-radius:4px; background:var(--c-blue); opacity:.75}
-.pt-veil{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+.pt-veil{position:absolute; inset:-.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center;
   gap:.35rem; padding:var(--sp-lg); text-align:center; background:color-mix(in srgb,var(--c-white) 55%,transparent)}
 .pt-veil b{font-weight:500; color:var(--c-off-black)}
 .pt-veil span{font-size:var(--t-small); color:var(--text-2); max-width:30ch}
-.pt-ico{display:grid; place-items:center; width:2.5rem; height:2.5rem; margin-bottom:.25rem; border-radius:50%;
+.pt-ico{flex:none; display:grid; place-items:center; width:2.5rem; height:2.5rem; margin-bottom:.25rem; border-radius:50%;
   background:var(--c-blue); color:var(--c-white)}
 .pt-ico svg{width:1.2rem; height:1.2rem}
 @media (max-width:1024px){ .pt{grid-template-columns:1fr; gap:var(--sp-xl); padding:var(--sp-lg); border-radius:24px} }
@@ -4547,25 +4555,30 @@ markers: 60+
         <p class="pt-note">These figures come from a controlled precision study on pooled
           saliva. Values in everyday practice, with real samples collected in the field, can
           differ from them.</p>
-        <a class="btn" href="/contact" data-link>Full summary &#8599;&#xFE0E;</a>
+        <a class="btn" href="/contact" data-link>Full study &#8599;&#xFE0E;</a>
       </div>
-      <div class="pt-lock" aria-hidden="true">
-        <span class="pt-k">Within-run CV</span>
-        <ul class="pt-chart">
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:36%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:50%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:52%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:56%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:62%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:64%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:66%"></span></li>
-          <li><span class="pt-nm"></span><span class="pt-bar" style="width:66%"></span></li>
-        </ul>
-        <div class="pt-veil"><span class="pt-ico"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9.5h-13z"/></svg></span>
+      <div class="pt-lock">
+        <!-- Hypoxanthine, among the lowest variation on both measures of the study,
+             and creatinine as a marker readers know. Cortisol is not in this study. -->
+        <span class="pt-k">Highlights from the panel</span>
+        <div class="pt-top">
+          <div class="pt-bm"><b>Hypoxanthine</b><dl><dt>Within a run</dt><dd>2.6&thinsp;%</dd><dt>Between runs</dt><dd>1.1&thinsp;%</dd></dl></div>
+          <div class="pt-bm"><b>Creatinine</b><dl><dt>Within a run</dt><dd>3.5&thinsp;%</dd><dt>Between runs</dt><dd>0.4&thinsp;%</dd></dl></div>
+        </div>
+        <span class="pt-lim">ICH&nbsp;M10 limit: 15&thinsp;% on both</span>
+        <div class="pt-rest">
+          <ul class="pt-chart" aria-hidden="true">
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:52%"></span></li>
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:56%"></span></li>
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:62%"></span></li>
+            <li><span class="pt-nm"></span><span class="pt-bar" style="width:64%"></span></li>
+          </ul>
+          <div class="pt-veil"><span class="pt-ico"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9.5h-13z"/></svg></span>
           <b>All 29 biomarkers, three measures</b>
           <span>Within-run and between-run variation and the lowest level quantified, on request.</span></div>
+        </div>
       </div>
     </div>
   </div>
