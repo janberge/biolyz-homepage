@@ -616,6 +616,34 @@ img{max-width:100%; display:block}
 #p-biomarkers > .bm-hero ~ #bm-analytes{padding-top:0}
 #p-biomarkers > .bm-hero{padding-bottom:var(--sp-lg)}
 #p-biomarkers #bm-dashboard{padding-top:var(--sp-md)}
+/* Analytical performance teaser: a little in the open, the rest behind a call. */
+#p-biomarkers #bm-performance{padding-block:var(--sp-md)}
+.pt{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--sp-2xl); align-items:center;
+  padding:var(--sp-2xl); border-radius:28px; background:var(--c-grey-100)}
+.pt-copy{display:flex; flex-direction:column; align-items:flex-start; gap:var(--sp-md)}
+.pt-copy .eyebrow{color:var(--c-blue)}
+.pt-copy p{color:var(--text-2); max-width:44ch; margin:0}
+.pt-figs{display:flex; gap:var(--sp-xl); flex-wrap:wrap; margin-block:var(--sp-xs)}
+.pt-figs div{display:flex; flex-direction:column; gap:.2rem; max-width:13rem}
+.pt-figs b{font-weight:400; font-size:var(--h3); line-height:1; letter-spacing:-.04em; color:var(--c-blue)}
+.pt-figs small{font-size:.5em; color:var(--text-3)}
+.pt-figs span{font-size:var(--t-small); color:var(--text-2)}
+.pt-copy .btn{border-radius:var(--r-round)}
+.pt-copy p.pt-note{font-size:var(--t-small); color:var(--text-2); padding-left:var(--sp-sm); border-left:2px solid var(--c-blue)}
+.pt-lock{position:relative; overflow:hidden; padding:var(--sp-lg); border-radius:20px; background:var(--c-white)}
+.pt-k{display:block; font-size:.75rem; letter-spacing:.09em; text-transform:uppercase; color:var(--text-3); margin-bottom:var(--sp-sm)}
+.pt-chart{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.55rem; filter:blur(3px)}
+.pt-chart li{display:grid; grid-template-columns:7rem 1fr; align-items:center; gap:var(--sp-sm)}
+.pt-nm{height:.6rem; border-radius:4px; background:var(--c-grey-200)}
+.pt-bar{height:.7rem; border-radius:4px; background:var(--c-blue); opacity:.75}
+.pt-veil{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.35rem; padding:var(--sp-lg); text-align:center; background:color-mix(in srgb,var(--c-white) 55%,transparent)}
+.pt-veil b{font-weight:500; color:var(--c-off-black)}
+.pt-veil span{font-size:var(--t-small); color:var(--text-2); max-width:30ch}
+.pt-ico{display:grid; place-items:center; width:2.5rem; height:2.5rem; margin-bottom:.25rem; border-radius:50%;
+  background:var(--c-blue); color:var(--c-white)}
+.pt-ico svg{width:1.2rem; height:1.2rem}
+@media (max-width:1024px){ .pt{grid-template-columns:1fr; gap:var(--sp-xl); padding:var(--sp-lg); border-radius:24px} }
 /* ElevenLabs-style layout for the biomarker page: large rounded cards and
    pill-shaped controls (segmented tabs, filters, search), with a light hero
    and the photo in a rounded card. Headlines, eyebrows and the text under
@@ -4493,6 +4521,50 @@ markers: 60+
       &mdash; cortisol to cortisone, arachidonic acid to EPA, creatinine to creatine &mdash;
       which is how the production assay reaches 56 reportable markers from 48 measured
       analytes.</div>
+  </div>
+</section>
+
+<!-- Analytical performance teaser, from the one-page Analytical Performance
+     Summary (salivary small-molecule panel, release 1.2.1, October 2026).
+     Only the headline is public; the summary itself goes out on request
+     (the full validation data under NDA). The preview bars are the real
+     within-run CVs of the ten most precise analytes, blurred on purpose. -->
+<section class="sec" id="bm-performance">
+  <div class="wrap">
+    <div class="pt">
+      <div class="pt-copy">
+        <span class="eyebrow">Analytical performance</span>
+        <h2 class="h3">Measured the same way, every time.</h2>
+        <p>Our precision study assessed the panel against ICH M10, the international
+          guideline for bioanalytical method validation.</p>
+        <div class="pt-figs">
+          <div><b>26<small>/27</small></b><span>biomarkers meet the ICH&nbsp;M10 standard</span></div>
+          <div><b>4.8<small>%</small></b><span>typical variation of a single result</span></div>
+        </div>
+        <p class="pt-note">These figures come from a controlled precision study on pooled
+          saliva. Values in everyday practice, with real samples collected in the field, can
+          differ from them.</p>
+        <a class="btn" href="/contact" data-link>Request the full summary &#8599;&#xFE0E;</a>
+      </div>
+      <div class="pt-lock" aria-hidden="true">
+        <span class="pt-k">Within-run CV</span>
+        <ul class="pt-chart">
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:36%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:50%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:52%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:56%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:58%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:62%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:64%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:66%"></span></li>
+          <li><span class="pt-nm"></span><span class="pt-bar" style="width:66%"></span></li>
+        </ul>
+        <div class="pt-veil"><span class="pt-ico"><svg viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M7 11V8a5 5 0 0 1 10 0v3M5.5 11h13v9.5h-13z"/></svg></span>
+          <b>All 29 biomarkers, three measures</b>
+          <span>Within-run and between-run variation and the lowest level quantified, on request.</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
