@@ -2,6 +2,16 @@
   "_how": "Articles on the /blog page, newest first by date. The daily press check (tools/press_check.py) adds new ones in a pull request; set \"hidden\": true on any you do not want shown. Merge the pull request to publish.",
   "articles": [
     {
+      "url": "https://www.bild.de/sport/fussball/borussia-dortmund-spannender-einblick-guirassy-zeigt-spuck-tests-beim-bvb-6afb5426f8e3163ff6886678",
+      "outlet": "BILD",
+      "date": "2026-11-16",
+      "lang": "DE",
+      "title": "Spannender Einblick! Guirassy zeigt Spuck-Tests beim BVB",
+      "blurb": "Serhou Guirassy shares Dortmund\u2019s saliva test and its step-by-step collection guide on Snapchat.",
+      "logo_class": "bild",
+      "logo_html": "BILD"
+    },
+    {
       "url": "https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html",
       "outlet": "IT BOLTWISE",
       "date": "2026-08-10",
