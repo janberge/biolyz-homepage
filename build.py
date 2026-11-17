@@ -38,11 +38,11 @@ def _blog_cards():
             meta += " &middot; %d %s" % (d.day, d.strftime("%b %Y"))
         blurb = "<p>%s</p>" % e("blurb") if a.get("blurb") else ""
         out.append(
-            '      <a class="bl-card" href="%s" target="_blank" rel="noopener">\n'
+            '      <a class="bl-card"%s href="%s" target="_blank" rel="noopener">\n'
             '        <div class="bl-tile bl-tile--sm"><span class="bl-logo bl-logo--%s" role="img" aria-label="%s">%s</span>'
             '<span class="bl-lang">%s</span></div>\n'
             '        <span class="bl-meta">%s</span><h3>%s</h3>%s\n'
-            '      </a>' % (e("url"), cls, e("outlet"), logo, e("lang"), meta, e("title"), blurb))
+            '      </a>' % (' id="press-%s"' % cls if cls != "new" else "", e("url"), cls, e("outlet"), logo, e("lang"), meta, e("title"), blurb))
     return "\n".join(out)
 assert src.count("<!--BLOG_CARDS-->") == 1
 src = src.replace("<!--BLOG_CARDS-->", _blog_cards())
@@ -288,7 +288,12 @@ def data_uri(path, mime):
         mime, base64.b64encode(open(path, "rb").read()).decode())
 
 
-IMG_SRC = {n: os.path.join(sp, "web", n + ".jpg") for n in used}
+# Photos are JPEG; a mark that needs a transparent ground (the press logos)
+# may be web/<name>.png instead.
+def _img_path(n):
+    png = os.path.join(sp, "web", n + ".png")
+    return png if os.path.exists(png) else os.path.join(sp, "web", n + ".jpg")
+IMG_SRC = {n: _img_path(n) for n in used}
 VID_SRC = {n: os.path.join(sp, "web", n + ".mp4") for n in usedv}
 
 # The artifact copy carries no video. Inlined, the three heroes are ~14 MB of
@@ -298,13 +303,13 @@ VID_SRC = {n: os.path.join(sp, "web", n + ".mp4") for n in usedv}
 # nobody can open. BIOLYZ_ARTIFACT_VIDEO=1 puts them back.
 ARTIFACT_VIDEO = os.environ.get("BIOLYZ_ARTIFACT_VIDEO") == "1"
 inline_loader = loader(
-    {n: data_uri(p_, "image/jpeg") for n, p_ in IMG_SRC.items()},
+    {n: data_uri(p_, "image/png" if p_.endswith(".png") else "image/jpeg") for n, p_ in IMG_SRC.items()},
     {n: data_uri(p_, "video/mp4") for n, p_ in VID_SRC.items()} if ARTIFACT_VIDEO else {})
 # Root-based, not relative: from a nested route such as /compare/point-of-care
 # a bare "assets/x.jpg" resolves to /compare/assets/x.jpg and 404s.
 _ASSET_ROOT = os.environ.get("BIOLYZ_BASE", "").rstrip("/") + "/assets/"
 file_loader = loader(
-    {n: _ASSET_ROOT + n + ".jpg" for n in used},
+    {n: _ASSET_ROOT + os.path.basename(IMG_SRC[n]) for n in used},
     {n: _ASSET_ROOT + n + ".mp4" for n in usedv})
 def svg(path,cls):
     s=open(path,encoding="utf-8").read()
@@ -329,11 +334,12 @@ src = src.replace("__SVG_nyt__", _clean(
 src = src.replace("__SVG_kicker__", _clean(
     os.path.join(TP, "kicker.svg"), "kicker", viewbox="13.89 70.38 168.98 48",
     drop='<path fill="#fff" d="M0 0h192.756v192.756H0V0z"/>'))
-# The only press mark that is not already black: it ships navy (#1f3265), and
-# the featured-in row reads as one ink.
+# Kept in its own navy (#1f3265): the press marks go grey at rest and take
+# their colour back on hover, like the club crests.
 src = src.replace("__SVG_scienceforsport__", _clean(
-    os.path.join(TP, "scienceforsport.svg"), "sfs",
-    viewbox="53.49 26.47 1814.65 286.01", recolor=True))
+    os.path.join(TP, "scienceforsport.svg"), "sfs", viewbox="36 0 1833 320"))
+# Redrawn from the BILD box, in its own red.
+src = src.replace("__SVG_bild__", _clean(os.path.join(TP, "bild.svg"), "bild"))
 src = src.replace("__SVG_sportico__", _clean(
     os.path.join(TP, "sportico.svg"), "sportico", viewbox="0 0 491.1 126.76"))
 # Integration marks for the marquee. Own colours kept (no recolor) — these

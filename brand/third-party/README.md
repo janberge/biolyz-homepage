@@ -10,6 +10,7 @@ These are **other organisations' trademarks**, vendored here only so
 | `new-york-times.svg` | The New York Times Company | a press mark |
 | `kicker.svg` | kicker (Olympia-Verlag) | a press mark |
 | `sportico.svg` | Sportico Media | a press mark |
+| `bild.svg` | BILD (Axel Springer) | a press mark |
 | `whoop.svg` | WHOOP, Inc. | an integration mark |
 | `garmin.svg` | Garmin Ltd. | an integration mark |
 | `trainingpeaks.svg` | TrainingPeaks (PeaksWare, LLC) | an integration mark |

@@ -1280,26 +1280,33 @@ textarea{min-height:7rem; resize:vertical}
   text-decoration:none; color:var(--c-off-black)}
 /* Full ink, not a faded one. At 72 % these read as four grey marks rather
    than four black ones, which is a different claim about who published you. */
-.pmark .logo-svg{width:auto; display:block;
-  transition:opacity var(--dur-short) var(--ease)}
-.pmark:hover .logo-svg,
-.pmark:focus-visible .logo-svg{opacity:.6}
+.pmark .logo-svg, .pmark-img{width:auto; display:block;
+  transition:opacity var(--dur-short) var(--ease), filter var(--dur-short) var(--ease)}
+/* Marks in their own colours go grey at rest and take the colour back on
+   hover, like the club crests; the black ones lighten instead. */
+.pmark:not(.pmark--nyt,.pmark--sportico) .logo-svg, .pmark-img{filter:grayscale(1)}
+.pmark:is(:hover,:focus-visible) .logo-svg, .pmark:is(:hover,:focus-visible) .pmark-img{filter:none}
+.pmark:is(.pmark--nyt,.pmark--sportico):is(:hover,:focus-visible) .logo-svg{opacity:.6}
 .pmark:focus-visible{outline:2px solid var(--focus); outline-offset:6px}
 .pmark--nyt .logo-svg{height:1.15rem}
 .pmark--kicker .logo-svg{height:1.5rem}
 .pmark--sportico .logo-svg{height:1.45rem}
-.pmark--sfs .logo-svg{height:1.2rem}
+.pmark--sfs .logo-svg{height:1.6rem}
+.pmark--bild .logo-svg{height:2rem}
+.pmark--kicker .pmark-img{height:1.9rem}
+.pmark--orf .pmark-img{height:2.3rem}
+.pmark--oe24 .pmark-img{height:1.5rem}
+.pmark--brut .pmark-img{height:1.45rem}
+.pmark--fitt .pmark-img{height:1.15rem}
 /* The outlets from /blog without a vector logo: their wordmark set in type,
    in the same ink and at the same visual height as the drawn marks. */
 .pmark--txt{font-size:1.2rem; font-weight:700; letter-spacing:-.02em; line-height:1; white-space:nowrap;
   transition:opacity var(--dur-short) var(--ease)}
 .pmark--txt:hover, .pmark--txt:focus-visible{opacity:.6}
 .pmark--txt small{font-size:.55em; font-weight:500; letter-spacing:.02em; margin-left:.35em}
-.pmark--brut{font-weight:800; letter-spacing:-.03em}
 .pmark--accent{font-weight:500; font-style:italic}
 .pmark--athletech, .pmark--boltwise{letter-spacing:.04em; font-size:1.05rem}
 .pmark--playbook{font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-style:italic}
-.pmark--fitt{letter-spacing:.12em; font-size:1.05rem}
 
 .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px;
   overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0}
@@ -1311,7 +1318,13 @@ textarea{min-height:7rem; resize:vertical}
   .pmark--nyt .logo-svg{height:.9rem}
   .pmark--kicker .logo-svg{height:1.25rem}
   .pmark--sportico .logo-svg{height:1.2rem}
-  .pmark--sfs .logo-svg{height:1rem}
+  .pmark--sfs .logo-svg{height:1.3rem}
+  .pmark--bild .logo-svg{height:1.65rem}
+  .pmark--kicker .pmark-img{height:1.55rem}
+  .pmark--orf .pmark-img{height:1.9rem}
+  .pmark--oe24 .pmark-img{height:1.25rem}
+  .pmark--brut .pmark-img{height:1.2rem}
+  .pmark--fitt .pmark-img{height:.95rem}
   .pmark--txt{font-size:1rem}
 }
 
@@ -2211,23 +2224,20 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .bl-feat .bl-tile .bl-logo{font-size:3rem}
 .bl-tile:has(.bl-logo--sportico){background:#fff; border:1px solid var(--c-grey-200)}
 .bl-tile:has(.bl-logo--boltwise){background:#10213f; color:#fff}
-.bl-tile:has(.bl-logo--orf){background:#d9001b; color:#fff}
-.bl-tile:has(.bl-logo--oe24){background:#e30613; color:#fff}
-.bl-tile:has(.bl-logo--brut){background:#111; color:#fff}
-.bl-logo--brut{font-weight:800; letter-spacing:-.03em}
 .bl-tile:has(.bl-logo--accent){background:#f3f4f6; color:#181818}
 .bl-logo--accent{font-weight:500; font-style:italic}
 .bl-tile:has(.bl-logo--athletech){background:#000; color:#fff}
 .bl-logo--athletech{letter-spacing:.04em}
 .bl-tile:has(.bl-logo--playbook){background:#f4efe6; color:#181818}
 .bl-logo--playbook{font-family:Georgia, 'Times New Roman', serif; font-weight:400; font-style:italic}
-.bl-tile:has(.bl-logo--fitt){background:#fff; color:#181818; border:1px solid var(--c-grey-200)}
-.bl-logo--fitt{letter-spacing:.12em; font-size:1.5rem !important}
 .bl-tile:has(.bl-logo--athletic){background:#fff; color:#181818; border:1px solid var(--c-grey-200)}
-.bl-tile:has(.bl-logo--kicker){background:#fff; border:1px solid var(--c-grey-200)}
 .bl-tile:has(.bl-logo--new){background:#eef0f4; color:#181818}
-.bl-tile:has(.bl-logo--bild){background:#d00; color:#fff}
-.bl-logo--bild{font-weight:800; letter-spacing:-.02em}
+/* Outlets whose own logo we have: shown in its colours on a white tile. */
+.bl-tile:has(:is(.bl-logo--kicker,.bl-logo--orf,.bl-logo--oe24,.bl-logo--brut,.bl-logo--fitt,.bl-logo--bild)){background:#fff; border:1px solid var(--c-grey-200)}
+.bl-logo-img{display:block; width:auto; height:2.6rem; max-width:70%; object-fit:contain}
+.bl-logo--orf .bl-logo-img{height:3.4rem}
+.bl-logo--brut .bl-logo-img, .bl-logo--fitt .bl-logo-img{height:2rem}
+.bl-logo--bild svg{height:3.4rem}
 .bl-logo--new{font-size:1.5rem !important; padding:0 1rem}
 .bl-lang{z-index:1}
 .bl-card:hover .bl-logo, .bl-feat:hover .bl-logo{transform:scale(1.04)}
@@ -2542,31 +2552,32 @@ a.club{text-decoration:none}
       <div class="proof-group">
         <span class="eyebrow">Featured in</span>
         <div class="marks">
-          <a class="pmark pmark--nyt" href="https://www.nytimes.com/athletic/6858367/2025/12/05/soccer-saliva-marginal-gains/"
-             target="_blank" rel="noopener" aria-label="The New York Times, opens the article in a new tab">__SVG_nyt__</a>
-          <a class="pmark pmark--kicker" href="https://www.kicker.de/bvb-setzt-auf-speicheltests-1174045/artikel"
-             target="_blank" rel="noopener" aria-label="kicker, opens the article in a new tab">__SVG_kicker__</a>
-          <a class="pmark pmark--sportico" href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/"
-             target="_blank" rel="noopener" aria-label="Sportico, opens the article in a new tab">__SVG_sportico__</a>
-          <a class="pmark pmark--sfs" href="https://www.scienceforsport.com/"
-             target="_blank" rel="noopener"
-             aria-label="Science for Sport, opens scienceforsport.com in a new tab">__SVG_scienceforsport__</a>
-          <a class="pmark pmark--txt pmark--orf" href="https://noe.orf.at/stories/3338121/"
-             target="_blank" rel="noopener" aria-label="ORF Niederösterreich, opens the article in a new tab">ORF<small>Niederösterreich</small></a>
-          <a class="pmark pmark--txt pmark--oe24" href="https://www.oe24.at/oesterreich/chronik/niederoesterreich/noe-unternehmen-arbeitet-mit-deutschem-bundesligisten-bvb-zusammen/665952275"
-             target="_blank" rel="noopener" aria-label="oe24, opens the article in a new tab">oe24</a>
-          <a class="pmark pmark--txt pmark--brut" href="https://brutkasten.com/artikel/biolyz-tullner-speicheltest-startup-holt-dreijahresvertrag-mit-borussia-dortmund"
-             target="_blank" rel="noopener" aria-label="brutkasten, opens the article in a new tab">brutkasten</a>
-          <a class="pmark pmark--txt pmark--accent" href="https://accent.at/news/tullner-speicheltest-startup-biolyz-holt-dreijahresvertrag-mit-borussia-dortmund"
-             target="_blank" rel="noopener" aria-label="accent, opens the article in a new tab">accent</a>
-          <a class="pmark pmark--txt pmark--athletech" href="https://athletechnews.com/borussia-dortmund-saliva-biomarker-testing-biolyz/"
-             target="_blank" rel="noopener" aria-label="Athletech News, opens the article in a new tab">ATHLETECH<small>NEWS</small></a>
-          <a class="pmark pmark--txt pmark--playbook" href="https://playbook.beehiiv.com/p/volume-76-beyond-wearables"
-             target="_blank" rel="noopener" aria-label="Playbook, opens the article in a new tab">Playbook</a>
-          <a class="pmark pmark--txt pmark--fitt" href="https://insider.fitt.co/press-release/biolyz-partners-with-borussia-dortmund-to-bring-high-frequency-saliva-biomarker-testing-to-elite-football/"
-             target="_blank" rel="noopener" aria-label="Fitt Insider, opens the article in a new tab">FITT INSIDER</a>
-          <a class="pmark pmark--txt pmark--boltwise" href="https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html"
-             target="_blank" rel="noopener" aria-label="IT BOLTWISE, opens the article in a new tab">IT BOLTWISE</a>
+          <a class="pmark pmark--bild" href="/blog" data-link data-anchor="press-bild"
+             aria-label="BILD, on our blog">__SVG_bild__</a>
+          <a class="pmark pmark--nyt" href="/blog" data-link data-anchor="press-athletic"
+             aria-label="The New York Times, on our blog">__SVG_nyt__</a>
+          <a class="pmark pmark--kicker" href="/blog" data-link data-anchor="press-kicker"
+             aria-label="kicker, on our blog"><img class="pmark-img" src="__IMG_presskicker__" alt=""></a>
+          <a class="pmark pmark--sportico" href="/blog" data-link data-anchor="press-sportico"
+             aria-label="Sportico, on our blog">__SVG_sportico__</a>
+          <a class="pmark pmark--sfs" href="/blog" data-link
+             aria-label="Science for Sport, on our blog">__SVG_scienceforsport__</a>
+          <a class="pmark pmark--orf" href="/blog" data-link data-anchor="press-orf"
+             aria-label="ORF Niederösterreich, on our blog"><img class="pmark-img" src="__IMG_pressorf__" alt=""></a>
+          <a class="pmark pmark--oe24" href="/blog" data-link data-anchor="press-oe24"
+             aria-label="oe24, on our blog"><img class="pmark-img" src="__IMG_pressoe24__" alt=""></a>
+          <a class="pmark pmark--brut" href="/blog" data-link data-anchor="press-brut"
+             aria-label="brutkasten, on our blog"><img class="pmark-img" src="__IMG_pressbrut__" alt=""></a>
+          <a class="pmark pmark--txt pmark--accent" href="/blog" data-link data-anchor="press-accent"
+             aria-label="accent, on our blog">accent</a>
+          <a class="pmark pmark--txt pmark--athletech" href="/blog" data-link data-anchor="press-athletech"
+             aria-label="Athletech News, on our blog">ATHLETECH<small>NEWS</small></a>
+          <a class="pmark pmark--txt pmark--playbook" href="/blog" data-link data-anchor="press-playbook"
+             aria-label="Playbook, on our blog">Playbook</a>
+          <a class="pmark pmark--fitt" href="/blog" data-link data-anchor="press-fitt"
+             aria-label="Fitt Insider, on our blog"><img class="pmark-img" src="__IMG_pressfitt__" alt=""></a>
+          <a class="pmark pmark--txt pmark--boltwise" href="/blog" data-link data-anchor="press-boltwise"
+             aria-label="IT BOLTWISE, on our blog">IT BOLTWISE</a>
         </div>
       </div>
       <div class="proof-group">
@@ -6329,7 +6340,7 @@ markers: 60+
 
 <section class="sec">
   <div class="wrap">
-    <a class="bl-feat" href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/" target="_blank" rel="noopener">
+    <a class="bl-feat" id="press-sportico" href="https://www.sportico.com/business/tech/2026/saliva-testing-startup-biolyz-us-expansion-plans-1234941401/" target="_blank" rel="noopener">
       <div class="bl-tile"><span class="bl-logo bl-logo--sportico" role="img" aria-label="Sportico">__SVG_sportico__</span></div>
       <div class="bl-body"><span class="bl-meta">Sportico &middot; 2026 &middot; Featured</span><h2 class="h3">Saliva-Testing Startup Biolyz Eyes American Expansion Plans</h2><p class="copy">How the Austrian company grew to 13 football clubs, opened a UK lab and is preparing for the US.</p><span class="bl-more">Read on Sportico &#8599;&#xFE0E;</span></div>
     </a>

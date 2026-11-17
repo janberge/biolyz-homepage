@@ -9,7 +9,7 @@
       "title": "Spannender Einblick! Guirassy zeigt Spuck-Tests beim BVB",
       "blurb": "Serhou Guirassy shares Dortmund\u2019s saliva test and its step-by-step collection guide on Snapchat.",
       "logo_class": "bild",
-      "logo_html": "BILD"
+      "logo_html": "__SVG_bild__"
     },
     {
       "url": "https://www.it-boltwise.de/biolyz-setzt-mit-speicheltests-auf-leistungssport-und-plant-expansion-in-die-usa.html",
@@ -29,7 +29,7 @@
       "title": "Tullner Start-up „optimiert“ Fußballprofis",
       "blurb": "Austrian public broadcaster on the Dortmund deal, with scientists weighing potential and limits.",
       "logo_class": "orf",
-      "logo_html": "ORF<small>Niederösterreich</small>"
+      "logo_html": "<img class=\"bl-logo-img\" src=\"__IMG_pressorf__\" alt=\"\">"
     },
     {
       "url": "https://www.oe24.at/oesterreich/chronik/niederoesterreich/noe-unternehmen-arbeitet-mit-deutschem-bundesligisten-bvb-zusammen/665952275",
@@ -39,7 +39,7 @@
       "title": "NÖ Unternehmen arbeitet mit deutschem Bundesligisten BVB zusammen",
       "blurb": "A Lower Austrian company and a three-year partnership with Borussia Dortmund.",
       "logo_class": "oe24",
-      "logo_html": "oe24"
+      "logo_html": "<img class=\"bl-logo-img\" src=\"__IMG_pressoe24__\" alt=\"\">"
     },
     {
       "url": "https://brutkasten.com/artikel/biolyz-tullner-speicheltest-startup-holt-dreijahresvertrag-mit-borussia-dortmund",
@@ -49,7 +49,7 @@
       "title": "Biolyz: Tullner Speicheltest-Startup holt Dreijahresvertrag mit Borussia Dortmund",
       "blurb": "From the 2024/25 pilot to a three-year contract, and plans for English football.",
       "logo_class": "brut",
-      "logo_html": "brutkasten"
+      "logo_html": "<img class=\"bl-logo-img\" src=\"__IMG_pressbrut__\" alt=\"\">"
     },
     {
       "url": "https://accent.at/news/tullner-speicheltest-startup-biolyz-holt-dreijahresvertrag-mit-borussia-dortmund",
@@ -89,7 +89,7 @@
       "title": "Biolyz partners with Borussia Dortmund to bring high-frequency saliva biomarker testing to elite football",
       "blurb": "The press release announcing the three-year partnership.",
       "logo_class": "fitt",
-      "logo_html": "FITT INSIDER"
+      "logo_html": "<img class=\"bl-logo-img\" src=\"__IMG_pressfitt__\" alt=\"\">"
     },
     {
       "url": "https://www.nytimes.com/athletic/6858367/2025/12/05/soccer-saliva-marginal-gains/",
@@ -109,7 +109,7 @@
       "title": "BVB setzt auf Speicheltests",
       "blurb": "Germany’s football magazine on Dortmund’s saliva testing.",
       "logo_class": "kicker",
-      "logo_html": "__SVG_kicker__"
+      "logo_html": "<img class=\"bl-logo-img\" src=\"__IMG_presskicker__\" alt=\"\">"
     }
   ],
   "seen": []
