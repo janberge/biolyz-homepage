@@ -905,6 +905,13 @@ img{max-width:100%; display:block}
 .az-rows li{display:grid; grid-template-columns:minmax(0,1fr) 40%; align-items:center; gap:.8rem; font-size:.8125rem}
 .az-rows i{display:block; height:6px; border-radius:3px; background:linear-gradient(90deg,#0013e9 var(--w),#e6e8f5 var(--w))}
 .az-q{margin:.35rem 0 0; padding-top:.65rem; border-top:1px solid #ececec; font-size:.8125rem; color:#646464}
+.az-uc{display:flex; flex-direction:column; gap:.4rem; margin-top:.75rem; padding-top:.65rem; border-top:1px solid #ececec}
+.az-uc-k{font-size:.6875rem; letter-spacing:.08em; text-transform:uppercase; color:#646464}
+.az-uc a{display:flex; justify-content:space-between; align-items:baseline; gap:.75rem; text-decoration:none; color:#0013e9; font-size:.875rem}
+.az-uc a::after{content:'\2192'; flex:none}
+.az-uc a span{flex:1}
+.az-uc a small{font-size:.75rem; color:#646464; white-space:nowrap}
+.az-uc a:hover span{text-decoration:underline}
 .az-cases{align-self:flex-start; font-size:.8125rem; color:var(--c-blue); text-decoration:none}
 .az-cases:hover{text-decoration:underline}
 @media (max-width:1024px){
@@ -2250,6 +2257,78 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 .cs-club--cta{background:var(--c-blue); color:#fff}
 .cs-club--cta span{color:var(--o-white-80)}
 .cs-club--cta .btn{align-self:flex-start; margin-top:var(--sp-sm); background:#fff; color:var(--c-blue)}
+/* Customer stories: Dortmund and Leverkusen side by side; picking one shows its use cases. */
+.cv2 .cv2-picks{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-md); align-items:start}
+.cv2 .cv2-quotes{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(22rem,100%),1fr)); gap:var(--sp-md); margin-bottom:var(--sp-2xl)}
+.cv2 .cv2-quotes .cs-q{padding:var(--sp-lg)}
+.cv2 .cv2-quotes .cs-q blockquote{font-size:var(--t-medium)}
+.cv2 .cv2-bvb .cs-side{max-width:48rem}
+.cv2 .pick{position:absolute; opacity:0; pointer-events:none}
+.cv2 .cv2-card{display:flex; flex-direction:column; gap:.5rem; padding:var(--sp-lg); border-radius:16px; background:#fff;
+  border:2px solid var(--c-grey-200); cursor:pointer; transition:border-color .2s var(--ease), box-shadow .2s var(--ease)}
+.cv2 .cv2-card:hover{border-color:#b9bfff}
+.cv2 .cv2-crest{width:3.5rem; height:3.5rem; display:block}
+.cv2 .cv2-crest svg{width:100%; height:100%; display:block}
+.cv2 .cv2-card b{font-weight:400; font-size:var(--h5); letter-spacing:-.03em; margin-top:.25rem}
+.cv2 .cv2-card span{font-size:var(--t-small); color:var(--text-2)}
+.cv2 .cv2-card em{font-style:normal; align-self:flex-start; margin-top:.5rem; padding:.3rem .8rem; border-radius:var(--r-round);
+  background:var(--c-grey-100); color:var(--c-blue); font-size:var(--t-small)}
+#pick-bvb:checked ~ .cv2-picks label[for=pick-bvb],
+#pick-b04:checked ~ .cv2-picks label[for=pick-b04]{border-color:var(--c-blue); box-shadow:0 8px 24px rgba(0,19,233,.08)}
+#pick-bvb:checked ~ .cv2-picks label[for=pick-bvb] em,
+#pick-b04:checked ~ .cv2-picks label[for=pick-b04] em{background:var(--c-blue); color:#fff}
+.cv2 .pick:focus-visible ~ .cv2-picks .cv2-card{outline:none}
+#pick-bvb:focus-visible ~ .cv2-picks label[for=pick-bvb],
+#pick-b04:focus-visible ~ .cv2-picks label[for=pick-b04]{outline:2px solid var(--c-blue); outline-offset:3px}
+.cv2 .cv2-panel{display:none; margin-top:var(--sp-2xl)}
+#pick-bvb:checked ~ .cv2-panel--bvb, #pick-b04:checked ~ .cv2-panel--b04{display:block}
+.cv2 .cv2-story{margin-bottom:var(--sp-2xl)}
+.cv2 .uc-hd{display:flex; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:var(--sp-md)}
+.cv2 .uc-hd p{font-size:var(--t-small); color:var(--text-2)}
+.cv2 .uc-list{display:flex; flex-direction:column; gap:.75rem}
+.cv2 .uc{background:#fff; border:1px solid var(--c-grey-200); border-radius:16px; overflow:hidden; scroll-margin-top:6rem}
+.cv2 .uc > summary{list-style:none; cursor:pointer; padding:1.25rem 1.5rem; display:grid; grid-template-columns:1fr auto; gap:.25rem 1rem; align-items:start}
+.cv2 .uc > summary::-webkit-details-marker{display:none}
+.cv2 .uc > summary:focus-visible{outline:2px solid var(--c-blue); outline-offset:-2px; border-radius:16px}
+.cv2 .uc-tags{display:flex; flex-wrap:wrap; gap:.4rem; grid-column:1}
+.cv2 .uc-cat{display:inline-block; padding:.25rem .6rem; border-radius:var(--r-round); background:#e9eaf6; color:var(--c-blue);
+  font-size:var(--t-tiny); letter-spacing:.06em; text-transform:uppercase}
+.cv2 .tag{display:inline-block; padding:.25rem .6rem; border-radius:var(--r-round); border:1px solid var(--c-grey-200);
+  font-family:inherit; font-size:var(--t-tiny); letter-spacing:0; text-transform:none; color:var(--text-2)}
+.cv2 .uc-title{grid-column:1; font-size:var(--h5); letter-spacing:-.03em; line-height:1.15; margin-top:.5rem}
+.cv2 .uc-sub{grid-column:1; color:var(--text-2); font-size:var(--t-regular)}
+.cv2 .uc-tog{grid-column:2; grid-row:1 / span 3; align-self:center; width:2.25rem; height:2.25rem; border-radius:50%;
+  border:1px solid var(--c-grey-200); display:grid; place-items:center; color:var(--c-blue); transition:transform .25s var(--ease)}
+.cv2 .uc[open] .uc-tog{transform:rotate(45deg)}
+.cv2 .uc-body{padding:0 1.5rem 1.75rem; display:flex; flex-direction:column; gap:1.25rem; max-width:62rem}
+.cv2 .uc-body p{color:var(--text-2); font-size:var(--t-regular); max-width:none}
+.cv2 .uc-body strong{font-weight:400; color:var(--text)}
+.cv2 .uc-chart{margin:0; border-radius:12px; background:#f6f6f6; padding:.5rem}
+.cv2 .uc-chart img{display:block; width:100%; height:auto}
+.cv2 .uc-lbl{display:block; font-size:var(--t-tiny); letter-spacing:.08em; text-transform:uppercase; color:var(--text-3); margin-bottom:.4rem}
+.cv2 .uc-grid{display:grid; grid-template-columns:1fr 1fr; gap:1rem}
+.cv2 .uc-box{border-radius:12px; padding:1.1rem 1.25rem; border:1px solid var(--c-grey-200)}
+.cv2 .uc-box--sw{background:#e9eaf6; border-color:transparent}
+.cv2 .uc-box--sw .uc-lbl{color:var(--c-blue)}
+.cv2 .uc-look{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:.5rem}
+.cv2 .uc-look li{position:relative; padding-left:1.1rem; color:var(--text-2); font-size:var(--t-regular)}
+.cv2 .uc-look li::before{content:'\203A'; position:absolute; left:0; color:var(--c-blue)}
+.cv2 .uc-3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-md)}
+.cv2 .uc-3 > div{padding-top:.75rem; border-top:2px solid var(--c-grey-200)}
+.cv2 .uc-3 > .uc-act{border-top-color:var(--c-blue)}
+.cv2 .uc-3 .uc-act .uc-lbl{color:var(--c-blue)}
+@media (max-width:860px){ .cv2 .uc-3{grid-template-columns:1fr} }
+.cv2 .uc-ev{font-style:italic; color:var(--text-3); font-size:var(--t-small)}
+.cv2 .cv2-cta{margin-top:var(--sp-2xl)}
+.cv2 .av{width:3rem; height:3rem; flex:none; border-radius:50%; background:var(--c-blue); color:#fff; display:grid; place-items:center; font-size:var(--t-small)}
+@media (max-width:860px){
+  .cv2 .cv2-picks{gap:.6rem}
+  .cv2 .cv2-card{padding:1rem}
+  .cv2 .cv2-crest{width:2.75rem; height:2.75rem}
+  .cv2 .uc-grid{grid-template-columns:1fr}
+  .cv2 .uc > summary{padding:1rem 1.1rem}
+  .cv2 .uc-body{padding:0 1.1rem 1.25rem}
+}
 /* Blog */
 .bl-feat{display:grid; grid-template-columns:minmax(0,6fr) minmax(0,5fr); gap:var(--sp-xl); align-items:center;
   color:inherit; text-decoration:none; margin-bottom:var(--sp-2xl)}
@@ -2445,6 +2524,7 @@ blockquote footer b{font-weight:400; color:var(--text-2)}
 /* Home "Working with": crests link to Customer Stories, and the quote sits
    right under them instead of in a popup. */
 a.club{text-decoration:none}
+span.club{cursor:default}
 .proof-quote{margin:var(--sp-sm) 0 0; max-width:34rem; padding:var(--sp-lg); border-radius:16px; background:#eef0f4;
   display:flex; flex-direction:column; gap:var(--sp-md); text-align:left}
 .pq-club{display:flex; align-items:center; gap:.7rem; padding-bottom:var(--sp-md); border-bottom:1px solid #dfe2ea; font-size:var(--t-small); color:var(--text-2)}
@@ -2458,6 +2538,10 @@ a.club{text-decoration:none}
 .proof-quote figcaption span{display:flex; flex-direction:column; flex:1; min-width:12rem}
 .proof-quote figcaption b{font-weight:400; color:var(--text)}
 .proof-quote .inline-link{color:var(--c-blue); white-space:nowrap}
+/* Leverkusen and Dortmund side by side; one column on narrow screens. */
+.pq-row{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-md); width:100%; max-width:70rem; margin-top:var(--sp-sm)}
+.pq-row .proof-quote{max-width:none; margin:0}
+@media (max-width:860px){ .pq-row{grid-template-columns:1fr} }
 /* Careers: open positions */
 .jobs{display:flex; flex-direction:column; border-top:var(--stroke) solid var(--c-grey-200)}
 .job{display:grid; grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto; gap:var(--sp-lg); align-items:center;
@@ -2550,18 +2634,29 @@ a.club{text-decoration:none}
         <span class="eyebrow">Working with</span>
         <div class="marks">
           <span class="club" role="img" aria-label="Bayer 04 Leverkusen">__SVG_b04__</span>
-          <a class="club" href="/customers" data-link aria-label="Borussia Dortmund, read the customer story">__SVG_bvb__</a>
+          <span class="club" role="img" aria-label="Borussia Dortmund">__SVG_bvb__</span>
         </div>
-        <figure class="proof-quote">
-          <div class="pq-club"><span class="pq-crest">__SVG_bvb__</span><span><b>Borussia Dortmund</b>Bundesliga &middot; Biolyz partner since 2024</span></div>
-          <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
-            inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
-          <figcaption>
-            <img src="__IMG_braun__" width="80" height="80" loading="lazy" alt="">
-            <span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span>
-            <a class="inline-link" href="/customers" data-link>Read the story &rarr;</a>
-          </figcaption>
-        </figure>
+        <div class="pq-row">
+          <figure class="proof-quote">
+            <div class="pq-club"><span class="pq-crest">__SVG_b04__</span><span><b>Bayer 04 Leverkusen</b>Bundesliga</span></div>
+            <blockquote>&ldquo;We are squeezing value out of every internal load marker available, capillary blood draws and now saliva testing, to individualize training and try to be ahead a little bit in comparison to our competitors.&rdquo;</blockquote>
+            <figcaption>
+              <img src="__IMG_kruger__" width="80" height="80" loading="lazy" alt="">
+              <span><b>Dr. Malte Kr&uuml;ger</b>Head of Sports Science and Athletics, Bayer 04 Leverkusen</span>
+              <a class="inline-link" href="/customers#uc-b04">Read the story &rarr;</a>
+            </figcaption>
+          </figure>
+          <figure class="proof-quote">
+            <div class="pq-club"><span class="pq-crest">__SVG_bvb__</span><span><b>Borussia Dortmund</b>Bundesliga &middot; Biolyz partner since 2024</span></div>
+            <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
+              inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
+            <figcaption>
+              <img src="__IMG_braun__" width="80" height="80" loading="lazy" alt="">
+              <span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span>
+              <a class="inline-link" href="/customers" data-link>Read the story &rarr;</a>
+            </figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </div>
@@ -3281,6 +3376,7 @@ markers: 60+
             <b class="az-name">Hormonal status</b>
             <ul class="vx"><li class="is-out"><span>Cortisol</span><b>+21% &uarr;</b></li><li><span>Testosterone</span><b>-8%</b></li><li class="is-out"><span>Testosterone:Cortisol ratio</span><b>-26% &darr;</b></li></ul>
             <p class="az-q">Is there a concern about anabolic&ndash;catabolic balance?</p>
+            <div class="az-uc"><span class="az-uc-k">Use cases</span><a href="/customers#uc-pain"><span>Pain early-warning via cortisone</span><small>Borussia Dortmund</small></a><a href="/customers#uc-progesterone"><span>Progesterone: hidden external exposure</span><small>Borussia Dortmund</small></a></div>
           </div>
         </div>
         <div class="az-panel" data-panel="az4" id="panel-az4" role="tabpanel" aria-labelledby="tab-az4" hidden>
@@ -3289,6 +3385,7 @@ markers: 60+
             <b class="az-name">Psychological stress</b>
             <ul class="vx"><li><span>Cortisol AM</span><b>+6%</b></li><li><span>DHEAS</span><b>-3%</b></li><li class="is-out"><span>Alpha-amylase</span><b>+23% &uarr;</b></li></ul>
             <p class="az-q">Is there a concern about stress-response activation?</p>
+            <div class="az-uc"><span class="az-uc-k">Use cases</span><a href="/customers#uc-cortisol"><span>Cortisol: objective stress signal</span><small>Bayer 04 Leverkusen</small></a><a href="/customers#uc-ramadan"><span>Ramadan: individual tolerance</span><small>Bayer 04 Leverkusen</small></a></div>
           </div>
         </div>
         <div class="az-panel" data-panel="az5" id="panel-az5" role="tabpanel" aria-labelledby="tab-az5" hidden>
@@ -3297,6 +3394,7 @@ markers: 60+
             <b class="az-name">Sleep</b>
             <ul class="vx"><li class="is-out"><span>Melatonin</span><b>-24% &darr;</b></li><li><span>Trigonelline</span><b>+4%</b></li></ul>
             <p class="az-q">Is there a concern about circadian / sleep disruption?</p>
+            <div class="az-uc"><span class="az-uc-k">Use cases</span><a href="/customers#uc-melatonin"><span>Melatonin over-supplementation</span><small>Borussia Dortmund</small></a><a href="/customers#uc-cortisol"><span>Cortisol: objective stress signal</span><small>Bayer 04 Leverkusen</small></a></div>
           </div>
         </div>
         <div class="az-panel" data-panel="az6" id="panel-az6" role="tabpanel" aria-labelledby="tab-az6" hidden>
@@ -3305,6 +3403,7 @@ markers: 60+
             <b class="az-name">Hydration</b>
             <ul class="vx"><li><span>Salivary creatinine</span><b>+3%</b></li><li><span>Protein concentration</span><b>-2%</b></li></ul>
             <p class="az-q">Is there a concern about fluid balance / hydration status?</p>
+            <div class="az-uc"><span class="az-uc-k">Use case</span><a href="/customers#uc-ramadan"><span>Ramadan: individual tolerance</span><small>Bayer 04 Leverkusen</small></a></div>
           </div>
         </div>
       </div>
@@ -6239,53 +6338,188 @@ markers: 60+
     </div>
   </div>
 </section>
-
-<section class="sec">
+<section class="sec cv2">
   <div class="wrap">
-    <article class="cs-feature">
+    <div class="hd">
+      <span class="eyebrow">Our clubs</span>
+      <h2 class="h3">Pick a club to see what Biolyz showed there.</h2>
+    </div>
+    <div class="cv2-box">
+    <input class="pick" type="radio" name="cv2-club" id="pick-bvb" autocomplete="off">
+    <input class="pick" type="radio" name="cv2-club" id="pick-b04" autocomplete="off">
+    <div class="cv2-picks">
+      <label class="cv2-card" for="pick-bvb">
+          <span class="cv2-crest">__SVG_bvb__</span>
+          <b>Borussia Dortmund</b>
+          <span>Bundesliga &middot; three-year partnership since 2025</span>
+          <em>3 use cases</em>
+        </label>
+      <label class="cv2-card" for="pick-b04">
+          <span class="cv2-crest">__SVG_b04__</span>
+          <b>Bayer 04 Leverkusen</b>
+          <span>Bundesliga &middot; saliva testing alongside capillary blood</span>
+          <em>2 use cases</em>
+        </label>
+    </div>
+
+    <div class="cv2-panel cv2-panel--bvb" id="uc-bvb" data-pick="pick-bvb">
+      <div class="cv2-quotes">
+        <figure class="cs-q cs-q--light">
+          <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
+            inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
+          <figcaption><img src="__IMG_braun__" loading="lazy" alt=""><span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span></figcaption>
+        </figure>
+        <figure class="cs-q cs-q--light">
+          <blockquote>&ldquo;Today, we are facing far fewer injuries thanks to more precise control over
+            workload and recovery.&rdquo;</blockquote>
+          <figcaption><span class="av">SK</span><span><b>Sebastian Kehl</b>Sporting Director, Borussia Dortmund</span></figcaption>
+        </figure>
+      </div>
+      <div class="cv2-story">
+      <article class="cv2-bvb">
       <div class="cs-side">
-        <div class="cs-logo">__SVG_bvb__</div>
-        <span class="eyebrow">Borussia Dortmund &middot; Bundesliga</span>
         <h2 class="h3">From a one-season pilot to a three-year partnership.</h2>
-        <p class="copy">Dortmund tested Biolyz through the 2024/25 Bundesliga season, with players
-          sampled two to five times a week. In December 2025 the club signed a three-year
-          agreement and is rolling saliva testing out across its performance and medical
-          operations.</p>
+        <p class="copy">A one-season pilot in 2024/25 became a three-year agreement in December 2025.</p>
         <div class="cs-figs">
           <div><b>12,000+</b><span>Samples in the pilot season</span></div>
           <div><b>2&ndash;5&times;</b><span>Tests per player, per week</span></div>
           <div><b>3 years</b><span>Partnership from 2025</span></div>
         </div>
-        <a class="btn btn--ghost" href="/blog" data-link>Read the coverage &#8594;</a>
-      </div>
-      <div class="cs-quotes">
-        <figure class="cs-q">
-          <blockquote>&ldquo;I was skeptical at first, but when you experience the power of looking
-            inside a player on a daily basis, that can really change how you work and compete.&rdquo;</blockquote>
-          <figcaption><img src="__IMG_braun__" alt="" width="48" height="48" loading="lazy"><span><b>Dr. Markus Braun</b>Head Team Physician, Borussia Dortmund</span></figcaption>
-        </figure>
-        <figure class="cs-q cs-q--light">
-          <blockquote>&ldquo;Today, we are facing far fewer injuries thanks to more precise control over
-            workload and recovery.&rdquo;</blockquote>
-          <figcaption><span class="proc-av">SK</span><span><b>Sebastian Kehl</b>Sporting Director, Borussia Dortmund</span></figcaption>
-        </figure>
       </div>
     </article>
-  </div>
-</section>
+      </div>
+      <div class="uc-hd"><h3 class="h5">Use cases at Borussia Dortmund</h3><p>Open a case to read it.</p></div>
+      <div class="uc-list">
+      <details class="uc" id="uc-melatonin">
+        <summary>
+          <div class="uc-tags"><span class="uc-cat">Sleep</span><span class="tag">Melatonin</span><span class="tag">Trigonelline</span></div>
+          <h4 class="uc-title">Melatonin Over-Supplementation</h4>
+          <p class="uc-sub">A hidden sleep aid was costing next-day performance.</p>
+          <span class="uc-tog" aria-hidden="true">+</span>
+        </summary>
+        <div class="uc-body">
+          <figure class="uc-chart"><img src="__IMG_ucmelatonin__" loading="lazy" alt="Athlete melatonin and trigonelline over 76 morning samples: melatonin climbs far above his normal band after the start of supplementation and returns to baseline after the intervention; trigonelline runs high and erratic over the same weeks."></figure>
+          <div class="uc-3">
+            <div><span class="uc-lbl">What we saw</span><p>Morning melatonin up to 83&nbsp;ng/mL where it should be near zero, climbing week to week, with the coffee marker high alongside.</p></div>
+            <div><span class="uc-lbl">Why it matters</span><p>The sleep aid is still active at kick-off: slower reactions, weaker attention. Performance dropped measurably.</p></div>
+            <div class="uc-act"><span class="uc-lbl">Action</span><p>One staff conversation and a lower dose. Melatonin back to baseline, match performance recovered.</p></div>
+          </div>
+        </div>
+      </details>
 
-<section class="sec band-grey">
-  <div class="wrap">
-    <div class="hd">
-      <span class="eyebrow">Also working with Biolyz</span>
-      <h2 class="h3">More stories on the way.</h2>
+      <details class="uc" id="uc-pain">
+        <summary>
+          <div class="uc-tags"><span class="uc-cat">Hormonal status</span><span class="tag">Cortisone</span><span class="tag">Cortisol</span></div>
+          <h4 class="uc-title">Pain Early-Warning via Cortisone</h4>
+          <p class="uc-sub">Returning pain, flagged about two days before it shows.</p>
+          <span class="uc-tog" aria-hidden="true">+</span>
+        </summary>
+        <div class="uc-body">
+          <figure class="uc-chart"><img src="__IMG_ucpain__" loading="lazy" alt="Athlete cortisone over about 290 days with five corticosteroid injections marked: after each injection cortisone collapses to near-zero, then climbs back through his band, with pain flares above it."></figure>
+          <div class="uc-3">
+            <div><span class="uc-lbl">What we saw</span><p>Cortisone collapses after each injection, then climbs back as pain returns. Cortisol stays flat all season: 2.07 vs a squad median of 3.24&nbsp;ng/mL.</p></div>
+            <div><span class="uc-lbl">Why it matters</span><p>Load can be adjusted before distress, even when the athlete says nothing. Flat cortisol flags over-training.</p></div>
+            <div class="uc-act"><span class="uc-lbl">Action</span><p>Log every injection, flag the climb-back to medical, and rethink re-injecting when suppression lasts longer.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="uc" id="uc-progesterone">
+        <summary>
+          <div class="uc-tags"><span class="uc-cat">Hormonal status</span><span class="tag">Progesterone</span></div>
+          <h4 class="uc-title">Progesterone: Hidden External Exposure</h4>
+          <p class="uc-sub">An abnormal hormone, traced to a cause outside the athlete.</p>
+          <span class="uc-tog" aria-hidden="true">+</span>
+        </summary>
+        <div class="uc-body">
+          <figure class="uc-chart"><img src="__IMG_ucprogesterone__" loading="lazy" alt="Athlete progesterone over about 330 days: most samples sit at the male floor, with recurring readings above it and a late-season peak of 79 pg/mL."></figure>
+          <div class="uc-3">
+            <div><span class="uc-lbl">What we saw</span><p>Progesterone repeatedly above the male floor, peaking at 79&nbsp;pg/mL late in the season.</p></div>
+            <div><span class="uc-lbl">Why it matters</span><p>Raises injury risk and hurts mood and performance. Invisible without longitudinal data.</p></div>
+            <div class="uc-act"><span class="uc-lbl">Action</span><p>Traced to a partner&rsquo;s fertility treatment. Resolved in one conversation.</p></div>
+          </div>
+        </div>
+      </details>
+      </div>
     </div>
-    <div class="cs-more">
-      <div class="cs-club"><div class="cs-logo cs-logo--sm">__SVG_b04__</div><b>Bayer 04 Leverkusen</b><span>Bundesliga &middot; story coming soon</span></div>
+
+    <div class="cv2-panel cv2-panel--b04" id="uc-b04" data-pick="pick-b04">
+      <div class="cv2-quotes">
+        <figure class="cs-q cs-q--light">
+          <blockquote>&ldquo;We are squeezing value out of every internal load marker available, capillary blood draws and now saliva testing, to individualize training and try to be ahead a little bit in comparison to our competitors.&rdquo;</blockquote>
+          <figcaption><img src="__IMG_kruger__" loading="lazy" alt=""><span><b>Dr. Malte Kr&uuml;ger</b>Head of Sports Science and Athletics (professional squad), Bayer 04 Leverkusen</span></figcaption>
+        </figure>
+      </div>
+      <div class="uc-hd"><h3 class="h5">Use cases at Bayer 04 Leverkusen</h3><p>Open a case to read it.</p></div>
+      <div class="uc-list">
+      <details class="uc" id="uc-cortisol">
+        <summary>
+          <div class="uc-tags"><span class="uc-cat">Psychological stress</span><span class="uc-cat">Sleep</span><span class="tag">Cortisol</span><span class="tag">Melatonin</span></div>
+          <h4 class="uc-title">Cortisol: Objective Stress Signal</h4>
+          <p class="uc-sub">An objective read on psychological load.</p>
+          <span class="uc-tog" aria-hidden="true">+</span>
+        </summary>
+        <div class="uc-body">
+          <figure class="uc-chart"><img src="__IMG_uccortisol__" loading="lazy" alt="Athlete cortisol over about 130 days sits in his band, then climbs sharply to a peak near 24.8 ng/mL; daytime melatonin spikes in the same window."></figure>
+          <div class="uc-3">
+            <div><span class="uc-lbl">What we saw</span><p>Cortisol peaked near 24.8&nbsp;ng/mL and stayed high for two weeks, while daytime melatonin spiked.</p></div>
+            <div><span class="uc-lbl">Why it matters</span><p>Real, sustained stress that questionnaires miss. He was already self-medicating his sleep.</p></div>
+            <div class="uc-act"><span class="uc-lbl">Action</span><p>Check in early and refer to the team doctor or psychologist.</p></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="uc" id="uc-ramadan">
+        <summary>
+          <div class="uc-tags"><span class="uc-cat">Hydration</span><span class="uc-cat">Psychological stress</span><span class="tag">Protein concentration</span><span class="tag">Cortisol</span></div>
+          <h4 class="uc-title">Ramadan: Individual Tolerance</h4>
+          <p class="uc-sub">Same fast, opposite responses.</p>
+          <span class="uc-tog" aria-hidden="true">+</span>
+        </summary>
+        <div class="uc-body">
+          <figure class="uc-chart"><img src="__IMG_ucramadan__" loading="lazy" alt="Before and during Ramadan for two players. Hydration (total protein): Player A 0.45 to 0.42 mg/mL, Player B 0.45 to 0.59. Stress (cortisol): Player A 1.56 to 1.4 ng/mL, Player B 1.99 to 2.58."></figure>
+          <div class="uc-3">
+            <div><span class="uc-lbl">What we saw</span><p>Player B: hydration protein and cortisol both up about 30%. Player A: no change.</p></div>
+            <div><span class="uc-lbl">Why it matters</span><p>You cannot predict who struggles. Only individual tracking shows it.</p></div>
+            <div class="uc-act"><span class="uc-lbl">Action</span><p>Individual fluid, electrolyte and sleep support for those drifting, then re-test.</p></div>
+          </div>
+        </div>
+      </details>
+      </div>
+    </div>
+
+    </div>
+
+    <div class="cs-more cv2-cta">
       <div class="cs-club cs-club--cta"><b>Your club here?</b><span>See what Biolyz would show on your own squad.</span><a class="btn" href="/contact" data-link>Contact us &#8599;&#xFE0E;</a></div>
     </div>
   </div>
 </section>
+<script>
+/* /customers#<case id> or #uc-b04: pick that club, open that case, bring it into view. */
+(function(){
+  function go(){
+    var t = location.hash && document.getElementById(location.hash.slice(1));
+    if (!t || !t.closest('.cv2')) return;
+    var pk = t.closest('[data-pick]'); if (pk) document.getElementById(pk.dataset.pick).checked = true;
+    if (t.tagName === 'DETAILS') t.open = true;
+    setTimeout(function(){ t.scrollIntoView({block:'start'}); }, 400);   /* after the router's scroll-to-top */
+  }
+  window.addEventListener('hashchange', go);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+  /* With a mouse, resting on a club opens it; a tap or click does the same on touch. */
+  if (window.matchMedia && matchMedia('(hover:hover)').matches)
+    [].forEach.call(document.querySelectorAll('.cv2-card'), function(l){
+      l.addEventListener('mouseenter', function(){ document.getElementById(l.htmlFor).checked = true; });
+    });
+  /* ... and leaving the clubs and their content closes both again. */
+  var box = document.querySelector('.cv2-box');
+  if (box && window.matchMedia && matchMedia('(hover:hover)').matches)
+    box.addEventListener('mouseleave', function(){
+      [].forEach.call(box.querySelectorAll('.pick'), function(r){ r.checked = false; });
+    });
+})();
+</script>
 </div>
 
 <!-- ======================================================================
