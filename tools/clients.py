@@ -104,7 +104,9 @@ def build(root, logo_svg):
                 "__SEALED__", json.dumps(_seal(slug, pw, payload.encode())))
             # Nothing readable may reach the public file. A phrase from the page
             # body that survives would mean the sealing step was skipped.
-            probe = re.sub(r"<[^>]+>", " ", page)
+            # Script and style text is code the shell shares (addEventListener ...), not page copy.
+            probe = re.sub(r"<(script|style)\b.*?</\1>", " ", page, flags=re.S)
+            probe = re.sub(r"<[^>]+>", " ", probe)
             probe = max(re.findall(r"[A-Za-zÄÖÜäöüß]{9,}", probe) or [""], key=len)
             assert not probe or probe not in html, "client %s: plaintext leaked" % slug
             open(os.path.join(out_dir, slug + ".html"), "w", encoding="utf-8").write(html)

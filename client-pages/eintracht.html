@@ -499,6 +499,10 @@ table.cmp{border-collapse:collapse; width:100%; min-width:30rem; font-size:var(-
     document.getElementById('gate').hidden = true;
     app.hidden = false;
     nav(); reveal(); calc(page.data); film(); docs(); files(page.files || {});
+    // innerHTML leaves a page's own <script> inert; run each once, in order.
+    [].forEach.call(app.querySelectorAll('script'), function(o){
+      var n = document.createElement('script'); n.textContent = o.textContent; o.parentNode.replaceChild(n, o);
+    });
     var lock = document.getElementById('lock');
     if (lock) lock.addEventListener('click', function(){ try { sessionStorage.removeItem(KEY); } catch (e) {} location.reload(); });
     if (location.hash){ var t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
