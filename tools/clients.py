@@ -8,6 +8,8 @@ is public:
     clients/<slug>/page.html    the page body (start from a copy of an existing client)
     clients/<slug>/data.json    calculator data: packages, squad, salaries
     clients/<slug>/pass.txt     the password, one line
+    clients/<slug>/lab-visit    present = show the optional "Lab visit" step;
+                                the page marks it <!--lab-visit--> ... <!--/lab-visit-->
     clients/<slug>/files/       downloads and images, each sealed on its own:
                                 <a data-file="name"> fetches on click,
                                 <img data-img="name"> loads after unlock
@@ -74,6 +76,9 @@ def build(root, logo_svg):
             page = open(os.path.join(d, "page.html"), encoding="utf-8").read()
             title = re.search(r"<title>(.*?)</title>", page, re.S).group(1).strip()
             page = re.sub(r"<title>.*?</title>\s*", "", page, count=1, flags=re.S)
+            # Optional next step, switched on per club by the flag file.
+            if not os.path.exists(os.path.join(d, "lab-visit")):
+                page = re.sub(r"[ \t]*<!--lab-visit-->.*?<!--/lab-visit-->\n?", "", page, flags=re.S)
             dpath = os.path.join(d, "data.json")
             data = json.load(open(dpath, encoding="utf-8")) if os.path.exists(dpath) else None
             # Downloads: each sealed into its own file under an opaque name, so
